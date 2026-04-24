@@ -20,17 +20,23 @@ export default function SEOHead({
   site: freshSite,
 }) {
   const site = freshSite || SITE;
-  const fullTitle = title ? `${title} | ${site.name}` : `${site.name} — India's #1 Travel Community`;
+  
+  const metaTitle = title || site.seoTitle || "India's #1 Travel Community";
+  const fullTitle = title ? `${title} | ${site.name}` : `${site.name} — ${metaTitle}`;
+  
+  const metaDescription = description || site.seoDescription || "Experience authentic group travel across India with Humsafar Community.";
+  const metaKeywords = keywords || site.seoKeywords;
+  
   const fullUrl = url ? `${site.url}${url}` : site.url;
-  const ogImage = image || site.defaultOGImage;
+  const ogImage = image || (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470");
   const canonicalUrl = canonical ? `${site.url}${canonical}` : fullUrl;
 
   return (
     <Head>
       {/* ── PRIMARY META ─────────────────────────────────────────── */}
       <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
+      <meta name="description" content={metaDescription} />
+      {metaKeywords && <meta name="keywords" content={metaKeywords} />}
       <meta name="author" content={author || site.name} />
       <link rel="canonical" href={canonicalUrl} />
 
@@ -55,21 +61,21 @@ export default function SEOHead({
 
       {/* ── OPEN GRAPH (SXO: Rich previews for higher CTR) ────────── */}
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content={title} />
+      <meta property="og:image:alt" content={title || metaTitle} />
       <meta property="og:site_name" content={site.name} />
       <meta property="og:locale" content="en_IN" />
 
       {/* ── TWITTER CARDS ─────────────────────────────────────────── */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@humsafar_travel" />
+      <meta name="twitter:site" content={site.socials?.twitter ? `@${site.socials.twitter.split('/').pop()}` : "@humsafar_travel"} />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImage} />
 
       {/* ── ARTICLE META (for blog posts) ──────────────────────────── */}

@@ -30,6 +30,9 @@ export default {
     { name: 'gst', title: 'GST Number', type: 'string', fieldset: 'business' },
     { name: 'location', title: 'Base City', type: 'string', fieldset: 'business' },
     
+    { name: 'seoTitle', title: 'Default Meta Title', type: 'string', fieldset: 'seo' },
+    { name: 'seoDescription', title: 'Default Meta Description', type: 'text', fieldset: 'seo' },
+    { name: 'seoKeywords', title: 'Focus Keywords', type: 'string', description: 'Comma separated keywords', fieldset: 'seo' },
     {
       name: 'faqs',
       title: 'Homepage FAQs',
