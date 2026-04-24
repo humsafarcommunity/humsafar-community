@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { schemaTypes } from './sanity/schemas';
+import { schemaTypes } from './sanity/schemas/index.js';
 
 export default defineConfig({
   basePath: '/admin',
@@ -13,21 +13,21 @@ export default defineConfig({
         S.list()
           .title('Website Content')
           .items([
+            // Singleton
             S.listItem()
               .title('Global Site Settings')
               .id('siteSettings')
-              .schemaType('siteSettings')
               .child(
-                S.editor()
-                  .id('siteSettings')
+                S.document()
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
+                  .title('Global Site Settings')
               ),
             S.divider(),
-            // Other types
-            ...S.documentTypeListItems().filter(
-              (listItem) => !['siteSettings'].includes(listItem.getId())
-            ),
+            // Manual list to avoid resolution errors
+            S.documentTypeListItem('tour').title('Tour Packages'),
+            S.documentTypeListItem('blog').title('Blog Posts'),
+            S.documentTypeListItem('banner').title('Hero Banners'),
           ]),
     }),
   ],
