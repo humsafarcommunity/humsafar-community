@@ -33,5 +33,17 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
+    // Filter out singleton types from "Create new" menu
+    templates: (prev) =>
+      prev.filter((template) => !['siteSettings'].includes(template.id)),
+  },
+  document: {
+    // For singleton types, hide the "Duplicate" and "Delete" actions
+    actions: (prev, { schemaType }) => {
+      if (schemaType === 'siteSettings') {
+        return prev.filter(({ action }) => !['delete', 'duplicate', 'unpublish'].includes(action));
+      }
+      return prev;
+    },
   },
 });
