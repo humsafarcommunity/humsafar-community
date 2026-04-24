@@ -198,7 +198,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
           }}
         >
           {/* AEO/GEO: Hero content is what AI reads first */}
-          <div key={currentSlide}>
+          <div style={{ minHeight: 320, display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <p
               style={{
                 display: "inline-block",
@@ -214,6 +214,8 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                 letterSpacing: 3.5,
                 textTransform: "uppercase",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
+                animation: "fadeIn 0.8s ease-out",
+                margin: "0 auto 18px"
               }}
             >
               {banners[currentSlide]?.tag}
@@ -231,6 +233,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                 marginBottom: 24,
                 letterSpacing: "-0.02em",
                 textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                animation: "fadeIn 1s ease-out",
               }}
             >
               {banners[currentSlide]?.title || "Discover Your Next"} <br /> 
@@ -243,9 +246,10 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                   fontSize: "clamp(16px, 2vw, 20px)",
                   lineHeight: 1.6,
                   maxWidth: 600,
-                  marginBottom: 40,
+                  margin: "0 auto 40px",
                   textShadow: "0 1px 4px rgba(0,0,0,0.2)",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
+                  animation: "fadeIn 1.2s ease-out",
                 }}
               >
                 {banners[currentSlide]?.sub}
@@ -840,7 +844,13 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
       >
         💬
       </a>
-    </>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
   );
 }
 
