@@ -13,12 +13,13 @@ export default defineConfig({
         S.list()
           .title('Website Content')
           .items([
-            // Singleton for Site Settings
             S.listItem()
               .title('Global Site Settings')
               .id('siteSettings')
+              .schemaType('siteSettings')
               .child(
-                () => S.document()
+                S.editor()
+                  .id('siteSettings')
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
               ),
