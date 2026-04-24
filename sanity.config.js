@@ -18,7 +18,7 @@ export default defineConfig({
               .title('Global Site Settings')
               .id('siteSettings')
               .child(
-                S.document()
+                S.editor()
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
               ),
