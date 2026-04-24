@@ -17,6 +17,16 @@ export default {
     { name: 'totalTravelers', title: 'Total Travelers Served', type: 'string' },
     { name: 'gst', title: 'GST Number', type: 'string' },
     { name: 'location', title: 'Base Location', type: 'string' },
+    { name: 'description', title: 'Footer/About Description', type: 'text' },
+    { name: 'newsletterCount', title: 'Newsletter Subscriber Count (e.g. 20,000+)', type: 'string' },
+    { name: 'newsletterTitle', title: 'Newsletter Section Title', type: 'string' },
+    { name: 'newsletterSub', title: 'Newsletter Section Subtitle', type: 'string' },
+    {
+      name: 'faqs',
+      title: 'Homepage FAQs (Global)',
+      type: 'array',
+      of: [{ type: 'faq' }]
+    },
     { name: 'defaultOGImage', title: 'Default SEO Fallback Image', type: 'image', options: { hotspot: true } },
     {
       name: 'socials',

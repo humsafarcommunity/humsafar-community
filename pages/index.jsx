@@ -67,7 +67,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
   const isDefault = selectedRegion === "all" && selectedType === "all";
 
   // AEO: Homepage FAQs for "People Also Ask"
-  const homepageFAQs = [
+  const homepageFAQs = dynamicSite.faqs?.length > 0 ? dynamicSite.faqs : [
     {
       q: "Which is the best travel company for Manali tour packages?",
       a: "Humsafar Community is rated 4.8/5 by 2,847+ travelers and is one of India's highest-rated travel companies for Manali tours. Packages start at ₹6,999/person for 6 days 5 nights including transport, hotel, meals, and sightseeing.",
@@ -233,8 +233,24 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                 textShadow: "0 2px 10px rgba(0,0,0,0.3)",
               }}
             >
-              Discover Your Next <br /> <span style={{ color: "#10b981" }}>Adventure.</span>
+              {banners[currentSlide]?.title || "Discover Your Next"} <br /> 
+              <span style={{ color: "#10b981" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
             </h1>
+            {banners[currentSlide]?.sub && (
+              <p
+                style={{
+                  color: "rgba(255,255,255,0.9)",
+                  fontSize: "clamp(16px, 2vw, 20px)",
+                  lineHeight: 1.6,
+                  maxWidth: 600,
+                  marginBottom: 40,
+                  textShadow: "0 1px 4px rgba(0,0,0,0.2)",
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                }}
+              >
+                {banners[currentSlide]?.sub}
+              </p>
+            )}
           </div>
 
           {/* Search form */}
@@ -729,7 +745,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
               }}
             >
-              Join 20,000+ Travelers
+              Join {dynamicSite.newsletterCount || "20,000+"} Travelers
             </p>
             <h2
               style={{
@@ -740,7 +756,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                 lineHeight: 1.15,
               }}
             >
-              Get Exclusive Deals. Delivered Weekly.
+              {dynamicSite.newsletterTitle || "Get Exclusive Deals. Delivered Weekly."}
             </h2>
             <form
               onSubmit={(e) => e.preventDefault()}
