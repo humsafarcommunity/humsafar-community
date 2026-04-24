@@ -850,7 +850,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
-    </div>
+    </>
   );
 }
 
