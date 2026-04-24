@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEOHead from "../../components/SEOHead";
 import TourCard from "../../components/TourCard";
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { getFreshData, SITE } from "../../data";
 import Link from "next/link";
@@ -23,7 +24,7 @@ export default function PackagesPage({ tours, site: freshSite }) {
   );
 
   return (
-    <div style={{ background: "#f8fafc", minHeight: "100vh" }}>
+    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingTop: "85px" }}>
       <SEOHead
         title="All Tour Packages | Humsafar Community"
         description="Explore all our group tours and travel packages across India and International destinations."
@@ -31,12 +32,7 @@ export default function PackagesPage({ tours, site: freshSite }) {
         url="/packages"
       />
 
-      <nav style={{ padding: "20px", background: "#064e3b", color: "#fff" }}>
-         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Link href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: 700, fontSize: 20 }}>Humsafar</Link>
-            <Link href="/" style={{ color: "#fff", textDecoration: "none", fontSize: 14 }}>← Back to Home</Link>
-         </div>
-      </nav>
+      <Navbar site={dynamicSite} isSolid={true} />
 
       <main style={{ maxWidth: 1100, margin: "40px auto", padding: "0 20px" }}>
         <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: 40, marginBottom: 20 }}>Our Tour Packages</h1>
@@ -63,8 +59,8 @@ export default function PackagesPage({ tours, site: freshSite }) {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 30 }}>
-          {filtered.map((tour) => (
-            <TourCard key={tour._id} tour={tour} />
+          {filtered.map((tour, idx) => (
+            <TourCard key={tour._id || tour.slug || idx} tour={tour} />
           ))}
         </div>
         

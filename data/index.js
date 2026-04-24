@@ -3,21 +3,18 @@
 // Humsafar Community v5.0
 // ============================================================
 
-import data from './data.json';
-
-// Static exports (cached by Webpack)
-export const SITE = data.SITE;
-export const TOURS = data.TOURS;
-export const BLOGS = data.BLOGS;
-export const BANNERS = data.BANNERS;
-
 /**
  * Server-side only: Reads fresh data directly from disk to bypass Webpack cache.
  * Use this in getStaticProps/getServerSideProps.
  */
 import { createClient } from 'next-sanity';
-import staticData from './data.json';
 import { urlFor } from '../lib/sanity.image';
+
+const staticData = require('./data.json');
+export const SITE = staticData.SITE;
+export const TOURS = staticData.TOURS;
+export const BLOGS = staticData.BLOGS;
+export const BANNERS = staticData.BANNERS;
 
 const client = createClient({
   projectId: 'fghdctku',

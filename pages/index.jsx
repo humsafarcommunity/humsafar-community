@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import SEOHead from "../components/SEOHead";
 import TourCard from "../components/TourCard";
+import Navbar from "../components/Navbar";
 import BlogCard from "../components/BlogCard";
 import FAQAccordion from "../components/FAQAccordion";
 import Footer from "../components/Footer";
@@ -28,7 +29,6 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Auto-advance hero slider
   useEffect(() => {
@@ -131,7 +131,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
         title="Best Tour Packages India 2025 | Group Tours & Himalayan Treks"
-        description={`Book group tours, custom trips & Himalayan treks with ${dynamicSite.name}. Manali ₹6,999 | Kedarnath ₹10,500 | Jaisalmer ₹7,500. Fixed Saturday departures from Delhi. 4.8⭐ rated by 2,847+ travelers.`}
+        description={`Explore India's best travel community with ${dynamicSite.name}. Book curated group tours, custom trips, and Himalayan treks. Rated 4.8/5 by thousands of happy travelers.`}
         keywords="group tours india 2025, manali tour package from delhi, kedarnath yatra package, jaisalmer desert safari, himalayan trek packages, corporate team outing, custom trip planning india, travel community india"
         image={dynamicSite.defaultOGImage}
         url="/"
@@ -140,125 +140,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
         site={dynamicSite}
       />
 
-      {/* ── NAVIGATION ───────────────────────────────────────────── */}
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          padding: isScrolled ? "12px 24px" : "18px 24px",
-          background: isScrolled ? "rgba(255,255,255,0.97)" : "transparent",
-          backdropFilter: isScrolled ? "blur(20px)" : "none",
-          borderBottom: isScrolled ? "1px solid #e2e8f0" : "none",
-          boxShadow: isScrolled ? "0 2px 20px rgba(0,0,0,0.07)" : "none",
-          transition: "all 0.3s ease",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            gap: 20,
-          }}
-        >
-          <Link
-            href="/"
-            style={{ textDecoration: "none", lineHeight: 1.1 }}
-            aria-label="Humsafar Community Home"
-          >
-            <div
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontSize: 24,
-                fontWeight: 700,
-                color: isScrolled ? "#064e3b" : "#fff",
-                letterSpacing: -0.5,
-              }}
-            >
-              Humsafar
-            </div>
-            <div
-              style={{
-                fontSize: 8,
-                fontWeight: 700,
-                letterSpacing: 3.5,
-                textTransform: "uppercase",
-                color: isScrolled ? "#94a3b8" : "rgba(255,255,255,0.6)",
-                marginTop: 1,
-              }}
-            >
-              Community
-            </div>
-          </Link>
-
-          {/* Desktop nav */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 24,
-              marginLeft: "auto",
-            }}
-          >
-            {[
-              { href: "/", label: "Explore" },
-              { href: "/upcoming", label: "Upcoming Tours" },
-              { href: "/custom-trips", label: "Custom Trips" },
-              { href: "/blog", label: "Travel Blog" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  textDecoration: "none",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: isScrolled ? "#4b5563" : "rgba(255,255,255,0.88)",
-                  fontFamily: "Plus Jakarta Sans, sans-serif",
-                  transition: "color 0.15s",
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <a
-              href={`https://wa.me/${dynamicSite.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                background: isScrolled ? "#064e3b" : "#fff",
-                color: isScrolled ? "#fff" : "#064e3b",
-                padding: "10px 20px",
-                borderRadius: 999,
-                fontSize: 13,
-                fontWeight: 700,
-                textDecoration: "none",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-                transition: "all 0.2s",
-              }}
-              // SXO: Track WhatsApp conversions
-              onClick={() => {
-                if (window.gtag) {
-                  window.gtag("event", "whatsapp_click", {
-                    event_category: "Conversion",
-                    event_label: "Header CTA",
-                  });
-                }
-              }}
-            >
-              💬 Chat Now
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar site={dynamicSite} />
 
       {/* ── HERO SECTION ─────────────────────────────────────────── */}
       <section
@@ -342,38 +224,17 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
               className="speakable"
               style={{
                 fontFamily: "Playfair Display, serif",
-                fontSize: "clamp(44px,8vw,96px)",
+                fontSize: "clamp(32px, 10vw, 84px)",
                 fontWeight: 700,
                 color: "#fff",
-                lineHeight: 1.0,
-                marginBottom: 20,
-                letterSpacing: -1,
-                textShadow: "0 4px 30px rgba(0,0,0,0.25)",
+                lineHeight: 1.1,
+                marginBottom: 24,
+                letterSpacing: "-0.02em",
+                textShadow: "0 2px 10px rgba(0,0,0,0.3)",
               }}
             >
-              India&apos;s Best{" "}
-              <em style={{ color: "#6ee7b7", fontStyle: "italic" }}>
-                Travel Community
-              </em>
+              Discover Your Next <br /> <span style={{ color: "#10b981" }}>Adventure.</span>
             </h1>
-
-            {/* AEO: Direct answer paragraph — exactly what featured snippets show */}
-            <p
-              className="speakable"
-              style={{
-                fontSize: "clamp(15px,2vw,18px)",
-                color: "rgba(255,255,255,0.88)",
-                maxWidth: 580,
-                margin: "0 auto 44px",
-                lineHeight: 1.7,
-                fontWeight: 300,
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-              }}
-            >
-              Book group tours to Manali (₹6,999), Kedarnath Yatra (₹10,500),
-              Jaisalmer Desert Safari (₹7,500). Fixed Saturday departures from
-              Delhi. 4.8⭐ rated by 50,000+ travelers since 2020.
-            </p>
           </div>
 
           {/* Search form */}
@@ -388,7 +249,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
               borderRadius: 999,
               padding: "6px 6px 6px 22px",
               maxWidth: 580,
-              margin: "0 auto",
+              margin: "0 auto 32px",
               boxShadow: "0 24px 64px rgba(0,0,0,0.28)",
               alignItems: "center",
               gap: 8,
@@ -435,6 +296,28 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
             </button>
           </form>
 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "24px 48px",
+              color: "#64748b",
+              fontWeight: 600,
+              fontSize: 13,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              ⭐ <span style={{ color: "#fff" }}>4.8/5</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Google Rating</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              👥 <span style={{ color: "#fff" }}>50,000+</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Travelers</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              ⛰️ <span style={{ color: "#fff" }}>500+</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Departures</span>
+            </div>
+          </div>
+
           {/* Slider dots */}
           <div
             style={{
@@ -467,64 +350,13 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
         </div>
       </section>
 
-      {/* ── TRUST SIGNALS (SXO: Reduce bounce rate) ──────────────── */}
-      <section
-        aria-label="Trust signals and statistics"
-        style={{
-          background: "#064e3b",
-          padding: "20px 24px",
-          borderTop: "1px solid rgba(255,255,255,0.1)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "center",
-            gap: 48,
-            flexWrap: "wrap",
-          }}
-        >
-          {[
-            { value: "50,000+", label: "Happy Travelers" },
-            { value: "4.8⭐", label: "Google Rating" },
-            { value: "200+", label: "Trips Annually" },
-            { value: "Since 2020", label: "Trusted Since" },
-          ].map((stat, i) => (
-            <div key={i} style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: 22,
-                  fontWeight: 900,
-                  color: "#6ee7b7",
-                  fontFamily: "Playfair Display, serif",
-                }}
-              >
-                {stat.value}
-              </div>
-              <div
-                style={{
-                  fontSize: 12,
-                  color: "rgba(255,255,255,0.65)",
-                  fontFamily: "Plus Jakarta Sans, sans-serif",
-                  marginTop: 2,
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── FILTER BAR ───────────────────────────────────────────── */}
       <div style={{ padding: "0 20px" }}>
         <div
           style={{
             background: "#fff",
             borderRadius: 20,
-            margin: "-20px auto 0",
+            margin: "-32px auto 0",
             maxWidth: 1100,
             padding: "24px 28px",
             boxShadow: "0 12px 40px rgba(0,0,0,0.12)",
@@ -533,7 +365,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
             zIndex: 20,
           }}
         >
-          <div style={{ display: "flex", gap: 28, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "24px 40px", flexWrap: "wrap", justifyContent: "space-between" }}>
             <div style={{ flex: 1, minWidth: 220 }}>
               <p
                 style={{
@@ -733,8 +565,8 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                     gap: 24,
                   }}
                 >
-                  {bestsellers.map((tour) => (
-                    <TourCard key={tour._id} tour={tour} />
+                  {bestsellers.map((tour, idx) => (
+                    <TourCard key={tour._id || tour.slug || idx} tour={tour} />
                   ))}
                 </div>
               </>
@@ -849,8 +681,8 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
                   gap: 24,
                 }}
               >
-                {blogs.slice(0, 3).map((blog) => (
-                  <BlogCard key={blog.id} blog={blog} />
+                {blogs.slice(0, 3).map((blog, idx) => (
+                  <BlogCard key={blog._id || blog.slug || idx} blog={blog} />
                 ))}
               </div>
             </div>

@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SEOHead from "../../components/SEOHead";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import {
   SITE,
   getFreshData,
@@ -51,8 +53,10 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
         site={dynamicSite}
       />
 
+      <Navbar site={dynamicSite} isSolid={true} />
+
       {/* Breadcrumb nav */}
-      <nav aria-label="Breadcrumb" style={{ background: "#f8fafc", padding: "12px 24px", borderBottom: "1px solid #e2e8f0", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: 13, color: "#64748b" }}>
+      <nav aria-label="Breadcrumb" style={{ background: "#f8fafc", padding: "85px 24px 12px", borderBottom: "1px solid #e2e8f0", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: 13, color: "#64748b" }}>
         <ol style={{ display: "flex", gap: 8, listStyle: "none", maxWidth: 800, margin: "0 auto", flexWrap: "wrap" }}>
           {breadcrumbs.map((crumb, i) => (
             <li key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -283,6 +287,8 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
           </div>
         </section>
       )}
+
+      <Footer dynamicSite={dynamicSite} />
     </>
   );
 }

@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SEOHead from "../../components/SEOHead";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import {
   SITE,
   getFreshData,
@@ -78,12 +80,14 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         site={dynamicSite}
       />
 
+      <Navbar site={dynamicSite} />
+
       {/* Schema breadcrumb display */}
       <nav
         aria-label="Breadcrumb"
         style={{
           background: "#f8fafc",
-          padding: "12px 24px",
+          padding: "85px 24px 12px",
           borderBottom: "1px solid #e2e8f0",
           fontFamily: "Plus Jakarta Sans, sans-serif",
           fontSize: 13,
@@ -220,12 +224,22 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       {/* Main content */}
       <main style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 100, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-        <div style={{ maxWidth: 1060, margin: "0 auto", padding: "32px 20px", display: "grid", gridTemplateColumns: "1fr 330px", gap: 28 }}>
+        <div 
+          className="responsive-grid"
+          style={{ 
+            maxWidth: 1060, 
+            margin: "0 auto", 
+            padding: "32px 20px", 
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", 
+            gap: 28 
+          }}
+        >
           <div>
             {/* Highlights */}
             <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 18, padding: "26px 28px", marginBottom: 22, border: "1px solid #e2e8f0" }}>
               <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 18 }}>Trip Highlights</h2>
-              <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 11, listStyle: "none" }}>
+              <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 11, listStyle: "none" }}>
                 {tour.highlights?.map((h, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{ width: 22, height: 22, borderRadius: 999, background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 12 }}>✓</div>
@@ -440,7 +454,9 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         </div>
       </main>
 
-      <style jsx>{`
+      <Footer dynamicSite={dynamicSite} />
+
+      <style jsx global>{`
         @media (max-width: 768px) {
           .mobile-book-bar { display: flex !important; }
           main > div { grid-template-columns: 1fr !important; }
