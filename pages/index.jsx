@@ -21,7 +21,7 @@ import {
 // HOMEPAGE COMPONENT
 // ──────────────────────────────────────────────────────────────────
 
-export default function HomePage({ tours, blogs, banners, site: freshSite }) {
+export default function HomePage({ tours, blogs, banners, site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite || SITE || { name: "Humsafar Community", socials: {} };
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
@@ -138,6 +138,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite }) {
         schemas={schemas}
         breadcrumbs={[{ name: "Home", path: "/" }]}
         site={dynamicSite}
+        seo={seoData}
       />
 
       <Navbar site={dynamicSite} />
@@ -862,6 +863,7 @@ export async function getStaticProps() {
       blogs: data.BLOGS,
       banners: data.BANNERS,
       site: data.SITE,
+      seo: data.SEODATA,
     },
     // ISR: Revalidate every 60 seconds (SXO: Always fresh content)
     revalidate: 60,

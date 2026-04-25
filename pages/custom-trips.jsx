@@ -2,10 +2,10 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SEOHead from "../components/SEOHead";
-import { SITE } from "../data";
+import { getFreshData, SITE } from "../data";
 
-export default function CustomTripsPage() {
-  const dynamicSite = SITE || { name: "Humsafar Community", whatsapp: "916268496389" };
+export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
+  const dynamicSite = freshSite || SITE || { name: "Humsafar Community", whatsapp: "916268496389" };
   const [status, setStatus] = useState("idle"); // idle | success
 
   const handleSubmit = (e) => {
@@ -30,6 +30,7 @@ export default function CustomTripsPage() {
         title="Custom Trip Planning | Design Your Dream Vacation"
         description="Plan your perfect private trip with Humsafar Community. Tell us your requirements and we'll craft a curated itinerary just for you."
         site={dynamicSite}
+        seo={seoData}
         url="/custom-trips"
       />
       <Navbar site={dynamicSite} isSolid={true} />
@@ -139,6 +140,17 @@ export default function CustomTripsPage() {
       <Footer dynamicSite={dynamicSite} />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const data = await getFreshData();
+  return {
+    props: {
+      site: data.SITE,
+      seo: data.SEODATA,
+    },
+    revalidate: 60,
+  };
 }
 
 const labelStyle = {

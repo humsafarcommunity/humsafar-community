@@ -26,7 +26,8 @@ const client = createClient({
 export async function getFreshData() {
   try {
     const sanityData = await client.fetch(`{
-      "SITE": *[_type == "siteSettings"][0],
+      "SITE": *[_type == "siteSettings" && _id == "siteSettings"][0],
+      "SEODATA": *[_type == "seoSettings" && _id == "seoSettings"][0],
       "TOURS": *[_type == "tour" && defined(slug.current)] {
         ...,
         "slug": slug.current,
@@ -66,6 +67,7 @@ export async function getFreshData() {
 
     return {
       SITE: sanityData.SITE || staticData.SITE,
+      SEODATA: sanityData.SEODATA || {},
       TOURS: tours.length > 0 ? tours : staticData.TOURS,
       BLOGS: blogs.length > 0 ? blogs : staticData.BLOGS,
       BANNERS: banners.length > 0 ? banners : staticData.BANNERS,

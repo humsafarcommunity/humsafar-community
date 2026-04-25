@@ -7,7 +7,7 @@ import TourCard from "../components/TourCard";
 import BlogCard from "../components/BlogCard";
 import { SITE, getFreshData } from "../data";
 
-export default function SearchPage({ tours, blogs, site: freshSite }) {
+export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite || SITE;
   const router = useRouter();
   const { q } = router.query;
@@ -43,6 +43,7 @@ export default function SearchPage({ tours, blogs, site: freshSite }) {
         description={`Find the best tour packages and travel guides for ${q || ""}. Explore curated trips by Humsafar Community.`}
         url={`/search?q=${q}`}
         site={dynamicSite}
+        seo={seoData}
       />
 
       <Navbar site={dynamicSite} />
@@ -146,6 +147,7 @@ export async function getStaticProps() {
       tours: data.TOURS,
       blogs: data.BLOGS,
       site: data.SITE,
+      seo: data.SEODATA,
     },
     revalidate: 60,
   };

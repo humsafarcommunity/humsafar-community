@@ -7,7 +7,6 @@ export default {
     { name: 'footer', title: 'Footer & Newsletter', options: { collapsible: true } },
     { name: 'stats', title: 'Traveler Statistics', options: { collapsible: true } },
     { name: 'social', title: 'Social Media Icons', options: { collapsible: true } },
-    { name: 'seo', title: 'SEO & Global Branding', options: { collapsible: true } },
   ],
   fields: [
     { name: 'name', title: 'Site Name', type: 'string', fieldset: 'business' },
@@ -30,17 +29,13 @@ export default {
     { name: 'gst', title: 'GST Number', type: 'string', fieldset: 'business' },
     { name: 'location', title: 'Base City', type: 'string', fieldset: 'business' },
     
-    { name: 'seoTitle', title: 'Default Meta Title', type: 'string', fieldset: 'seo' },
-    { name: 'seoDescription', title: 'Default Meta Description', type: 'text', fieldset: 'seo' },
-    { name: 'seoKeywords', title: 'Focus Keywords', type: 'string', description: 'Comma separated keywords', fieldset: 'seo' },
     {
       name: 'faqs',
       title: 'Homepage FAQs',
       type: 'array',
       of: [{ type: 'faq' }],
-      fieldset: 'seo'
+      fieldset: 'footer'
     },
-    { name: 'defaultOGImage', title: 'SEO OG Image', type: 'image', options: { hotspot: true }, fieldset: 'seo' },
     {
       name: 'socials',
       title: 'Active Social Profiles',

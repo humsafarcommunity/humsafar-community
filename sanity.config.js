@@ -13,15 +13,25 @@ export default defineConfig({
         S.list()
           .title('Website Content')
           .items([
-            // Singleton
+            // Singleton for Branding
             S.listItem()
-              .title('Global Site Settings')
+              .title('Global Branding')
               .id('siteSettings')
               .child(
                 S.document()
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
-                  .title('Global Site Settings')
+                  .title('Global Branding')
+              ),
+            // Singleton for SEO
+            S.listItem()
+              .title('SEO & Metadata')
+              .id('seoSettings')
+              .child(
+                S.document()
+                  .schemaType('seoSettings')
+                  .documentId('seoSettings')
+                  .title('SEO & Metadata')
               ),
             S.divider(),
             // Manual list to avoid resolution errors
@@ -35,12 +45,12 @@ export default defineConfig({
     types: schemaTypes,
     // Filter out singleton types from "Create new" menu
     templates: (prev) =>
-      prev.filter((template) => !['siteSettings'].includes(template.id)),
+      prev.filter((template) => !['siteSettings', 'seoSettings'].includes(template.id)),
   },
   document: {
     // For singleton types, hide the "Duplicate" and "Delete" actions
     actions: (prev, { schemaType }) => {
-      if (schemaType === 'siteSettings') {
+      if (['siteSettings', 'seoSettings'].includes(schemaType)) {
         return prev.filter(({ action }) => !['delete', 'duplicate', 'unpublish'].includes(action));
       }
       return prev;

@@ -18,18 +18,21 @@ export default function SEOHead({
   author,
   breadcrumbs,
   site: freshSite,
+  seo: freshSeo,
 }) {
   const site = freshSite || SITE;
+  const seo = freshSeo || {};
   
-  const metaTitle = title || site.seoTitle || "India's #1 Travel Community";
+  const metaTitle = title || seo.seoTitle || "India's #1 Travel Community";
   const fullTitle = title ? `${title} | ${site.name}` : `${site.name} — ${metaTitle}`;
   
-  const metaDescription = description || site.seoDescription || "Experience authentic group travel across India with Humsafar Community.";
-  const metaKeywords = keywords || site.seoKeywords;
+  const metaDescription = description || seo.seoDescription || "Experience authentic group travel across India with Humsafar Community.";
+  const metaKeywords = keywords || seo.seoKeywords;
   
   const fullUrl = url ? `${site.url}${url}` : site.url;
-  const ogImage = image || (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470");
-  const canonicalUrl = canonical ? `${site.url}${canonical}` : fullUrl;
+  const ogImage = image || seo.ogImage || (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+  const canonicalUrl = canonical || seo.canonicalUrl ? (canonical ? `${site.url}${canonical}` : seo.canonicalUrl) : fullUrl;
+  const favicon = seo.favicon || "/favicon.ico";
 
   return (
     <Head>
@@ -39,6 +42,7 @@ export default function SEOHead({
       {metaKeywords && <meta name="keywords" content={metaKeywords} />}
       <meta name="author" content={author || site.name} />
       <link rel="canonical" href={canonicalUrl} />
+      {seo.googleVerification && <meta name="google-site-verification" content={seo.googleVerification} />}
 
       {/* ── ROBOTS (SEO + GEO: Allow AI crawlers) ─────────────────── */}
       {noindex ? (
@@ -113,9 +117,9 @@ export default function SEOHead({
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
       {/* Favicon */}
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/x-icon" href={favicon} />
+      <link rel="apple-touch-icon" sizes="180x180" href={favicon} />
+      <link rel="icon" type="image/png" sizes="32x32" href={favicon} />
 
       {/* ── JSON-LD STRUCTURED DATA (GEO + AIO core) ─────────────── */}
       {schemas.map((schema, i) => (

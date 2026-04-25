@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { getFreshData, SITE } from "../../data";
 import Link from "next/link";
 
-export default function PackagesPage({ tours, site: freshSite }) {
+export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite || SITE || { name: "Humsafar Community", socials: {} };
   const [selectedRegion, setSelectedRegion] = useState("all");
   
@@ -29,6 +29,7 @@ export default function PackagesPage({ tours, site: freshSite }) {
         title="All Tour Packages | Humsafar Community"
         description="Explore all our group tours and travel packages across India and International destinations."
         site={dynamicSite}
+        seo={seoData}
         url="/packages"
       />
 
@@ -82,6 +83,7 @@ export async function getStaticProps() {
     props: {
       tours: data.TOURS,
       site: data.SITE,
+      seo: data.SEODATA,
     },
     revalidate: 60,
   };
