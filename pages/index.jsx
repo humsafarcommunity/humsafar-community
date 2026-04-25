@@ -182,7 +182,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.12) 40%,rgba(0,0,0,0.65) 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)",
             zIndex: 2,
           }}
         />
@@ -232,7 +232,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                 lineHeight: 1,
                 marginBottom: 24,
                 letterSpacing: "-0.04em",
-                textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                textShadow: "0 4px 24px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)",
                 animation: "fadeIn 1s ease-out",
               }}
             >
