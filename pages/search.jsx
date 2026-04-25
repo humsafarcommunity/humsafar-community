@@ -54,7 +54,7 @@ export default function SearchPage({ tours, blogs, site: freshSite }) {
               Search Results
             </p>
             <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(32px, 5vw, 48px)", color: "#0f172a", marginBottom: 16 }}>
-              Showing results for "{q}"
+              Showing results for &quot;{q}&quot;
             </h1>
             <p style={{ color: "#64748b", fontSize: 16, maxWidth: 600, margin: "0 auto" }}>
               {results.tours.length + results.blogs.length} matches found across our tours and travel guides.
@@ -110,7 +110,7 @@ export default function SearchPage({ tours, blogs, site: freshSite }) {
                     No results found
                   </h2>
                   <p style={{ color: "#64748b", fontSize: 16, maxWidth: 400, margin: "0 auto 32px" }}>
-                    We couldn't find anything matching "{q}". Try searching for popular destinations like "Manali", "Kerala", or "Ladakh".
+                    We couldn&apos;t find anything matching &quot;{q}&quot;. Try searching for popular destinations like &quot;Manali&quot;, &quot;Kerala&quot;, or &quot;Ladakh&quot;.
                   </p>
                   <button 
                     onClick={() => router.push("/")}
