@@ -37,7 +37,7 @@ export default function AboutPage({ site: freshSite, seo: seoData }) {
             <div style={{ padding: 40, background: "#fff", borderRadius: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: 32, marginBottom: 20 }}>🫂</div>
               <h3 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Community First</h3>
-              <p style={{ color: "#64748b", lineHeight: 1.6 }}>We don't just sell tours; we build friendships. Every trip is an opportunity to meet people who share your passion for exploration.</p>
+              <p style={{ color: "#64748b", lineHeight: 1.6 }}>We don&apos;t just sell tours; we build friendships. Every trip is an opportunity to meet people who share your passion for exploration.</p>
             </div>
             <div style={{ padding: 40, background: "#fff", borderRadius: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: 32, marginBottom: 20 }}>🏔️</div>
