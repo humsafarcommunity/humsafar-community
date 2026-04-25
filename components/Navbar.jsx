@@ -23,6 +23,7 @@ export default function Navbar({ site, isSolid = false }) {
     { href: "/", label: "Explore" },
     { href: "/packages", label: "Upcoming Tours" },
     { href: "/custom-trips", label: "Custom Trips" },
+    { href: "/about", label: "About Us" },
     { href: "/blog", label: "Travel Blog" },
   ];
 

@@ -130,10 +130,9 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
     <>
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
-        title="Best Tour Packages India 2025 | Group Tours & Himalayan Treks"
-        description={`Explore India's best travel community with ${dynamicSite.name}. Book curated group tours, custom trips, and Himalayan treks. Rated 4.8/5 by thousands of happy travelers.`}
-        keywords="group tours india 2025, manali tour package from delhi, kedarnath yatra package, jaisalmer desert safari, himalayan trek packages, corporate team outing, custom trip planning india, travel community india"
-        image={dynamicSite.defaultOGImage}
+        title="Humsafar Community | Best Group Tours in Himachal & Uttarakhand"
+        description="Join Humsafar Community for budget-friendly group tours, backpacking trips, and authentic travel experiences across India. Plan your 2026 adventure today!"
+        keywords="Humsafar Community, India travel community, Group tours to Himachal, Uttarakhand tour packages 2026, Adventure tours North India"
         url="/"
         schemas={schemas}
         breadcrumbs={[{ name: "Home", path: "/" }]}

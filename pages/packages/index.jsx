@@ -19,6 +19,26 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
     { id: "other", label: "Rest of India" },
   ];
 
+  const seoConfig = {
+    himachal: {
+      title: "Himachal Pradesh Group Tours & Packages 2026 | Humsafar Community",
+      desc: "Explore Manali, Kasol, and Spiti Valley with Humsafar Community. Affordable, safe, and fun Himachal backpacking trips for students and solo travelers.",
+      keys: "Himachal group tours for students, Humsafar Community Manali itinerary, Spiti Valley group departures, Budget Kasol tours"
+    },
+    uttarakhand: {
+      title: "Offbeat Uttarakhand Tours & Treks | Humsafar Community",
+      desc: "Discover hidden gems in Uttarakhand. Book budget-friendly group departures, Kedarnath yatra, and adventure treks with India's best travel community.",
+      keys: "Affordable Uttarakhand backpacker trips, Kedarnath group departure 2026, Offbeat stay options in Uttarakhand, Weekend trips from Delhi to Uttarakhand"
+    },
+    all: {
+      title: "All Tour Packages | Humsafar Community",
+      desc: "Explore all our group tours and travel packages across India and International destinations.",
+      keys: "group tours india, travel packages 2026, humsafar community tours"
+    }
+  };
+
+  const currentSEO = seoConfig[selectedRegion] || seoConfig.all;
+
   const filtered = tours.filter(
     (t) => selectedRegion === "all" || t.region === selectedRegion
   );
@@ -26,8 +46,9 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
   return (
     <div style={{ background: "#f8fafc", minHeight: "100vh", paddingTop: "85px" }}>
       <SEOHead
-        title="All Tour Packages | Humsafar Community"
-        description="Explore all our group tours and travel packages across India and International destinations."
+        title={currentSEO.title}
+        description={currentSEO.desc}
+        keywords={currentSEO.keys}
         site={dynamicSite}
         seo={seoData}
         url="/packages"
