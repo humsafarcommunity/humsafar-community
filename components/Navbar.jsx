@@ -95,7 +95,7 @@ export default function Navbar({ site, isSolid = false }) {
               </Link>
             ))}
             <a
-              href={`https://wa.me/${site?.whatsapp || '916268496389'}`}
+              href={`https://wa.me/${(site?.whatsapp || '916268496389').toString().replace(/\D/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -173,7 +173,7 @@ export default function Navbar({ site, isSolid = false }) {
           </Link>
         ))}
         <a
-          href={`https://wa.me/${site?.whatsapp || '916268496389'}`}
+          href={`https://wa.me/${(site?.whatsapp || '916268496389').toString().replace(/\D/g, '')}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{
