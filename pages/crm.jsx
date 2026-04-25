@@ -42,7 +42,7 @@ Night travel — Stay in bus
 ✅ *Inclusions:* Travel | Hotel | Meals
 ❌ *Exclusions:* Personal expenses
 💰 *Amount:* ₹{amount}
-📞 *Contact:* 9876543210
+📞 *Contact:* 916268496389
 🌐 humsafarcommunity.com`;
 
 const STATUS_CONFIG = {
@@ -259,7 +259,7 @@ export default function HumsafarCRM() {
 
   const sendEmail = (lead) => {
     const sub = encodeURIComponent(`Booking Confirmation — Humsafar Community | ${lead.batch}`);
-    const body = encodeURIComponent(`Dear ${lead.name},\n\nYour booking is confirmed for the ${lead.batch} batch.\n\nPackage: ₹${lead.total?.toLocaleString()}\nAdvance Paid: ₹${lead.advance?.toLocaleString()}\nBalance Due: ₹${(lead.total - lead.advance)?.toLocaleString()}\n\nThank you for choosing Humsafar Community!\n\nTeam Humsafar\nContact: 9876543210`);
+    const body = encodeURIComponent(`Dear ${lead.name},\n\nYour booking is confirmed for the ${lead.batch} batch.\n\nPackage: ₹${lead.total?.toLocaleString()}\nAdvance Paid: ₹${lead.advance?.toLocaleString()}\nBalance Due: ₹${(lead.total - lead.advance)?.toLocaleString()}\n\nThank you for choosing Humsafar Community!\n\nTeam Humsafar\nContact: 916268496389`);
     window.open(`mailto:${lead.email}?subject=${sub}&body=${body}`, "_blank");
     showToast(`Email client opened for ${lead.name}`);
   };

@@ -813,7 +813,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
 
       {/* ── WHATSAPP FLOAT ───────────────────────────────────────── */}
       <a
-        href={`https://wa.me/${SITE.whatsapp}?text=Hi Humsafar! I want to book a tour package.`}
+        href={`https://wa.me/${dynamicSite.whatsapp || '916268496389'}?text=Hi Humsafar! I want to book a tour package.`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
