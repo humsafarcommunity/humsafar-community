@@ -151,10 +151,10 @@ export default function TourCard({ tour }) {
                 ₹{tour.oldPrice}
               </div>
             )}
-            <div style={{ fontSize: 21, fontWeight: 900, color: "#0e1117", fontFamily: "Playfair Display, serif" }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: "#0e1117", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.02em" }}>
               ₹{Number(tour.price).toLocaleString("en-IN")}{" "}
-              <span style={{ fontSize: 12, fontWeight: 400, color: "#94a3b8", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-                /person
+              <span style={{ fontSize: 11, fontWeight: 500, color: "#64748b", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: 0 }}>
+                / person
               </span>
             </div>
           </div>
