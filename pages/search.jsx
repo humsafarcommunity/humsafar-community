@@ -20,14 +20,14 @@ export default function SearchPage({ tours, blogs, site: freshSite }) {
     setLoading(true);
     const query = (q || "").toLowerCase();
     
-    const filteredTours = tours.filter(t => 
+    const filteredTours = (tours || []).filter(t => 
       t.title?.toLowerCase().includes(query) || 
       t.region?.toLowerCase().includes(query) ||
       t.type?.toLowerCase().includes(query) ||
       t.shortDesc?.toLowerCase().includes(query)
     );
     
-    const filteredBlogs = blogs.filter(b => 
+    const filteredBlogs = (blogs || []).filter(b => 
       b.title?.toLowerCase().includes(query) ||
       b.excerpt?.toLowerCase().includes(query)
     );
