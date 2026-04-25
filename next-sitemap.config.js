@@ -72,49 +72,11 @@ module.exports = {
       };
     }
 
-    // Other pages
     return {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
       lastmod: new Date().toISOString(),
     };
-  },
-
-  // Additional sitemaps for images
-  additionalPaths: async (config) => {
-    // Import tours data to generate image sitemap entries
-    const tours = [
-      {
-        slug: "manali-kasol-solang-valley-atal-tunnel",
-        title: "Manali Kasol Group Tour",
-        img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200",
-      },
-      {
-        slug: "kedarnath-yatra-char-dham-trek",
-        title: "Kedarnath Yatra Package",
-        img: "https://images.unsplash.com/photo-1562016600-ece13e8ba570?q=80&w=1200",
-      },
-      {
-        slug: "jaisalmer-desert-safari-golden-fort",
-        title: "Jaisalmer Desert Safari",
-        img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200",
-      },
-    ];
-
-    return tours.map((tour) => ({
-      loc: `/packages/${tour.slug}`,
-      lastmod: new Date().toISOString(),
-      changefreq: "weekly",
-      priority: 0.9,
-      // Image sitemap data
-      images: [
-        {
-          loc: tour.img,
-          title: tour.title,
-          caption: `${tour.title} — Humsafar Community`,
-        },
-      ],
-    }));
   },
 };
