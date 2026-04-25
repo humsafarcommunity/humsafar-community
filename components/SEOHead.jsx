@@ -2,6 +2,7 @@
 // Full SEO + AEO + GEO + SXO + AIO optimization in every page
 import Head from "next/head";
 import { SITE } from "../data";
+import { urlFor } from "../lib/sanity.image";
 
 export default function SEOHead({
   title,
@@ -30,9 +31,9 @@ export default function SEOHead({
   const metaKeywords = keywords || seo.seoKeywords;
   
   const fullUrl = url ? `${site.url}${url}` : site.url;
-  const ogImage = image || seo.ogImage || (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+  const ogImage = image || (seo.ogImage ? urlFor(seo.ogImage) : (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470"));
   const canonicalUrl = canonical || seo.canonicalUrl ? (canonical ? `${site.url}${canonical}` : seo.canonicalUrl) : fullUrl;
-  const favicon = seo.favicon || "/favicon.ico";
+  const favicon = seo.favicon ? urlFor(seo.favicon) : "/favicon.ico";
 
   return (
     <Head>
