@@ -225,20 +225,20 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             <h1
               className="speakable"
               style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: "clamp(32px, 9vw, 82px)",
-                fontWeight: 800,
+                fontFamily: "'Urbanist', sans-serif",
+                fontStyle: "italic",
+                fontSize: "clamp(34px, 10vw, 88px)",
+                fontWeight: 900,
                 color: "#fff",
                 lineHeight: 1,
                 marginBottom: 24,
-                letterSpacing: "-0.03em",
+                letterSpacing: "-0.04em",
                 textShadow: "0 4px 24px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)",
                 animation: "fadeIn 1s ease-out",
-                textTransform: "uppercase"
               }}
             >
               {banners[currentSlide]?.title || "Discover Your Next"} <br /> 
-              <span style={{ color: "#fbbf24" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
+              <span style={{ color: "#10b981" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
             </h1>
             {banners[currentSlide]?.sub && (
               <p
