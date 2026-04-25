@@ -225,13 +225,13 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             <h1
               className="speakable"
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "'Outfit', sans-serif",
                 fontSize: "clamp(32px, 10vw, 84px)",
-                fontWeight: 700,
+                fontWeight: 900,
                 color: "#fff",
-                lineHeight: 1.1,
+                lineHeight: 1,
                 marginBottom: 24,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.04em",
                 textShadow: "0 2px 10px rgba(0,0,0,0.3)",
                 animation: "fadeIn 1s ease-out",
               }}
