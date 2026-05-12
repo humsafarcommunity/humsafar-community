@@ -236,11 +236,11 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         <div 
           className="responsive-grid"
           style={{ 
-            maxWidth: 1060, 
+            maxWidth: 1100, 
             margin: "0 auto", 
-            padding: "32px 20px", 
+            padding: "32px 12px", 
             display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", 
+            gridTemplateColumns: "2.5fr 1fr", 
             gap: 28 
           }}
         >
@@ -302,20 +302,20 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             )}
 
             {/* Inclusions / Exclusions */}
-            <div className="inclusions-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}>
+            <div className="inclusions-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
               {[
-                { title: "What's Included", items: tour.inclusions, icon: "✓", bg: "#ecfdf5", col: "#065f46" },
+                { title: "What's Included", items: tour.inclusions, icon: "✓", bg: "#f0fdf4", col: "#16a34a" },
                 { title: "What's Excluded", items: tour.exclusions, icon: "✗", bg: "#fef2f2", col: "#dc2626" },
               ].map((sec) => (
-                <section key={sec.title} aria-label={sec.title} style={{ background: "#fff", borderRadius: 16, padding: "22px", border: "1px solid #e2e8f0" }}>
-                  <h3 style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, color: sec.col, marginBottom: 14 }}>{sec.title}</h3>
+                <section key={sec.title} aria-label={sec.title} style={{ background: "#fff", borderRadius: 12, padding: "20px", border: "1px solid #f1f5f9", height: "100%", boxSizing: "border-box" }}>
+                  <h3 style={{ fontSize: 10, fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.5, color: sec.col, marginBottom: 14 }}>{sec.title}</h3>
                   <ul style={{ listStyle: "none" }}>
                     {sec.items?.map((item, i) => (
-                      <li key={i} style={{ display: "flex", gap: 10, marginBottom: 9 }}>
-                        <div style={{ width: 20, height: 20, borderRadius: 999, background: sec.bg, flexShrink: 0, marginTop: 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: sec.col }}>
+                      <li key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
+                        <div style={{ width: 18, height: 18, borderRadius: 4, background: sec.bg, flexShrink: 0, marginTop: 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: sec.col }}>
                           {sec.icon}
                         </div>
-                        <span style={{ fontSize: 13, color: "#475569", lineHeight: 1.5 }}>{item}</span>
+                        <span style={{ fontSize: 13, color: "#475569", lineHeight: 1.5, fontWeight: 500 }}>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -434,16 +434,16 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                   Number of Travelers
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#f8fafc", borderRadius: 12, padding: "10px 14px", marginBottom: 18, border: "1px solid #e2e8f0" }}>
-                  <button onClick={() => setPax(Math.max(1, pax - 1))} style={{ width: 34, height: 34, borderRadius: 10, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center" }}>−</button>
-                  <span style={{ fontSize: 24, fontWeight: 900, fontFamily: "Playfair Display, serif" }}>{pax}</span>
-                  <button onClick={() => setPax(pax + 1)} style={{ width: 34, height: 34, borderRadius: 10, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
+                  <button onClick={() => setPax(Math.max(1, pax - 1))} style={{ width: 32, height: 32, borderRadius: 6, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>−</button>
+                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "Playfair Display, serif" }}>{pax}</span>
+                  <button onClick={() => setPax(pax + 1)} style={{ width: 32, height: 32, borderRadius: 6, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
                 </div>
 
                 <a
                   href={`https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(waMessage)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "#22c55e", color: "#fff", padding: "15px", borderRadius: 14, fontWeight: 800, fontSize: 14, textDecoration: "none", boxSizing: "border-box", fontFamily: "Plus Jakarta Sans, sans-serif" }}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "#10b981", color: "#fff", padding: "14px", borderRadius: 10, fontWeight: 800, fontSize: 13, textDecoration: "none", boxSizing: "border-box", fontFamily: "Plus Jakarta Sans, sans-serif", textTransform: "uppercase", letterSpacing: 0.5 }}
                   onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Tour Sidebar", value: totalPrice })}
                 >
                   💬 Book on WhatsApp
@@ -484,7 +484,8 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             height: auto !important;
             border-radius: 8px !important;
             gap: 6px !important;
-            margin: 0 -4px !important;
+            margin: 0 !important;
+            width: 100% !important;
           }
           .featured-img-container {
             height: 280px !important;
@@ -496,6 +497,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             grid-template-rows: 1fr !important;
             height: 65px !important;
             gap: 6px !important;
+            width: 100% !important;
           }
           .hero-overlay {
             padding: 20px !important;
@@ -518,13 +520,14 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           .mobile-book-bar div:first-child div:first-child { color: #64748b !important; font-weight: 800 !important; font-size: 9px !important; }
 
           aside { display: none !important; }
-          .inclusions-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .inclusions-grid { grid-template-columns: 1fr !important; gap: 12px !important; width: 100% !important; box-sizing: border-box !important; }
+          .inclusions-grid section { width: 100% !important; box-sizing: border-box !important; }
           .highlights-grid { grid-template-columns: 1fr !important; }
           
           h2 { font-size: 19px !important; letter-spacing: -0.02em !important; }
-          section { padding: 18px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; }
+          section { padding: 18px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; width: 100% !important; box-sizing: border-box !important; }
           
-          .responsive-grid { padding: 12px !important; }
+          .responsive-grid { padding: 12px !important; width: 100% !important; box-sizing: border-box !important; }
         }
       `}</style>
     </>
