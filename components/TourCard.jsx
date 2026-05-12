@@ -144,18 +144,18 @@ export default function TourCard({ tour }) {
           {tour.title}
         </h3>
 
-        <div style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px dashed #e2e8f0", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div className="tour-card-footer" style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px dashed #e2e8f0", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 8 }}>
           <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
             <meta itemProp="priceCurrency" content="INR" />
             <meta itemProp="price" content={tour.price} />
             {tour.oldPrice && (
-              <div style={{ fontSize: 11, color: "#94a3b8", textDecoration: "line-through", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+              <div style={{ fontSize: 10, color: "#94a3b8", textDecoration: "line-through", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
                 ₹{tour.oldPrice}
               </div>
             )}
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#0e1117", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.02em" }}>
+            <div style={{ fontSize: 18, fontWeight: 800, color: "#0e1117", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.02em" }}>
               ₹{Number(tour.price).toLocaleString("en-IN")}{" "}
-              <span style={{ fontSize: 11, fontWeight: 500, color: "#64748b", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: 0 }}>
+              <span style={{ fontSize: 10, fontWeight: 500, color: "#64748b", fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: 0 }}>
                 / person
               </span>
             </div>
@@ -167,8 +167,8 @@ export default function TourCard({ tour }) {
               color: "#fff",
               border: "none",
               borderRadius: 10,
-              padding: "9px 18px",
-              fontSize: 12,
+              padding: "8px 14px",
+              fontSize: 11,
               fontWeight: 700,
               cursor: "pointer",
               textDecoration: "none",

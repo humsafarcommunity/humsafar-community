@@ -320,6 +320,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
           </form>
 
           <div
+            className="hero-stats"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -403,30 +404,33 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
               >
                 Destination
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-                {regions.map((r) => (
-                  <button
-                    key={r.id}
-                    onClick={() => setSelectedRegion(r.id)}
-                    aria-pressed={selectedRegion === r.id}
-                    style={{
-                      padding: "7px 14px",
-                      borderRadius: 10,
-                      border: `2px solid ${selectedRegion === r.id ? "#064e3b" : "#e2e8f0"}`,
-                      background:
-                        selectedRegion === r.id ? "#064e3b" : "#fff",
-                      color:
-                        selectedRegion === r.id ? "#fff" : "#64748b",
-                      cursor: "pointer",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      transition: "all 0.15s",
-                      fontFamily: "Plus Jakarta Sans, sans-serif",
-                    }}
-                  >
-                    {r.label}
-                  </button>
-                ))}
+              <div className="filter-scroll-container">
+                <div style={{ display: "flex", gap: 7 }} className="filter-inner">
+                  {regions.map((r) => (
+                    <button
+                      key={r.id}
+                      onClick={() => setSelectedRegion(r.id)}
+                      aria-pressed={selectedRegion === r.id}
+                      style={{
+                        padding: "7px 14px",
+                        borderRadius: 10,
+                        border: `2px solid ${selectedRegion === r.id ? "#064e3b" : "#e2e8f0"}`,
+                        background:
+                          selectedRegion === r.id ? "#064e3b" : "#fff",
+                        color:
+                          selectedRegion === r.id ? "#fff" : "#64748b",
+                        cursor: "pointer",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        transition: "all 0.15s",
+                        fontFamily: "Plus Jakarta Sans, sans-serif",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {r.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             <div>
@@ -443,30 +447,33 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
               >
                 Experience
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-                {types.map((t) => (
-                  <button
-                    key={t.id}
-                    onClick={() => setSelectedType(t.id)}
-                    aria-pressed={selectedType === t.id}
-                    style={{
-                      padding: "7px 14px",
-                      borderRadius: 10,
-                      border: `2px solid ${selectedType === t.id ? "#c8860a" : "#e2e8f0"}`,
-                      background:
-                        selectedType === t.id ? "#c8860a" : "#fff",
-                      color:
-                        selectedType === t.id ? "#fff" : "#64748b",
-                      cursor: "pointer",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      transition: "all 0.15s",
-                      fontFamily: "Plus Jakarta Sans, sans-serif",
-                    }}
-                  >
-                    {t.label}
-                  </button>
-                ))}
+              <div className="filter-scroll-container">
+                <div style={{ display: "flex", gap: 7 }} className="filter-inner">
+                  {types.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setSelectedType(t.id)}
+                      aria-pressed={selectedType === t.id}
+                      style={{
+                        padding: "7px 14px",
+                        borderRadius: 10,
+                        border: `2px solid ${selectedType === t.id ? "#c8860a" : "#e2e8f0"}`,
+                        background:
+                          selectedType === t.id ? "#c8860a" : "#fff",
+                        color:
+                          selectedType === t.id ? "#fff" : "#64748b",
+                        cursor: "pointer",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        transition: "all 0.15s",
+                        fontFamily: "Plus Jakarta Sans, sans-serif",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -820,6 +827,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
+        className="whatsapp-float"
         style={{
           position: "fixed",
           bottom: 24,
@@ -853,6 +861,15 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        .filter-scroll-container {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .filter-scroll-container::-webkit-scrollbar {
+          display: none;
+        }
         @media (max-width: 640px) {
           .hero-search-form {
             border-radius: 18px !important;
@@ -874,6 +891,16 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
           }
           .newsletter-form button {
             width: 100% !important;
+          }
+          .hero-stats {
+            gap: 16px 24px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          .whatsapp-float {
+             left: 20px !important;
+             right: auto !important;
+             bottom: 20px !important;
           }
         }
       `}</style>
