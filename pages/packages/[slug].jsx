@@ -265,8 +265,8 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                       style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "17px 22px", background: "none", border: "none", cursor: "pointer", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif" }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
-                        <div style={{ width: 40, height: 40, borderRadius: 999, background: expandedDay === i ? "#064e3b" : "#ecfdf5", color: expandedDay === i ? "#fff" : "#064e3b", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, flexShrink: 0 }}>
-                          D{day.day}
+                        <div style={{ padding: "4px 14px", height: 28, borderRadius: 999, background: expandedDay === i ? "#064e3b" : "#ecfdf5", color: expandedDay === i ? "#fff" : "#064e3b", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, flexShrink: 0, textTransform: "uppercase", letterSpacing: 1 }}>
+                          Day {day.day}
                         </div>
                         <div>
                           <div style={{ fontSize: 15, fontWeight: 700, color: "#0e1117" }}>{day.title}</div>
@@ -276,8 +276,15 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                       <span style={{ fontSize: 18, color: "#94a3b8", marginLeft: 8 }}>{expandedDay === i ? "−" : "+"}</span>
                     </button>
                     {expandedDay === i && (
-                      <div style={{ padding: "4px 22px 20px 75px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
-                        {day.desc}
+                      <div style={{ padding: "4px 22px 20px 22px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
+                        <div style={{ borderLeft: "2px solid #ecfdf5", paddingLeft: 20, marginLeft: 6 }}>
+                          {day.desc.split(/[.\n]/).filter(p => p.trim()).map((point, idx) => (
+                            <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 10 }}>
+                              <span style={{ color: "#10b981", fontWeight: 900 }}>•</span>
+                              <span>{point.trim()}.</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
