@@ -176,55 +176,55 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       {/* Hero Section with Integrated Image Grid */}
       <section style={{ background: "#fff", paddingTop: 85 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px 40px" }}>
-            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 12, height: 560, borderRadius: 28, overflow: "hidden", position: "relative", boxShadow: "0 20px 50px rgba(0,0,0,0.12)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 12px 32px" }}>
+            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 8, height: 520, borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
               {/* Main Featured Image with Overlay Content */}
               <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
                 <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
-                
-                {/* Back Button */}
-                <Link href="/packages" className="back-btn" style={{ position: "absolute", top: 24, left: 24, background: "rgba(255,255,255,0.2)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", borderRadius: 999, padding: "8px 18px", fontSize: 12, fontWeight: 700, textDecoration: "none", zIndex: 10 }}>
-                  ← All Packages
-                </Link>
+              
+              {/* Back Button */}
+              <Link href="/packages" className="back-btn" style={{ position: "absolute", top: 20, left: 20, background: "rgba(0,0,0,0.3)", backdropFilter: "blur(8px)", color: "#fff", borderRadius: 8, padding: "6px 14px", fontSize: 11, fontWeight: 700, textDecoration: "none", zIndex: 10, textTransform: "uppercase", letterSpacing: 1 }}>
+                ← Back
+              </Link>
 
-                {/* Gradient & Content Overlay */}
-                <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 40%, transparent 70%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "40px" }}>
-                  <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                    <span style={{ background: "rgba(16,185,129,0.9)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5 }}>
-                      {tour.region}
-                    </span>
-                    <span style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 700 }}>
-                      {tour.duration}
-                    </span>
-                  </div>
-                  <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(26px, 4vw, 54px)", fontWeight: 800, color: "#fff", marginBottom: 12, lineHeight: 1.1, textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}>
-                    {tour.title}
-                  </h1>
-                  <div className="hero-meta" style={{ color: "rgba(255,255,255,0.9)", fontSize: 14, display: "flex", gap: 20, flexWrap: "wrap", fontWeight: 500 }}>
-                    <span>📍 {tour.location}</span>
-                    <span>⭐ {tour.rating} ({tour.reviews} reviews)</span>
-                  </div>
+              {/* Gradient & Content Overlay */}
+              <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 80%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "32px" }}>
+                <div className="hero-badges" style={{ display: "flex", gap: 6, marginBottom: 10 }}>
+                  <span style={{ background: "#10b981", color: "#fff", fontSize: 9, padding: "3px 10px", borderRadius: 4, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
+                    {tour.region}
+                  </span>
+                  <span style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 9, padding: "3px 10px", borderRadius: 4, fontWeight: 700, textTransform: "uppercase" }}>
+                    {tour.duration}
+                  </span>
+                </div>
+                <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(24px, 4vw, 50px)", fontWeight: 900, color: "#fff", marginBottom: 10, lineHeight: 1.1 }}>
+                  {tour.title}
+                </h1>
+                <div className="hero-meta" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, display: "flex", gap: 16, flexWrap: "wrap", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                  <span>📍 {tour.location}</span>
+                  <span>⭐ {tour.rating}</span>
                 </div>
               </div>
+            </div>
 
-              {/* Side Grid (Thumbnails) */}
-              {tour.gallery && tour.gallery.length > 0 && (
-                <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 12 }} className="gallery-side-grid">
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                    <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
-                    <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                    <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
-                    <div style={{ position: "relative", filter: "brightness(0.7)" }}>
-                      <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
-                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 16 }}>
-                        +{tour.gallery.length}
-                      </div>
+            {/* Side Grid (Thumbnails) */}
+            {tour.gallery && tour.gallery.length > 0 && (
+              <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 8 }} className="gallery-side-grid">
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
+                  <div style={{ position: "relative", filter: "brightness(0.6)" }}>
+                    <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
+                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 14 }}>
+                      +{tour.gallery.length}
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
             </div>
         </div>
       </section>
@@ -247,42 +247,42 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           <div>
             {/* Highlights */}
             {tour.highlights?.length > 0 && (
-              <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 18, padding: "26px 28px", marginBottom: 22, border: "1px solid #e2e8f0" }}>
-                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 18 }}>Trip Highlights</h2>
-                <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 11, listStyle: "none" }}>
-                  {tour.highlights.map((h, i) => (
-                    <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div style={{ width: 22, height: 22, borderRadius: 999, background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 12 }}>✓</div>
-                      <span style={{ fontSize: 14, color: "#374151", fontWeight: 500 }}>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
+              <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 12, padding: "24px", marginBottom: 20, border: "1px solid #eef2f6" }}>
+              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 22, fontWeight: 800, marginBottom: 16, color: "#0f172a" }}>Trip Highlights</h2>
+              <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, listStyle: "none" }}>
+                {tour.highlights.map((h, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 6, background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: "#10b981" }}>✓</div>
+                    <span style={{ fontSize: 14, color: "#475569", fontWeight: 500 }}>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
             )}
 
             {/* Itinerary */}
             {tour.itinerary?.length > 0 && (
               <section aria-label="Trip itinerary" style={{ marginBottom: 22 }}>
-                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 14 }}>
+                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 22, fontWeight: 800, marginBottom: 14, color: "#0f172a" }}>
                   📅 Day-by-Day Itinerary
                 </h2>
                 {tour.itinerary.map((day, i) => (
-                  <div key={i} style={{ background: "#fff", borderRadius: 14, border: "1px solid #e2e8f0", marginBottom: 10, overflow: "hidden" }}>
+                  <div key={i} style={{ background: "#fff", borderRadius: 12, border: "1px solid #eef2f6", marginBottom: 8, overflow: "hidden" }}>
                     <button
                       onClick={() => setExpandedDay(expandedDay === i ? -1 : i)}
                       aria-expanded={expandedDay === i}
-                      style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "17px 22px", background: "none", border: "none", cursor: "pointer", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif" }}
+                      style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", background: "none", border: "none", cursor: "pointer", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif" }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
-                        <div style={{ padding: "4px 14px", height: 28, borderRadius: 999, background: expandedDay === i ? "#064e3b" : "#ecfdf5", color: expandedDay === i ? "#fff" : "#064e3b", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, flexShrink: 0, textTransform: "uppercase", letterSpacing: 1 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <div style={{ padding: "4px 12px", height: 24, borderRadius: 4, background: expandedDay === i ? "#0f172a" : "#f1f5f9", color: expandedDay === i ? "#fff" : "#475569", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, flexShrink: 0, textTransform: "uppercase", letterSpacing: 0.5 }}>
                           Day {day.day}
                         </div>
                         <div>
-                          <div style={{ fontSize: 15, fontWeight: 700, color: "#0e1117" }}>{day.title}</div>
-                          {day.meals && <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 2 }}>🍽️ {day.meals}</div>}
+                          <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a" }}>{day.title}</div>
+                          {day.meals && <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 1 }}>🍽️ {day.meals}</div>}
                         </div>
                       </div>
-                      <span style={{ fontSize: 18, color: "#94a3b8", marginLeft: 8 }}>{expandedDay === i ? "−" : "+"}</span>
+                      <span style={{ fontSize: 16, color: "#94a3b8", marginLeft: 8 }}>{expandedDay === i ? "−" : "+"}</span>
                     </button>
                     {expandedDay === i && (
                       <div style={{ padding: "4px 20px 20px 20px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
@@ -476,44 +476,55 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       <style jsx global>{`
         @media (max-width: 768px) {
+          main { padding-bottom: 90px !important; }
+          main > div { padding: 12px 12px 32px !important; gap: 16px !important; }
+          
           .tour-gallery-grid {
             grid-template-columns: 1fr !important;
             height: auto !important;
-            border-radius: 18px !important;
-            gap: 8px !important;
+            border-radius: 8px !important;
+            gap: 6px !important;
+            margin: 0 -4px !important;
           }
           .featured-img-container {
-            height: 300px !important;
-            border-radius: 18px !important;
+            height: 280px !important;
+            border-radius: 8px !important;
           }
           .gallery-side-grid {
             display: grid !important;
             grid-template-columns: repeat(4, 1fr) !important;
             grid-template-rows: 1fr !important;
-            height: 70px !important;
-            gap: 8px !important;
+            height: 65px !important;
+            gap: 6px !important;
           }
           .hero-overlay {
-            padding: 24px !important;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, transparent) !important;
+            padding: 20px !important;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 70%, transparent) !important;
           }
-          .tour-title { font-size: 24px !important; }
-          .hero-meta { font-size: 11px !important; gap: 12px !important; }
-          .hero-badges { gap: 6px !important; }
-          .back-btn { top: 16px !important; left: 16px !important; padding: 6px 14px !important; font-size: 11px !important; }
+          .tour-title { font-size: 22px !important; font-weight: 900 !important; }
+          .hero-meta { font-size: 10px !important; gap: 12px !important; }
+          .hero-badges { gap: 6px !important; margin-bottom: 8px !important; }
+          .back-btn { top: 12px !important; left: 12px !important; padding: 4px 10px !important; font-size: 9px !important; border-radius: 4px !important; }
           
-          .mobile-book-bar { display: flex !important; padding: 10px 16px 20px !important; height: 75px !important; }
-          .mobile-book-bar div:first-child div:last-child { font-size: 18px !important; }
-          .mobile-book-bar a { padding: 10px 18px !important; font-size: 13px !important; border-radius: 12px !important; }
-          .mobile-book-bar div:first-child div:first-child { color: #475569 !important; font-weight: 700 !important; font-size: 9px !important; }
+          .mobile-book-bar { 
+            display: flex !important; 
+            padding: 12px 16px 20px !important; 
+            height: 80px !important; 
+            border-top: 1px solid #eef2f6 !important;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.08) !important;
+          }
+          .mobile-book-bar div:first-child div:last-child { font-size: 19px !important; font-weight: 900 !important; }
+          .mobile-book-bar a { padding: 12px 20px !important; font-size: 13px !important; border-radius: 8px !important; }
+          .mobile-book-bar div:first-child div:first-child { color: #64748b !important; font-weight: 800 !important; font-size: 9px !important; }
 
-          main > div { grid-template-columns: 1fr !important; padding-top: 20px !important; }
           aside { display: none !important; }
-          .inclusions-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+          .inclusions-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
           .highlights-grid { grid-template-columns: 1fr !important; }
           
-          h2 { font-size: 20px !important; }
-          section { padding: 20px !important; border-radius: 16px !important; }
+          h2 { font-size: 19px !important; letter-spacing: -0.02em !important; }
+          section { padding: 18px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; }
+          
+          .responsive-grid { padding: 12px !important; }
         }
       `}</style>
     </>
