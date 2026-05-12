@@ -181,7 +181,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       {/* Hero Section with Integrated Image Grid */}
       <section style={{ background: "#fff", paddingTop: 85 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 12px 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 32px" }}>
             <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 8, height: 520, borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
               {/* Main Featured Image with Overlay Content */}
               <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
@@ -243,7 +243,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           style={{ 
             maxWidth: 1100, 
             margin: "0 auto", 
-            padding: "32px 12px", 
+            padding: "32px 24px", 
             display: "grid", 
             gridTemplateColumns: "2.5fr 1fr", 
             gap: 28 
@@ -485,7 +485,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           
           .responsive-grid { 
             grid-template-columns: 1fr !important; 
-            padding: 12px !important; 
+            padding: 12px 24px 32px !important; 
             width: 100% !important; 
             box-sizing: border-box !important; 
             gap: 20px !important;
