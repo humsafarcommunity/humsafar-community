@@ -80,7 +80,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         site={dynamicSite}
       />
 
-      <Navbar site={dynamicSite} />
+      <Navbar site={dynamicSite} isSolid={true} />
 
       {/* Schema breadcrumb display */}
       <nav
@@ -211,16 +211,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         </div>
       </div>
 
-      {/* AEO: Direct answer paragraph (machine-readable summary) */}
-      {tour.directAnswer && (
-        <div style={{ background: "#f0fdf4", padding: "16px 24px", borderBottom: "1px solid #bbf7d0" }}>
-          <div style={{ maxWidth: 1060, margin: "0 auto" }}>
-            <p className="speakable" style={{ fontSize: 14, color: "#065f46", lineHeight: 1.7, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-              <strong>Quick Summary:</strong> {tour.directAnswer}
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {/* Main content */}
       <main style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 100, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
