@@ -136,7 +136,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           background: "rgba(255, 255, 255, 0.98)",
           backdropFilter: "blur(14px)",
           borderTop: "1px solid #f1f5f9",
-          padding: "14px 12px 24px",
+          padding: "14px 24px 28px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -522,7 +522,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           
           .mobile-book-bar { 
             display: flex !important; 
-            padding: 14px 12px 24px !important; 
+            padding: 14px 24px 28px !important; 
             height: auto !important; 
             border-top: 1px solid #f1f5f9 !important;
             box-shadow: 0 -10px 40px rgba(0,0,0,0.06) !important;
