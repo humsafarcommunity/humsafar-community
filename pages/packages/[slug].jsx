@@ -476,8 +476,15 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          main { padding-bottom: 90px !important; }
-          main > div { padding: 12px 12px 32px !important; gap: 16px !important; }
+          main { padding-bottom: 100px !important; }
+          
+          .responsive-grid { 
+            grid-template-columns: 1fr !important; 
+            padding: 12px !important; 
+            width: 100% !important; 
+            box-sizing: border-box !important; 
+            gap: 20px !important;
+          }
           
           .tour-gallery-grid {
             grid-template-columns: 1fr !important;
@@ -519,15 +526,17 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           .mobile-book-bar a { padding: 12px 20px !important; font-size: 13px !important; border-radius: 8px !important; }
           .mobile-book-bar div:first-child div:first-child { color: #64748b !important; font-weight: 800 !important; font-size: 9px !important; }
 
-          aside { display: none !important; }
+          aside { 
+            display: block !important; 
+            position: static !important; 
+            margin-top: 20px !important;
+          }
           .inclusions-grid { grid-template-columns: 1fr !important; gap: 12px !important; width: 100% !important; box-sizing: border-box !important; }
           .inclusions-grid section { width: 100% !important; box-sizing: border-box !important; }
           .highlights-grid { grid-template-columns: 1fr !important; }
           
           h2 { font-size: 19px !important; letter-spacing: -0.02em !important; }
           section { padding: 18px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; width: 100% !important; box-sizing: border-box !important; }
-          
-          .responsive-grid { padding: 12px !important; width: 100% !important; box-sizing: border-box !important; }
         }
       `}</style>
     </>
