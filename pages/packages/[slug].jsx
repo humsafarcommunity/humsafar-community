@@ -177,61 +177,55 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
       {/* Hero Section with Integrated Image Grid */}
       <section style={{ background: "#fff", paddingTop: 85 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px 40px" }}>
-          <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 12, height: 560, borderRadius: 28, overflow: "hidden", position: "relative", boxShadow: "0 20px 50px rgba(0,0,0,0.12)" }}>
-            
-            {/* Main Featured Image with Overlay Content */}
-            <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
-              <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
-              
-              {/* Back Button */}
-              <Link href="/packages" style={{ position: "absolute", top: 24, left: 24, background: "rgba(255,255,255,0.2)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", borderRadius: 999, padding: "8px 18px", fontSize: 12, fontWeight: 700, textDecoration: "none", zIndex: 10 }}>
-                ← All Packages
-              </Link>
+            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 12, height: 560, borderRadius: 28, overflow: "hidden", position: "relative", boxShadow: "0 20px 50px rgba(0,0,0,0.12)" }}>
+              {/* Main Featured Image with Overlay Content */}
+              <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
+                <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
+                
+                {/* Back Button */}
+                <Link href="/packages" className="back-btn" style={{ position: "absolute", top: 24, left: 24, background: "rgba(255,255,255,0.2)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", borderRadius: 999, padding: "8px 18px", fontSize: 12, fontWeight: 700, textDecoration: "none", zIndex: 10 }}>
+                  ← All Packages
+                </Link>
 
-              {/* Gradient & Content Overlay */}
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 70%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "40px" }}>
-                <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                  <span style={{ background: "rgba(16,185,129,0.9)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5 }}>
-                    {tour.region}
-                  </span>
-                  <span style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 700 }}>
-                    {tour.duration}
-                  </span>
-                </div>
-                <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(28px, 4vw, 54px)", fontWeight: 800, color: "#fff", marginBottom: 12, lineHeight: 1.1, textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}>
-                  {tour.title}
-                </h1>
-                <div style={{ color: "rgba(255,255,255,0.9)", fontSize: 14, display: "flex", gap: 20, flexWrap: "wrap", fontWeight: 500 }}>
-                  <span>📍 {tour.location}</span>
-                  <span>⭐ {tour.rating} ({tour.reviews} reviews)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Side Grid (Thumbnails) */}
-            {tour.gallery && tour.gallery.length > 0 ? (
-              <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 12 }} className="desktop-only">
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
-                  <div style={{ position: "relative", filter: "brightness(0.7)" }}>
-                    <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
-                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 16 }}>
-                      +{tour.gallery.length} Photos
-                    </div>
+                {/* Gradient & Content Overlay */}
+                <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 40%, transparent 70%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "40px" }}>
+                  <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                    <span style={{ background: "rgba(16,185,129,0.9)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5 }}>
+                      {tour.region}
+                    </span>
+                    <span style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 6, fontWeight: 700 }}>
+                      {tour.duration}
+                    </span>
+                  </div>
+                  <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(26px, 4vw, 54px)", fontWeight: 800, color: "#fff", marginBottom: 12, lineHeight: 1.1, textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}>
+                    {tour.title}
+                  </h1>
+                  <div className="hero-meta" style={{ color: "rgba(255,255,255,0.9)", fontSize: 14, display: "flex", gap: 20, flexWrap: "wrap", fontWeight: 500 }}>
+                    <span>📍 {tour.location}</span>
+                    <span>⭐ {tour.rating} ({tour.reviews} reviews)</span>
                   </div>
                 </div>
               </div>
-            ) : (
-              /* Fallback if no gallery images */
-              <div style={{ background: "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, textAlign: "center", color: "#94a3b8", fontSize: 13 }} className="desktop-only">
-                More photos coming soon
-              </div>
-            )}
-          </div>
+
+              {/* Side Grid (Thumbnails) */}
+              {tour.gallery && tour.gallery.length > 0 && (
+                <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 12 }} className="gallery-side-grid">
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
+                    <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
+                    <div style={{ position: "relative", filter: "brightness(0.7)" }}>
+                      <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
+                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 16 }}>
+                        +{tour.gallery.length}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
         </div>
       </section>
 
@@ -291,11 +285,11 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                       <span style={{ fontSize: 18, color: "#94a3b8", marginLeft: 8 }}>{expandedDay === i ? "−" : "+"}</span>
                     </button>
                     {expandedDay === i && (
-                      <div style={{ padding: "4px 22px 20px 22px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
-                        <div style={{ borderLeft: "2px solid #ecfdf5", paddingLeft: 20, marginLeft: 6 }}>
+                      <div style={{ padding: "4px 20px 20px 20px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
+                        <div style={{ borderLeft: "2px solid #ecfdf5", paddingLeft: 16, marginLeft: 2 }}>
                           {day.desc.split(/[.\n]/).filter(p => p.trim()).map((point, idx) => (
-                            <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 10 }}>
-                              <span style={{ color: "#10b981", fontWeight: 900 }}>•</span>
+                            <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 8 }}>
+                              <span style={{ color: "#10b981", fontWeight: 900, flexShrink: 0 }}>•</span>
                               <span>{point.trim()}.</span>
                             </div>
                           ))}
@@ -484,25 +478,42 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         @media (max-width: 768px) {
           .tour-gallery-grid {
             grid-template-columns: 1fr !important;
-            height: 320px !important;
+            height: auto !important;
+            border-radius: 18px !important;
+            gap: 8px !important;
+          }
+          .featured-img-container {
+            height: 300px !important;
             border-radius: 18px !important;
           }
-          .featured-img-container div:last-child {
+          .gallery-side-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: 1fr !important;
+            height: 70px !important;
+            gap: 8px !important;
+          }
+          .hero-overlay {
             padding: 24px !important;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, transparent) !important;
           }
-          .tour-gallery-grid div.desktop-only {
-            display: none !important;
-          }
-          .mobile-book-bar { display: flex !important; padding: 12px 16px 18px !important; }
-          .mobile-book-bar div:first-child div:last-child { fontSize: 18px !important; }
-          .mobile-book-bar a { padding: 10px 18px !important; font-size: 13px !important; }
-          main > div { grid-template-columns: 1fr !important; }
+          .tour-title { font-size: 24px !important; }
+          .hero-meta { font-size: 11px !important; gap: 12px !important; }
+          .hero-badges { gap: 6px !important; }
+          .back-btn { top: 16px !important; left: 16px !important; padding: 6px 14px !important; font-size: 11px !important; }
+          
+          .mobile-book-bar { display: flex !important; padding: 10px 16px 20px !important; height: 75px !important; }
+          .mobile-book-bar div:first-child div:last-child { font-size: 18px !important; }
+          .mobile-book-bar a { padding: 10px 18px !important; font-size: 13px !important; border-radius: 12px !important; }
+          .mobile-book-bar div:first-child div:first-child { color: #475569 !important; font-weight: 700 !important; font-size: 9px !important; }
+
+          main > div { grid-template-columns: 1fr !important; padding-top: 20px !important; }
           aside { display: none !important; }
-          .inclusions-grid { grid-template-columns: 1fr !important; }
-          .hero-badges { justify-content: center !important; }
-          .hero-stats-row { justify-content: center !important; gap: 12px !important; font-size: 12px !important; }
-          .tour-title { text-align: center !important; }
+          .inclusions-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
           .highlights-grid { grid-template-columns: 1fr !important; }
+          
+          h2 { font-size: 20px !important; }
+          section { padding: 20px !important; border-radius: 16px !important; }
         }
       `}</style>
     </>
