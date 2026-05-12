@@ -133,21 +133,23 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           left: 0,
           right: 0,
           zIndex: 50,
-          background: "#fff",
-          borderTop: "1px solid #e2e8f0",
-          padding: "12px 20px 22px",
+          background: "rgba(255, 255, 255, 0.98)",
+          backdropFilter: "blur(14px)",
+          borderTop: "1px solid #f1f5f9",
+          padding: "14px 12px 24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          boxShadow: "0 -8px 32px rgba(0,0,0,0.1)",
+          boxShadow: "0 -10px 40px rgba(0,0,0,0.06)",
+          boxSizing: "border-box"
         }}
         className="mobile-book-bar"
       >
         <div>
-          <div style={{ fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+          <div style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 800, marginBottom: 2 }}>
             {pax} Pax · {sharing} Sharing
           </div>
-          <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "Playfair Display, serif" }}>
+          <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "Playfair Display, serif", color: "#0f172a" }}>
             ₹{totalPrice.toLocaleString("en-IN")}
           </div>
         </div>
@@ -156,17 +158,20 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            background: "#22c55e",
+            background: "#10b981",
             color: "#fff",
-            padding: "13px 22px",
-            borderRadius: 14,
-            fontWeight: 700,
-            fontSize: 14,
+            padding: "12px 20px",
+            borderRadius: 8,
+            fontWeight: 800,
+            fontSize: 13,
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
             gap: 7,
             fontFamily: "Plus Jakarta Sans, sans-serif",
+            textTransform: "uppercase",
+            letterSpacing: 0.5,
+            boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)"
           }}
           onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Mobile Book Bar", value: totalPrice })}
         >
@@ -517,10 +522,10 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           
           .mobile-book-bar { 
             display: flex !important; 
-            padding: 12px 16px 20px !important; 
-            height: 80px !important; 
-            border-top: 1px solid #eef2f6 !important;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.08) !important;
+            padding: 14px 12px 24px !important; 
+            height: auto !important; 
+            border-top: 1px solid #f1f5f9 !important;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.06) !important;
           }
           .mobile-book-bar div:first-child div:last-child { font-size: 19px !important; font-weight: 900 !important; }
           .mobile-book-bar a { padding: 12px 20px !important; font-size: 13px !important; border-radius: 8px !important; }
