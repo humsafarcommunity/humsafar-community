@@ -12,6 +12,13 @@ export default {
     { name: 'price', title: 'Current Price', type: 'number' },
     { name: 'oldPrice', title: 'Old Price (String)', type: 'string' },
     { name: 'img', title: 'Cover Image', type: 'image', options: { hotspot: true } },
+    {
+      name: 'gallery',
+      title: 'Tour Gallery (Multiple Images)',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      options: { layout: 'grid' }
+    },
     { name: 'rating', title: 'Rating', type: 'number' },
     { name: 'reviews', title: 'Total Reviews', type: 'number' },
     { name: 'bestseller', title: 'Is Bestseller?', type: 'boolean' },
