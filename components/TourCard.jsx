@@ -136,6 +136,8 @@ export default function TourCard({ tour }) {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
+            overflowWrap: "break-word",
+            wordBreak: "break-word",
           }}
           itemProp="name"
         >

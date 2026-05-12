@@ -58,13 +58,14 @@ export default function Footer({ dynamicSite }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 40,
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+            gap: "40px 24px",
             marginBottom: 40,
           }}
+          className="footer-grid"
         >
           {/* Logo & About Section */}
-          <div style={{ maxWidth: 280 }}>
+          <div className="footer-logo-section" style={{ maxWidth: 280 }}>
             <Link
               href="/"
               style={{ textDecoration: "none", lineHeight: 1.1, display: "flex", flexDirection: "column", marginBottom: 16 }}
@@ -193,6 +194,10 @@ export default function Footer({ dynamicSite }) {
       <style jsx>{`
         .footer-link:hover { color: #10b981 !important; }
         .social-icon:hover { color: #fff !important; }
+        @media (max-width: 768px) {
+          .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .footer-logo-section { max-width: 100% !important; }
+        }
       `}</style>
     </footer>
   );

@@ -76,6 +76,8 @@ export default function BlogCard({ blog }) {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
+            overflowWrap: "break-word",
+            wordBreak: "break-word",
           }}
           itemProp="headline"
         >

@@ -223,7 +223,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
 
             {/* AEO: H1 must contain primary keyword — AI systems weight H1 very heavily */}
             <h1
-              className="speakable"
+              className="speakable hero-title"
               style={{
                 fontFamily: "'Bodoni Moda', serif",
                 fontStyle: "italic",
@@ -263,13 +263,15 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             onSubmit={handleSearch}
             role="search"
             aria-label="Search destinations"
+            className="hero-search-form"
             style={{
               display: "flex",
               background: "rgba(255,255,255,0.97)",
               backdropFilter: "blur(20px)",
               borderRadius: 999,
               padding: "6px 6px 6px 22px",
-              maxWidth: 580,
+              maxWidth: 580, // Prevent too wide on desktop
+              width: "100%",
               margin: "0 auto 32px",
               boxShadow: "0 24px 64px rgba(0,0,0,0.28)",
               alignItems: "center",
@@ -558,7 +560,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                   <h2
                     style={{
                       fontFamily: "Playfair Display, serif",
-                      fontSize: 38,
+                      fontSize: "clamp(28px, 5vw, 38px)",
                       fontWeight: 700,
                       color: "#0e1117",
                     }}
@@ -675,7 +677,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                 <h2
                   style={{
                     fontFamily: "Playfair Display, serif",
-                    fontSize: 38,
+                    fontSize: "clamp(28px, 5vw, 38px)",
                     fontWeight: 700,
                     color: "#0e1117",
                   }}
@@ -765,6 +767,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             </h2>
             <form
               onSubmit={(e) => e.preventDefault()}
+              className="newsletter-form"
               style={{ display: "flex", gap: 10, maxWidth: 440, margin: "0 auto" }}
             >
               <label htmlFor="newsletter-email" style={{ display: "none" }}>
@@ -849,6 +852,29 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 640px) {
+          .hero-search-form {
+            border-radius: 18px !important;
+            flex-direction: column !important;
+            padding: 16px !important;
+            gap: 12px !important;
+          }
+          .hero-search-form input {
+            width: 100% !important;
+            text-align: center !important;
+            padding: 4px 0 !important;
+          }
+          .hero-search-form button {
+            width: 100% !important;
+            padding: 14px !important;
+          }
+          .newsletter-form {
+            flex-direction: column !important;
+          }
+          .newsletter-form button {
+            width: 100% !important;
+          }
         }
       `}</style>
     </>
