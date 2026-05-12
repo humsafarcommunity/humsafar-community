@@ -87,7 +87,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         aria-label="Breadcrumb"
         style={{
           background: "#f8fafc",
-          padding: "85px 24px 12px",
+          padding: "85px 0 12px",
           borderBottom: "1px solid #e2e8f0",
           fontFamily: "Plus Jakarta Sans, sans-serif",
           fontSize: 13,
@@ -95,7 +95,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         }}
       >
         <ol
-          style={{ display: "flex", gap: 8, listStyle: "none", maxWidth: 1100, margin: "0 auto", flexWrap: "wrap" }}
+          style={{ display: "flex", gap: 8, listStyle: "none", maxWidth: 1100, margin: "0 auto", padding: "0 24px", flexWrap: "wrap", boxSizing: "border-box" }}
           itemScope
           itemType="https://schema.org/BreadcrumbList"
         >
@@ -484,64 +484,63 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           main { padding-bottom: 100px !important; }
           
           .responsive-grid { 
-            grid-template-columns: 1fr !important; 
-            padding: 12px 24px 32px !important; 
+            display: block !important;
+            padding: 24px !important; 
             width: 100% !important; 
             box-sizing: border-box !important; 
-            gap: 20px !important;
           }
           
           .tour-gallery-grid {
-            grid-template-columns: 1fr !important;
+            display: block !important;
             height: auto !important;
             border-radius: 8px !important;
-            gap: 6px !important;
             margin: 0 !important;
             width: 100% !important;
           }
           .featured-img-container {
             height: 280px !important;
             border-radius: 8px !important;
+            margin-bottom: 8px !important;
           }
           .gallery-side-grid {
             display: grid !important;
             grid-template-columns: repeat(4, 1fr) !important;
             grid-template-rows: 1fr !important;
             height: 65px !important;
-            gap: 6px !important;
+            gap: 8px !important;
             width: 100% !important;
           }
           .hero-overlay {
-            padding: 20px !important;
+            padding: 24px !important;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 70%, transparent) !important;
           }
-          .tour-title { font-size: 22px !important; font-weight: 900 !important; }
-          .hero-meta { font-size: 10px !important; gap: 12px !important; }
-          .hero-badges { gap: 6px !important; margin-bottom: 8px !important; }
-          .back-btn { top: 12px !important; left: 12px !important; padding: 4px 10px !important; font-size: 9px !important; border-radius: 4px !important; }
+          .tour-title { font-size: 24px !important; font-weight: 900 !important; }
+          .hero-meta { font-size: 11px !important; gap: 14px !important; }
+          .hero-badges { gap: 8px !important; margin-bottom: 10px !important; }
+          .back-btn { top: 16px !important; left: 16px !important; padding: 6px 12px !important; font-size: 10px !important; border-radius: 4px !important; }
           
           .mobile-book-bar { 
             display: flex !important; 
-            padding: 14px 24px 28px !important; 
+            padding: 14px 24px 32px !important; 
             height: auto !important; 
             border-top: 1px solid #f1f5f9 !important;
             box-shadow: 0 -10px 40px rgba(0,0,0,0.06) !important;
           }
-          .mobile-book-bar div:first-child div:last-child { font-size: 19px !important; font-weight: 900 !important; }
-          .mobile-book-bar a { padding: 12px 20px !important; font-size: 13px !important; border-radius: 8px !important; }
-          .mobile-book-bar div:first-child div:first-child { color: #64748b !important; font-weight: 800 !important; font-size: 9px !important; }
+          .mobile-book-bar div:first-child div:last-child { font-size: 20px !important; font-weight: 900 !important; }
+          .mobile-book-bar a { padding: 12px 24px !important; font-size: 13px !important; border-radius: 8px !important; }
 
           aside { 
             display: block !important; 
             position: static !important; 
-            margin-top: 20px !important;
+            margin-top: 24px !important;
+            width: 100% !important;
           }
-          .inclusions-grid { grid-template-columns: 1fr !important; gap: 12px !important; width: 100% !important; box-sizing: border-box !important; }
+          .inclusions-grid { grid-template-columns: 1fr !important; gap: 16px !important; width: 100% !important; box-sizing: border-box !important; }
           .inclusions-grid section { width: 100% !important; box-sizing: border-box !important; }
           .highlights-grid { grid-template-columns: 1fr !important; }
           
-          h2 { font-size: 19px !important; letter-spacing: -0.02em !important; }
-          section { padding: 18px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; width: 100% !important; box-sizing: border-box !important; }
+          h2 { font-size: 20px !important; letter-spacing: -0.02em !important; }
+          section { padding: 24px !important; border-radius: 12px !important; border: 1px solid #f1f5f9 !important; width: 100% !important; box-sizing: border-box !important; }
         }
       `}</style>
     </>
