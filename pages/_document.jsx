@@ -12,10 +12,8 @@ export default function Document() {
         <meta name="theme-color" content="#064e3b" />
         <meta name="msapplication-TileColor" content="#064e3b" />
 
-        {/* GEO: Site verification for search engines */}
-        {/* Add your actual verification codes */}
-        {/* <meta name="google-site-verification" content="YOUR_CODE" /> */}
-        {/* <meta name="msvalidate.01" content="YOUR_CODE" /> */}
+        {/* GEO: Site verification (Add codes in CMS > SEO Settings for dynamic updates) */}
+        {/* <meta name="google-site-verification" content="ADD_IN_CMS" /> */}
 
         {/* SEO: Alternate language versions if adding Hindi */}
         {/* <link rel="alternate" hrefLang="hi" href="https://humsafarcommunity.com/hi/" /> */}

@@ -48,21 +48,54 @@ export async function getFreshData() {
     // Ensure TOURS and BLOGS are arrays and only contain items with string slugs
     const tours = (sanityData.TOURS || []).map(t => ({
       ...t,
-      img: urlFor(t.img) // Automate Optimization
+      img: t.img ? urlFor(t.img) : (staticData.TOURS.find(st => st.slug === t.slug)?.img || ""), // Fallback to static if image missing
+      price: t.price || 0,
+      rating: t.rating || 5.0,
+      reviews: t.reviews || 0
     }));
-    const blogs = (sanityData.BLOGS || []).map(b => ({
-      ...b,
-      coverImage: urlFor(b.coverImage), // Automate Optimization
-      // Deep optimize content images
-      content: (b.content || []).map(block => 
-        block._type === 'image' || block.type === 'img' 
-          ? { ...block, url: urlFor(block.url || block) } 
-          : block
-      )
-    }));
+
+    const blogs = (sanityData.BLOGS || [])
+      .filter(b => b.title && b.slug) // SXO: Filter out drafts/broken posts
+      .map(b => {
+        // Extract plain text for excerpt if missing
+        const firstText = (b.content || [])
+          .find(block => block._type === 'block' || block.type === 'para')
+          ?.children?.map(c => c.text || "").join("") || 
+          (b.content || []).find(block => block.text)?.text || "";
+
+        return {
+          ...b,
+          category: b.category || "Travel",
+          readTime: b.readTime || 5,
+          excerpt: b.excerpt || (firstText ? (firstText.slice(0, 160) + "...") : "Read our latest travel guide and plan your next adventure with Humsafar Community."),
+          coverImage: b.coverImage ? urlFor(b.coverImage) : "",
+          // Normalize content format
+          content: (b.content || []).map(block => {
+            if (!block) return null;
+            // Handle images in content
+            if (block._type === 'image' || block.type === 'img') {
+              return { 
+                type: 'img', 
+                url: urlFor(block.url || block),
+                caption: block.caption || "" 
+              };
+            }
+            // Handle PortableText blocks
+            if (block._type === 'block') {
+              return {
+                type: block.style === 'h2' ? 'h2' : (block.style === 'h3' ? 'h3' : 'para'),
+                text: (block.children || []).map(c => c.text || "").join("")
+              };
+            }
+            return block;
+          }).filter(Boolean)
+        };
+      });
+
     const banners = (sanityData.BANNERS || []).map(bn => ({
       ...bn,
-      url: urlFor(bn.url) // Automate Optimization
+      id: bn.id || bn._id || `banner-${Math.random()}`,
+      url: bn.url ? urlFor(bn.url) : ""
     }));
 
     return {

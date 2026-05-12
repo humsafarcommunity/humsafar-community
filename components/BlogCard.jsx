@@ -97,7 +97,7 @@ export default function BlogCard({ blog }) {
           {blog.excerpt}
         </p>
         <Link
-          href={`/blog/${blog.slug}`}
+          href={blog.slug ? `/blog/${blog.slug}` : "#"}
           style={{
             display: "flex",
             alignItems: "center",
@@ -110,7 +110,7 @@ export default function BlogCard({ blog }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
-          Read Full Guide →
+          {blog.slug ? "Read Full Guide →" : "Content Unavailable"}
         </Link>
         <meta itemProp="datePublished" content={blog.publishedAt} />
       </div>
