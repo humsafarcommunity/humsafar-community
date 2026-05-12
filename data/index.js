@@ -49,6 +49,7 @@ export async function getFreshData() {
     const tours = (sanityData.TOURS || []).map(t => ({
       ...t,
       img: t.img ? urlFor(t.img) : (staticData.TOURS.find(st => st.slug === t.slug)?.img || ""), // Fallback to static if image missing
+      gallery: (t.gallery || []).map(g => urlFor(g)),
       price: t.price || 0,
       rating: t.rating || 5.0,
       reviews: t.reviews || 0

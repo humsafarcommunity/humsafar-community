@@ -174,42 +174,64 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         </a>
       </div>
 
-      {/* Hero Image */}
-      <div style={{ position: "relative", height: "56vh", overflow: "hidden" }}>
-        <Image
-          src={tour.img}
-          alt={`${tour.title} — ${tour.location}`}
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: "cover" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(0,0,0,0.82),rgba(0,0,0,0.18))" }} />
-        <Link href="/packages" style={{ position: "absolute", top: 88, left: 24, background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", borderRadius: 999, padding: "9px 20px", cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif", textDecoration: "none" }}>
-          ← All Packages
-        </Link>
-        <div style={{ position: "absolute", bottom: 28, left: 24, right: 24, maxWidth: 1060, margin: "0 auto" }}>
-          <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap" }}>
-            <span style={{ background: "rgba(16,185,129,0.85)", color: "#fff", fontSize: 11, padding: "3px 12px", borderRadius: 6, fontWeight: 700, textTransform: "uppercase", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-              {tour.region}
-            </span>
-            <span style={{ background: "rgba(200,134,10,0.9)", color: "#fff", fontSize: 11, padding: "3px 12px", borderRadius: 6, fontWeight: 700, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-              From ₹{Number(tour.price).toLocaleString("en-IN")}
-            </span>
-            <span style={{ background: "rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", color: "#fff", fontSize: 11, padding: "3px 12px", borderRadius: 6, border: "1px solid rgba(255,255,255,0.2)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-              {tour.duration}
-            </span>
-          </div>
-          <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(24px,4vw,50px)", fontWeight: 700, color: "#fff", marginBottom: 10, lineHeight: 1.1, textShadow: "0 4px 20px rgba(0,0,0,0.3)" }}>
-            {tour.title}
-          </h1>
-          <div className="hero-stats-row" style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, display: "flex", gap: 18, flexWrap: "wrap", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-            <span>📍 {tour.location}</span>
-            <span>⭐ {tour.rating} ({tour.reviews} reviews)</span>
-            {tour.interested && <span>👥 {tour.interested}+ interested</span>}
+      {/* Hero Section with Image Grid */}
+      <section style={{ background: "#fff", paddingTop: 85 }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px 32px" }}>
+          {tour.gallery && tour.gallery.length > 0 ? (
+            /* Premium Grid Layout */
+            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 12, height: 500, borderRadius: 24, overflow: "hidden", position: "relative" }}>
+              <div style={{ position: "relative", height: "100%" }}>
+                <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.4), transparent)" }} />
+              </div>
+              <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
+                  <div style={{ position: "relative", filter: "brightness(0.7)" }}>
+                    <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
+                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 16 }}>
+                      +{tour.gallery.length} Photos
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Fallback Single Image */
+            <div style={{ position: "relative", height: 450, borderRadius: 24, overflow: "hidden" }}>
+               <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
+               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.4), transparent)" }} />
+            </div>
+          )}
+
+          {/* Tour Meta Info */}
+          <div style={{ marginTop: 24 }}>
+            <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+              <span style={{ background: "#ecfdf5", color: "#065f46", fontSize: 11, padding: "5px 14px", borderRadius: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, border: "1px solid #d1fae5", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+                {tour.region}
+              </span>
+              <span style={{ background: "#fffbeb", color: "#92400e", fontSize: 11, padding: "5px 14px", borderRadius: 8, fontWeight: 700, border: "1px solid #fef3c7", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+                From ₹{Number(tour.price).toLocaleString("en-IN")}
+              </span>
+              <span style={{ background: "#f8fafc", color: "#64748b", fontSize: 11, padding: "5px 14px", borderRadius: 8, fontWeight: 700, border: "1px solid #e2e8f0", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+                {tour.duration}
+              </span>
+            </div>
+            <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 800, color: "#0e1117", marginBottom: 14, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+              {tour.title}
+            </h1>
+            <div className="hero-stats-row" style={{ color: "#64748b", fontSize: 14, display: "flex", gap: 24, flexWrap: "wrap", fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 500 }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 6 }}>📍 {tour.location}</span>
+              <span style={{ display: "flex", alignItems: "center", gap: 6 }}>⭐ {tour.rating} ({tour.reviews} reviews)</span>
+              {tour.interested && <span style={{ display: "flex", alignItems: "center", gap: 6 }}>👥 {tour.interested}+ travelers interested</span>}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
 
 
@@ -458,6 +480,13 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       <style jsx global>{`
         @media (max-width: 768px) {
+          .tour-gallery-grid {
+            grid-template-columns: 1fr !important;
+            height: 300px !important;
+          }
+          .tour-gallery-grid div:last-child {
+            display: none !important;
+          }
           .mobile-book-bar { display: flex !important; padding: 12px 16px 18px !important; }
           .mobile-book-bar div:first-child div:last-child { fontSize: 18px !important; }
           .mobile-book-bar a { padding: 10px 18px !important; font-size: 13px !important; }
