@@ -189,7 +189,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           ← All Packages
         </Link>
         <div style={{ position: "absolute", bottom: 28, left: 24, right: 24, maxWidth: 1060, margin: "0 auto" }}>
-          <div style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap" }}>
+          <div className="hero-badges" style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap" }}>
             <span style={{ background: "rgba(16,185,129,0.85)", color: "#fff", fontSize: 11, padding: "3px 12px", borderRadius: 6, fontWeight: 700, textTransform: "uppercase", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
               {tour.region}
             </span>
@@ -200,10 +200,10 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
               {tour.duration}
             </span>
           </div>
-          <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(24px,4vw,50px)", fontWeight: 700, color: "#fff", marginBottom: 10, lineHeight: 1.1, textShadow: "0 4px 20px rgba(0,0,0,0.3)" }}>
+          <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(24px,4vw,50px)", fontWeight: 700, color: "#fff", marginBottom: 10, lineHeight: 1.1, textShadow: "0 4px 20px rgba(0,0,0,0.3)" }}>
             {tour.title}
           </h1>
-          <div style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, display: "flex", gap: 18, flexWrap: "wrap", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+          <div className="hero-stats-row" style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, display: "flex", gap: 18, flexWrap: "wrap", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
             <span>📍 {tour.location}</span>
             <span>⭐ {tour.rating} ({tour.reviews} reviews)</span>
             {tour.interested && <span>👥 {tour.interested}+ interested</span>}
@@ -237,17 +237,19 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
         >
           <div>
             {/* Highlights */}
-            <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 18, padding: "26px 28px", marginBottom: 22, border: "1px solid #e2e8f0" }}>
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 18 }}>Trip Highlights</h2>
-              <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 11, listStyle: "none" }}>
-                {tour.highlights?.map((h, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ width: 22, height: 22, borderRadius: 999, background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 12 }}>✓</div>
-                    <span style={{ fontSize: 14, color: "#374151", fontWeight: 500 }}>{h}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {tour.highlights?.length > 0 && (
+              <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 18, padding: "26px 28px", marginBottom: 22, border: "1px solid #e2e8f0" }}>
+                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 18 }}>Trip Highlights</h2>
+                <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 11, listStyle: "none" }}>
+                  {tour.highlights.map((h, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div style={{ width: 22, height: 22, borderRadius: 999, background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 12 }}>✓</div>
+                      <span style={{ fontSize: 14, color: "#374151", fontWeight: 500 }}>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {/* Itinerary */}
             {tour.itinerary?.length > 0 && (
@@ -284,7 +286,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             )}
 
             {/* Inclusions / Exclusions */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}>
+            <div className="inclusions-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}>
               {[
                 { title: "What's Included", items: tour.inclusions, icon: "✓", bg: "#ecfdf5", col: "#065f46" },
                 { title: "What's Excluded", items: tour.exclusions, icon: "✗", bg: "#fef2f2", col: "#dc2626" },
@@ -458,9 +460,16 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
       <style jsx global>{`
         @media (max-width: 768px) {
-          .mobile-book-bar { display: flex !important; }
+          .mobile-book-bar { display: flex !important; padding: 12px 16px 18px !important; }
+          .mobile-book-bar div:first-child div:last-child { fontSize: 18px !important; }
+          .mobile-book-bar a { padding: 10px 18px !important; font-size: 13px !important; }
           main > div { grid-template-columns: 1fr !important; }
           aside { display: none !important; }
+          .inclusions-grid { grid-template-columns: 1fr !important; }
+          .hero-badges { justify-content: center !important; }
+          .hero-stats-row { justify-content: center !important; gap: 12px !important; font-size: 12px !important; }
+          .tour-title { text-align: center !important; }
+          .highlights-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>
