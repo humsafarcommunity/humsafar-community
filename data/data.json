@@ -442,43 +442,50 @@
       "bestseller": false,
       "interested": 420,
       "highlights": [
-        "Uluwatu Temple Sunset",
-        "Nusa Penida Island Tour",
-        "Ubud Rice Terraces",
-        "Traditional Balinese Dance",
-        "Seminyak Beach Vibes",
-        "Mount Batur Sunrise Trek"
+        "Uluwatu Temple Sunset & Kecak Fire Dance",
+        "Nusa Penida Island Hopping (Kelingking Beach)",
+        "Ubud Sacred Monkey Forest & Tegalalang Rice Terrace",
+        "Mount Batur Sunrise Trekking Adventure",
+        "Traditional Balinese Massage & Spa Treatment",
+        "Seminyak & Canggu Beach Club Experience"
       ],
       "gallery": [
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
         "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200",
         "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200",
         "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?q=80&w=1200"
       ],
       "inclusions": [
-        "4-Star Resort Stay",
-        "Daily Breakfast",
-        "Airport Transfers",
-        "Nusa Penida Boat Tickets",
-        "Private AC Transport",
-        "Local Guide"
+        "4-Star Luxury Resort Stay",
+        "Daily Gourmet Breakfast",
+        "Private AC Transport with English Speaking Driver",
+        "Fast Boat Tickets to Nusa Penida",
+        "Airport Pick-up & Drop-off",
+        "Entrance Fees to All Sightseeing Spots"
       ],
       "exclusions": [
-        "International Flights",
-        "Visa Fees",
-        "Lunch & Dinner",
-        "Personal Expenses"
+        "International Flights from India",
+        "Bali Visa on Arrival (VoA)",
+        "Lunch & Dinner (Unless specified)",
+        "Personal Travel Insurance"
       ],
       "itinerary": [
-        { "day": 1, "title": "Arrive Bali — Check-in", "desc": "Arrive at Ngurah Rai International Airport. Transfer to your resort in Seminyak.", "meals": "None" },
-        { "day": 2, "title": "Ubud Day Tour", "desc": "Visit Tegalalang Rice Terrace and Monkey Forest.", "meals": "Breakfast" }
+        { "day": 1, "title": "Arrive Bali — Welcome to Paradise", "desc": "Arrive at Ngurah Rai International Airport. Meet our representative and transfer to your luxury resort in Seminyak. Evening free to explore the vibrant Seminyak beach and cafes.", "meals": "None" },
+        { "day": 2, "title": "Ubud Cultural Tour & Sacred Monkey Forest", "desc": "Visit the Tegalalang Rice Terraces for iconic photos. Explore the Sacred Monkey Forest Sanctuary and Ubud Art Market. Enjoy a traditional Balinese lunch overlooking the greenery.", "meals": "Breakfast" },
+        { "day": 3, "title": "Nusa Penida Island Adventure", "desc": "Full day trip to Nusa Penida island by fast boat. Visit Kelingking Beach (T-Rex Bay), Broken Beach, and Angel’s Billabong. Snorkeling at Crystal Bay.", "meals": "Breakfast" },
+        { "day": 4, "title": "Mount Batur Sunrise Trek → Coffee Plantation", "desc": "Early morning trek to Mount Batur summit for a breathtaking sunrise over the clouds. Visit a local Luwak coffee plantation on the way back. Relaxing Balinese massage in the afternoon.", "meals": "Breakfast" },
+        { "day": 5, "title": "Uluwatu Sunset & Kecak Fire Dance", "desc": "Visit the cliffside Uluwatu Temple. Watch the famous Kecak Fire Dance during sunset. Seafood dinner at Jimbaran Bay (optional).", "meals": "Breakfast" },
+        { "day": 6, "title": "Free Day in Seminyak / Canggu", "desc": "A free day to relax by the pool, try surfing at Canggu, or indulge in some high-end shopping in Seminyak's boutiques.", "meals": "Breakfast" },
+        { "day": 7, "title": "Departure from Bali", "desc": "Last-minute souvenir shopping at Krisna Oleh-Oleh. Transfer to the airport for your flight back home with tropical memories.", "meals": "Breakfast" }
       ],
       "faqs": [
-        { "q": "Do Indians need a visa for Bali?", "a": "Yes, Indians can get a Visa on Arrival (VoA) for IDR 500,000 (approx ₹2,700)." }
+        { "q": "Do Indians need a visa for Bali in 2025?", "a": "Yes, Indians can get a Visa on Arrival (VoA) for IDR 500,000 (approx ₹2,700). It is valid for 30 days and can be extended once." },
+        { "q": "What is the best currency to carry in Bali?", "a": "The local currency is Indonesian Rupiah (IDR). It's best to carry some USD or a Zero-Forex card, but IDR is needed for local markets." }
       ],
-      "seoTitle": "Bali Group Tour Package 2025 | Humsafar Community",
-      "seoDesc": "Explore Bali with Humsafar. 7 days tropical paradise tour including Ubud and Nusa Penida.",
-      "keywords": "bali tour package, indonesia group trip, bali backpacking",
-      "directAnswer": "Bali group tour costs ₹45,000 per person."
+      "seoTitle": "Bali Group Tour Package 2025 — 7 Days Tropical Island Tour | Humsafar",
+      "seoDesc": "Book Bali group tour package. 7 days luxury getaway including Ubud rice terraces, Nusa Penida island, Uluwatu sunset, and Mount Batur trek. Starting ₹45,000/person.",
+      "keywords": "bali tour package 2025, bali group trip from india, nusa penida tour, ubud luxury package, bali backpacking tour",
+      "directAnswer": "Bali group tour costs ₹45,000 per person for 7 days with Humsafar Community, including 4-star hotels, Nusa Penida trip, and airport transfers."
     },
     {
       "_id": "t5",
@@ -496,39 +503,48 @@
       "bestseller": false,
       "interested": 350,
       "highlights": [
-        "Bangkok City & Temple Tour",
-        "Phuket Island Hopping",
-        "Phi Phi Island by Speedboat",
-        "Coral Island Activities",
-        "Night Market Shopping",
-        "Authentic Thai Massage"
+        "Phi Phi Island Speedboat Tour & Maya Bay",
+        "Bangkok City & Golden Buddha Temple Tour",
+        "Phuket Nightlife & Bangla Road Experience",
+        "Coral Island Water Sports & Parasailing",
+        "Authentic Thai Street Food & Night Markets",
+        "Traditional Thai Massage Treatment"
       ],
       "gallery": [
         "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1200",
-        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200"
+        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200",
+        "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200"
       ],
       "inclusions": [
-        "Hotel Stay with Breakfast",
-        "Internal Transfers",
-        "Guided Sightseeing",
-        "Speedboat to Phi Phi",
-        "Experienced Tour Manager"
+        "3-Star / 4-Star Accommodations",
+        "Daily Breakfast Buffet",
+        "Internal Transfers in Private AC Coach",
+        "Full Day Phi Phi Island Tour with Lunch",
+        "Professional English Speaking Guide",
+        "Bangkok to Phuket Internal Connection"
       ],
       "exclusions": [
-        "Airfare",
-        "Thai Visa",
+        "International Airfare",
+        "Thai Visa Fees (If applicable)",
+        "National Park Entry Fees (Phi Phi)",
         "Personal Expenses"
       ],
       "itinerary": [
-        { "day": 1, "title": "Arrive Bangkok", "desc": "Welcome to the Land of Smiles! Transfer to your hotel.", "meals": "None" }
+        { "day": 1, "title": "Arrive Bangkok — The City of Angels", "desc": "Arrive at Suvarnabhumi Airport. Transfer to your hotel. Evening at leisure or visit the famous Chao Phraya River Cruise for dinner.", "meals": "None" },
+        { "day": 2, "title": "Bangkok Temple Tour & City Exploration", "desc": "Visit Wat Traimit (Golden Buddha) and Wat Benchamabophit (Marble Temple). Afternoon shopping at MBK Center or Siam Paragon. Evening visit to Khao San Road.", "meals": "Breakfast" },
+        { "day": 3, "title": "Bangkok → Phuket — Island Vibes", "desc": "Fly to Phuket. Check-in at your hotel near Patong Beach. Relax by the beach and explore the vibrant nightlife at Bangla Road in the evening.", "meals": "Breakfast" },
+        { "day": 4, "title": "Phi Phi Island Hopping by Speedboat", "desc": "Full day tour to Phi Phi Don and Phi Phi Leh. Visit Maya Bay (as seen in 'The Beach'), Pileh Lagoon, and Viking Cave. Enjoy a buffet lunch on the island.", "meals": "Breakfast, Lunch" },
+        { "day": 5, "title": "Coral Island Water Sports Day", "desc": "Visit Coral Island for exciting water activities like parasailing, sea walking, and snorkeling. Return to Phuket for a relaxing Thai massage.", "meals": "Breakfast" },
+        { "day": 6, "title": "Phuket Sightseeing & Departure", "desc": "Visit Big Buddha and Wat Chalong. Final shopping at Phuket Old Town. Transfer to the airport for your flight back to India.", "meals": "Breakfast" }
       ],
       "faqs": [
-        { "q": "Is Thailand visa-free for Indians?", "a": "Yes, Thailand currently offers visa-free entry for Indian citizens (up to Nov 2025)." }
+        { "q": "Is Thailand visa-free for Indians in 2025?", "a": "Yes, Thailand offers visa-free entry for Indian citizens for tourism purposes until late 2025 (check current govt notification for exact dates)." },
+        { "q": "Which is better: Bangkok or Phuket?", "a": "Both offer different experiences! Bangkok is great for shopping, temples, and city life, while Phuket is world-famous for its beaches and island hopping. Our tour includes both!" }
       ],
-      "seoTitle": "Thailand Group Tour Package 2025 | Humsafar Community",
-      "seoDesc": "Explore Bangkok and Phuket with Humsafar. 6 days Thailand special group departure.",
-      "keywords": "thailand tour package, bangkok phuket group trip, thailand backpacking",
-      "directAnswer": "Thailand group tour costs ₹32,000 per person."
+      "seoTitle": "Thailand Group Tour Package 2025 — 6 Days Bangkok & Phuket | Humsafar",
+      "seoDesc": "Book Thailand group tour from India. 6 days 5 nights covering Bangkok city, Phi Phi Island, and Phuket beaches. Starting ₹32,000/person. 4.8⭐ rated by travelers.",
+      "keywords": "thailand tour package 2025, bangkok phuket tour from india, phi phi island package, thailand group trip, budget thailand tour",
+      "directAnswer": "Thailand group tour costs ₹32,000 per person for 6 days with Humsafar Community, covering Bangkok and Phuket."
     }
   ],
   "BANNERS": [
