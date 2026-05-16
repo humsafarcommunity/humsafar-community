@@ -11,6 +11,7 @@ import FAQAccordion from "../components/FAQAccordion";
 import Footer from "../components/Footer";
 import {
   SITE,
+  REVIEWS,
   getFreshData,
   generateOrganizationSchema,
   generateWebsiteSchema,
@@ -22,7 +23,7 @@ import {
 // ──────────────────────────────────────────────────────────────────
 
 export default function HomePage({ tours, blogs, banners, site: freshSite, seo: seoData }) {
-  const dynamicSite = freshSite || SITE || { name: "Humsafar Community", socials: {} };
+  const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,10 +60,11 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
       (selectedType === "all" || t.type === selectedType)
   );
   
-  // Show bestsellers first, but if none are marked, show the latest tours instead
   const bestsellers = tours.some(t => t.bestseller) 
     ? tours.filter((t) => t.bestseller).slice(0, 4)
     : tours.slice(0, 4);
+
+  const internationalTours = tours.filter((t) => t.region === "international").slice(0, 4);
 
   const isDefault = selectedRegion === "all" && selectedType === "all";
 
@@ -213,7 +215,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                 fontWeight: 700,
                 letterSpacing: 3.5,
                 textTransform: "uppercase",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontFamily: "'Outfit', sans-serif",
                 animation: "fadeIn 0.8s ease-out",
                 margin: "0 auto 18px"
               }}
@@ -249,7 +251,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                   maxWidth: 600,
                   margin: "0 auto 40px",
                   textShadow: "0 1px 4px rgba(0,0,0,0.2)",
-                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                  fontFamily: "'Outfit', sans-serif",
                   animation: "fadeIn 1.2s ease-out",
                 }}
               >
@@ -375,22 +377,25 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
       </section>
 
       {/* ── FILTER BAR ───────────────────────────────────────────── */}
-      <div style={{ padding: "0 20px" }}>
+      <div style={{ width: "100%", padding: "0 24px", boxSizing: "border-box" }}>
         <div
+          className="filter-strip-card"
           style={{
             background: "#fff",
             borderRadius: 20,
             margin: "-32px auto 0",
-            maxWidth: 1100,
+            maxWidth: 1156, // 1100 content + 28*2 padding
+            width: "100%",
             padding: "24px 28px",
             boxShadow: "0 12px 40px rgba(0,0,0,0.12)",
             border: "1px solid #e2e8f0",
             position: "relative",
             zIndex: 20,
+            boxSizing: "border-box"
           }}
         >
-          <div style={{ display: "flex", gap: "24px 40px", flexWrap: "wrap", justifyContent: "space-between" }}>
-            <div style={{ flex: 1, minWidth: 220 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px 60px" }}>
+            <div>
               <p
                 style={{
                   fontSize: 10,
@@ -484,7 +489,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
       <main>
         <section
           aria-label="Tour packages"
-          style={{ padding: "60px 20px", background: "#fff" }}
+          style={{ padding: "60px 24px", background: "#fff" }}
         >
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             {!isDefault ? (
@@ -599,6 +604,70 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                     <TourCard key={tour._id || tour.slug || idx} tour={tour} />
                   ))}
                 </div>
+
+                {/* International Tours Section */}
+                {internationalTours.length > 0 && (
+                  <div style={{ marginTop: 64 }}>
+                    <p
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: "#3b82f6",
+                        textTransform: "uppercase",
+                        letterSpacing: 2,
+                        marginBottom: 8,
+                        fontFamily: "Plus Jakarta Sans, sans-serif",
+                      }}
+                    >
+                      Global Adventures
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-end",
+                        marginBottom: 32,
+                        flexWrap: "wrap",
+                        gap: 12,
+                      }}
+                    >
+                      <h2
+                        style={{
+                          fontFamily: "Playfair Display, serif",
+                          fontSize: "clamp(28px, 5vw, 38px)",
+                          fontWeight: 700,
+                          color: "#0e1117",
+                        }}
+                      >
+                        International Tour Packages
+                      </h2>
+                      <Link
+                        href="/packages?region=international"
+                        style={{
+                          color: "#3b82f6",
+                          fontWeight: 700,
+                          fontSize: 14,
+                          textDecoration: "none",
+                          fontFamily: "Plus Jakarta Sans, sans-serif",
+                        }}
+                      >
+                        View All International →
+                      </Link>
+                    </div>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                          "repeat(auto-fill,minmax(280px,1fr))",
+                        gap: 24,
+                      }}
+                    >
+                      {internationalTours.map((tour, idx) => (
+                        <TourCard key={tour._id || tour.slug || idx} tour={tour} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -607,7 +676,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         {/* ── AEO SECTION: Direct answers for voice search ──────── */}
         <section
           aria-label="Frequently asked questions"
-          style={{ padding: "60px 20px", background: "#f8fafc" }}
+          style={{ padding: "60px 24px", background: "#f8fafc" }}
         >
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <p
@@ -655,7 +724,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         {blogs.length > 0 && (
           <section
             aria-label="Travel blog and guides"
-            style={{ padding: "60px 20px", background: "#fff" }}
+            style={{ padding: "60px 24px", background: "#fff" }}
           >
             <div style={{ maxWidth: 1100, margin: "0 auto" }}>
               <p
@@ -723,7 +792,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         <section
           aria-label="Newsletter signup"
           style={{
-            padding: "72px 20px",
+            padding: "72px 24px",
             background: "#064e3b",
             position: "relative",
             overflow: "hidden",
@@ -871,6 +940,9 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
           display: none;
         }
         @media (max-width: 640px) {
+          .filter-strip-card {
+            padding: 24px 16px !important;
+          }
           .hero-search-form {
             border-radius: 18px !important;
             flex-direction: column !important;

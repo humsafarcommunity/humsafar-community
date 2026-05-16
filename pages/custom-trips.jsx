@@ -5,7 +5,7 @@ import SEOHead from "../components/SEOHead";
 import { getFreshData, SITE } from "../data";
 
 export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
-  const dynamicSite = freshSite || SITE || { name: "Humsafar Community", whatsapp: "916268496389" };
+  const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const [status, setStatus] = useState("idle"); // idle | success
 
   const handleSubmit = (e) => {
@@ -16,7 +16,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
     // Create WhatsApp message
     const message = `Hi Humsafar! I want to plan a *Custom Trip*.\n\n👤 Name: ${data.name}\n📍 Destination: ${data.destination}\n👥 Travelers: ${data.pax}\n📅 Date: ${data.date}\n⏱ Duration: ${data.duration}\n💰 Budget: ${data.budget}\n📝 Notes: ${data.notes}`;
     
-    const waUrl = `https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
     
     setStatus("success");
     setTimeout(() => {

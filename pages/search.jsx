@@ -8,7 +8,7 @@ import BlogCard from "../components/BlogCard";
 import { SITE, getFreshData } from "../data";
 
 export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData }) {
-  const dynamicSite = freshSite || SITE;
+  const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
   const { q } = router.query;
   const [results, setResults] = useState({ tours: [], blogs: [] });

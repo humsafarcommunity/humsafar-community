@@ -136,47 +136,45 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           background: "rgba(255, 255, 255, 0.98)",
           backdropFilter: "blur(14px)",
           borderTop: "1px solid #f1f5f9",
-          padding: "14px 24px 28px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
           boxShadow: "0 -10px 40px rgba(0,0,0,0.06)",
           boxSizing: "border-box"
         }}
         className="mobile-book-bar"
       >
-        <div>
-          <div style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 800, marginBottom: 2 }}>
-            {pax} Pax · {sharing} Sharing
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "14px 24px 28px", display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", boxSizing: "border-box" }}>
+          <div>
+            <div style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 800, marginBottom: 2 }}>
+              {pax} Pax · {sharing} Sharing
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "Playfair Display, serif", color: "#0f172a" }}>
+              ₹{totalPrice.toLocaleString("en-IN")}
+            </div>
           </div>
-          <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "Playfair Display, serif", color: "#0f172a" }}>
-            ₹{totalPrice.toLocaleString("en-IN")}
-          </div>
+          <a
+            href={`https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(waMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              background: "#10b981",
+              color: "#fff",
+              padding: "12px 24px",
+              borderRadius: 8,
+              fontWeight: 800,
+              fontSize: 13,
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 7,
+              fontFamily: "Plus Jakarta Sans, sans-serif",
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+              boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)"
+            }}
+            onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Mobile Book Bar", value: totalPrice })}
+          >
+            💬 Book Now
+          </a>
         </div>
-        <a
-          href={`https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(waMessage)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            background: "#10b981",
-            color: "#fff",
-            padding: "12px 20px",
-            borderRadius: 8,
-            fontWeight: 800,
-            fontSize: 13,
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: 7,
-            fontFamily: "Plus Jakarta Sans, sans-serif",
-            textTransform: "uppercase",
-            letterSpacing: 0.5,
-            boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)"
-          }}
-          onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Mobile Book Bar", value: totalPrice })}
-        >
-          💬 Book Now
-        </a>
       </div>
 
       {/* Hero Section with Integrated Image Grid */}
@@ -520,11 +518,17 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
           .back-btn { top: 16px !important; left: 16px !important; padding: 6px 12px !important; font-size: 10px !important; border-radius: 4px !important; }
           
           .mobile-book-bar { 
-            display: flex !important; 
-            padding: 14px 24px 32px !important; 
+            display: block !important; 
+            padding: 0 !important; 
             height: auto !important; 
             border-top: 1px solid #f1f5f9 !important;
             box-shadow: 0 -10px 40px rgba(0,0,0,0.06) !important;
+          }
+          .mobile-book-bar > div {
+            padding: 14px 24px 32px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
           }
           .mobile-book-bar div:first-child div:last-child { font-size: 20px !important; font-weight: 900 !important; }
           .mobile-book-bar a { padding: 12px 24px !important; font-size: 13px !important; border-radius: 8px !important; }

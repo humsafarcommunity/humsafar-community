@@ -11,10 +11,14 @@ import { createClient } from 'next-sanity';
 import { urlFor } from '../lib/sanity.image';
 
 const staticData = require('./data.json');
-export const SITE = staticData.SITE;
+export const SITE = {
+  ...staticData.SITE,
+  whatsapp: (staticData.SITE.whatsapp || "916268496389").toString().replace(/\D/g, "")
+};
 export const TOURS = staticData.TOURS;
 export const BLOGS = staticData.BLOGS;
 export const BANNERS = staticData.BANNERS;
+export const REVIEWS = staticData.REVIEWS;
 
 const client = createClient({
   projectId: 'fghdctku',
@@ -99,16 +103,36 @@ export async function getFreshData() {
       url: bn.url ? urlFor(bn.url) : ""
     }));
 
+    const site = {
+      ...staticData.SITE,
+      ...sanityData.SITE,
+    };
+    
+    // Sanitize WhatsApp number (must be digits only for wa.me)
+    if (site.whatsapp) {
+      site.whatsapp = site.whatsapp.toString().replace(/\D/g, "");
+    } else {
+      site.whatsapp = "916268496389"; // Absolute fallback
+    }
+
     return {
-      SITE: sanityData.SITE || staticData.SITE,
+      SITE: site,
       SEODATA: sanityData.SEODATA || {},
       TOURS: tours.length > 0 ? tours : staticData.TOURS,
       BLOGS: blogs.length > 0 ? blogs : staticData.BLOGS,
       BANNERS: banners.length > 0 ? banners : staticData.BANNERS,
+      REVIEWS: staticData.REVIEWS,
     };
   } catch (error) {
     console.error("Sanity fetch failed, falling back to static data", error);
-    return staticData;
+    return {
+      SITE,
+      TOURS,
+      BLOGS,
+      BANNERS,
+      REVIEWS,
+      SEODATA: {}
+    };
   }
 }
 

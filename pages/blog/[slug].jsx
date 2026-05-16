@@ -15,7 +15,7 @@ import {
 } from "../../data";
 
 export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) {
-  const dynamicSite = freshSite || SITE || { name: "Humsafar Community", whatsapp: "916268496389" };
+  const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
   const [expandedFaq, setExpandedFaq] = useState(null);
 
@@ -241,7 +241,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
               Talk to our experts and book the perfect trip today.
             </p>
             <a
-              href={`https://wa.me/${dynamicSite.whatsapp}?text=Hi Humsafar! I read your blog about ${blog.title} and want to book a trip.`}
+              href={`https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=Hi Humsafar! I read your blog about ${blog.title} and want to book a trip.`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#22c55e", color: "#fff", padding: "14px 28px", borderRadius: 14, fontWeight: 700, fontSize: 15, textDecoration: "none", fontFamily: "Plus Jakarta Sans, sans-serif" }}

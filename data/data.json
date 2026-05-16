@@ -425,6 +425,110 @@
       "seoDesc": "Complete Kedarnath Yatra 2025 guide. How to register online, 18km trek breakdown, helicopter booking (₹3,500-4,500), hotels in Guptkashi, packing list, and per-person budget (₹9,000-13,000).",
       "keywords": "kedarnath yatra 2025, kedarnath registration 2025, kedarnath trek guide, kedarnath helicopter booking 2025, kedarnath temple opening date 2025, char dham yatra guide",
       "directAnswer": "Kedarnath Temple opens on April 30, 2025 (Akshaya Tritiya) and closes on October 22, 2025. Registration at registrationandtouristcare.uk.gov.in is mandatory and free. The 18km trek from Gaurikund takes 6-8 hours. Total trip budget: ₹9,000-13,000 per person."
+    },
+    {
+      "_id": "t4",
+      "title": "Bali Getaway: Tropical Paradise & Island Hopping",
+      "slug": "bali-getaway-tropical-paradise",
+      "location": "Bali, Indonesia",
+      "region": "international",
+      "type": "group",
+      "duration": "7 Days / 6 Nights",
+      "price": 45000,
+      "oldPrice": "55,000",
+      "img": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
+      "rating": 4.9,
+      "reviews": 156,
+      "bestseller": false,
+      "interested": 420,
+      "highlights": [
+        "Uluwatu Temple Sunset",
+        "Nusa Penida Island Tour",
+        "Ubud Rice Terraces",
+        "Traditional Balinese Dance",
+        "Seminyak Beach Vibes",
+        "Mount Batur Sunrise Trek"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200",
+        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200",
+        "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?q=80&w=1200"
+      ],
+      "inclusions": [
+        "4-Star Resort Stay",
+        "Daily Breakfast",
+        "Airport Transfers",
+        "Nusa Penida Boat Tickets",
+        "Private AC Transport",
+        "Local Guide"
+      ],
+      "exclusions": [
+        "International Flights",
+        "Visa Fees",
+        "Lunch & Dinner",
+        "Personal Expenses"
+      ],
+      "itinerary": [
+        { "day": 1, "title": "Arrive Bali — Check-in", "desc": "Arrive at Ngurah Rai International Airport. Transfer to your resort in Seminyak.", "meals": "None" },
+        { "day": 2, "title": "Ubud Day Tour", "desc": "Visit Tegalalang Rice Terrace and Monkey Forest.", "meals": "Breakfast" }
+      ],
+      "faqs": [
+        { "q": "Do Indians need a visa for Bali?", "a": "Yes, Indians can get a Visa on Arrival (VoA) for IDR 500,000 (approx ₹2,700)." }
+      ],
+      "seoTitle": "Bali Group Tour Package 2025 | Humsafar Community",
+      "seoDesc": "Explore Bali with Humsafar. 7 days tropical paradise tour including Ubud and Nusa Penida.",
+      "keywords": "bali tour package, indonesia group trip, bali backpacking",
+      "directAnswer": "Bali group tour costs ₹45,000 per person."
+    },
+    {
+      "_id": "t5",
+      "title": "Thailand Treasures: Bangkok & Phuket Special",
+      "slug": "thailand-treasures-bangkok-phuket",
+      "location": "Thailand",
+      "region": "international",
+      "type": "group",
+      "duration": "6 Days / 5 Nights",
+      "price": 32000,
+      "oldPrice": "38,000",
+      "img": "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200",
+      "rating": 4.8,
+      "reviews": 124,
+      "bestseller": false,
+      "interested": 350,
+      "highlights": [
+        "Bangkok City & Temple Tour",
+        "Phuket Island Hopping",
+        "Phi Phi Island by Speedboat",
+        "Coral Island Activities",
+        "Night Market Shopping",
+        "Authentic Thai Massage"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1200",
+        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200"
+      ],
+      "inclusions": [
+        "Hotel Stay with Breakfast",
+        "Internal Transfers",
+        "Guided Sightseeing",
+        "Speedboat to Phi Phi",
+        "Experienced Tour Manager"
+      ],
+      "exclusions": [
+        "Airfare",
+        "Thai Visa",
+        "Personal Expenses"
+      ],
+      "itinerary": [
+        { "day": 1, "title": "Arrive Bangkok", "desc": "Welcome to the Land of Smiles! Transfer to your hotel.", "meals": "None" }
+      ],
+      "faqs": [
+        { "q": "Is Thailand visa-free for Indians?", "a": "Yes, Thailand currently offers visa-free entry for Indian citizens (up to Nov 2025)." }
+      ],
+      "seoTitle": "Thailand Group Tour Package 2025 | Humsafar Community",
+      "seoDesc": "Explore Bangkok and Phuket with Humsafar. 6 days Thailand special group departure.",
+      "keywords": "thailand tour package, bangkok phuket group trip, thailand backpacking",
+      "directAnswer": "Thailand group tour costs ₹32,000 per person."
     }
   ],
   "BANNERS": [
@@ -451,6 +555,40 @@
       "title": "Live the Legacy.",
       "hi": "Legacy.",
       "sub": "Desert dunes, golden forts, and centuries of royal heritage await you."
+    }
+  ],
+  "REVIEWS": [
+    {
+      "author": "Sumit Jain",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "I recently booked a trip through Humsafar Community, and I must say it was an outstanding experience from start to finish. The team was professional, responsive, and very helpful in planning every detail of our itinerary.",
+      "initials": "SJ",
+      "color": "#4285F4"
+    },
+    {
+      "author": "Ashish Sharma",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "Absolutely loved my stay with Humsafar Community! The hosts were warm and welcoming, and the community vibe was amazing. Highly recommend for a unique and enriching experience!",
+      "initials": "AS",
+      "color": "#EA4335"
+    },
+    {
+      "author": "Tanmay Mishra",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "I recently booked my trip through Humsafar Tour and Travel, and I must say — it was an amazing experience from start to finish! ✨",
+      "initials": "TM",
+      "color": "#FBBC05"
+    },
+    {
+      "author": "Priyanshu Nagar",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "Exceptional Service & Memorable Experience! One of the best tour operators in Gwalior. Highly recommend them for hassle-free travel planning.",
+      "initials": "PN",
+      "color": "#34A853"
     }
   ]
 }

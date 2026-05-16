@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { SITE, getFreshData } from "../data";
 
 export default function AboutPage({ site: freshSite, seo: seoData }) {
-  const dynamicSite = freshSite || SITE;
+  const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
 
   return (
     <>
