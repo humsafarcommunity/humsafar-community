@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function GoogleReviews({ placeId }) {
   const [reviews, setReviews] = useState([]);
@@ -82,17 +83,19 @@ export default function GoogleReviews({ placeId }) {
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
             <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <img 
+              <Image 
                 src={rev.profile_photo_url} 
                 alt={rev.author_name} 
-                style={{ width: 44, height: 44, borderRadius: '50%' }} 
+                width={44}
+                height={44}
+                style={{ borderRadius: '50%' }} 
               />
               <div>
                 <div style={{ fontWeight: 700, color: "#0f172a", fontSize: 15 }}>{rev.author_name}</div>
                 <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>{rev.relative_time_description}</div>
               </div>
             </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_Logo.svg" width="16" height="16" alt="G" />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_Logo.svg" width={16} height={16} alt="G" />
           </div>
           <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
             {[...Array(rev.rating)].map((_, i) => (
@@ -100,7 +103,7 @@ export default function GoogleReviews({ placeId }) {
             ))}
           </div>
           <p style={{ fontSize: 14, lineHeight: 1.7, color: "#475569", margin: 0 }}>
-            "{rev.text}"
+            &quot;{rev.text}&quot;
           </p>
         </div>
       ))}
