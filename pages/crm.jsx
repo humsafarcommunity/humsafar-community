@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import Head from "next/head";
 
 // ─── Seed Data ────────────────────────────────────────────────────────────────
 const SEED = [
@@ -650,6 +651,9 @@ export default function HumsafarCRM() {
 
   return (
     <div className="flex h-screen bg-slate-100 overflow-hidden font-['Plus_Jakarta_Sans',system-ui,sans-serif]">
+      <Head>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       {/* SIDEBAR */}
       <div className="w-[240px] bg-slate-900 flex flex-col flex-shrink-0 h-screen">
         <div className="p-6 pt-5 pb-4">

@@ -4,11 +4,9 @@
 # ── ALLOW ALL MAJOR SEARCH ENGINES ─────────────────────────────
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
@@ -59,6 +57,7 @@ Allow: /
 
 # ── DISALLOW ADMIN & PRIVATE PAGES ─────────────────────────────
 Disallow: /admin/
+Disallow: /crm
 Disallow: /api/
 Disallow: /_next/
 Disallow: /private/

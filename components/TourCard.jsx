@@ -28,7 +28,7 @@ export default function TourCard({ tour }) {
     >
       <div style={{ position: "relative", paddingTop: "64%", overflow: "hidden" }}>
         <Image
-          src={tour.img}
+          src={tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
           alt={`${tour.title} — ${tour.location}`}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

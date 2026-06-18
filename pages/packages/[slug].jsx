@@ -183,13 +183,13 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 8, height: 520, borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
               {/* Main Featured Image with Overlay Content */}
               <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
-                <Image src={tour.img} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
+                <Image src={tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
               
               {/* Back Button */}
               <Link href="/packages" className="back-btn" style={{ position: "absolute", top: 20, left: 20, background: "rgba(0,0,0,0.3)", backdropFilter: "blur(8px)", color: "#fff", borderRadius: 8, padding: "6px 14px", fontSize: 11, fontWeight: 700, textDecoration: "none", zIndex: 10, textTransform: "uppercase", letterSpacing: 1 }}>
                 ← Back
               </Link>
-
+              
               {/* Gradient & Content Overlay */}
               <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 80%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "32px" }}>
                 <div className="hero-badges" style={{ display: "flex", gap: 6, marginBottom: 10 }}>
@@ -214,13 +214,13 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             {tour.gallery && tour.gallery.length > 0 && (
               <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 8 }} className="gallery-side-grid">
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[0] || tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} fill style={{ objectFit: "cover" }} alt="Gallery 1" /></div>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[1] || tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} fill style={{ objectFit: "cover" }} alt="Gallery 2" /></div>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                  <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
+                  <div style={{ position: "relative" }}><Image src={tour.gallery[2] || tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} fill style={{ objectFit: "cover" }} alt="Gallery 3" /></div>
                   <div style={{ position: "relative", filter: "brightness(0.6)" }}>
-                    <Image src={tour.gallery[3] || tour.img} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
+                    <Image src={tour.gallery[3] || tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} fill style={{ objectFit: "cover" }} alt="Gallery 4" />
                     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 14 }}>
                       +{tour.gallery.length}
                     </div>

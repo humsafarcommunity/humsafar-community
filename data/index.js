@@ -198,11 +198,11 @@ export function generateTourSchema(tour, site = SITE) {
   return {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    "@id": `${site.url}/packages/${tour.slug}/`,
+    "@id": `${site.url}/packages/${tour.slug}`,
     name: tour.title,
     description: tour.seoDesc,
     image: tour.img,
-    url: `${site.url}/packages/${tour.slug}/`,
+    url: `${site.url}/packages/${tour.slug}`,
     offers: {
       "@type": "Offer",
       price: tour.price,
@@ -247,7 +247,7 @@ export function generateArticleSchema(blog, site = SITE) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    "@id": `${site.url}/blog/${blog.slug}/`,
+    "@id": `${site.url}/blog/${blog.slug}`,
     headline: blog.seoTitle || blog.title,
     description: blog.seoDesc || blog.excerpt,
     image: {
@@ -270,7 +270,7 @@ export function generateArticleSchema(blog, site = SITE) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${site.url}/blog/${blog.slug}/`,
+      "@id": `${site.url}/blog/${blog.slug}`,
     },
     keywords: blog.keywords,
     articleSection: blog.category,

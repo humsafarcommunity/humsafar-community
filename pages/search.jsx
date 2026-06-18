@@ -44,6 +44,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
         url={`/search?q=${q}`}
         site={dynamicSite}
         seo={seoData}
+        noindex={true}
       />
 
       <Navbar site={dynamicSite} />

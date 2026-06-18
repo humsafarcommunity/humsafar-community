@@ -184,7 +184,7 @@ export default function Footer({ dynamicSite }) {
             borderTop: "1px solid #161b22",
             paddingTop: 24,
             display: "flex",
-            justifyContent: "",
+            justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
             gap: 16,

@@ -18,6 +18,7 @@ module.exports = {
     "/404",
     "/500",
     "/search",
+    "/crm",
   ],
 
   // Custom priorities for different page types

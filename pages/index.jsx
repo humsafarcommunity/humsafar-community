@@ -105,7 +105,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         "@type": "ListItem",
         position: i + 1,
         name: tour.title,
-        url: `${dynamicSite.url}/packages/${tour.slug}/`,
+        url: `${dynamicSite.url}/packages/${tour.slug}`,
         description: tour.seoDesc,
       })),
     },
@@ -170,7 +170,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             }}
           >
             <Image
-              src={b.url}
+              src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
               alt={b.tag || "Travel Destination"}
               fill
               priority={i === 0}
