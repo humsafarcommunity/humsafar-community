@@ -197,8 +197,8 @@ export function generateOrganizationSchema(site = SITE) {
 export function generateTourSchema(tour, site = SITE) {
   return {
     "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    "@id": `${site.url}/packages/${tour.slug}`,
+    "@type": "Product",
+    "@id": `${site.url}/packages/${tour.slug}/`,
     name: tour.title,
     description: tour.seoDesc,
     image: tour.img,
