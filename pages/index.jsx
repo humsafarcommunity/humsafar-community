@@ -22,7 +22,7 @@ import {
 // HOMEPAGE COMPONENT
 // ──────────────────────────────────────────────────────────────────
 
-export default function HomePage({ tours, blogs, banners, site: freshSite, seo: seoData }) {
+export default function HomePage({ tours = [], blogs = [], banners = [], site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,15 +30,17 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   // Auto-advance hero slider
   useEffect(() => {
+    if (!banners || banners.length === 0) return;
     const timer = setInterval(
-      () => setCurrentSlide((p) => (p + 1) % banners.length),
+      () => setCurrentSlide((p) => (p + 1) % (banners.length || 1)),
       5500
     );
     return () => clearInterval(timer);
-  }, [banners.length]);
+  }, [banners?.length]);
 
   // SXO: Scroll detection for sticky nav
   useEffect(() => {
@@ -47,24 +49,37 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Reset loading state if route transition terminates or errors
+  useEffect(() => {
+    const handleStop = () => setIsSearching(false);
+    router.events.on("routeChangeComplete", handleStop);
+    router.events.on("routeChangeError", handleStop);
+    return () => {
+      router.events.off("routeChangeComplete", handleStop);
+      router.events.off("routeChangeError", handleStop);
+    };
+  }, [router.events]);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
+      setIsSearching(true);
       router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
     }
   };
 
-  const filtered = tours.filter(
+  const filtered = (tours || []).filter(
     (t) =>
+      t &&
       (selectedRegion === "all" || t.region === selectedRegion) &&
       (selectedType === "all" || t.type === selectedType)
   );
   
-  const bestsellers = tours.some(t => t.bestseller) 
-    ? tours.filter((t) => t.bestseller).slice(0, 4)
-    : tours.slice(0, 4);
+  const bestsellers = (tours || []).some(t => t?.bestseller) 
+    ? (tours || []).filter((t) => t?.bestseller).slice(0, 4)
+    : (tours || []).slice(0, 4);
 
-  const internationalTours = tours.filter((t) => t.region === "international").slice(0, 4);
+  const internationalTours = (tours || []).filter((t) => t?.region === "international").slice(0, 4);
 
   const isDefault = selectedRegion === "all" && selectedType === "all";
 
@@ -158,9 +173,9 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         }}
       >
         {/* Background images */}
-        {banners.map((b, i) => (
+        {(banners || []).map((b, i) => (
           <div
-            key={b.id}
+            key={b?.id || i}
             style={{
               position: "absolute",
               inset: 0,
@@ -304,6 +319,7 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
             <button
               type="submit"
               aria-label="Search"
+              disabled={isSearching}
               style={{
                 background: "#064e3b",
                 color: "#fff",
@@ -312,12 +328,24 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
                 padding: "12px 28px",
                 fontWeight: 700,
                 fontSize: 14,
-                cursor: "pointer",
+                cursor: isSearching ? "not-allowed" : "pointer",
                 flexShrink: 0,
                 fontFamily: "Plus Jakarta Sans, sans-serif",
+                opacity: isSearching ? 0.85 : 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
               }}
             >
-              Search
+              {isSearching ? (
+                <>
+                  <span className="spinner" />
+                  Searching...
+                </>
+              ) : (
+                "Search"
+              )}
             </button>
           </form>
 
@@ -929,6 +957,19 @@ export default function HomePage({ tours, blogs, banners, site: freshSite, seo: 
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .spinner {
+          width: 14px;
+          height: 14px;
+          border: 2px solid rgba(255,255,255,0.3);
+          border-top-color: #fff;
+          border-radius: 50%;
+          display: inline-block;
+          animation: spin 0.8s linear infinite;
         }
         .filter-scroll-container {
           width: 100%;

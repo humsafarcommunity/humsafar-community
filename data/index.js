@@ -115,12 +115,47 @@ export async function getFreshData() {
       site.whatsapp = "916268496389"; // Absolute fallback
     }
 
+    // Merge logic: Merge static data with Sanity data by slug or id to prevent local routes from being overwritten/hidden when Sanity data is loaded.
+    const mergedToursMap = {};
+    staticData.TOURS.forEach(tour => {
+      mergedToursMap[tour.slug] = tour;
+    });
+    tours.forEach(tour => {
+      mergedToursMap[tour.slug] = {
+        ...mergedToursMap[tour.slug],
+        ...tour
+      };
+    });
+
+    const mergedBlogsMap = {};
+    staticData.BLOGS.forEach(blog => {
+      mergedBlogsMap[blog.slug] = blog;
+    });
+    blogs.forEach(blog => {
+      mergedBlogsMap[blog.slug] = {
+        ...mergedBlogsMap[blog.slug],
+        ...blog
+      };
+    });
+
+    const mergedBannersMap = {};
+    staticData.BANNERS.forEach(banner => {
+      mergedBannersMap[banner.id] = banner;
+    });
+    banners.forEach(banner => {
+      const bId = banner.id || banner._id;
+      mergedBannersMap[bId] = {
+        ...mergedBannersMap[bId],
+        ...banner
+      };
+    });
+
     return {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
-      TOURS: tours.length > 0 ? tours : staticData.TOURS,
-      BLOGS: blogs.length > 0 ? blogs : staticData.BLOGS,
-      BANNERS: banners.length > 0 ? banners : staticData.BANNERS,
+      TOURS: Object.values(mergedToursMap),
+      BLOGS: Object.values(mergedBlogsMap),
+      BANNERS: Object.values(mergedBannersMap),
       REVIEWS: staticData.REVIEWS,
     };
   } catch (error) {

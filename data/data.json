@@ -320,6 +320,203 @@
       "seoDesc": "Book Jaisalmer desert safari tour package. 4 days 3 nights including Sam Sand Dunes camel safari, overnight desert camp, Jaisalmer Fort. Starting ₹7,500/person. 4.9⭐ rated by 212 travelers.",
       "keywords": "jaisalmer desert safari package 2025, jaisalmer tour package, sam sand dunes camping, jaisalmer fort tour, rajasthan desert tour, overnight desert camp jaisalmer",
       "directAnswer": "Jaisalmer desert safari package costs ₹7,500 per person for 4 days 3 nights with Humsafar Community. Package includes Sam Sand Dunes camel safari, overnight desert camp, Jaisalmer Fort visit, Kuldhara village, folk dance evening. October to March is the best time to visit."
+    },
+    {
+      "_id": "t4",
+      "title": "Bali Getaway: Tropical Paradise & Island Hopping",
+      "slug": "bali-getaway-tropical-paradise",
+      "location": "Bali, Indonesia",
+      "region": "international",
+      "type": "group",
+      "duration": "7 Days / 6 Nights",
+      "price": 45000,
+      "oldPrice": "55,000",
+      "img": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
+      "rating": 4.9,
+      "reviews": 156,
+      "bestseller": false,
+      "interested": 420,
+      "highlights": [
+        "Uluwatu Temple Sunset & Kecak Fire Dance",
+        "Nusa Penida Island Hopping (Kelingking Beach)",
+        "Ubud Sacred Monkey Forest & Tegalalang Rice Terrace",
+        "Mount Batur Sunrise Trekking Adventure",
+        "Traditional Balinese Massage & Spa Treatment",
+        "Seminyak & Canggu Beach Club Experience"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
+        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200",
+        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200",
+        "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?q=80&w=1200"
+      ],
+      "inclusions": [
+        "4-Star Luxury Resort Stay",
+        "Daily Gourmet Breakfast",
+        "Private AC Transport with English Speaking Driver",
+        "Fast Boat Tickets to Nusa Penida",
+        "Airport Pick-up & Drop-off",
+        "Entrance Fees to All Sightseeing Spots"
+      ],
+      "exclusions": [
+        "International Flights from India",
+        "Bali Visa on Arrival (VoA)",
+        "Lunch & Dinner (Unless specified)",
+        "Personal Travel Insurance"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrive Bali — Welcome to Paradise",
+          "desc": "Arrive at Ngurah Rai International Airport. Meet our representative and transfer to your luxury resort in Seminyak. Evening free to explore the vibrant Seminyak beach and cafes.",
+          "meals": "None"
+        },
+        {
+          "day": 2,
+          "title": "Ubud Cultural Tour & Sacred Monkey Forest",
+          "desc": "Visit the Tegalalang Rice Terraces for iconic photos. Explore the Sacred Monkey Forest Sanctuary and Ubud Art Market. Enjoy a traditional Balinese lunch overlooking the greenery.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 3,
+          "title": "Nusa Penida Island Adventure",
+          "desc": "Full day trip to Nusa Penida island by fast boat. Visit Kelingking Beach (T-Rex Bay), Broken Beach, and Angel’s Billabong. Snorkeling at Crystal Bay.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 4,
+          "title": "Mount Batur Sunrise Trek → Coffee Plantation",
+          "desc": "Early morning trek to Mount Batur summit for a breathtaking sunrise over the clouds. Visit a local Luwak coffee plantation on the way back. Relaxing Balinese massage in the afternoon.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 5,
+          "title": "Uluwatu Sunset & Kecak Fire Dance",
+          "desc": "Visit the cliffside Uluwatu Temple. Watch the famous Kecak Fire Dance during sunset. Seafood dinner at Jimbaran Bay (optional).",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 6,
+          "title": "Free Day in Seminyak / Canggu",
+          "desc": "A free day to relax by the pool, try surfing at Canggu, or indulge in some high-end shopping in Seminyak's boutiques.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 7,
+          "title": "Departure from Bali",
+          "desc": "Last-minute souvenir shopping at Krisna Oleh-Oleh. Transfer to the airport for your flight back home with tropical memories.",
+          "meals": "Breakfast"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do Indians need a visa for Bali in 2025?",
+          "a": "Yes, Indians can get a Visa on Arrival (VoA) for IDR 500,000 (approx ₹2,700). It is valid for 30 days and can be extended once."
+        },
+        {
+          "q": "What is the best currency to carry in Bali?",
+          "a": "The local currency is Indonesian Rupiah (IDR). It's best to carry some USD or a Zero-Forex card, but IDR is needed for local markets."
+        }
+      ],
+      "seoTitle": "Bali Group Tour Package 2025 — 7 Days Tropical Island Tour | Humsafar",
+      "seoDesc": "Book Bali group tour package. 7 days luxury getaway including Ubud rice terraces, Nusa Penida island, Uluwatu sunset, and Mount Batur trek. Starting ₹45,000/person.",
+      "keywords": "bali tour package 2025, bali group trip from india, nusa penida tour, ubud luxury package, bali backpacking tour",
+      "directAnswer": "Bali group tour costs ₹45,000 per person for 7 days with Humsafar Community, including 4-star hotels, Nusa Penida trip, and airport transfers."
+    },
+    {
+      "_id": "t5",
+      "title": "Thailand Treasures: Bangkok & Phuket Special",
+      "slug": "thailand-treasures-bangkok-phuket",
+      "location": "Thailand",
+      "region": "international",
+      "type": "group",
+      "duration": "6 Days / 5 Nights",
+      "price": 32000,
+      "oldPrice": "38,000",
+      "img": "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200",
+      "rating": 4.8,
+      "reviews": 124,
+      "bestseller": false,
+      "interested": 350,
+      "highlights": [
+        "Phi Phi Island Speedboat Tour & Maya Bay",
+        "Bangkok City & Golden Buddha Temple Tour",
+        "Phuket Nightlife & Bangla Road Experience",
+        "Coral Island Water Sports & Parasailing",
+        "Authentic Thai Street Food & Night Markets",
+        "Traditional Thai Massage Treatment"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1200",
+        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200",
+        "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200"
+      ],
+      "inclusions": [
+        "3-Star / 4-Star Accommodations",
+        "Daily Breakfast Buffet",
+        "Internal Transfers in Private AC Coach",
+        "Full Day Phi Phi Island Tour with Lunch",
+        "Professional English Speaking Guide",
+        "Bangkok to Phuket Internal Connection"
+      ],
+      "exclusions": [
+        "International Airfare",
+        "Thai Visa Fees (If applicable)",
+        "National Park Entry Fees (Phi Phi)",
+        "Personal Expenses"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrive Bangkok — The City of Angels",
+          "desc": "Arrive at Suvarnabhumi Airport. Transfer to your hotel. Evening at leisure or visit the famous Chao Phraya River Cruise for dinner.",
+          "meals": "None"
+        },
+        {
+          "day": 2,
+          "title": "Bangkok Temple Tour & City Exploration",
+          "desc": "Visit Wat Traimit (Golden Buddha) and Wat Benchamabophit (Marble Temple). Afternoon shopping at MBK Center or Siam Paragon. Evening visit to Khao San Road.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 3,
+          "title": "Bangkok → Phuket — Island Vibes",
+          "desc": "Fly to Phuket. Check-in at your hotel near Patong Beach. Relax by the beach and explore the vibrant nightlife at Bangla Road in the evening.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 4,
+          "title": "Phi Phi Island Hopping by Speedboat",
+          "desc": "Full day tour to Phi Phi Don and Phi Phi Leh. Visit Maya Bay (as seen in 'The Beach'), Pileh Lagoon, and Viking Cave. Enjoy a buffet lunch on the island.",
+          "meals": "Breakfast, Lunch"
+        },
+        {
+          "day": 5,
+          "title": "Coral Island Water Sports Day",
+          "desc": "Visit Coral Island for exciting water activities like parasailing, sea walking, and snorkeling. Return to Phuket for a relaxing Thai massage.",
+          "meals": "Breakfast"
+        },
+        {
+          "day": 6,
+          "title": "Phuket Sightseeing & Departure",
+          "desc": "Visit Big Buddha and Wat Chalong. Final shopping at Phuket Old Town. Transfer to the airport for your flight back to India.",
+          "meals": "Breakfast"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Is Thailand visa-free for Indians in 2025?",
+          "a": "Yes, Thailand offers visa-free entry for Indian citizens for tourism purposes until late 2025 (check current govt notification for exact dates)."
+        },
+        {
+          "q": "Which is better: Bangkok or Phuket?",
+          "a": "Both offer different experiences! Bangkok is great for shopping, temples, and city life, while Phuket is world-famous for its beaches and island hopping. Our tour includes both!"
+        }
+      ],
+      "seoTitle": "Thailand Group Tour Package 2025 — 6 Days Bangkok & Phuket | Humsafar",
+      "seoDesc": "Book Thailand group tour from India. 6 days 5 nights covering Bangkok city, Phi Phi Island, and Phuket beaches. Starting ₹32,000/person. 4.8⭐ rated by travelers.",
+      "keywords": "thailand tour package 2025, bangkok phuket tour from india, phi phi island package, thailand group trip, budget thailand tour",
+      "directAnswer": "Thailand group tour costs ₹32,000 per person for 6 days with Humsafar Community, covering Bangkok and Phuket."
     }
   ],
   "BLOGS": [
@@ -425,126 +622,6 @@
       "seoDesc": "Complete Kedarnath Yatra 2025 guide. How to register online, 18km trek breakdown, helicopter booking (₹3,500-4,500), hotels in Guptkashi, packing list, and per-person budget (₹9,000-13,000).",
       "keywords": "kedarnath yatra 2025, kedarnath registration 2025, kedarnath trek guide, kedarnath helicopter booking 2025, kedarnath temple opening date 2025, char dham yatra guide",
       "directAnswer": "Kedarnath Temple opens on April 30, 2025 (Akshaya Tritiya) and closes on October 22, 2025. Registration at registrationandtouristcare.uk.gov.in is mandatory and free. The 18km trek from Gaurikund takes 6-8 hours. Total trip budget: ₹9,000-13,000 per person."
-    },
-    {
-      "_id": "t4",
-      "title": "Bali Getaway: Tropical Paradise & Island Hopping",
-      "slug": "bali-getaway-tropical-paradise",
-      "location": "Bali, Indonesia",
-      "region": "international",
-      "type": "group",
-      "duration": "7 Days / 6 Nights",
-      "price": 45000,
-      "oldPrice": "55,000",
-      "img": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
-      "rating": 4.9,
-      "reviews": 156,
-      "bestseller": false,
-      "interested": 420,
-      "highlights": [
-        "Uluwatu Temple Sunset & Kecak Fire Dance",
-        "Nusa Penida Island Hopping (Kelingking Beach)",
-        "Ubud Sacred Monkey Forest & Tegalalang Rice Terrace",
-        "Mount Batur Sunrise Trekking Adventure",
-        "Traditional Balinese Massage & Spa Treatment",
-        "Seminyak & Canggu Beach Club Experience"
-      ],
-      "gallery": [
-        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200",
-        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200",
-        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200",
-        "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?q=80&w=1200"
-      ],
-      "inclusions": [
-        "4-Star Luxury Resort Stay",
-        "Daily Gourmet Breakfast",
-        "Private AC Transport with English Speaking Driver",
-        "Fast Boat Tickets to Nusa Penida",
-        "Airport Pick-up & Drop-off",
-        "Entrance Fees to All Sightseeing Spots"
-      ],
-      "exclusions": [
-        "International Flights from India",
-        "Bali Visa on Arrival (VoA)",
-        "Lunch & Dinner (Unless specified)",
-        "Personal Travel Insurance"
-      ],
-      "itinerary": [
-        { "day": 1, "title": "Arrive Bali — Welcome to Paradise", "desc": "Arrive at Ngurah Rai International Airport. Meet our representative and transfer to your luxury resort in Seminyak. Evening free to explore the vibrant Seminyak beach and cafes.", "meals": "None" },
-        { "day": 2, "title": "Ubud Cultural Tour & Sacred Monkey Forest", "desc": "Visit the Tegalalang Rice Terraces for iconic photos. Explore the Sacred Monkey Forest Sanctuary and Ubud Art Market. Enjoy a traditional Balinese lunch overlooking the greenery.", "meals": "Breakfast" },
-        { "day": 3, "title": "Nusa Penida Island Adventure", "desc": "Full day trip to Nusa Penida island by fast boat. Visit Kelingking Beach (T-Rex Bay), Broken Beach, and Angel’s Billabong. Snorkeling at Crystal Bay.", "meals": "Breakfast" },
-        { "day": 4, "title": "Mount Batur Sunrise Trek → Coffee Plantation", "desc": "Early morning trek to Mount Batur summit for a breathtaking sunrise over the clouds. Visit a local Luwak coffee plantation on the way back. Relaxing Balinese massage in the afternoon.", "meals": "Breakfast" },
-        { "day": 5, "title": "Uluwatu Sunset & Kecak Fire Dance", "desc": "Visit the cliffside Uluwatu Temple. Watch the famous Kecak Fire Dance during sunset. Seafood dinner at Jimbaran Bay (optional).", "meals": "Breakfast" },
-        { "day": 6, "title": "Free Day in Seminyak / Canggu", "desc": "A free day to relax by the pool, try surfing at Canggu, or indulge in some high-end shopping in Seminyak's boutiques.", "meals": "Breakfast" },
-        { "day": 7, "title": "Departure from Bali", "desc": "Last-minute souvenir shopping at Krisna Oleh-Oleh. Transfer to the airport for your flight back home with tropical memories.", "meals": "Breakfast" }
-      ],
-      "faqs": [
-        { "q": "Do Indians need a visa for Bali in 2025?", "a": "Yes, Indians can get a Visa on Arrival (VoA) for IDR 500,000 (approx ₹2,700). It is valid for 30 days and can be extended once." },
-        { "q": "What is the best currency to carry in Bali?", "a": "The local currency is Indonesian Rupiah (IDR). It's best to carry some USD or a Zero-Forex card, but IDR is needed for local markets." }
-      ],
-      "seoTitle": "Bali Group Tour Package 2025 — 7 Days Tropical Island Tour | Humsafar",
-      "seoDesc": "Book Bali group tour package. 7 days luxury getaway including Ubud rice terraces, Nusa Penida island, Uluwatu sunset, and Mount Batur trek. Starting ₹45,000/person.",
-      "keywords": "bali tour package 2025, bali group trip from india, nusa penida tour, ubud luxury package, bali backpacking tour",
-      "directAnswer": "Bali group tour costs ₹45,000 per person for 7 days with Humsafar Community, including 4-star hotels, Nusa Penida trip, and airport transfers."
-    },
-    {
-      "_id": "t5",
-      "title": "Thailand Treasures: Bangkok & Phuket Special",
-      "slug": "thailand-treasures-bangkok-phuket",
-      "location": "Thailand",
-      "region": "international",
-      "type": "group",
-      "duration": "6 Days / 5 Nights",
-      "price": 32000,
-      "oldPrice": "38,000",
-      "img": "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200",
-      "rating": 4.8,
-      "reviews": 124,
-      "bestseller": false,
-      "interested": 350,
-      "highlights": [
-        "Phi Phi Island Speedboat Tour & Maya Bay",
-        "Bangkok City & Golden Buddha Temple Tour",
-        "Phuket Nightlife & Bangla Road Experience",
-        "Coral Island Water Sports & Parasailing",
-        "Authentic Thai Street Food & Night Markets",
-        "Traditional Thai Massage Treatment"
-      ],
-      "gallery": [
-        "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1200",
-        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200",
-        "https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1200"
-      ],
-      "inclusions": [
-        "3-Star / 4-Star Accommodations",
-        "Daily Breakfast Buffet",
-        "Internal Transfers in Private AC Coach",
-        "Full Day Phi Phi Island Tour with Lunch",
-        "Professional English Speaking Guide",
-        "Bangkok to Phuket Internal Connection"
-      ],
-      "exclusions": [
-        "International Airfare",
-        "Thai Visa Fees (If applicable)",
-        "National Park Entry Fees (Phi Phi)",
-        "Personal Expenses"
-      ],
-      "itinerary": [
-        { "day": 1, "title": "Arrive Bangkok — The City of Angels", "desc": "Arrive at Suvarnabhumi Airport. Transfer to your hotel. Evening at leisure or visit the famous Chao Phraya River Cruise for dinner.", "meals": "None" },
-        { "day": 2, "title": "Bangkok Temple Tour & City Exploration", "desc": "Visit Wat Traimit (Golden Buddha) and Wat Benchamabophit (Marble Temple). Afternoon shopping at MBK Center or Siam Paragon. Evening visit to Khao San Road.", "meals": "Breakfast" },
-        { "day": 3, "title": "Bangkok → Phuket — Island Vibes", "desc": "Fly to Phuket. Check-in at your hotel near Patong Beach. Relax by the beach and explore the vibrant nightlife at Bangla Road in the evening.", "meals": "Breakfast" },
-        { "day": 4, "title": "Phi Phi Island Hopping by Speedboat", "desc": "Full day tour to Phi Phi Don and Phi Phi Leh. Visit Maya Bay (as seen in 'The Beach'), Pileh Lagoon, and Viking Cave. Enjoy a buffet lunch on the island.", "meals": "Breakfast, Lunch" },
-        { "day": 5, "title": "Coral Island Water Sports Day", "desc": "Visit Coral Island for exciting water activities like parasailing, sea walking, and snorkeling. Return to Phuket for a relaxing Thai massage.", "meals": "Breakfast" },
-        { "day": 6, "title": "Phuket Sightseeing & Departure", "desc": "Visit Big Buddha and Wat Chalong. Final shopping at Phuket Old Town. Transfer to the airport for your flight back to India.", "meals": "Breakfast" }
-      ],
-      "faqs": [
-        { "q": "Is Thailand visa-free for Indians in 2025?", "a": "Yes, Thailand offers visa-free entry for Indian citizens for tourism purposes until late 2025 (check current govt notification for exact dates)." },
-        { "q": "Which is better: Bangkok or Phuket?", "a": "Both offer different experiences! Bangkok is great for shopping, temples, and city life, while Phuket is world-famous for its beaches and island hopping. Our tour includes both!" }
-      ],
-      "seoTitle": "Thailand Group Tour Package 2025 — 6 Days Bangkok & Phuket | Humsafar",
-      "seoDesc": "Book Thailand group tour from India. 6 days 5 nights covering Bangkok city, Phi Phi Island, and Phuket beaches. Starting ₹32,000/person. 4.8⭐ rated by travelers.",
-      "keywords": "thailand tour package 2025, bangkok phuket tour from india, phi phi island package, thailand group trip, budget thailand tour",
-      "directAnswer": "Thailand group tour costs ₹32,000 per person for 6 days with Humsafar Community, covering Bangkok and Phuket."
     }
   ],
   "BANNERS": [
