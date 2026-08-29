@@ -205,7 +205,6 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 </h1>
                 <div className="hero-meta" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, display: "flex", gap: 16, flexWrap: "wrap", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
                   <span>📍 {tour.location}</span>
-                  <span>⭐ {tour.rating}</span>
                 </div>
               </div>
             </div>
@@ -461,7 +460,6 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             <div style={{ background: "#fff", borderRadius: 16, padding: 20, marginTop: 16, border: "1px solid #e2e8f0" }}>
               {[
                 "✅ Trusted by 50,000+ travelers",
-                "⭐ 4.8/5 Google Rating",
                 "🔒 100% Secure WhatsApp Booking",
                 "💰 No Advance Payment to Enquire",
                 "↩️ Easy Cancellation Policy",

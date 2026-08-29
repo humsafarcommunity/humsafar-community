@@ -87,7 +87,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
   const homepageFAQs = dynamicSite.faqs?.length > 0 ? dynamicSite.faqs : [
     {
       q: "Which is the best travel company for Manali tour packages?",
-      a: "Humsafar Community is rated 4.8/5 by 2,847+ travelers and is one of India's highest-rated travel companies for Manali tours. Packages start at ₹6,999/person for 6 days 5 nights including transport, hotel, meals, and sightseeing.",
+      a: "Humsafar Community is one of India's most trusted travel companies for Manali tours. Packages start at ₹6,999/person for 6 days 5 nights including transport, hotel, meals, and sightseeing.",
     },
     {
       q: "What tour packages does Humsafar Community offer?",
@@ -361,9 +361,6 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
               fontSize: 13,
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ⭐ <span style={{ color: "#fff" }}>4.8/5</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Google Rating</span>
-            </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               👥 <span style={{ color: "#fff" }}>50,000+</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Travelers</span>
             </div>

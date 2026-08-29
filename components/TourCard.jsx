@@ -107,21 +107,7 @@ export default function TourCard({ tour }) {
           >
             🕐 {tour.duration}
           </span>
-          <span
-            style={{
-              fontSize: 12,
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-            }}
-            itemProp="aggregateRating"
-            itemScope
-            itemType="https://schema.org/AggregateRating"
-          >
-            <meta itemProp="ratingValue" content={tour.rating} />
-            <meta itemProp="reviewCount" content={tour.reviews} />
-            ⭐{" "}
-            <strong style={{ color: "#0e1117" }}>{tour.rating}</strong>{" "}
-            <span style={{ color: "#94a3b8" }}>({tour.reviews})</span>
-          </span>
+
         </div>
 
         <h3

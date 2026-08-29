@@ -194,7 +194,6 @@ export default function Footer({ dynamicSite }) {
         >
           <span>© {new Date().getFullYear()} {dynamicSite.name} Pvt. Ltd.</span>
           <div style={{ display: "flex", gap: 20 }}>
-            <span>4.8★ Google Rating</span>
             <span>Made with ❤️ in India</span>
           </div>
         </div>

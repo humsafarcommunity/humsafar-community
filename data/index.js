@@ -218,13 +218,6 @@ export function generateOrganizationSchema(site = SITE) {
       },
     ],
     priceRange: "₹₹",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: site.ratingValue,
-      reviewCount: site.reviewCount,
-      bestRating: "5",
-      worstRating: "1",
-    },
     sameAs: Object.values(site.socials || {}),
   };
 }
@@ -249,12 +242,6 @@ export function generateTourSchema(tour, site = SITE) {
         name: site.name,
         url: site.url,
       },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: tour.rating,
-      reviewCount: tour.reviews,
-      bestRating: "5",
     },
     provider: {
       "@type": "TravelAgency",
