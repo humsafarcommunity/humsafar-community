@@ -222,31 +222,31 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
             <h1
               className="speakable hero-title"
               style={{
-                fontFamily: "'Bodoni Moda', serif",
-                fontStyle: "italic",
-                fontSize: "clamp(34px, 12vw, 94px)",
-                fontWeight: 600,
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(36px, 7vw, 84px)",
+                fontWeight: 800,
                 color: "#fff",
-                lineHeight: 1.05,
-                marginBottom: 24,
-                letterSpacing: "-0.01em",
-                textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-                animation: "fadeIn 1.2s ease-out",
+                lineHeight: 1.1,
+                marginBottom: 20,
+                letterSpacing: "-0.02em",
+                textShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                animation: "fadeIn 1s ease-out",
               }}
             >
-              {banners[currentSlide]?.title || "Discover Your Next"} <br /> 
-              <span style={{ color: "#10b981" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
+              {banners[currentSlide]?.title || "Discover Your Next"}{" "}
+              <span style={{ color: "#6ee7b7", fontStyle: "italic" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
             </h1>
             {banners[currentSlide]?.sub && (
               <p
                 style={{
-                  color: "rgba(255,255,255,0.9)",
-                  fontSize: "clamp(16px, 2vw, 20px)",
+                  color: "rgba(255,255,255,0.92)",
+                  fontSize: "clamp(15px, 1.8vw, 19px)",
                   lineHeight: 1.6,
-                  maxWidth: 600,
-                  margin: "0 auto 40px",
-                  textShadow: "0 1px 4px rgba(0,0,0,0.2)",
-                  fontFamily: "'Outfit', sans-serif",
+                  maxWidth: 580,
+                  margin: "0 auto 36px",
+                  textShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 500,
                   animation: "fadeIn 1.2s ease-out",
                 }}
               >
@@ -397,26 +397,27 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
                 Destination
               </p>
               <div className="filter-scroll-container">
-                <div style={{ display: "flex", gap: 7 }} className="filter-inner">
+                <div style={{ display: "flex", gap: 8 }} className="filter-inner">
                   {regions.map((r) => (
                     <button
                       key={r.id}
                       onClick={() => setSelectedRegion(r.id)}
                       aria-pressed={selectedRegion === r.id}
                       style={{
-                        padding: "7px 14px",
-                        borderRadius: 10,
-                        border: `2px solid ${selectedRegion === r.id ? "#064e3b" : "#e2e8f0"}`,
+                        padding: "8px 16px",
+                        borderRadius: 12,
+                        border: `1.5px solid ${selectedRegion === r.id ? "#064e3b" : "#e2e8f0"}`,
                         background:
-                          selectedRegion === r.id ? "#064e3b" : "#fff",
+                          selectedRegion === r.id ? "#064e3b" : "#f8fafc",
                         color:
-                          selectedRegion === r.id ? "#fff" : "#64748b",
+                          selectedRegion === r.id ? "#fff" : "#475569",
                         cursor: "pointer",
-                        fontSize: 12,
-                        fontWeight: 600,
-                        transition: "all 0.15s",
+                        fontSize: 13,
+                        fontWeight: 700,
+                        transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         whiteSpace: "nowrap",
+                        boxShadow: selectedRegion === r.id ? "0 4px 14px rgba(6, 78, 59, 0.2)" : "none",
                       }}
                     >
                       {r.label}
@@ -440,26 +441,27 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
                 Experience
               </p>
               <div className="filter-scroll-container">
-                <div style={{ display: "flex", gap: 7 }} className="filter-inner">
+                <div style={{ display: "flex", gap: 8 }} className="filter-inner">
                   {types.map((t) => (
                     <button
                       key={t.id}
                       onClick={() => setSelectedType(t.id)}
                       aria-pressed={selectedType === t.id}
                       style={{
-                        padding: "7px 14px",
-                        borderRadius: 10,
-                        border: `2px solid ${selectedType === t.id ? "#c8860a" : "#e2e8f0"}`,
+                        padding: "8px 16px",
+                        borderRadius: 12,
+                        border: `1.5px solid ${selectedType === t.id ? "#064e3b" : "#e2e8f0"}`,
                         background:
-                          selectedType === t.id ? "#c8860a" : "#fff",
+                          selectedType === t.id ? "#064e3b" : "#f8fafc",
                         color:
-                          selectedType === t.id ? "#fff" : "#64748b",
+                          selectedType === t.id ? "#fff" : "#475569",
                         cursor: "pointer",
-                        fontSize: 12,
-                        fontWeight: 600,
-                        transition: "all 0.15s",
+                        fontSize: 13,
+                        fontWeight: 700,
+                        transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         whiteSpace: "nowrap",
+                        boxShadow: selectedType === t.id ? "0 4px 14px rgba(6, 78, 59, 0.2)" : "none",
                       }}
                     >
                       {t.label}
@@ -879,27 +881,27 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
 
       {/* ── WHATSAPP FLOAT ───────────────────────────────────────── */}
       <a
-        href={`https://wa.me/${(dynamicSite.whatsapp || '916268496389').toString().replace(/\D/g, '')}?text=Hi Humsafar! I want to book a tour package.`}
+        href={`https://wa.me/${(dynamicSite.whatsapp || '916268496389').toString().replace(/\D/g, '')}?text=Hi Humsafar! I want to enquire about tour packages.`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="whatsapp-float"
+        className="whatsapp-float pulse-glow"
         style={{
           position: "fixed",
           bottom: 24,
           right: 24,
           background: "#22c55e",
           color: "#fff",
-          width: 58,
-          height: 58,
+          width: 56,
+          height: 56,
           borderRadius: 999,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 8px 28px rgba(34,197,94,0.42)",
-          zIndex: 50,
+          boxShadow: "0 10px 25px rgba(34,197,94,0.45)",
+          zIndex: 100,
           textDecoration: "none",
-          fontSize: 26,
+          transition: "transform 0.2s ease, background 0.2s ease",
         }}
         onClick={() => {
           if (window.gtag) {
@@ -910,7 +912,10 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
           }
         }}
       >
-        💬
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382C17.115 14.204 15.361 13.342 15.034 13.223C14.707 13.104 14.469 13.045 14.231 13.402C13.993 13.759 13.31 14.561 13.102 14.8C12.894 15.038 12.686 15.068 12.329 14.889C11.972 14.711 10.822 14.333 9.458 13.117C8.396 12.17 7.679 10.999 7.471 10.642C7.263 10.285 7.449 10.091 7.628 9.913C7.789 9.753 7.987 9.493 8.165 9.285C8.343 9.077 8.402 8.928 8.521 8.69C8.64 8.452 8.581 8.244 8.492 8.066C8.402 7.888 7.689 6.134 7.392 5.421C7.102 4.727 6.81 4.821 6.596 4.811C6.394 4.801 6.156 4.801 5.918 4.801C5.68 4.801 5.294 4.89 4.967 5.247C4.64 5.604 3.719 6.466 3.719 8.22C3.719 9.974 4.997 11.668 5.175 11.906C5.353 12.144 7.688 15.733 11.263 17.278C12.113 17.645 12.776 17.865 13.292 18.028C14.145 18.3 14.921 18.261 15.534 18.17C16.218 18.068 17.643 17.307 17.94 16.474C18.237 15.641 18.237 14.927 18.148 14.779C18.058 14.63 17.829 14.56 17.472 14.382Z" fill="currentColor"/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12C2 13.82 2.489 15.526 3.344 17L2 22L7.174 20.686C8.618 21.523 10.256 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM4 12C4 7.582 7.582 4 12 4C16.418 4 20 7.582 20 12C20 16.418 16.418 20 12 20C10.457 20 9.015 19.562 7.785 18.802L4.85 19.55L5.617 16.711C4.595 15.385 4 13.76 4 12Z" fill="currentColor"/>
+        </svg>
       </a>
       <style jsx>{`
         @keyframes fadeIn {

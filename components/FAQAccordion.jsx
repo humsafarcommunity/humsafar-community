@@ -1,69 +1,91 @@
 import { useState } from 'react';
 
 export default function FAQAccordion({ faqs }) {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(0);
   if (!faqs || faqs.length === 0) return null;
 
   return (
     <div itemScope itemType="https://schema.org/FAQPage">
-      {faqs.map((faq, i) => (
-        <div
-          key={i}
-          style={{
-            border: "1px solid #e2e8f0",
-            borderRadius: 13,
-            overflow: "hidden",
-            marginBottom: 10,
-          }}
-          itemScope
-          itemType="https://schema.org/Question"
-          itemProp="mainEntity"
-        >
-          <button
-            onClick={() => setOpen(open === i ? null : i)}
-            aria-expanded={open === i}
+      {faqs.map((faq, i) => {
+        const isOpen = open === i;
+        return (
+          <div
+            key={i}
             style={{
-              cursor: "pointer",
-              padding: "18px 22px",
-              fontWeight: 600,
-              fontSize: 15,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              background: "#fff",
-              width: "100%",
-              border: "none",
-              textAlign: "left",
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-              color: "#1e293b",
-              transition: "background 0.15s",
+              border: `1px solid ${isOpen ? '#10b981' : '#e2e8f0'}`,
+              borderRadius: 16,
+              overflow: "hidden",
+              marginBottom: 12,
+              background: isOpen ? "#f0fdf4" : "#fff",
+              boxShadow: isOpen ? "0 4px 14px rgba(16, 185, 129, 0.08)" : "none",
+              transition: "all 0.25s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#f8fafc")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+            itemScope
+            itemType="https://schema.org/Question"
+            itemProp="mainEntity"
           >
-            <span itemProp="name">{faq.q}</span>
-            <span style={{ marginLeft: 12, flexShrink: 0, fontSize: 18 }}>
-              {open === i ? "−" : "+"}
-            </span>
-          </button>
-          {open === i && (
-            <div
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              aria-expanded={isOpen}
               style={{
-                padding: "4px 22px 18px",
-                fontSize: 14,
-                color: "#475569",
-                lineHeight: 1.75,
+                cursor: "pointer",
+                padding: "20px 24px",
+                fontWeight: 700,
+                fontSize: 16,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                background: "transparent",
+                width: "100%",
+                border: "none",
+                textAlign: "left",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
+                color: isOpen ? "#064e3b" : "#0f172a",
+                transition: "color 0.2s ease",
+                gap: 16,
               }}
-              itemScope
-              itemType="https://schema.org/Answer"
-              itemProp="acceptedAnswer"
             >
-              <span itemProp="text">{faq.a}</span>
-            </div>
-          )}
-        </div>
-      ))}
+              <span itemProp="name">{faq.q}</span>
+              <span
+                style={{
+                  flexShrink: 0,
+                  width: 28,
+                  height: 28,
+                  borderRadius: 999,
+                  background: isOpen ? "#d1fae5" : "#f1f5f9",
+                  color: isOpen ? "#064e3b" : "#64748b",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "transform 0.3s ease, background 0.3s ease",
+                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            {isOpen && (
+              <div
+                style={{
+                  padding: "0 24px 22px",
+                  fontSize: 15,
+                  color: "#334155",
+                  lineHeight: 1.7,
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                }}
+                itemScope
+                itemType="https://schema.org/Answer"
+                itemProp="acceptedAnswer"
+              >
+                <span itemProp="text">{faq.a}</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
+
