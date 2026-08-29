@@ -216,27 +216,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
         >
           {/* AEO/GEO: Hero content is what AI reads first */}
           <div style={{ minHeight: 320, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <p
-              style={{
-                display: "inline-block",
-                marginBottom: 18,
-                padding: "6px 22px",
-                borderRadius: 999,
-                border: "1px solid rgba(255,255,255,0.25)",
-                background: "rgba(255,255,255,0.1)",
-                backdropFilter: "blur(12px)",
-                color: "#fff",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: 3.5,
-                textTransform: "uppercase",
-                fontFamily: "'Outfit', sans-serif",
-                animation: "fadeIn 0.8s ease-out",
-                margin: "0 auto 18px"
-              }}
-            >
-              {banners[currentSlide]?.tag}
-            </p>
+
 
             {/* AEO: H1 must contain primary keyword — AI systems weight H1 very heavily */}
             <h1
@@ -349,25 +329,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
             </button>
           </form>
 
-          <div
-            className="hero-stats"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              gap: "24px 48px",
-              color: "#64748b",
-              fontWeight: 600,
-              fontSize: 13,
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              👥 <span style={{ color: "#fff" }}>50,000+</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Travelers</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ⛰️ <span style={{ color: "#fff" }}>500+</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>Departures</span>
-            </div>
-          </div>
+
 
           {/* Slider dots */}
           <div
