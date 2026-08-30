@@ -987,11 +987,47 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
 
 export async function getStaticProps() {
   const data = await getFreshData();
+
+  // SXO Optimization: Strip heavy fields (itinerary, blog body, full galleries) for homepage preview payload
+  const tours = (data.TOURS || []).map(t => ({
+    _id: t._id || t.id || t.slug,
+    title: t.title || "",
+    slug: t.slug || "",
+    location: t.location || "",
+    region: t.region || "domestic",
+    type: t.type || "group",
+    duration: t.duration || "",
+    price: t.price || 0,
+    oldPrice: t.oldPrice || "",
+    img: t.img || "",
+    bestseller: !!t.bestseller,
+    seoDesc: t.seoDesc || "",
+  }));
+
+  const blogs = (data.BLOGS || []).map(b => ({
+    _id: b._id || b.id || b.slug,
+    title: b.title || "",
+    slug: b.slug || "",
+    category: b.category || "Travel Guide",
+    author: b.author || "Humsafar Team",
+    date: b.date || b.publishedAt || "",
+    coverImage: b.coverImage || b.img || "",
+    excerpt: b.excerpt || b.summary || "",
+  }));
+
+  const banners = (data.BANNERS || []).map(b => ({
+    id: b.id || b._id || b.slug,
+    title: b.title || "",
+    hi: b.hi || "",
+    sub: b.sub || "",
+    url: b.url || "",
+  }));
+
   return {
     props: {
-      tours: data.TOURS,
-      blogs: data.BLOGS,
-      banners: data.BANNERS,
+      tours,
+      blogs,
+      banners,
       site: data.SITE,
       seo: data.SEODATA,
     },
