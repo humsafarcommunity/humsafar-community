@@ -128,32 +128,7 @@
       "directAnswer": "Kedarnath Temple opens on April 30, 2025 (Akshaya Tritiya) and closes on October 22, 2025. Registration at registrationandtouristcare.uk.gov.in is mandatory and free. The 18km trek from Gaurikund takes 6-8 hours. Total trip budget: ₹9,000-13,000 per person."
     }
   ],
-  "BANNERS": [
-    {
-      "id": "b1",
-      "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1920",
-      "tag": "Explore the Himalayas",
-      "title": "Find Your Wild.",
-      "hi": "Wild.",
-      "sub": "Curated Himalayan expeditions for the modern explorer. Join 50,000+ travelers."
-    },
-    {
-      "id": "b2",
-      "url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1920",
-      "tag": "Sacred Char Dham",
-      "title": "Touch the Divine.",
-      "hi": "Divine.",
-      "sub": "Kedarnath, Badrinath, Gangotri, Yamunotri — the roof of the spiritual world."
-    },
-    {
-      "id": "b3",
-      "url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1920",
-      "tag": "Royal Rajasthan",
-      "title": "Live the Legacy.",
-      "hi": "Legacy.",
-      "sub": "Desert dunes, golden forts, and centuries of royal heritage await you."
-    }
-  ],
+  "BANNERS": [],
   "REVIEWS": [
     {
       "author": "Sumit Jain",

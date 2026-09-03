@@ -129,24 +129,15 @@ export async function getFreshData() {
       };
     });
 
-    const mergedBannersMap = {};
-    staticData.BANNERS.forEach(banner => {
-      mergedBannersMap[banner.id] = banner;
-    });
-    banners.forEach(banner => {
-      const bId = banner.id || banner._id;
-      mergedBannersMap[bId] = {
-        ...mergedBannersMap[bId],
-        ...banner
-      };
-    });
+    // BANNERS are fetched strictly from Sanity CMS
+    const finalBanners = banners;
 
     return {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
       TOURS: finalTours,
       BLOGS: Object.values(mergedBlogsMap),
-      BANNERS: Object.values(mergedBannersMap),
+      BANNERS: finalBanners,
       REVIEWS: staticData.REVIEWS,
     };
   } catch (error) {
