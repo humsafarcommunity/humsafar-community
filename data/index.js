@@ -52,7 +52,7 @@ export async function getFreshData() {
     // Ensure TOURS and BLOGS are arrays and only contain items with string slugs
     const tours = (sanityData.TOURS || []).map(t => ({
       ...t,
-      img: t.img ? urlFor(t.img) : (staticData.TOURS.find(st => st.slug === t.slug)?.img || ""), // Fallback to static if image missing
+      img: t.img ? urlFor(t.img) : (typeof t.img === 'string' ? t.img : ""),
       gallery: (t.gallery || []).map(g => urlFor(g)),
       price: t.price || 0,
       rating: t.rating || 5.0,
@@ -115,17 +115,8 @@ export async function getFreshData() {
       site.whatsapp = "916268496389"; // Absolute fallback
     }
 
-    // Merge logic: Merge static data with Sanity data by slug or id to prevent local routes from being overwritten/hidden when Sanity data is loaded.
-    const mergedToursMap = {};
-    staticData.TOURS.forEach(tour => {
-      mergedToursMap[tour.slug] = tour;
-    });
-    tours.forEach(tour => {
-      mergedToursMap[tour.slug] = {
-        ...mergedToursMap[tour.slug],
-        ...tour
-      };
-    });
+    // TOURS are fetched strictly from Sanity CMS
+    const finalTours = tours;
 
     const mergedBlogsMap = {};
     staticData.BLOGS.forEach(blog => {
@@ -153,7 +144,7 @@ export async function getFreshData() {
     return {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
-      TOURS: Object.values(mergedToursMap),
+      TOURS: finalTours,
       BLOGS: Object.values(mergedBlogsMap),
       BANNERS: Object.values(mergedBannersMap),
       REVIEWS: staticData.REVIEWS,

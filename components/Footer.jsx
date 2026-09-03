@@ -14,12 +14,12 @@ export default function Footer({ dynamicSite }) {
       ]
     },
     {
-      title: "Top Tours",
+      title: "Top Destinations",
       links: [
-        { label: "Manali & Kasol", href: "/packages/manali-kasol-solang-valley-atal-tunnel" },
-        { label: "Kedarnath Yatra", href: "/packages/kedarnath-yatra-char-dham-trek" },
-        { label: "Jaisalmer Desert", href: "/packages/jaisalmer-desert-safari-golden-fort" },
-        { label: "Bali Getaway", href: "/packages/bali-getaway-tropical-paradise" },
+        { label: "All Tour Packages", href: "/packages" },
+        { label: "Himachal Group Tours", href: "/packages?region=himachal" },
+        { label: "Uttarakhand Treks", href: "/packages?region=uttarakhand" },
+        { label: "International Getaways", href: "/packages?region=international" },
       ]
     },
     {
