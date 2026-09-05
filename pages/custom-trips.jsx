@@ -35,7 +35,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
       />
       <Navbar site={dynamicSite} isSolid={true} />
 
-      <main style={{ maxWidth: 800, margin: "20px auto", padding: "0 16px 80px" }}>
+      <main style={{ maxWidth: 800, margin: "20px auto", padding: "0 16px 80px", width: "100%", boxSizing: "border-box" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 8vw, 48px)", fontWeight: 700, color: "#0e1117", marginBottom: 16 }}>
              Design Your Dream Trip
@@ -46,7 +46,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
         </div>
 
         {status === "success" ? (
-          <div style={{ background: "#fff", padding: "60px 40px", borderRadius: 24, textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.05)", border: "1px solid #e2e8f0" }}>
+          <div className="p-6 sm:p-12" style={{ background: "#fff", borderRadius: 24, textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.05)", border: "1px solid #e2e8f0" }}>
              <div style={{ fontSize: 48, marginBottom: 20 }}>✅</div>
              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
              <p style={{ color: "#64748b", marginBottom: 24 }}>Redirecting you to WhatsApp to finalize the details with our expert...</p>
@@ -60,58 +60,56 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
         ) : (
           <form 
             onSubmit={handleSubmit}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 p-5 sm:p-10 w-full box-border"
             style={{ 
               background: "#fff", 
-              padding: "40px", 
               borderRadius: 24, 
               boxShadow: "0 20px 50px rgba(0,0,0,0.05)", 
               border: "1px solid #e2e8f0",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "24px"
+              maxWidth: "100%"
             }}
           >
-            <div style={{ gridColumn: "span 2" }}>
+            <div className="col-span-1 sm:col-span-2 min-w-0 w-full">
               <label style={labelStyle}>Full Name *</label>
               <input name="name" required placeholder="e.g. Rahul Sharma" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>WhatsApp Number *</label>
-              <input name="phone" required placeholder="10-digit number" style={inputStyle} />
+              <input name="phone" type="tel" required placeholder="10-digit number" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>Destination *</label>
               <input name="destination" required placeholder="e.g. Spiti Valley" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>Approx Departure Date</label>
               <input name="date" type="date" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>No. of Travelers</label>
-              <input name="pax" type="number" placeholder="e.g. 4" style={inputStyle} />
+              <input name="pax" type="number" min="1" placeholder="e.g. 4" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>Trip Duration (Days)</label>
               <input name="duration" placeholder="e.g. 5 Days" style={inputStyle} />
             </div>
 
-            <div>
+            <div className="col-span-1 min-w-0 w-full">
               <label style={labelStyle}>Approx Budget (Per Person)</label>
               <input name="budget" placeholder="e.g. ₹15,000" style={inputStyle} />
             </div>
 
-            <div style={{ gridColumn: "span 2" }}>
+            <div className="col-span-1 sm:col-span-2 min-w-0 w-full">
               <label style={labelStyle}>Special Requirements / Notes</label>
               <textarea name="notes" rows="4" placeholder="Mention any specific activities, preferences, or celebrations..." style={{ ...inputStyle, resize: "none" }}></textarea>
             </div>
 
-            <div style={{ gridColumn: "span 2", marginTop: 12 }}>
+            <div className="col-span-1 sm:col-span-2 min-w-0 w-full mt-2">
               <button 
                 type="submit"
                 style={{ 
@@ -119,12 +117,13 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
                   background: "#064e3b", 
                   color: "#fff", 
                   border: "none", 
-                  padding: "18px", 
+                  padding: "16px 20px", 
                   borderRadius: 14, 
                   fontWeight: 800, 
                   fontSize: 16, 
                   cursor: "pointer", 
-                  transition: "all 0.2s ease"
+                  transition: "all 0.2s ease",
+                  boxSizing: "border-box"
                 }}
               >
                 Send Trip Requirement
@@ -165,13 +164,16 @@ const labelStyle = {
 
 const inputStyle = {
   width: "100%",
+  maxWidth: "100%",
   padding: "14px 16px",
   borderRadius: 12,
   border: "1.5px solid #e2e8f0",
-  fontSize: 14,
+  fontSize: 16,
   fontFamily: "'Plus Jakarta Sans', sans-serif",
   outline: "none",
   color: "#0e1117",
   background: "#fcfdfe",
-  boxSizing: "border-box"
+  boxSizing: "border-box",
+  minWidth: 0,
 };
+

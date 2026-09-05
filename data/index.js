@@ -118,16 +118,8 @@ export async function getFreshData() {
     // TOURS are fetched strictly from Sanity CMS
     const finalTours = tours;
 
-    const mergedBlogsMap = {};
-    staticData.BLOGS.forEach(blog => {
-      mergedBlogsMap[blog.slug] = blog;
-    });
-    blogs.forEach(blog => {
-      mergedBlogsMap[blog.slug] = {
-        ...mergedBlogsMap[blog.slug],
-        ...blog
-      };
-    });
+    // BLOGS are fetched strictly from Sanity CMS
+    const finalBlogs = blogs;
 
     // BANNERS are fetched strictly from Sanity CMS
     const finalBanners = banners;
@@ -136,7 +128,7 @@ export async function getFreshData() {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
       TOURS: finalTours,
-      BLOGS: Object.values(mergedBlogsMap),
+      BLOGS: finalBlogs,
       BANNERS: finalBanners,
       REVIEWS: staticData.REVIEWS,
     };
