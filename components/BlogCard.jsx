@@ -7,7 +7,7 @@ export default function BlogCard({ blog }) {
     <article
       style={{
         background: "#fff",
-        borderRadius: 18,
+        borderRadius: 20,
         overflow: "hidden",
         border: "1px solid #e2e8f0",
         cursor: "pointer",
@@ -66,7 +66,7 @@ export default function BlogCard({ blog }) {
         </div>
         <h3
           style={{
-            fontFamily: "Playfair Display, serif",
+            fontFamily: "var(--sans)",
             fontSize: 18,
             fontWeight: 700,
             color: "#0e1117",

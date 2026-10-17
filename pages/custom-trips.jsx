@@ -37,7 +37,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
 
       <main style={{ maxWidth: 800, margin: "20px auto", padding: "0 16px 80px", width: "100%", boxSizing: "border-box" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 8vw, 48px)", fontWeight: 700, color: "#0e1117", marginBottom: 16 }}>
+          <h1 style={{ fontFamily: "var(--sans)", fontSize: "clamp(28px, 8vw, 48px)", fontWeight: 700, color: "#0e1117", marginBottom: 16 }}>
              Design Your Dream Trip
           </h1>
           <p style={{ color: "#64748b", fontSize: 16, maxWidth: 540, margin: "0 auto", lineHeight: 1.6 }}>
@@ -48,7 +48,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
         {status === "success" ? (
           <div className="p-6 sm:p-12" style={{ background: "#fff", borderRadius: 24, textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.05)", border: "1px solid #e2e8f0" }}>
              <div style={{ fontSize: 48, marginBottom: 20 }}>✅</div>
-             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
+             <h2 style={{ fontFamily: "var(--sans)", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
              <p style={{ color: "#64748b", marginBottom: 24 }}>Redirecting you to WhatsApp to finalize the details with our expert...</p>
              <button 
                onClick={() => setStatus("idle")}

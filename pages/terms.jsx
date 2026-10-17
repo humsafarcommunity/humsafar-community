@@ -22,7 +22,7 @@ export default function TermsPage({ site: freshSite, seo: seoData }) {
       <main style={{ minHeight: "80vh", background: "#f8fafc", paddingTop: 120, paddingBottom: 80 }}>
         <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
           <div style={{ background: "#ffffff", borderRadius: 24, padding: "48px 40px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-            <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(32px, 5vw, 48px)", color: "#0f172a", marginBottom: 8 }}>
+            <h1 style={{ fontFamily: "var(--sans)", fontSize: "clamp(32px, 5vw, 48px)", color: "#0f172a", marginBottom: 8 }}>
               Terms of Service
             </h1>
             <p style={{ color: "#64748b", fontSize: 14, marginBottom: 32 }}>Last updated: August 27, 2026</p>
@@ -32,7 +32,7 @@ export default function TermsPage({ site: freshSite, seo: seoData }) {
                 Welcome to <strong>Humsafar Community</strong>. Please read these Terms of Service carefully before booking a tour, expedition, or trip with us. By using our website and services, you agree to be bound by these terms.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 1. Booking & Payments
               </h2>
               <p style={{ marginBottom: 16 }}>
@@ -44,7 +44,7 @@ export default function TermsPage({ site: freshSite, seo: seoData }) {
                 <li>Failure to pay the remaining balance on time may result in cancellation of the booking with no refund of the advance.</li>
               </ul>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 2. Cancellation & Refund Policy
               </h2>
               <p style={{ marginBottom: 16 }}>
@@ -57,21 +57,21 @@ export default function TermsPage({ site: freshSite, seo: seoData }) {
                 <li>In case of natural calamities, landslides, roadblocks, or government restrictions, we will offer trip vouchers or alternative arrangements, but cash refunds may not be possible.</li>
               </ul>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 3. Traveler Guidelines & Conduct
               </h2>
               <p style={{ marginBottom: 24 }}>
                 Humsafar Community is a group travel community. Travelers are expected to maintain respectful behavior toward trip leaders, local hosts, and fellow travelers. The use of illegal substances is strictly prohibited on our trips. We reserve the right to expel any traveler from a trip if their behavior is disruptive or dangerous, without any refunds.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 4. Liability & Insurance
               </h2>
               <p style={{ marginBottom: 24 }}>
                 Travel involves inherent risks, especially in high-altitude terrain. Humsafar Community is not liable for injuries, delays, losses, or damages resulting from weather, road blockages, physical ailments, or other unforeseen events. We strongly recommend that all travelers purchase travel insurance before departure.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 5. Changes to Terms
               </h2>
               <p style={{ marginBottom: 24 }}>

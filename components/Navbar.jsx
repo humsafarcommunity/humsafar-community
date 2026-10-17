@@ -52,7 +52,7 @@ export default function Navbar({ site, isSolid = false }) {
             <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
               <span
                 style={{
-                  fontFamily: "Playfair Display, serif",
+                  fontFamily: "var(--sans)",
                   fontSize: 26,
                   fontWeight: 700,
                   color: activeHeaderStyle ? "#0e1117" : "#fff",
@@ -166,7 +166,7 @@ export default function Navbar({ site, isSolid = false }) {
               fontWeight: 700,
               color: "#fff",
               textDecoration: "none",
-              fontFamily: "Playfair Display, serif"
+              fontFamily: "var(--sans)"
             }}
           >
             {link.label}

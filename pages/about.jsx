@@ -25,7 +25,7 @@ export default function AboutPage({ site: freshSite, seo: seoData }) {
             <p style={{ fontSize: 13, fontWeight: 700, color: "#10b981", textTransform: "uppercase", letterSpacing: 2, marginBottom: 16 }}>
               Our Story
             </p>
-            <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(36px, 6vw, 60px)", color: "#0f172a", marginBottom: 24, lineHeight: 1.1 }}>
+            <h1 style={{ fontFamily: "var(--sans)", fontSize: "clamp(36px, 6vw, 60px)", color: "#0f172a", marginBottom: 24, lineHeight: 1.1 }}>
               We are more than <br /> a travel agency.
             </h1>
             <p style={{ fontSize: 18, color: "#64748b", lineHeight: 1.8, maxWidth: 700, margin: "0 auto" }}>
@@ -36,17 +36,17 @@ export default function AboutPage({ site: freshSite, seo: seoData }) {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32, marginBottom: 80 }}>
             <div style={{ padding: 40, background: "#fff", borderRadius: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: 32, marginBottom: 20 }}>🫂</div>
-              <h3 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Community First</h3>
+              <h3 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Community First</h3>
               <p style={{ color: "#64748b", lineHeight: 1.6 }}>We don&apos;t just sell tours; we build friendships. Every trip is an opportunity to meet people who share your passion for exploration.</p>
             </div>
             <div style={{ padding: 40, background: "#fff", borderRadius: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: 32, marginBottom: 20 }}>🏔️</div>
-              <h3 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Authentic Slopes</h3>
+              <h3 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Authentic Slopes</h3>
               <p style={{ color: "#64748b", lineHeight: 1.6 }}>Our local experts take you beyond the tourist traps to the hidden gems of Himachal and Uttarakhand that only locals know.</p>
             </div>
             <div style={{ padding: 40, background: "#fff", borderRadius: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: 32, marginBottom: 20 }}>🛡️</div>
-              <h3 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Safe & Student-Friendly</h3>
+              <h3 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginBottom: 12 }}>Safe & Student-Friendly</h3>
               <p style={{ color: "#64748b", lineHeight: 1.6 }}>We prioritize safety, especially for female and solo travelers, making high-altitude adventure accessible and affordable for everyone.</p>
             </div>
           </div>

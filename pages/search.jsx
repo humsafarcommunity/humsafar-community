@@ -120,7 +120,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
               Search Hub
             </span>
 
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(30px, 5vw, 46px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2 }}>
+            <h1 style={{ fontFamily: "var(--sans)", fontSize: "clamp(30px, 5vw, 46px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2 }}>
               {q ? <>Search results for &ldquo;<span style={{ color: "#34d399" }}>{q}</span>&rdquo;</> : "Explore Destinations & Guides"}
             </h1>
 
@@ -313,7 +313,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
                     <div style={{ background: "#ecfdf5", width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
                       🏔️
                     </div>
-                    <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 700, color: "#0f172a", margin: 0 }}>
+                    <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, fontWeight: 700, color: "#0f172a", margin: 0 }}>
                       Tour Packages <span style={{ fontSize: 16, color: "#64748b", fontWeight: 600 }}>({results.tours.length})</span>
                     </h2>
                   </div>
@@ -337,7 +337,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
                     <div style={{ background: "#ecfdf5", width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
                       📖
                     </div>
-                    <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 700, color: "#0f172a", margin: 0 }}>
+                    <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, fontWeight: 700, color: "#0f172a", margin: 0 }}>
                       Travel Guides & Articles <span style={{ fontSize: 16, color: "#64748b", fontWeight: 600 }}>({results.blogs.length})</span>
                     </h2>
                   </div>
@@ -379,7 +379,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
                   }}>
                     🔍
                   </div>
-                  <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 700, color: "#0f172a", marginBottom: 12 }}>
+                  <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, color: "#0f172a", marginBottom: 12 }}>
                     No exact matches found
                   </h2>
                   <p style={{ color: "#64748b", fontSize: 15, lineHeight: 1.6, marginBottom: 28 }}>

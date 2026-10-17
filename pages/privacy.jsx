@@ -22,7 +22,7 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
       <main style={{ minHeight: "80vh", background: "#f8fafc", paddingTop: 120, paddingBottom: 80 }}>
         <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
           <div style={{ background: "#ffffff", borderRadius: 24, padding: "48px 40px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-            <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(32px, 5vw, 48px)", color: "#0f172a", marginBottom: 8 }}>
+            <h1 style={{ fontFamily: "var(--sans)", fontSize: "clamp(32px, 5vw, 48px)", color: "#0f172a", marginBottom: 8 }}>
               Privacy Policy
             </h1>
             <p style={{ color: "#64748b", fontSize: 14, marginBottom: 32 }}>Last updated: August 27, 2026</p>
@@ -32,7 +32,7 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
                 At <strong>Humsafar Community</strong>, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our booking services.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 1. Information We Collect
               </h2>
               <p style={{ marginBottom: 16 }}>
@@ -45,7 +45,7 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
                 <li>Payment details processed securely through our payment gateway partners.</li>
               </ul>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 2. How We Use Your Information
               </h2>
               <p style={{ marginBottom: 16 }}>
@@ -58,21 +58,21 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
                 <li>Send promotional emails and newsletters (you can opt out at any time).</li>
               </ul>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 3. Information Sharing & Disclosure
               </h2>
               <p style={{ marginBottom: 24 }}>
                 We do not sell, rent, or trade your personal information. We may share information with trusted third-party service providers (such as hotel partners, local transport operators, and permit authorities) solely to execute your booked travel itineraries.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 4. Data Security
               </h2>
               <p style={{ marginBottom: 24 }}>
                 We implement industry-standard security measures to safeguard your personal data. However, please note that no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.
               </p>
 
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, color: "#0f172a", marginTop: 40, marginBottom: 16 }}>
                 5. Contact Us
               </h2>
               <p style={{ marginBottom: 24 }}>

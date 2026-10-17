@@ -20,7 +20,7 @@ export default function BlogPage({ blogs, site: freshSite }) {
       <Navbar site={dynamicSite} isSolid={true} />
 
       <main style={{ maxWidth: 1100, margin: "40px auto", padding: "0 20px" }}>
-        <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: 40, marginBottom: 10 }}>Travel Stories & Guides</h1>
+        <h1 style={{ fontFamily: "var(--sans)", fontSize: 40, marginBottom: 10 }}>Travel Stories & Guides</h1>
         <p style={{ color: "#64748b", marginBottom: 40 }}>Expert advice and inspiration for your next adventure.</p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 30 }}>

@@ -102,7 +102,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
           {/* H1 — AEO: Must contain primary keyword */}
           <h1
             className="speakable"
-            style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(26px,4vw,44px)", fontWeight: 700, color: "#0e1117", lineHeight: 1.17, marginBottom: 18 }}
+            style={{ fontFamily: "var(--sans)", fontSize: "clamp(26px,4vw,44px)", fontWeight: 700, color: "#0e1117", lineHeight: 1.17, marginBottom: 18 }}
             itemProp="headline"
           >
             {blog.title}
@@ -141,9 +141,9 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
             {(blog.content || []).map((block, i) => {
               switch (block.type) {
                 case "h2":
-                  return <h2 key={i} style={{ fontFamily: "Playfair Display, serif", fontSize: 28, fontWeight: 700, color: "#0e1117", margin: "40px 0 16px", lineHeight: 1.2 }}>{block.text}</h2>;
+                  return <h2 key={i} style={{ fontFamily: "var(--sans)", fontSize: 28, fontWeight: 700, color: "#0e1117", margin: "40px 0 16px", lineHeight: 1.2 }}>{block.text}</h2>;
                 case "h3":
-                  return <h3 key={i} style={{ fontFamily: "Playfair Display, serif", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" }}>{block.text}</h3>;
+                  return <h3 key={i} style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" }}>{block.text}</h3>;
                 case "para":
                   return <p key={i} style={{ marginBottom: 20 }} className="speakable">{block.text}</p>;
                 case "quote":
@@ -195,7 +195,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
               itemScope
               itemType="https://schema.org/FAQPage"
             >
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 30, fontWeight: 700, marginBottom: 6 }}>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 30, fontWeight: 700, marginBottom: 6 }}>
                 Frequently Asked Questions
               </h2>
               <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 24 }}>
@@ -234,7 +234,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
 
           {/* CTA */}
           <div style={{ marginTop: 48, background: "#064e3b", borderRadius: 20, padding: "32px", textAlign: "center", color: "#fff" }}>
-            <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 26, fontWeight: 700, marginBottom: 10 }}>
+            <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, marginBottom: 10 }}>
               Ready for Your Adventure?
             </h2>
             <p style={{ opacity: 0.8, marginBottom: 22, fontSize: 15 }}>
@@ -256,7 +256,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
       {relatedBlogs?.length > 0 && (
         <section style={{ background: "#f8fafc", padding: "48px 24px", borderTop: "1px solid #e2e8f0" }}>
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
-            <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 26, fontWeight: 700, marginBottom: 24, color: "#0e1117" }}>
+            <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, marginBottom: 24, color: "#0e1117" }}>
               Related Articles
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))", gap: 20 }}>
@@ -278,7 +278,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
                     )}
                     <div style={{ padding: 16 }}>
                       <span style={{ fontSize: 11, color: "#065f46", fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif" }}>{rb.category}</span>
-                      <h3 style={{ fontFamily: "Playfair Display, serif", fontSize: 15, fontWeight: 700, color: "#0e1117", marginTop: 6, lineHeight: 1.3 }}>{rb.title}</h3>
+                      <h3 style={{ fontFamily: "var(--sans)", fontSize: 15, fontWeight: 700, color: "#0e1117", marginTop: 6, lineHeight: 1.3 }}>{rb.title}</h3>
                     </div>
                   </article>
                 </Link>

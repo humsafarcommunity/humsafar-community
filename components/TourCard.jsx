@@ -7,7 +7,7 @@ export default function TourCard({ tour }) {
     <article
       style={{
         background: "#fff",
-        borderRadius: 18,
+        borderRadius: 20,
         overflow: "hidden",
         border: "1px solid #e2e8f0",
         boxShadow: "0 4px 14px rgba(0,0,0,0.04)",
@@ -137,7 +137,7 @@ export default function TourCard({ tour }) {
 
         <h3
           style={{
-            fontFamily: "Playfair Display, serif",
+            fontFamily: "var(--sans)",
             fontSize: 18,
             fontWeight: 700,
             color: "#0f172a",
