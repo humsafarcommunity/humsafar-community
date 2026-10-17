@@ -81,7 +81,7 @@ export default function Footer({ dynamicSite }) {
             >
               <div
                 style={{
-                  fontFamily: "Playfair Display, serif",
+                  fontFamily: "var(--sans)",
                   fontSize: 26,
                   fontWeight: 700,
                   color: "#fff",

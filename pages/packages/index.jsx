@@ -57,7 +57,7 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
       <Navbar site={dynamicSite} isSolid={true} />
 
       <main style={{ maxWidth: 1100, margin: "40px auto", padding: "0 20px" }}>
-        <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: 40, marginBottom: 20 }}>Our Tour Packages</h1>
+        <h1 style={{ fontFamily: "var(--sans)", fontSize: 40, marginBottom: 20 }}>Our Tour Packages</h1>
         
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 40 }}>
           {regions.map((r) => (

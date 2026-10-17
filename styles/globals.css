@@ -4,7 +4,6 @@
 
 /* styles/globals.css — Humsafar Community v5.0 */
 /* ── FONTS ─────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700;800;900&family=Nunito:wght@400;600;700;800&display=swap');
 
 /* ── RESET & BASE ───────────────────────────────────────────── */
 *, *::before, *::after {
@@ -66,10 +65,10 @@ body {
   --border: #e2e8f0;
   --bg: #f8fafc;
   --card: #ffffff;
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --radius: 14px;
-  --radius-lg: 20px;
+    --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --radius: 12px;      /* inputs, chips, inner blocks */
+  --radius-lg: 20px;   /* cards */
+  --radius-xl: 32px;   /* hero and banners */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
   --shadow: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
@@ -77,8 +76,10 @@ body {
 
 /* ── TYPOGRAPHY ─────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--serif);
-  line-height: 1.2;
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   color: var(--ink);
 }
 
@@ -177,7 +178,7 @@ p, li, span, label, input, textarea, button, a {
 }
 
 .blog-body h2 {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 30px;
   font-weight: 700;
   color: var(--ink);
@@ -186,7 +187,7 @@ p, li, span, label, input, textarea, button, a {
 }
 
 .blog-body h3 {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 22px;
   font-weight: 700;
   color: #1e293b;

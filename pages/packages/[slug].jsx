@@ -146,7 +146,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             <div style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 800, marginBottom: 2 }}>
               {pax} Pax · {sharing} Sharing
             </div>
-            <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "Playfair Display, serif", color: "#0f172a" }}>
+            <div style={{ fontSize: 22, fontWeight: 900, fontFamily: "var(--sans)", color: "#0f172a" }}>
               ₹{totalPrice.toLocaleString("en-IN")}
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                     {tour.duration}
                   </span>
                 </div>
-                <h1 className="tour-title" style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(24px, 4vw, 50px)", fontWeight: 900, color: "#fff", marginBottom: 10, lineHeight: 1.1 }}>
+                <h1 className="tour-title" style={{ fontFamily: "var(--sans)", fontSize: "clamp(24px, 4vw, 50px)", fontWeight: 900, color: "#fff", marginBottom: 10, lineHeight: 1.1 }}>
                   {tour.title}
                 </h1>
                 <div className="hero-meta" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, display: "flex", gap: 16, flexWrap: "wrap", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
@@ -250,7 +250,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             {/* Highlights */}
             {tour.highlights?.length > 0 && (
               <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 12, padding: "24px", marginBottom: 20, border: "1px solid #eef2f6" }}>
-              <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 22, fontWeight: 800, marginBottom: 16, color: "#0f172a" }}>Trip Highlights</h2>
+              <h2 style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 800, marginBottom: 16, color: "#0f172a" }}>Trip Highlights</h2>
               <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, listStyle: "none" }}>
                 {tour.highlights.map((h, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -265,7 +265,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             {/* Itinerary */}
             {tour.itinerary?.length > 0 && (
               <section aria-label="Trip itinerary" style={{ marginBottom: 22 }}>
-                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 22, fontWeight: 800, marginBottom: 14, color: "#0f172a" }}>
+                <h2 style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 800, marginBottom: 14, color: "#0f172a" }}>
                   📅 Day-by-Day Itinerary
                 </h2>
                 {tour.itinerary.map((day, i) => (
@@ -333,7 +333,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 itemScope
                 itemType="https://schema.org/FAQPage"
               >
-                <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: 24, fontWeight: 700, marginBottom: 6 }}>
+                <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, fontWeight: 700, marginBottom: 6 }}>
                   Frequently Asked Questions
                 </h2>
                 <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 20 }}>
@@ -378,7 +378,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 <div style={{ fontSize: 10, opacity: 0.7, textTransform: "uppercase", letterSpacing: 2, marginBottom: 4, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
                   Total Cost
                 </div>
-                <div style={{ fontSize: 38, fontWeight: 900, fontFamily: "Playfair Display, serif" }}>
+                <div style={{ fontSize: 38, fontWeight: 900, fontFamily: "var(--sans)" }}>
                   ₹{totalPrice.toLocaleString("en-IN")}
                 </div>
                 <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
@@ -403,7 +403,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                         <div style={{ fontSize: 9, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1 }}>
                           {d.toLocaleDateString("en-IN", { month: "short" })}
                         </div>
-                        <div style={{ fontSize: 18, fontWeight: 900, color: "#0e1117", fontFamily: "Playfair Display, serif" }}>
+                        <div style={{ fontSize: 18, fontWeight: 900, color: "#0e1117", fontFamily: "var(--sans)" }}>
                           {d.getDate()}
                         </div>
                         <div style={{ fontSize: 9, color: "#94a3b8" }}>Sat</div>
@@ -437,7 +437,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#f8fafc", borderRadius: 12, padding: "10px 14px", marginBottom: 18, border: "1px solid #e2e8f0" }}>
                   <button onClick={() => setPax(Math.max(1, pax - 1))} style={{ width: 32, height: 32, borderRadius: 6, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>−</button>
-                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "Playfair Display, serif" }}>{pax}</span>
+                  <span style={{ fontSize: 20, fontWeight: 900, fontFamily: "var(--sans)" }}>{pax}</span>
                   <button onClick={() => setPax(pax + 1)} style={{ width: 32, height: 32, borderRadius: 6, background: "#fff", border: "1px solid #e2e8f0", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
                 </div>
 

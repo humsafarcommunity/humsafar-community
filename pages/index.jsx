@@ -170,6 +170,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
           justifyContent: "center",
           overflow: "hidden",
           background: "#064e3b",
+          borderRadius: "0 0 32px 32px",
         }}
       >
         {/* Background images */}
@@ -222,7 +223,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
             <h1
               className="speakable hero-title"
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "var(--sans)",
                 fontSize: "clamp(36px, 7vw, 84px)",
                 fontWeight: 800,
                 color: "#fff",
@@ -234,7 +235,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
               }}
             >
               {banners[currentSlide]?.title || "Discover Your Next"}{" "}
-              <span style={{ color: "#6ee7b7", fontStyle: "italic" }}>{banners[currentSlide]?.hi || "Adventure."}</span>
+              <span>{banners[currentSlide]?.hi || "Adventure."}</span>
             </h1>
             {banners[currentSlide]?.sub && (
               <p
@@ -485,7 +486,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
               <>
                 <h2
                   style={{
-                    fontFamily: "Playfair Display, serif",
+                    fontFamily: "var(--sans)",
                     fontSize: 34,
                     fontWeight: 700,
                     color: "#0e1117",
@@ -560,7 +561,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
                 >
                   <h2
                     style={{
-                      fontFamily: "Playfair Display, serif",
+                      fontFamily: "var(--sans)",
                       fontSize: "clamp(28px, 5vw, 38px)",
                       fontWeight: 700,
                       color: "#0e1117",
@@ -622,7 +623,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
                     >
                       <h2
                         style={{
-                          fontFamily: "Playfair Display, serif",
+                          fontFamily: "var(--sans)",
                           fontSize: "clamp(28px, 5vw, 38px)",
                           fontWeight: 700,
                           color: "#0e1117",
@@ -684,7 +685,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
             </p>
             <h2
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "var(--sans)",
                 fontSize: 34,
                 fontWeight: 700,
                 color: "#0e1117",
@@ -741,7 +742,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
               >
                 <h2
                   style={{
-                    fontFamily: "Playfair Display, serif",
+                    fontFamily: "var(--sans)",
                     fontSize: "clamp(28px, 5vw, 38px)",
                     fontWeight: 700,
                     color: "#0e1117",
@@ -821,7 +822,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
             </p>
             <h2
               style={{
-                fontFamily: "Playfair Display, serif",
+                fontFamily: "var(--sans)",
                 fontSize: "clamp(28px,4vw,48px)",
                 color: "#fff",
                 marginBottom: 16,
