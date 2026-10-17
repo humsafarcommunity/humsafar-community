@@ -20,6 +20,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "humsafarcommunity.com" },
+      { protocol: "https", hostname: "www.humsafarcommunity.com" },
       { protocol: "https", hostname: "uttarakhandtourism.gov.in" },
       { protocol: "https", hostname: "hikerwolf.com" },
       { protocol: "https", hostname: "cdn.sanity.io" },

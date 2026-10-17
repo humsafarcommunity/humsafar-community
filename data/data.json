@@ -1,10 +1,10 @@
 {
   "SITE": {
     "name": "Humsafar Community",
-    "url": "https://humsafarcommunity.com",
+    "url": "https://www.humsafarcommunity.com",
     "phone": "+91 62684 96389",
     "whatsapp": "916268496389",
-    "email": "hello@humsafarcommunity.com",
+    "email": "humsafarcommunity4@gmail.com",
     "address": "Gwalior, Madhya Pradesh, India",
     "lat": "26.2183",
     "lng": "78.1828",
@@ -20,7 +20,7 @@
       "youtube": "https://youtube.com/@humsafarcommunity",
       "twitter": "https://twitter.com/humsafar_travel"
     },
-    "defaultOGImage": "https://humsafarcommunity.com/og-image.jpg"
+    "defaultOGImage": "https://www.humsafarcommunity.com/og-image.jpg"
   },
   "TOURS": [],
   "BLOGS": [],

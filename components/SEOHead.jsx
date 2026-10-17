@@ -25,14 +25,18 @@ export default function SEOHead({
   const seo = freshSeo || {};
   
   const metaTitle = title || seo.seoTitle || "India's #1 Travel Community";
-  const fullTitle = title ? `${title} | ${site.name}` : `${site.name} — ${metaTitle}`;
+  const fullTitle = title
+    ? (title.toLowerCase().includes(String(site.name).toLowerCase()) ? title : `${title} | ${site.name}`)
+    : `${site.name} — ${metaTitle}`;
   
   const metaDescription = description || seo.seoDescription || "Experience authentic group travel across India with Humsafar Community.";
   const metaKeywords = keywords || seo.seoKeywords;
   
   const fullUrl = url ? `${site.url}${url}` : site.url;
   const ogImage = image || (seo.ogImage ? urlFor(seo.ogImage) : (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470"));
-  const canonicalUrl = canonical || seo.canonicalUrl ? (canonical ? `${site.url}${canonical}` : seo.canonicalUrl) : fullUrl;
+  // Every page points to its own address. (The old logic let the CMS "Canonical URL Base"
+  // replace the canonical of every page, which tells Google all pages are the homepage.)
+  const canonicalUrl = canonical ? `${site.url}${canonical}` : fullUrl;
   const favicon = seo.favicon ? urlFor(seo.favicon) : "/favicon.ico";
 
   return (

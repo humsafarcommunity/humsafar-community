@@ -26,11 +26,12 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
   const [expandedDay, setExpandedDay] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
 
-  // Get next 5 Saturdays
-  const saturdays = useMemo(() => getNextSaturdays(5), []);
+  // Next departure dates for the day(s) chosen in the CMS (Friday, Saturday or both)
+  const departureDay = tour?.departureDay;
+  const departures = useMemo(() => getNextDepartures(departureDay, 6), [departureDay]);
   useEffect(() => {
-    if (!activeDate && saturdays.length > 0) setActiveDate(saturdays[0]);
-  }, [activeDate, saturdays]);
+    if (!activeDate && departures.length > 0) setActiveDate(departures[0].toISOString());
+  }, [activeDate, departures]);
 
   if (router.isFallback) {
     return (
@@ -391,7 +392,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                   Select Departure Date
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6, marginBottom: 18 }}>
-                  {saturdays.map((d, i) => {
+                  {departures.map((d, i) => {
                     const dateStr = d.toISOString();
                     const isActive = activeDate === dateStr;
                     return (
@@ -406,7 +407,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                         <div style={{ fontSize: 18, fontWeight: 900, color: "#0e1117", fontFamily: "var(--sans)" }}>
                           {d.getDate()}
                         </div>
-                        <div style={{ fontSize: 9, color: "#94a3b8" }}>Sat</div>
+                        <div style={{ fontSize: 9, color: "#94a3b8" }}>{d.toLocaleDateString("en-IN", { weekday: "short" })}</div>
                       </button>
                     );
                   })}
@@ -549,13 +550,16 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
   );
 }
 
-function getNextSaturdays(n = 5) {
+// departureDay: "saturday" (default), "friday" or "both"
+function getNextDepartures(departureDay, n = 6) {
+  const weekdays = departureDay === "friday" ? [5] : departureDay === "both" ? [5, 6] : [6];
   const dates = [];
-  let d = new Date();
-  d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7 || 7));
-  for (let i = 0; i < n; i++) {
-    dates.push(new Date(d));
-    d.setDate(d.getDate() + 7);
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + 1); // earliest departure is tomorrow
+  while (dates.length < n) {
+    if (weekdays.includes(d.getDay())) dates.push(new Date(d));
+    d.setDate(d.getDate() + 1);
   }
   return dates;
 }

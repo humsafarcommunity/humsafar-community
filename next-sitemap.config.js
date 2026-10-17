@@ -3,7 +3,7 @@
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://humsafarcommunity.com",
+  siteUrl: "https://www.humsafarcommunity.com",
   generateRobotsTxt: false, // We have our own custom robots.txt
   generateIndexSitemap: true,
   changefreq: "weekly",

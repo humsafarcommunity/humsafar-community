@@ -882,7 +882,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
 
       {/* ── WHATSAPP FLOAT ───────────────────────────────────────── */}
       <a
-        href={`https://wa.me/${(dynamicSite.whatsapp || '916268496389').toString().replace(/\D/g, '')}?text=Hi Humsafar! I want to enquire about tour packages.`}
+        href={`https://wa.me/${(dynamicSite.whatsapp || '916268496389').toString().replace(/\D/g, '')}?text=${encodeURIComponent("Hi Humsafar! I want to enquire about tour packages.")}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
