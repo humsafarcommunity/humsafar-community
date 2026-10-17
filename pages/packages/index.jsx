@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import SEOHead from "../../components/SEOHead";
 import TourCard from "../../components/TourCard";
 import Navbar from "../../components/Navbar";
@@ -8,7 +9,14 @@ import Link from "next/link";
 
 export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite || SITE || { name: "Humsafar Community", socials: {} };
+  const router = useRouter();
   const [selectedRegion, setSelectedRegion] = useState("all");
+  useEffect(() => {
+    const r = router.query?.region;
+    if (router.isReady && typeof r === "string" && ["himachal", "uttarakhand", "rajasthan", "international", "other"].includes(r)) {
+      setSelectedRegion(r);
+    }
+  }, [router.isReady, router.query?.region]);
   
   const regions = [
     { id: "all", label: "All Destinations" },

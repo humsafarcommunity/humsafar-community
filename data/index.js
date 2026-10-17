@@ -200,8 +200,8 @@ export function generateOrganizationSchema(site = SITE) {
 export function generateTourSchema(tour, site = SITE) {
   return {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `${site.url}/packages/${tour.slug}/`,
+    "@type": ["Product", "TouristTrip"],
+    "@id": `${site.url}/packages/${tour.slug}#product`,
     name: tour.title,
     description: tour.seoDesc,
     image: tour.img,
@@ -228,15 +228,6 @@ export function generateTourSchema(tour, site = SITE) {
       name: day.title,
       description: day.desc,
     })),
-    ...(tour.faqs?.length > 0
-      ? {
-          mainEntity: tour.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }
-      : {}),
   };
 }
 

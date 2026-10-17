@@ -133,6 +133,21 @@ export default function TourCard({ tour }) {
           >
             {tour.type || tour.region || "Group Trip"}
           </span>
+          {tour.departureDay && (
+            <span
+              style={{
+                background: "#ecfdf5",
+                color: "#064e3b",
+                fontSize: 11,
+                fontWeight: 700,
+                padding: "3px 8px",
+                borderRadius: 6,
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+              }}
+            >
+              {tour.departureDay === "both" ? "Leaves Fri & Sat" : tour.departureDay === "friday" ? "Leaves Friday" : "Leaves Saturday"}
+            </span>
+          )}
         </div>
 
         <h3

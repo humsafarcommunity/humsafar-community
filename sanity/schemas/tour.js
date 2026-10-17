@@ -8,6 +8,21 @@ export default {
     { name: 'location', title: 'Location', type: 'string' },
     { name: 'region', title: 'Region Segment', type: 'string', options: { list: ['himachal', 'uttarakhand', 'rajasthan', 'international', 'other'] } },
     { name: 'type', title: 'Travel Type', type: 'string', options: { list: ['group', 'corporate', 'custom', 'educational'] } },
+    {
+      name: 'departureDay',
+      title: 'Departure day',
+      type: 'string',
+      description: 'Which day this trip leaves. Customers see the next dates for this day on the booking panel.',
+      options: {
+        list: [
+          { title: 'Saturday', value: 'saturday' },
+          { title: 'Friday', value: 'friday' },
+          { title: 'Friday and Saturday', value: 'both' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'saturday',
+    },
     { name: 'duration', title: 'Duration (e.g. 6 Days / 5 Nights)', type: 'string' },
     { name: 'price', title: 'Current Price', type: 'number' },
     { name: 'oldPrice', title: 'Old Price (String)', type: 'string' },
