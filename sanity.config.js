@@ -48,6 +48,7 @@ export default defineConfig({
             S.documentTypeListItem('tour').title('Tour Packages'),
             S.documentTypeListItem('blog').title('Blog Posts'),
             S.documentTypeListItem('banner').title('Hero Banners'),
+            S.documentTypeListItem('destination').title('Destination Cards'),
           ]),
     }),
   ],
