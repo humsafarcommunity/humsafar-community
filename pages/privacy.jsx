@@ -81,7 +81,7 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
               <p style={{ background: "#f1f5f9", padding: 20, borderRadius: 12, display: "inline-block", width: "100%", boxSizing: "border-box" }}>
                 <strong>Email:</strong> {dynamicSite.email || "hello@humsafarcommunity.com"}<br />
                 <strong>WhatsApp / Phone:</strong> {dynamicSite.phone || "+91 62684 96389"}<br />
-                <strong>Address:</strong> {dynamicSite.address || "Gurugram, Haryana, India"}
+                <strong>Address:</strong> {dynamicSite.address || "Gwalior, Madhya Pradesh, India"}
               </p>
             </div>
           </div>

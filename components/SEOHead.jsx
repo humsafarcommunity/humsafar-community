@@ -54,13 +54,7 @@ export default function SEOHead({
             name="robots"
             content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
           />
-          {/* GEO: Explicitly allow AI system crawlers */}
           <meta name="googlebot" content="index, follow, max-snippet:-1" />
-          <meta name="GPTBot" content="index, follow" />
-          <meta name="Claude-Web" content="index, follow" />
-          <meta name="PerplexityBot" content="index, follow" />
-          <meta name="Bingbot" content="index, follow" />
-          <meta name="Google-Extended" content="index, follow" />
         </>
       )}
 
@@ -94,8 +88,8 @@ export default function SEOHead({
       )}
 
       {/* ── GEOGRAPHIC META (Local SEO) ────────────────────────────── */}
-      <meta name="geo.region" content="IN-HR" />
-      <meta name="geo.placename" content="Gurugram, Haryana, India" />
+      <meta name="geo.region" content="IN-MP" />
+      <meta name="geo.placename" content="Gwalior, Madhya Pradesh, India" />
       <meta name="geo.position" content={`${site.lat};${site.lng}`} />
       <meta name="ICBM" content={`${site.lat}, ${site.lng}`} />
 
