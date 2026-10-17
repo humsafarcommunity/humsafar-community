@@ -43,6 +43,7 @@ export async function getFreshData() {
         "slug": slug.current,
         "coverImage": coverImage // Get full object for builder
       },
+      "DESTINATIONS": *[_type == "destination" && defined(image)] | order(order asc) { _id, name, group, region, link, textColor, "image": image, "alt": image.alt },
       "BANNERS": *[_type == "banner"] {
         ...,
         "url": image // Get full object for builder
@@ -129,6 +130,7 @@ export async function getFreshData() {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
       ABOUT: sanityData.ABOUT || null,
+      DESTINATIONS: (sanityData.DESTINATIONS || []).map(d => ({ ...d, image: urlFor(d.image) })),
       TOURS: finalTours,
       BLOGS: finalBlogs,
       BANNERS: finalBanners,
@@ -143,7 +145,8 @@ export async function getFreshData() {
       BANNERS,
       REVIEWS,
       SEODATA: {},
-      ABOUT: null
+      ABOUT: null,
+      DESTINATIONS: []
     };
   }
 }

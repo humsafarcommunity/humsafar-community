@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SEOHead from "../components/SEOHead";
+import DestinationCards from "../components/DestinationCards";
 import TourCard from "../components/TourCard";
 import Navbar from "../components/Navbar";
 import BlogCard from "../components/BlogCard";
@@ -22,7 +23,7 @@ import {
 // HOMEPAGE COMPONENT
 // ──────────────────────────────────────────────────────────────────
 
-export default function HomePage({ tours = [], blogs = [], banners = [], site: freshSite, seo: seoData }) {
+export default function HomePage({ tours = [], blogs = [], banners = [], destinations = [], site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
@@ -125,6 +126,26 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
       })),
     },
   ];
+
+  // Destination cards: from the CMS "Destination Cards", or built from your tours when none are added
+  const REGION_NAMES = { himachal: "Himachal", uttarakhand: "Uttarakhand", rajasthan: "Rajasthan", international: "International", other: "Rest of India" };
+  const destinationCards = (destinations.length
+    ? destinations.map((d) => ({
+        key: d._id,
+        name: d.name,
+        group: d.group || "domestic",
+        image: d.image,
+        alt: d.alt,
+        textColor: d.textColor,
+        href: d.link || (d.region ? `/packages?region=${d.region}` : "/packages"),
+      }))
+    : Object.keys(REGION_NAMES)
+        .map((r) => {
+          const t = (tours || []).find((x) => x?.region === r && x?.img);
+          return t && { key: r, name: REGION_NAMES[r], group: r === "international" ? "international" : "domestic", image: t.img, textColor: "light", href: `/packages?region=${r}` };
+        })
+        .filter(Boolean)
+  ).filter((d) => d.image);
 
   const regions = [
     { id: "all", label: "All Destinations" },
@@ -474,6 +495,14 @@ export default function HomePage({ tours = [], blogs = [], banners = [], site: f
           </div>
         </div>
       </div>
+
+      {/* ── DESTINATION CARDS ────────────────────────────────────── */}
+      {isDefault && (
+        <>
+          <DestinationCards title="Domestic Destinations" items={destinationCards.filter((d) => d.group !== "international")} />
+          <DestinationCards title="International Destinations" items={destinationCards.filter((d) => d.group === "international")} />
+        </>
+      )}
 
       {/* ── TOURS SECTION ────────────────────────────────────────── */}
       <main>
@@ -1002,6 +1031,7 @@ export async function getStaticProps() {
     oldPrice: t.oldPrice || "",
     img: t.img || "",
     bestseller: !!t.bestseller,
+    departureDay: t.departureDay || "",
     seoDesc: t.seoDesc || "",
   }));
 
@@ -1029,6 +1059,7 @@ export async function getStaticProps() {
       tours,
       blogs,
       banners,
+      destinations: (data.DESTINATIONS || []).map((d) => ({ _id: d._id || d.name, name: d.name || "", group: d.group || "domestic", region: d.region || "", link: d.link || "", textColor: d.textColor || "light", image: d.image || "", alt: d.alt || "" })),
       site: data.SITE,
       seo: data.SEODATA,
     },
