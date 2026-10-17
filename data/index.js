@@ -32,6 +32,7 @@ export async function getFreshData() {
     const sanityData = await client.fetch(`{
       "SITE": *[_type == "siteSettings" && _id == "siteSettings"][0],
       "SEODATA": *[_type == "seoSettings" && _id == "seoSettings"][0],
+      "ABOUT": *[_type == "aboutPage" && _id == "aboutPage"][0],
       "TOURS": *[_type == "tour" && defined(slug.current)] {
         ...,
         "slug": slug.current,
@@ -127,6 +128,7 @@ export async function getFreshData() {
     return {
       SITE: site,
       SEODATA: sanityData.SEODATA || {},
+      ABOUT: sanityData.ABOUT || null,
       TOURS: finalTours,
       BLOGS: finalBlogs,
       BANNERS: finalBanners,
@@ -140,7 +142,8 @@ export async function getFreshData() {
       BLOGS,
       BANNERS,
       REVIEWS,
-      SEODATA: {}
+      SEODATA: {},
+      ABOUT: null
     };
   }
 }

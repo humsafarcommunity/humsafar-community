@@ -33,6 +33,16 @@ export default defineConfig({
                   .documentId('seoSettings')
                   .title('SEO & Metadata')
               ),
+            // Singleton for the About Us page
+            S.listItem()
+              .title('About Us Page')
+              .id('aboutPage')
+              .child(
+                S.document()
+                  .schemaType('aboutPage')
+                  .documentId('aboutPage')
+                  .title('About Us Page')
+              ),
             S.divider(),
             // Manual list to avoid resolution errors
             S.documentTypeListItem('tour').title('Tour Packages'),
@@ -45,12 +55,12 @@ export default defineConfig({
     types: schemaTypes,
     // Filter out singleton types from "Create new" menu
     templates: (prev) =>
-      prev.filter((template) => !['siteSettings', 'seoSettings'].includes(template.id)),
+      prev.filter((template) => !['siteSettings', 'seoSettings', 'aboutPage'].includes(template.id)),
   },
   document: {
     // For singleton types, hide the "Duplicate" and "Delete" actions
     actions: (prev, { schemaType }) => {
-      if (['siteSettings', 'seoSettings'].includes(schemaType)) {
+      if (['siteSettings', 'seoSettings', 'aboutPage'].includes(schemaType)) {
         return prev.filter(({ action }) => !['delete', 'duplicate', 'unpublish'].includes(action));
       }
       return prev;
