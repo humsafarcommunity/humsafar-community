@@ -29,7 +29,6 @@ module.exports = {
         loc: path,
         changefreq: "daily",
         priority: 1.0,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -39,7 +38,6 @@ module.exports = {
         loc: path,
         changefreq: "weekly",
         priority: 0.9,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -49,7 +47,6 @@ module.exports = {
         loc: path,
         changefreq: "daily",
         priority: 0.85,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -59,7 +56,6 @@ module.exports = {
         loc: path,
         changefreq: "monthly",
         priority: 0.8,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -69,7 +65,6 @@ module.exports = {
         loc: path,
         changefreq: "weekly",
         priority: 0.75,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -77,7 +72,6 @@ module.exports = {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: new Date().toISOString(),
     };
   },
 };

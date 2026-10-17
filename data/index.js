@@ -166,10 +166,8 @@ export function generateOrganizationSchema(site = SITE) {
     foundingDate: site.founded,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "4th Floor, Adventure Hub, Sector 15",
-      addressLocality: "Gurugram",
-      addressRegion: "Haryana",
-      postalCode: "122001",
+      addressLocality: "Gwalior",
+      addressRegion: "Madhya Pradesh",
       addressCountry: "IN",
     },
     geo: {
