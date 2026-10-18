@@ -72,6 +72,7 @@ export default {
         { name: 'facebook', type: 'url' },
         { name: 'youtube', type: 'url' },
         { name: 'twitter', type: 'url' },
+        { name: 'linkedin', type: 'url' },
       ],
     },
   ],

@@ -14,11 +14,8 @@
     "totalTravelers": "50000",
     "gst": "06AABCH1234F1Z5",
     "location": "Gwalior, Madhya Pradesh",
-    "socials": {
-      "instagram": "https://instagram.com/humsafarcommunity",
-      "facebook": "https://facebook.com/humsafarcommunity",
-      "youtube": "https://youtube.com/@humsafarcommunity",
-      "twitter": "https://twitter.com/humsafar_travel"
+     "socials": {
+      "instagram": "https://www.instagram.com/humsafar.community/"
     },
     "defaultOGImage": "https://www.humsafarcommunity.com/og-image.jpg"
   },
