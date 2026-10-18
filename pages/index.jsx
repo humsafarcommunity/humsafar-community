@@ -185,7 +185,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
         aria-label="Hero section with featured destinations"
         style={{
           position: "relative",
-          minHeight: "94vh",
+          minHeight: "min(94vh, 820px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -403,7 +403,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
             boxSizing: "border-box"
           }}
         >
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px 60px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: "24px 60px" }}>
             <div>
               <p
                 style={{
@@ -543,7 +543,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   style={{
                     display: "grid",
                     gridTemplateColumns:
-                      "repeat(auto-fill,minmax(280px,1fr))",
+                      "repeat(auto-fill,minmax(min(100%, 280px), 1fr))",
                     gap: 24,
                   }}
                 >
@@ -615,7 +615,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   style={{
                     display: "grid",
                     gridTemplateColumns:
-                      "repeat(auto-fill,minmax(280px,1fr))",
+                      "repeat(auto-fill,minmax(min(100%, 280px), 1fr))",
                     gap: 24,
                   }}
                 >
@@ -677,7 +677,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                       style={{
                         display: "grid",
                         gridTemplateColumns:
-                          "repeat(auto-fill,minmax(280px,1fr))",
+                          "repeat(auto-fill,minmax(min(100%, 280px), 1fr))",
                         gap: 24,
                       }}
                     >
@@ -795,7 +795,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))",
+                  gridTemplateColumns: "repeat(auto-fill,minmax(min(100%, 300px), 1fr))",
                   gap: 24,
                 }}
               >

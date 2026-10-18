@@ -68,7 +68,7 @@ export default function GoogleReviews({ placeId }) {
   return (
     <div className="reviews-grid" style={{ 
       display: "grid", 
-      gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", 
+      gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", 
       gap: 24 
     }}>
       {reviews.map((rev, idx) => (

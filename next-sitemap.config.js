@@ -32,6 +32,11 @@ module.exports = {
       };
     }
 
+    // Manali landing page — the main keyword page
+    if (path === "/manali-tour-packages") {
+      return { loc: path, changefreq: "weekly", priority: 0.95 };
+    }
+
     // Tour package pages — very high priority
     if (path.startsWith("/packages/") && path !== "/packages") {
       return {

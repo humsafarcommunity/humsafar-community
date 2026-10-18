@@ -88,7 +88,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
 
           {/* Stats */}
           {stats.length > 0 && (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16, marginBottom: 64 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 160px), 1fr))", gap: 16, marginBottom: 64 }}>
               {stats.map((s, i) => (
                 <div key={s._key || i} style={{ ...card, padding: "24px 20px", textAlign: "center" }}>
                   <div style={{ fontSize: 32, fontWeight: 800, color: "#064e3b" }}>{s.value}</div>
@@ -109,7 +109,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
           )}
 
           {/* Values */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginBottom: 72 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 24, marginBottom: 72 }}>
             {values.map((v, i) => (
               <div key={v._key || i} style={{ ...card, padding: 36 }}>
                 {v.icon && <div style={{ fontSize: 32, marginBottom: 18 }}>{v.icon}</div>}
@@ -123,7 +123,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
           {team.length > 0 && (
             <section style={{ marginBottom: 72 }}>
               <h2 style={{ fontSize: "clamp(26px, 4vw, 34px)", color: "#0f172a", marginBottom: 28 }}>{pick("teamTitle")}</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 20 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 200px), 1fr))", gap: 20 }}>
                 {team.map((m, i) => (
                   <div key={m._key || i} style={{ ...card, overflow: "hidden" }}>
                     <div style={{ position: "relative", aspectRatio: "1 / 1", background: "#e2e8f0" }}>

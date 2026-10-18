@@ -57,13 +57,17 @@ const nextConfig = {
         ],
       },
       {
-        source: "/(.*)",
+        source: "/((?!admin|crm|search).*)",
         headers: [
           {
             key: "X-Robots-Tag",
             value: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
           },
         ],
+      },
+      {
+        source: "/(admin|crm|search)(.*)",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
   },

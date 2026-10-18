@@ -88,7 +88,7 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
           ))}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 30 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: 30 }}>
           {filtered.map((tour, idx) => (
             <TourCard key={tour._id || tour.slug || idx} tour={tour} />
           ))}
