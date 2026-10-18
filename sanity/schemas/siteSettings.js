@@ -22,9 +22,11 @@ export default {
     { name: 'newsletterSub', title: 'Newsletter Subtitle', type: 'string', fieldset: 'footer' },
 
     { name: 'founded', title: 'Year Founded', type: 'string', fieldset: 'stats' },
+    { name: 'instagramFollowers', title: 'Instagram followers', type: 'string', description: 'Shown under the hero, e.g. 13,000+. Leave empty to hide.', fieldset: 'stats' },
     { name: 'reviewCount', title: 'Total Reviews', type: 'string', fieldset: 'stats' },
-    { name: 'ratingValue', title: 'Avg Rating', type: 'string', fieldset: 'stats' },
-    { name: 'totalTravelers', title: 'Total Travelers', type: 'string', fieldset: 'stats' },
+    { name: 'googleReviewsUrl', title: 'Google reviews link', type: 'url', description: 'Optional. Link to your Google Business reviews.', fieldset: 'stats' },
+    { name: 'ratingValue', title: 'Google rating', type: 'string', description: 'Shown under the hero, e.g. 4.9. Leave empty to hide.', fieldset: 'stats' },
+    { name: 'totalTravelers', title: 'Total Travellers', type: 'string', description: 'Shown under the hero, e.g. 10,000+. Leave empty to hide.', fieldset: 'stats' },
 
     { name: 'gst', title: 'GST Number', type: 'string', fieldset: 'business' },
     { name: 'location', title: 'Base City', type: 'string', fieldset: 'business' },
