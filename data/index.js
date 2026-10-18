@@ -110,6 +110,10 @@ export async function getFreshData() {
       ...sanityData.SITE,
     };
     
+    site.trustLogos = (sanityData.SITE?.trustLogos || [])
+      .filter((l) => l && l.logo)
+      .map((l) => ({ name: l.name || "", url: l.url || "", logo: urlFor(l.logo) }));
+
     // Sanitize WhatsApp number (must be digits only for wa.me)
     if (site.whatsapp) {
       site.whatsapp = site.whatsapp.toString().replace(/\D/g, "");

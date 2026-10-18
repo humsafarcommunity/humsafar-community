@@ -51,7 +51,39 @@ export default function Footer({ dynamicSite }) {
     }
   ];
 
+  const trustLogos = (dynamicSite?.trustLogos || []).filter((l) => l?.logo);
+
   return (
+    <>
+      {trustLogos.length > 0 && (
+        <section aria-label="Registrations and partners" style={{ background: "#fff", padding: "56px 24px 48px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginBottom: 36 }}>
+              <span aria-hidden="true" className="trust-line" style={{ height: 2, width: 64, background: "#334155" }} />
+              <h2 style={{ fontSize: "clamp(20px, 3.4vw, 28px)", fontWeight: 800, color: "#1e293b", textAlign: "center", textTransform: "uppercase", letterSpacing: "-0.01em" }}>
+                {dynamicSite.trustHeading || "Brands who trust us"}
+              </h2>
+              <span aria-hidden="true" className="trust-line" style={{ height: 2, width: 64, background: "#334155" }} />
+            </div>
+            <ul style={{ listStyle: "none", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "28px 56px" }}>
+              {trustLogos.map((l, i) => {
+                const img = (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={l.logo} alt={l.name} loading="lazy" style={{ height: 56, width: "auto", maxWidth: 180, objectFit: "contain", filter: "grayscale(1)", opacity: 0.8 }} />
+                );
+                return (
+                  <li key={i}>
+                    {l.url ? <a href={l.url} target="_blank" rel="noopener noreferrer" aria-label={l.name}>{img}</a> : img}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <style jsx>{`
+            @media (max-width: 520px) { .trust-line { display: none; } }
+          `}</style>
+        </section>
+      )}
     <footer
       style={{
         background: "#080808",
@@ -208,5 +240,6 @@ export default function Footer({ dynamicSite }) {
         }
       `}</style>
     </footer>
+    </>
   );
 }

@@ -30,6 +30,32 @@ export default {
     { name: 'location', title: 'Base City', type: 'string', fieldset: 'business' },
     
     {
+      name: 'trustHeading',
+      title: 'Logo strip heading',
+      type: 'string',
+      description: 'Shown above the logos at the bottom of every page. Default: Brands who trust us',
+      fieldset: 'footer'
+    },
+    {
+      name: 'trustLogos',
+      title: 'Logo strip (registrations and partners)',
+      type: 'array',
+      description: 'Only add organisations you are actually registered with or listed on, using their official logo.',
+      fieldset: 'footer',
+      of: [
+        {
+          type: 'object',
+          name: 'trustLogo',
+          fields: [
+            { name: 'name', title: 'Name', type: 'string', description: 'e.g. TripAdvisor', validation: (Rule) => Rule.required() },
+            { name: 'logo', title: 'Logo', type: 'image', validation: (Rule) => Rule.required() },
+            { name: 'url', title: 'Link (optional)', type: 'url', description: 'Your listing or certificate page' },
+          ],
+          preview: { select: { title: 'name', media: 'logo' } },
+        },
+      ],
+    },
+    {
       name: 'faqs',
       title: 'Homepage FAQs',
       type: 'array',
