@@ -3,6 +3,7 @@ import SEOHead from "../components/SEOHead";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TourCard from "../components/TourCard";
+import FAQAccordion from "../components/FAQAccordion";
 import BlogCard from "../components/BlogCard";
 import { SITE, getFreshData, generateOrganizationSchema, generateFAQSchema } from "../data";
 
@@ -124,13 +125,8 @@ export default function ManaliPackagesPage({ tours = [], guides = [], site: fres
 
         <section style={{ ...section, paddingTop: 56 }}>
           <h2 style={h2}>Manali trip questions</h2>
-          <div style={{ display: "grid", gap: 12, maxWidth: 820 }}>
-            {faqs.map((f) => (
-              <details key={f.q} style={{ background: "#fff", borderRadius: 16, padding: "18px 20px", border: "1px solid #e2e8f0" }}>
-                <summary style={{ cursor: "pointer", fontWeight: 700, fontSize: 16, color: "#0e1117", minHeight: 24 }}>{f.q}</summary>
-                <p style={{ marginTop: 12, lineHeight: 1.75, color: "#475569" }}>{f.a}</p>
-              </details>
-            ))}
+          <div style={{ maxWidth: 820 }}>
+            <FAQAccordion faqs={faqs} defaultOpen={null} />
           </div>
         </section>
       </main>
