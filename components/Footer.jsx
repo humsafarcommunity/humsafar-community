@@ -17,6 +17,7 @@ export default function Footer({ dynamicSite }) {
       title: "Top Destinations",
       links: [
         { label: "All Tour Packages", href: "/packages" },
+        { label: "Manali Tour Packages", href: "/manali-tour-packages" },
         { label: "Himachal Group Tours", href: "/packages?region=himachal" },
         { label: "Uttarakhand Treks", href: "/packages?region=uttarakhand" },
         { label: "International Getaways", href: "/packages?region=international" },
@@ -99,7 +100,7 @@ export default function Footer({ dynamicSite }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))",
             gap: "40px 24px",
             marginBottom: 40,
           }}

@@ -252,7 +252,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             {tour.highlights?.length > 0 && (
               <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 12, padding: "24px", marginBottom: 20, border: "1px solid #eef2f6" }}>
               <h2 style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 800, marginBottom: 16, color: "#0f172a" }}>Trip Highlights</h2>
-              <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, listStyle: "none" }}>
+              <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))", gap: 10, listStyle: "none" }}>
                 {tour.highlights.map((h, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{ width: 20, height: 20, borderRadius: 6, background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: "#10b981" }}>✓</div>

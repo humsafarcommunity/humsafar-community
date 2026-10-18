@@ -23,7 +23,7 @@ export default function BlogPage({ blogs, site: freshSite }) {
         <h1 style={{ fontFamily: "var(--sans)", fontSize: 40, marginBottom: 10 }}>Travel Stories & Guides</h1>
         <p style={{ color: "#64748b", marginBottom: 40 }}>Expert advice and inspiration for your next adventure.</p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 30 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: 30 }}>
           {blogs.map((blog, idx) => (
             <BlogCard key={blog._id || blog.slug || idx} blog={blog} />
           ))}

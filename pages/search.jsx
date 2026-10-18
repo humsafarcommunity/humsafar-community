@@ -320,7 +320,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
 
                   <div style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
                     gap: 24
                   }}>
                     {results.tours.map(tour => (
@@ -344,7 +344,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
 
                   <div style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
                     gap: 28
                   }}>
                     {results.blogs.map(blog => (

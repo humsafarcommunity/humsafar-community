@@ -259,7 +259,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
             <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, marginBottom: 24, color: "#0e1117" }}>
               Related Articles
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(min(100%, 240px), 1fr))", gap: 20 }}>
               {relatedBlogs.map((rb) => (
                 <Link key={rb.id} href={`/blog/${rb.slug}`} style={{ textDecoration: "none" }}>
                   <article style={{ background: "#fff", borderRadius: 14, overflow: "hidden", border: "1px solid #e2e8f0", transition: "transform 0.2s ease, box-shadow 0.2s ease" }}
