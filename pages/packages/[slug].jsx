@@ -5,6 +5,8 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Accordion from "../../components/Accordion";
+import FAQAccordion from "../../components/FAQAccordion";
 import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -23,8 +25,6 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
   const [activeDate, setActiveDate] = useState(null);
   const [pax, setPax] = useState(1);
   const [sharing, setSharing] = useState("Quad");
-  const [expandedDay, setExpandedDay] = useState(0);
-  const [expandedFaq, setExpandedFaq] = useState(null);
 
   // Next departure dates for the day(s) chosen in the CMS (Friday, Saturday or both)
   const departureDay = tour?.departureDay;
@@ -265,42 +265,26 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
 
             {/* Itinerary */}
             {tour.itinerary?.length > 0 && (
-              <section aria-label="Trip itinerary" style={{ marginBottom: 22 }}>
-                <h2 style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 800, marginBottom: 14, color: "#0f172a" }}>
-                  📅 Day-by-Day Itinerary
-                </h2>
-                {tour.itinerary.map((day, i) => (
-                  <div key={i} style={{ background: "#fff", borderRadius: 12, border: "1px solid #eef2f6", marginBottom: 8, overflow: "hidden" }}>
-                    <button
-                      onClick={() => setExpandedDay(expandedDay === i ? -1 : i)}
-                      aria-expanded={expandedDay === i}
-                      style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", background: "none", border: "none", cursor: "pointer", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif" }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <div style={{ padding: "4px 12px", height: 24, borderRadius: 4, background: expandedDay === i ? "#0f172a" : "#f1f5f9", color: expandedDay === i ? "#fff" : "#475569", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, flexShrink: 0, textTransform: "uppercase", letterSpacing: 0.5 }}>
-                          Day {day.day}
-                        </div>
-                        <div>
-                          <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a" }}>{day.title}</div>
-                          {day.meals && <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 1 }}>🍽️ {day.meals}</div>}
-                        </div>
+              <section aria-label="Trip itinerary" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0", marginBottom: 22 }}>
+                <Accordion
+                  title="Itinerary"
+                  expandAll
+                  items={tour.itinerary.map((day) => ({
+                    badge: `Day ${day.day}`,
+                    title: day.title,
+                    subtitle: day.meals ? `🍽️ ${day.meals}` : undefined,
+                    body: (
+                      <div>
+                        {String(day.desc || "").split(/[.\n]/).filter((x) => x.trim()).map((point, idx) => (
+                          <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 10 }}>
+                            <span style={{ color: "#10b981", fontWeight: 900, flexShrink: 0 }}>•</span>
+                            <span>{point.trim()}.</span>
+                          </div>
+                        ))}
                       </div>
-                      <span style={{ fontSize: 16, color: "#94a3b8", marginLeft: 8 }}>{expandedDay === i ? "−" : "+"}</span>
-                    </button>
-                    {expandedDay === i && (
-                      <div style={{ padding: "4px 20px 20px 20px", fontSize: 14, color: "#475569", lineHeight: 1.8 }}>
-                        <div style={{ borderLeft: "2px solid #ecfdf5", paddingLeft: 16, marginLeft: 2 }}>
-                          {day.desc.split(/[.\n]/).filter(p => p.trim()).map((point, idx) => (
-                            <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 8 }}>
-                              <span style={{ color: "#10b981", fontWeight: 900, flexShrink: 0 }}>•</span>
-                              <span>{point.trim()}.</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                    ),
+                  }))}
+                />
               </section>
             )}
 
@@ -310,7 +294,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 { title: "What's Included", items: tour.inclusions, icon: "✓", bg: "#f0fdf4", col: "#16a34a" },
                 { title: "What's Excluded", items: tour.exclusions, icon: "✗", bg: "#fef2f2", col: "#dc2626" },
               ].map((sec) => (
-                <section key={sec.title} aria-label={sec.title} style={{ background: "#fff", borderRadius: 12, padding: "20px", border: "1px solid #f1f5f9", height: "100%", boxSizing: "border-box" }}>
+                <section key={sec.title} aria-label={sec.title} style={{ background: "#fff", borderRadius: 24, padding: "24px", border: "1px solid #e2e8f0", height: "100%", boxSizing: "border-box" }}>
                   <h3 style={{ fontSize: 10, fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.5, color: sec.col, marginBottom: 14 }}>{sec.title}</h3>
                   <ul style={{ listStyle: "none" }}>
                     {sec.items?.map((item, i) => (
@@ -326,48 +310,10 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
               ))}
             </div>
 
-            {/* FAQs — AEO: Powers "People Also Ask" in Google */}
+            {/* FAQs — Google reads these from the FAQ markup added in `schemas` above */}
             {tour.faqs?.length > 0 && (
-              <section
-                aria-label="Frequently asked questions"
-                style={{ background: "#fff", borderRadius: 18, padding: "26px 28px", border: "1px solid #e2e8f0" }}
-                itemScope
-                itemType="https://schema.org/FAQPage"
-              >
-                <h2 style={{ fontFamily: "var(--sans)", fontSize: 24, fontWeight: 700, marginBottom: 6 }}>
-                  Frequently Asked Questions
-                </h2>
-                <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 20 }}>
-                  Everything you need to know before booking
-                </p>
-                {tour.faqs.map((faq, i) => (
-                  <div
-                    key={i}
-                    style={{ border: "1px solid #e2e8f0", borderRadius: 13, overflow: "hidden", marginBottom: 10 }}
-                    itemProp="mainEntity"
-                    itemScope
-                    itemType="https://schema.org/Question"
-                  >
-                    <button
-                      onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
-                      aria-expanded={expandedFaq === i}
-                      style={{ cursor: "pointer", padding: "18px 22px", fontWeight: 600, fontSize: 15, display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", width: "100%", border: "none", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif", color: "#1e293b" }}
-                    >
-                      <span itemProp="name">{faq.q}</span>
-                      <span style={{ marginLeft: 12, flexShrink: 0, fontSize: 18 }}>{expandedFaq === i ? "−" : "+"}</span>
-                    </button>
-                    {expandedFaq === i && (
-                      <div
-                        style={{ padding: "4px 22px 18px", fontSize: 14, color: "#475569", lineHeight: 1.75, fontFamily: "Plus Jakarta Sans, sans-serif" }}
-                        itemProp="acceptedAnswer"
-                        itemScope
-                        itemType="https://schema.org/Answer"
-                      >
-                        <span itemProp="text">{faq.a}</span>
-                      </div>
-                    )}
-                  </div>
-                ))}
+              <section aria-label="Frequently asked questions" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0" }}>
+                <FAQAccordion title="Frequently asked questions" faqs={tour.faqs} defaultOpen={null} />
               </section>
             )}
           </div>

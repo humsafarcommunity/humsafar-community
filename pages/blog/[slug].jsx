@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import FAQAccordion from "../../components/FAQAccordion";
 import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -17,7 +18,6 @@ import {
 export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
-  const [expandedFaq, setExpandedFaq] = useState(null);
 
   if (router.isFallback) {
     return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>Loading...</div>;
@@ -187,48 +187,10 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
             })}
           </div>
 
-          {/* FAQ Section — AEO: Powers "People Also Ask" */}
+          {/* FAQ Section — Google reads these from the FAQ markup in `schemas` above */}
           {blog.faqs?.length > 0 && (
-            <section
-              aria-label="Frequently asked questions"
-              style={{ marginTop: 48, paddingTop: 36, borderTop: "2px solid #f1f5f9" }}
-              itemScope
-              itemType="https://schema.org/FAQPage"
-            >
-              <h2 style={{ fontFamily: "var(--sans)", fontSize: 30, fontWeight: 700, marginBottom: 6 }}>
-                Frequently Asked Questions
-              </h2>
-              <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 24 }}>
-                Answered by our travel experts at {dynamicSite.name}
-              </p>
-              {blog.faqs.map((faq, i) => (
-                <div
-                  key={i}
-                  style={{ border: "1px solid #e2e8f0", borderRadius: 13, overflow: "hidden", marginBottom: 10 }}
-                  itemProp="mainEntity"
-                  itemScope
-                  itemType="https://schema.org/Question"
-                >
-                  <button
-                    onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
-                    aria-expanded={expandedFaq === i}
-                    style={{ cursor: "pointer", padding: "18px 22px", fontWeight: 600, fontSize: 15, display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", width: "100%", border: "none", textAlign: "left", fontFamily: "Plus Jakarta Sans, sans-serif", color: "#1e293b" }}
-                  >
-                    <span itemProp="name">{faq.q}</span>
-                    <span style={{ marginLeft: 12, flexShrink: 0, fontSize: 18 }}>{expandedFaq === i ? "−" : "+"}</span>
-                  </button>
-                  {expandedFaq === i && (
-                    <div
-                      style={{ padding: "4px 22px 18px", fontSize: 14, color: "#475569", lineHeight: 1.75, fontFamily: "Plus Jakarta Sans, sans-serif" }}
-                      itemProp="acceptedAnswer"
-                      itemScope
-                      itemType="https://schema.org/Answer"
-                    >
-                      <span itemProp="text">{faq.a}</span>
-                    </div>
-                  )}
-                </div>
-              ))}
+            <section aria-label="Frequently asked questions" style={{ marginTop: 48, paddingTop: 36, borderTop: "2px solid #f1f5f9" }}>
+              <FAQAccordion title="Frequently asked questions" faqs={blog.faqs} defaultOpen={null} />
             </section>
           )}
 
