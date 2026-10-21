@@ -43,12 +43,17 @@ export default {
     { name: 'exclusions', title: 'Exclusions', type: 'array', of: [{ type: 'string' }] },
     { name: 'itinerary', title: 'Itinerary', type: 'array', of: [{ type: 'itineraryDay' }] },
     { name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'faq' }] },
+    { name: 'advanceAmount', title: 'Advance to book', type: 'string', description: 'e.g. ₹2,000 per person. Shown on the tour page.', group: 'terms' },
+    { name: 'taxNote', title: 'Tax note', type: 'string', description: 'e.g. GST included, or GST extra', group: 'terms' },
+    { name: 'cancellationPolicy', title: 'Cancellation and refunds', type: 'text', rows: 4, description: 'Plain words, e.g. 100% refund 15 days before, 50% 7 days before.', group: 'terms' },
+    { name: 'weatherNote', title: 'Snow and road closure note', type: 'text', rows: 3, description: 'What happens if snow or landslides close the road.', group: 'terms' },
     { name: 'seoTitle', title: 'SEO Title', type: 'string', group: 'seo' },
     { name: 'seoDesc', title: 'SEO Description', type: 'text', group: 'seo' },
     { name: 'keywords', title: 'SEO Keywords', type: 'string', group: 'seo' },
     { name: 'directAnswer', title: 'AEO Direct Answer Summary', type: 'text', group: 'seo' }
   ],
   groups: [
+    { name: 'terms', title: 'Booking terms' },
     { name: 'seo', title: 'SEO / AEO Optimization' }
   ]
 }

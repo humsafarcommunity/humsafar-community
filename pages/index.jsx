@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SEOHead from "../components/SEOHead";
+import StatsStrip from "../components/StatsStrip";
 import DestinationCards from "../components/DestinationCards";
 import TourCard from "../components/TourCard";
 import Navbar from "../components/Navbar";
@@ -495,6 +496,9 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
           </div>
         </div>
       </div>
+
+      {/* ── NUMBERS STRIP (from CMS) ──────────────────────────────── */}
+      <StatsStrip site={dynamicSite} />
 
       {/* ── DESTINATION CARDS ────────────────────────────────────── */}
       {isDefault && (

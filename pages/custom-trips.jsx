@@ -3,10 +3,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SEOHead from "../components/SEOHead";
 import { getFreshData, SITE } from "../data";
+import { waLink, track } from "../lib/whatsapp";
 
 export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const [status, setStatus] = useState("idle"); // idle | success
+  const [waUrl, setWaUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +18,9 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
     // Create WhatsApp message
     const message = `Hi Humsafar! I want to plan a *Custom Trip*.\n\n👤 Name: ${data.name}\n📍 Destination: ${data.destination}\n👥 Travelers: ${data.pax}\n📅 Date: ${data.date}\n⏱ Duration: ${data.duration}\n💰 Budget: ${data.budget}\n📝 Notes: ${data.notes}`;
     
-    const waUrl = `https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
-    
+    setWaUrl(waLink(dynamicSite, message, "/custom-trips"));
+    track("generate_lead", { event_label: "Custom trip" });
     setStatus("success");
-    setTimeout(() => {
-      window.open(waUrl, "_blank");
-    }, 1000);
   };
 
   return (
@@ -49,7 +48,8 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
           <div className="p-6 sm:p-12" style={{ background: "#fff", borderRadius: 24, textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.05)", border: "1px solid #e2e8f0" }}>
              <div style={{ fontSize: 48, marginBottom: 20 }}>✅</div>
              <h2 style={{ fontFamily: "var(--sans)", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
-             <p style={{ color: "#64748b", marginBottom: 24 }}>Redirecting you to WhatsApp to finalize the details with our expert...</p>
+             <p style={{ color: "#64748b", marginBottom: 24 }}>Tap the button to send these details to our team on WhatsApp.</p>
+             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#10b981", color: "#fff", padding: "14px 28px", borderRadius: 999, fontWeight: 800, textDecoration: "none", marginBottom: 16 }}>Continue on WhatsApp</a><br />
              <button 
                onClick={() => setStatus("idle")}
                style={{ background: "#064e3b", color: "#fff", border: "none", padding: "12px 24px", borderRadius: 12, fontWeight: 700, cursor: "pointer" }}

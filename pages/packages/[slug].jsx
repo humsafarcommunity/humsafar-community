@@ -10,6 +10,9 @@ import FAQAccordion from "../../components/FAQAccordion";
 import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import LeadForm from "../../components/LeadForm";
+import ReviewsSection from "../../components/ReviewsSection";
+import { waLink, telLink, track } from "../../lib/whatsapp";
 import {
   SITE,
   getFreshData,
@@ -19,7 +22,7 @@ import {
   generateFAQSchema,
 } from "../../data";
 
-export default function TourDetailPage({ tour, relatedTours, site: freshSite }) {
+export default function TourDetailPage({ tour, relatedTours, reviews = [], site: freshSite }) {
   const dynamicSite = freshSite || SITE || { whatsapp: "916268496389", name: "Humsafar Community" };
   const router = useRouter();
   const [activeDate, setActiveDate] = useState(null);
@@ -53,7 +56,16 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
   const pricePerPerson = Number(tour.price) + currentSurcharge;
   const totalPrice = pricePerPerson * pax;
 
-  const waMessage = `Hi Humsafar! I am interested in *${tour.title}*.\n\n🗓 Date: ${activeDate ? new Date(activeDate).toDateString() : "TBD"}\n🏨 Sharing: ${sharing}\n👥 People: ${pax}\n💰 Total: ₹${totalPrice.toLocaleString("en-IN")}\n⏱ Duration: ${tour.duration}\n\nPlease share more details.`;
+  const selectedDate = activeDate || (departures[0] ? departures[0].toISOString() : null);
+  const dateLine = selectedDate ? `🗓 Date: ${new Date(selectedDate).toDateString()}\n` : "";
+  const waMessage = `Hi Humsafar! I am interested in *${tour.title}*.\n\n${dateLine}🏨 Sharing: ${sharing}\n👥 People: ${pax}\n💰 Total: ₹${totalPrice.toLocaleString("en-IN")}\n⏱ Duration: ${tour.duration}\n\nPlease share more details.`;
+  const waHref = waLink(dynamicSite, waMessage, `/packages/${tour.slug}`);
+  const hasTerms = tour.advanceAmount || tour.taxNote || tour.cancellationPolicy || tour.weatherNote;
+  const trustLines = [
+    dynamicSite.totalTravelers ? `✅ ${dynamicSite.totalTravelers} travellers with us` : "✅ Experienced trip captain on every trip",
+    "💰 No payment needed to enquire",
+    ...(tour.cancellationPolicy ? ["↩️ Cancellation policy listed below"] : []),
+  ];
 
   const schemas = [
     generateOrganizationSchema(dynamicSite),
@@ -152,7 +164,15 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
             </div>
           </div>
           <a
-            href={`https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(waMessage)}`}
+            href={telLink(dynamicSite)}
+            onClick={() => track("call_click", { event_label: "Tour Mobile Bar" })}
+            aria-label="Call Humsafar"
+            style={{ background: "#fff", color: "#064e3b", border: "2px solid #064e3b", padding: "10px 16px", borderRadius: 8, fontWeight: 800, fontSize: 13, textDecoration: "none", marginLeft: "auto", marginRight: 8 }}
+          >
+            📞 Call
+          </a>
+          <a
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -310,6 +330,22 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
               ))}
             </div>
 
+            {hasTerms && (
+              <section aria-label="Booking terms" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0" }}>
+                <h2 style={{ fontSize: 22, marginBottom: 14, color: "#0e1117" }}>Booking terms</h2>
+                <ul style={{ margin: 0, paddingLeft: 20, color: "#475569", lineHeight: 1.8, fontSize: 15 }}>
+                  {tour.advanceAmount && <li><strong>Advance to book:</strong> {tour.advanceAmount}</li>}
+                  {tour.taxNote && <li><strong>Taxes:</strong> {tour.taxNote}</li>}
+                  {tour.cancellationPolicy && <li><strong>Cancellation:</strong> {tour.cancellationPolicy}</li>}
+                  {tour.weatherNote && <li><strong>Weather and road closures:</strong> {tour.weatherNote}</li>}
+                </ul>
+              </section>
+            )}
+
+            <LeadForm site={dynamicSite} source={`/packages/${tour.slug}`} trip={tour.title} title="Not ready to book? Get a callback" />
+
+            {reviews.length > 0 && <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} />}
+
             {/* FAQs — Google reads these from the FAQ markup added in `schemas` above */}
             {tour.faqs?.length > 0 && (
               <section aria-label="Frequently asked questions" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0" }}>
@@ -389,7 +425,7 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 </div>
 
                 <a
-                  href={`https://wa.me/${dynamicSite.whatsapp}?text=${encodeURIComponent(waMessage)}`}
+                  href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "#10b981", color: "#fff", padding: "14px", borderRadius: 10, fontWeight: 800, fontSize: 13, textDecoration: "none", boxSizing: "border-box", fontFamily: "Plus Jakarta Sans, sans-serif", textTransform: "uppercase", letterSpacing: 0.5 }}
@@ -400,17 +436,15 @@ export default function TourDetailPage({ tour, relatedTours, site: freshSite }) 
                 <p style={{ textAlign: "center", fontSize: 11, color: "#94a3b8", marginTop: 10, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
                   No payment needed to enquire.
                 </p>
+                <a href={telLink(dynamicSite)} onClick={() => track("call_click", { event_label: "Tour Sidebar" })} style={{ display: "block", textAlign: "center", marginTop: 6, fontSize: 13, fontWeight: 700, color: "#064e3b", textDecoration: "none" }}>
+                  📞 Prefer a call? Tap to call
+                </a>
               </div>
             </div>
 
             {/* Trust indicators */}
             <div style={{ background: "#fff", borderRadius: 16, padding: 20, marginTop: 16, border: "1px solid #e2e8f0" }}>
-              {[
-                "✅ Trusted by 50,000+ travelers",
-                "🔒 100% Secure WhatsApp Booking",
-                "💰 No Advance Payment to Enquire",
-                "↩️ Easy Cancellation Policy",
-              ].map((item, i) => (
+              {trustLines.map((item, i) => (
                 <div key={i} style={{ fontSize: 12, color: "#374151", marginBottom: 8, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
                   {item}
                 </div>
@@ -531,7 +565,7 @@ export async function getStaticProps({ params }) {
   ).slice(0, 3);
 
   return {
-    props: { tour, relatedTours, site: data.SITE },
+    props: { tour, relatedTours, reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])), site: data.SITE },
     revalidate: 60, // ISR: Update every 60s (SXO: Fresh content)
   };
 }

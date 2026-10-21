@@ -44,6 +44,7 @@ export async function getFreshData() {
         "coverImage": coverImage // Get full object for builder
       },
       "DESTINATIONS": *[_type == "destination" && defined(image)] | order(order asc) { _id, name, group, region, link, textColor, "image": image, "alt": image.alt },
+      "REVIEWS": *[_type == "review" && defined(text)] | order(featured desc, _createdAt desc)[0...12] { _id, author, city, trip, rating, text, date, source, "photo": photo },
       "BANNERS": *[_type == "banner"] {
         ...,
         "url": image // Get full object for builder
@@ -138,7 +139,7 @@ export async function getFreshData() {
       TOURS: finalTours,
       BLOGS: finalBlogs,
       BANNERS: finalBanners,
-      REVIEWS: staticData.REVIEWS,
+      REVIEWS: (sanityData.REVIEWS || []).map((r) => ({ ...r, photo: r.photo ? urlFor(r.photo) : "" })),
     };
   } catch (error) {
     console.error("Sanity fetch failed, falling back to static data", error);
@@ -147,7 +148,7 @@ export async function getFreshData() {
       TOURS,
       BLOGS,
       BANNERS,
-      REVIEWS,
+      REVIEWS: [],
       SEODATA: {},
       ABOUT: null,
       DESTINATIONS: []
@@ -170,7 +171,7 @@ export function generateOrganizationSchema(site = SITE) {
       height: 60,
     },
     description:
-      "India's most trusted travel community. Award-winning group tours, custom Himalayan expeditions, and corporate retreats. Serving 50,000+ travelers since 2020.",
+      "Group tours, custom Himalayan trips and corporate retreats led by experienced trip captains, with departures from Delhi and Gwalior.",
     telephone: site.phone,
     email: site.email,
     foundingDate: site.founded,
