@@ -122,7 +122,7 @@ export default function Footer({ dynamicSite }) {
               </div>
             </Link>
             <p style={{ fontSize: 13, lineHeight: 1.7, color: "#64748b", marginBottom: 20 }}>
-              {dynamicSite.description || "Curating authentic group travel experiences across the Himalayas and beyond since 2020."}
+              {dynamicSite.description || "Curating authentic group travel experiences across the Himalayas and beyond."}
             </p>
           </div>
 

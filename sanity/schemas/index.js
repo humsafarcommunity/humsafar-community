@@ -6,6 +6,8 @@ import banner from './banner';
 import faq from './faq';
 import aboutPage from './aboutPage';
 import destination from './destination';
+import lead from './lead';
+import review from './review';
 import itineraryDay from './itineraryDay';
 
 export const schemaTypes = [
@@ -17,5 +19,7 @@ export const schemaTypes = [
   faq,
   aboutPage,
   destination,
+  lead,
+  review,
   itineraryDay,
 ];

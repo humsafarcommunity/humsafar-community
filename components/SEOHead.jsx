@@ -68,8 +68,6 @@ export default function SEOHead({
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={title || metaTitle} />
       <meta property="og:site_name" content={site.name} />
       <meta property="og:locale" content="en_IN" />
