@@ -52,6 +52,7 @@ export default defineConfig({
             S.divider(),
             S.documentTypeListItem('lead').title('Leads (callback requests)'),
             S.documentTypeListItem('review').title('Reviews'),
+            S.documentTypeListItem('video').title('Videos (homepage)'),
           ]),
     }),
   ],

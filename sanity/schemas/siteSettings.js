@@ -67,6 +67,8 @@ export default {
       fieldset: 'footer'
     },
     { name: 'heroWords', title: 'Changing destination words', type: 'array', of: [{ type: 'string' }], description: 'The highlighted word in "Book Your Trip to ___" cycles through these, e.g. Spiti, Ladakh, Manali, Jibhi, Rajasthan, Udaipur, Jaisalmer. Leave empty for that default list.', fieldset: 'hero' },
+    { name: 'videosEyebrow', title: 'Videos section small label', type: 'string', initialValue: 'Videos', fieldset: 'hero' },
+    { name: 'videosTitle', title: 'Videos section heading', type: 'string', initialValue: 'Travellers on the Move', fieldset: 'hero' },
     { name: 'heroTagline', title: 'Tagline', type: 'string', description: 'Separate words with |, e.g. Pack | Join | Explore | Repeat', fieldset: 'hero' },
     { name: 'heroSubline', title: 'Line under the tagline', type: 'string', fieldset: 'hero' },
     { name: 'popupEnabled', title: 'Show the enquiry popup', type: 'boolean', initialValue: true, description: 'The "Enquire Now" button in the menu opens it.', fieldset: 'popup' },

@@ -9,6 +9,7 @@
  */
 import { createClient } from 'next-sanity';
 import { mergeSocials } from "./socials";
+import { youtubeId } from "../lib/youtube";
 import { urlFor } from '../lib/sanity.image';
 
 const staticData = require('./data.json');
@@ -46,6 +47,7 @@ export async function getFreshData() {
       },
       "DESTINATIONS": *[_type == "destination" && defined(image)] | order(order asc) { _id, name, group, region, link, textColor, "image": image, "alt": image.alt },
       "REVIEWS": *[_type == "review" && defined(text)] | order(featured desc, _createdAt desc)[0...12] { _id, author, city, trip, rating, text, date, source, "photo": photo },
+      "VIDEOS": *[_type == "video" && defined(youtubeUrl)] | order(order asc, _createdAt desc)[0...12] { _id, title, youtubeUrl, "thumbnail": thumbnail },
       "BANNERS": *[_type == "banner"] {
         ...,
         "url": image // Get full object for builder
@@ -142,6 +144,9 @@ export async function getFreshData() {
       TOURS: finalTours,
       BLOGS: finalBlogs,
       BANNERS: finalBanners,
+      VIDEOS: (sanityData.VIDEOS || [])
+        .map((v) => ({ _id: v._id, title: v.title || "", youtubeId: youtubeId(v.youtubeUrl), thumb: v.thumbnail ? urlFor(v.thumbnail) : "" }))
+        .filter((v) => v.youtubeId),
       REVIEWS: (sanityData.REVIEWS || []).map((r) => ({ ...r, photo: r.photo ? urlFor(r.photo) : "" })),
     };
   } catch (error) {
@@ -152,6 +157,7 @@ export async function getFreshData() {
       BLOGS,
       BANNERS,
       REVIEWS: [],
+      VIDEOS: [],
       SEODATA: {},
       ABOUT: null,
       DESTINATIONS: []
