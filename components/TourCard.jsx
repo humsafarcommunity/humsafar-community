@@ -175,7 +175,7 @@ export default function TourCard({ tour }) {
             <meta itemProp="priceCurrency" content="INR" />
             <meta itemProp="price" content={tour.price} />
             {tour.oldPrice && (
-              <div style={{ fontSize: 11, color: "#94a3b8", textDecoration: "line-through", fontFamily: "Plus Jakarta Sans, sans-serif", lineHeight: 1 }}>
+              <div style={{ fontSize: 11, color: "#64748b", textDecoration: "line-through", fontFamily: "Plus Jakarta Sans, sans-serif", lineHeight: 1 }}>
                 ₹{tour.oldPrice}
               </div>
             )}

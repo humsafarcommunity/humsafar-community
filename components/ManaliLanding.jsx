@@ -84,7 +84,7 @@ export default function ManaliLanding({ tours = [], guides = [], reviews = [], s
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
               <a href="#callback" style={{ ...btn, background: "#fff", color: "#064e3b" }}>Get a callback</a>
-              <a href={waLink(site, message, path)} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: path })} style={{ ...btn, background: "#10b981", color: "#fff" }}>Book on WhatsApp</a>
+              <a href={waLink(site, message, path)} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: path })} style={{ ...btn, background: "#047857", color: "#fff" }}>Book on WhatsApp</a>
             </div>
           </div>
         </section>

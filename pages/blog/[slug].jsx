@@ -63,7 +63,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
               {i < breadcrumbs.length - 1 ? (
                 <><Link href={crumb.path} style={{ color: "#064e3b", textDecoration: "none" }}>{crumb.name}</Link><span>/</span></>
               ) : (
-                <span style={{ color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>{crumb.name}</span>
+                <span style={{ color: "#64748b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>{crumb.name}</span>
               )}
             </li>
           ))}
@@ -109,7 +109,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
           </h1>
 
           {/* Author / date meta */}
-          <div style={{ display: "flex", gap: 20, marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid #f1f5f9", color: "#94a3b8", fontSize: 13 }}>
+          <div style={{ display: "flex", gap: 20, marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid #f1f5f9", color: "#64748b", fontSize: 13 }}>
             <span>✍️ <span itemProp="author" itemScope itemType="https://schema.org/Organization"><span itemProp="name">{blog.author}</span></span></span>
             <span>•</span>
             <span>📅 <time itemProp="datePublished" dateTime={blog.publishedAt}>{blog.publishedAt}</time></span>
@@ -175,7 +175,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
                       />
                     </div>
                       {block.caption && (
-                        <figcaption style={{ textAlign: "center", fontSize: 13, color: "#94a3b8", fontStyle: "italic", marginTop: 8, marginBottom: 16 }}>
+                        <figcaption style={{ textAlign: "center", fontSize: 13, color: "#64748b", fontStyle: "italic", marginTop: 8, marginBottom: 16 }}>
                           {block.caption}
                         </figcaption>
                       )}

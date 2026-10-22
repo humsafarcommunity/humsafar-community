@@ -49,7 +49,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
              <div style={{ fontSize: 48, marginBottom: 20 }}>✅</div>
              <h2 style={{ fontFamily: "var(--sans)", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
              <p style={{ color: "#64748b", marginBottom: 24 }}>Tap the button to send these details to our team on WhatsApp.</p>
-             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#10b981", color: "#fff", padding: "14px 28px", borderRadius: 999, fontWeight: 800, textDecoration: "none", marginBottom: 16 }}>Continue on WhatsApp</a><br />
+             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#047857", color: "#fff", padding: "14px 28px", borderRadius: 999, fontWeight: 800, textDecoration: "none", marginBottom: 16 }}>Continue on WhatsApp</a><br />
              <button 
                onClick={() => setStatus("idle")}
                style={{ background: "#064e3b", color: "#fff", border: "none", padding: "12px 24px", borderRadius: 12, fontWeight: 700, cursor: "pointer" }}
@@ -70,43 +70,43 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
             }}
           >
             <div className="col-span-1 sm:col-span-2 min-w-0 w-full">
-              <label style={labelStyle}>Full Name *</label>
-              <input name="name" required placeholder="e.g. Rahul Sharma" style={inputStyle} />
+              <label htmlFor="ct-1" style={labelStyle}>Full Name *</label>
+              <input id="ct-1" name="name" required placeholder="e.g. Rahul Sharma" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>WhatsApp Number *</label>
-              <input name="phone" type="tel" required placeholder="10-digit number" style={inputStyle} />
+              <label htmlFor="ct-2" style={labelStyle}>WhatsApp Number *</label>
+              <input id="ct-2" name="phone" type="tel" required placeholder="10-digit number" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>Destination *</label>
-              <input name="destination" required placeholder="e.g. Spiti Valley" style={inputStyle} />
+              <label htmlFor="ct-3" style={labelStyle}>Destination *</label>
+              <input id="ct-3" name="destination" required placeholder="e.g. Spiti Valley" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>Approx Departure Date</label>
-              <input name="date" type="date" style={inputStyle} />
+              <label htmlFor="ct-4" style={labelStyle}>Approx Departure Date</label>
+              <input id="ct-4" name="date" type="date" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>No. of Travelers</label>
-              <input name="pax" type="number" min="1" placeholder="e.g. 4" style={inputStyle} />
+              <label htmlFor="ct-5" style={labelStyle}>No. of Travelers</label>
+              <input id="ct-5" name="pax" type="number" min="1" placeholder="e.g. 4" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>Trip Duration (Days)</label>
-              <input name="duration" placeholder="e.g. 5 Days" style={inputStyle} />
+              <label htmlFor="ct-6" style={labelStyle}>Trip Duration (Days)</label>
+              <input id="ct-6" name="duration" placeholder="e.g. 5 Days" style={inputStyle} />
             </div>
 
             <div className="col-span-1 min-w-0 w-full">
-              <label style={labelStyle}>Approx Budget (Per Person)</label>
-              <input name="budget" placeholder="e.g. ₹15,000" style={inputStyle} />
+              <label htmlFor="ct-7" style={labelStyle}>Approx Budget (Per Person)</label>
+              <input id="ct-7" name="budget" placeholder="e.g. ₹15,000" style={inputStyle} />
             </div>
 
             <div className="col-span-1 sm:col-span-2 min-w-0 w-full">
-              <label style={labelStyle}>Special Requirements / Notes</label>
-              <textarea name="notes" rows="4" placeholder="Mention any specific activities, preferences, or celebrations..." style={{ ...inputStyle, resize: "none" }}></textarea>
+              <label htmlFor="ct-8" style={labelStyle}>Special Requirements / Notes</label>
+              <textarea id="ct-8" name="notes" rows="4" placeholder="Mention any specific activities, preferences, or celebrations..." style={{ ...inputStyle, resize: "none" }}></textarea>
             </div>
 
             <div className="col-span-1 sm:col-span-2 min-w-0 w-full mt-2">
@@ -128,7 +128,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
               >
                 Send Trip Requirement
               </button>
-              <p style={{ textAlign: "center", fontSize: 12, color: "#94a3b8", marginTop: 16 }}>
+              <p style={{ textAlign: "center", fontSize: 12, color: "#64748b", marginTop: 16 }}>
                 By submitting, you agree to receive trip updates on WhatsApp.
               </p>
             </div>
@@ -156,7 +156,7 @@ const labelStyle = {
   display: "block",
   fontSize: 11,
   fontWeight: 800,
-  color: "#94a3b8",
+  color: "#64748b",
   textTransform: "uppercase",
   letterSpacing: 1.5,
   marginBottom: 8,

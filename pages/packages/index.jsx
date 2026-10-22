@@ -95,7 +95,7 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
         </div>
         
         {filtered.length === 0 && (
-          <div style={{ textAlign: "center", padding: "100px", color: "#94a3b8" }}>
+          <div style={{ textAlign: "center", padding: "100px", color: "#64748b" }}>
             No packages found in this category.
           </div>
         )}

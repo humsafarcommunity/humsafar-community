@@ -128,7 +128,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
                   <span>/</span>
                 </>
               ) : (
-                <span itemProp="name" style={{ color: "#94a3b8" }}>
+                <span itemProp="name" style={{ color: "#64748b" }}>
                   {crumb.name}
                 </span>
               )}
@@ -176,7 +176,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              background: "#10b981",
+              background: "#047857",
               color: "#fff",
               padding: "12px 24px",
               borderRadius: 8,
@@ -214,7 +214,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
               {/* Gradient & Content Overlay */}
               <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 80%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "32px" }}>
                 <div className="hero-badges" style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-                  <span style={{ background: "#10b981", color: "#fff", fontSize: 9, padding: "3px 10px", borderRadius: 4, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
+                  <span style={{ background: "#047857", color: "#fff", fontSize: 9, padding: "3px 10px", borderRadius: 4, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
                     {tour.region}
                   </span>
                   <span style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 9, padding: "3px 10px", borderRadius: 4, fontWeight: 700, textTransform: "uppercase" }}>
@@ -275,7 +275,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
               <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))", gap: 10, listStyle: "none" }}>
                 {tour.highlights.map((h, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 6, background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: "#10b981" }}>✓</div>
+                    <div style={{ width: 20, height: 20, borderRadius: 6, background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: "#047857" }}>✓</div>
                     <span style={{ fontSize: 14, color: "#475569", fontWeight: 500 }}>{h}</span>
                   </li>
                 ))}
@@ -297,7 +297,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
                       <div>
                         {String(day.desc || "").split(/[.\n]/).filter((x) => x.trim()).map((point, idx) => (
                           <div key={idx} style={{ marginBottom: 8, display: "flex", gap: 10 }}>
-                            <span style={{ color: "#10b981", fontWeight: 900, flexShrink: 0 }}>•</span>
+                            <span style={{ color: "#047857", fontWeight: 900, flexShrink: 0 }}>•</span>
                             <span>{point.trim()}.</span>
                           </div>
                         ))}
@@ -383,13 +383,13 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
                         onClick={() => setActiveDate(dateStr)}
                         style={{ padding: "9px 4px", borderRadius: 10, border: `2px solid ${isActive ? "#064e3b" : "#e2e8f0"}`, background: isActive ? "#ecfdf5" : "#fff", cursor: "pointer", textAlign: "center", fontFamily: "Plus Jakarta Sans, sans-serif", transition: "all 0.15s" }}
                       >
-                        <div style={{ fontSize: 9, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1 }}>
+                        <div style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1 }}>
                           {d.toLocaleDateString("en-IN", { month: "short" })}
                         </div>
                         <div style={{ fontSize: 18, fontWeight: 900, color: "#0e1117", fontFamily: "var(--sans)" }}>
                           {d.getDate()}
                         </div>
-                        <div style={{ fontSize: 9, color: "#94a3b8" }}>{d.toLocaleDateString("en-IN", { weekday: "short" })}</div>
+                        <div style={{ fontSize: 9, color: "#64748b" }}>{d.toLocaleDateString("en-IN", { weekday: "short" })}</div>
                       </button>
                     );
                   })}
@@ -407,7 +407,7 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
                       style={{ padding: "9px 4px", borderRadius: 10, border: `2px solid ${sharing === o.type ? "#064e3b" : "#e2e8f0"}`, background: sharing === o.type ? "#ecfdf5" : "#fff", cursor: "pointer", textAlign: "center", fontFamily: "Plus Jakarta Sans, sans-serif" }}
                     >
                       <div style={{ fontSize: 12, fontWeight: 700, color: "#0e1117" }}>{o.type}</div>
-                      <div style={{ fontSize: 10, color: "#94a3b8" }}>
+                      <div style={{ fontSize: 10, color: "#64748b" }}>
                         {o.surcharge === 0 ? "Base" : `+₹${o.surcharge.toLocaleString()}`}
                       </div>
                     </button>
@@ -428,12 +428,12 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "#10b981", color: "#fff", padding: "14px", borderRadius: 10, fontWeight: 800, fontSize: 13, textDecoration: "none", boxSizing: "border-box", fontFamily: "Plus Jakarta Sans, sans-serif", textTransform: "uppercase", letterSpacing: 0.5 }}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "#047857", color: "#fff", padding: "14px", borderRadius: 10, fontWeight: 800, fontSize: 13, textDecoration: "none", boxSizing: "border-box", fontFamily: "Plus Jakarta Sans, sans-serif", textTransform: "uppercase", letterSpacing: 0.5 }}
                   onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Tour Sidebar", value: totalPrice })}
                 >
                   💬 Book on WhatsApp
                 </a>
-                <p style={{ textAlign: "center", fontSize: 11, color: "#94a3b8", marginTop: 10, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+                <p style={{ textAlign: "center", fontSize: 11, color: "#64748b", marginTop: 10, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
                   No payment needed to enquire.
                 </p>
                 <a href={telLink(dynamicSite)} onClick={() => track("call_click", { event_label: "Tour Sidebar" })} style={{ display: "block", textAlign: "center", marginTop: 6, fontSize: 13, fontWeight: 700, color: "#064e3b", textDecoration: "none" }}>

@@ -30,7 +30,7 @@ export default function BlogPage({ blogs, site: freshSite }) {
         </div>
 
         {blogs.length === 0 && (
-          <div style={{ textAlign: "center", padding: "100px", color: "#94a3b8" }}>
+          <div style={{ textAlign: "center", padding: "100px", color: "#64748b" }}>
             No blog posts published yet.
           </div>
         )}

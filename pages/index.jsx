@@ -29,6 +29,8 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
+  // Only the first slide loads at start, so it does not compete with the rest of the page for bandwidth
+  const [maxSlideSeen, setMaxSlideSeen] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,6 +45,10 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     );
     return () => clearInterval(timer);
   }, [banners?.length]);
+
+  useEffect(() => {
+    setMaxSlideSeen((m) => Math.max(m, currentSlide));
+  }, [currentSlide]);
 
   // SXO: Scroll detection for sticky nav
   useEffect(() => {
@@ -207,14 +213,18 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
               zIndex: i === currentSlide ? 1 : 0,
             }}
           >
-            <Image
-              src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
-              alt={b.tag || "Travel Destination"}
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-            />
+            {(i === 0 || i <= maxSlideSeen) && (
+              <Image
+                src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
+                alt={b.tag || "Travel Destination"}
+                fill
+                priority={i === 0}
+                fetchPriority={i === 0 ? "high" : "auto"}
+                quality={70}
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+              />
+            )}
           </div>
         ))}
         <div
@@ -253,8 +263,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 marginBottom: 20,
                 letterSpacing: "-0.02em",
                 textShadow: "0 4px 20px rgba(0,0,0,0.4)",
-                animation: "fadeIn 1s ease-out",
-              }}
+                }}
             >
               {banners[currentSlide]?.title || "Discover Your Next"}{" "}
               <span>{banners[currentSlide]?.hi || "Adventure."}</span>
@@ -410,7 +419,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 style={{
                   fontSize: 10,
                   fontWeight: 800,
-                  color: "#94a3b8",
+                  color: "#64748b",
                   textTransform: "uppercase",
                   letterSpacing: 2,
                   marginBottom: 11,
@@ -454,7 +463,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 style={{
                   fontSize: 10,
                   fontWeight: 800,
-                  color: "#94a3b8",
+                  color: "#64748b",
                   textTransform: "uppercase",
                   letterSpacing: 2,
                   marginBottom: 11,
@@ -560,7 +569,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                     style={{
                       textAlign: "center",
                       padding: 80,
-                      color: "#94a3b8",
+                      color: "#64748b",
                     }}
                   >
                     No packages match your filters.
@@ -573,7 +582,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   style={{
                     fontSize: 11,
                     fontWeight: 700,
-                    color: "#10b981",
+                    color: "#047857",
                     textTransform: "uppercase",
                     letterSpacing: 2,
                     marginBottom: 8,
@@ -754,7 +763,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 style={{
                   fontSize: 11,
                   fontWeight: 700,
-                  color: "#10b981",
+                  color: "#047857",
                   textTransform: "uppercase",
                   letterSpacing: 2,
                   marginBottom: 8,
@@ -891,7 +900,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
               <button
                 type="submit"
                 style={{
-                  background: "#10b981",
+                  background: "#047857",
                   color: "#fff",
                   border: "none",
                   borderRadius: 12,

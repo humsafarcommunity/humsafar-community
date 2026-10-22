@@ -46,7 +46,7 @@ export default function LeadForm({ site, source, trip, title = "Get a callback",
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track("whatsapp_click", { event_label: "After lead form" })}
-          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minHeight: 52, padding: "0 28px", borderRadius: 999, background: "#10b981", color: "#fff", fontWeight: 800, textDecoration: "none" }}
+          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minHeight: 52, padding: "0 28px", borderRadius: 999, background: "#047857", color: "#fff", fontWeight: 800, textDecoration: "none" }}
         >
           Continue on WhatsApp
         </a>

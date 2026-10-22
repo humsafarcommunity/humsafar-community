@@ -67,7 +67,7 @@ export default function Navbar({ site, isSolid = false }) {
                   fontWeight: 700,
                   letterSpacing: 3,
                   textTransform: "uppercase",
-                  color: "#10b981",
+                  color: activeHeaderStyle ? "#047857" : "#34d399",
                   marginTop: 2,
                 }}
               >
@@ -99,7 +99,7 @@ export default function Navbar({ site, isSolid = false }) {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                background: "#10b981",
+                background: "#047857",
                 color: "#fff",
                 padding: "10px 20px",
                 borderRadius: 12,
@@ -126,6 +126,8 @@ export default function Navbar({ site, isSolid = false }) {
               zIndex: 1100,
             }}
             className="mobile-only"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             <div style={{ width: 24, height: 2, background: (activeHeaderStyle && !isMobileMenuOpen) ? "#0e1117" : "#fff", marginBottom: 5, transition: "0.3s", transform: isMobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }}></div>
             <div style={{ width: 24, height: 2, background: (activeHeaderStyle && !isMobileMenuOpen) ? "#0e1117" : "#fff", marginBottom: 5, transition: "0.3s", opacity: isMobileMenuOpen ? 0 : 1 }}></div>
@@ -151,6 +153,7 @@ export default function Navbar({ site, isSolid = false }) {
         }}
       >
         <button 
+           aria-label="Close menu"
            onClick={() => setIsMobileMenuOpen(false)}
            style={{ position: "absolute", top: 20, right: 24, background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}
         >
@@ -177,7 +180,7 @@ export default function Navbar({ site, isSolid = false }) {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            background: "#10b981",
+            background: "#047857",
             color: "#fff",
             padding: "16px 40px",
             borderRadius: 14,

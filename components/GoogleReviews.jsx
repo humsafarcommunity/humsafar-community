@@ -92,7 +92,7 @@ export default function GoogleReviews({ placeId }) {
               />
               <div>
                 <div style={{ fontWeight: 700, color: "#0f172a", fontSize: 15 }}>{rev.author_name}</div>
-                <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>{rev.relative_time_description}</div>
+                <div style={{ fontSize: 12, color: "#64748b", marginTop: 2 }}>{rev.relative_time_description}</div>
               </div>
             </div>
             <Image src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_Logo.svg" width={16} height={16} alt="G" />

@@ -9,7 +9,7 @@ export default function MobileCtaBar({ site, message, source }) {
         <a href={telLink(site)} onClick={() => track("call_click", { event_label: source || "" })} style={{ ...base, border: "2px solid #064e3b", color: "#064e3b", background: "#fff" }}>
           Call us
         </a>
-        <a href={waLink(site, message || "Hi Humsafar! I want to enquire about a trip.", source)} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: source || "" })} style={{ ...base, background: "#10b981", color: "#fff" }}>
+        <a href={waLink(site, message || "Hi Humsafar! I want to enquire about a trip.", source)} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: source || "" })} style={{ ...base, background: "#047857", color: "#fff" }}>
           WhatsApp
         </a>
       </div>
