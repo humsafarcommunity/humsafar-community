@@ -51,6 +51,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
   return (
     <>
       <SEOHead
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "About Us", path: "/about" }]}
         title={a.seoTitle || "About Humsafar Community | Traveling India Together"}
         description={a.seoDescription || "We are more than a travel agency. Humsafar Community connects like-minded travelers for safe, budget-friendly, and unforgettable trips across North India."}
         keywords="Best community-led travel Himachal, Safe group tours for female travelers India, Travel buddies North India, Humsafar Community story"

@@ -175,7 +175,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     <>
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
-        title="Humsafar Community | Best Group Tours in Himachal & Uttarakhand"
+        title="Group Tours from Delhi & Gwalior | Humsafar Community"
         description="Join Humsafar Community for budget-friendly group tours, backpacking trips, and authentic travel experiences across India. Plan your 2026 adventure today!"
         keywords="Humsafar Community, India travel community, Group tours to Himachal, Uttarakhand tour packages 2026, Adventure tours North India"
         url="/"
@@ -216,7 +216,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
             {(i === 0 || i <= maxSlideSeen) && (
               <Image
                 src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
-                alt={b.tag || "Travel Destination"}
+                alt={[b.title, b.hi].filter(Boolean).join(" ") || b.tag || "Humsafar Community group trip in the Himalayas"}
                 fill
                 priority={i === 0}
                 fetchPriority={i === 0 ? "high" : "auto"}
