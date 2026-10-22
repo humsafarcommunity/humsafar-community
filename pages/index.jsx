@@ -1,10 +1,8 @@
 // pages/index.jsx — Homepage with complete 5-layer optimization
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import SEOHead from "../components/SEOHead";
-import StatsStrip from "../components/StatsStrip";
+import HeroBanner from "../components/HeroBanner";
 import DestinationCards from "../components/DestinationCards";
 import TourCard from "../components/TourCard";
 import Navbar from "../components/Navbar";
@@ -26,29 +24,9 @@ import {
 
 export default function HomePage({ tours = [], blogs = [], banners = [], destinations = [], site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentSlide, setCurrentSlide] = useState(0);
-  // Only the first slide loads at start, so it does not compete with the rest of the page for bandwidth
-  const [maxSlideSeen, setMaxSlideSeen] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-
-  // Auto-advance hero slider
-  useEffect(() => {
-    if (!banners || banners.length === 0) return;
-    const timer = setInterval(
-      () => setCurrentSlide((p) => (p + 1) % (banners.length || 1)),
-      5500
-    );
-    return () => clearInterval(timer);
-  }, [banners?.length]);
-
-  useEffect(() => {
-    setMaxSlideSeen((m) => Math.max(m, currentSlide));
-  }, [currentSlide]);
 
   // SXO: Scroll detection for sticky nav
   useEffect(() => {
@@ -56,25 +34,6 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Reset loading state if route transition terminates or errors
-  useEffect(() => {
-    const handleStop = () => setIsSearching(false);
-    router.events.on("routeChangeComplete", handleStop);
-    router.events.on("routeChangeError", handleStop);
-    return () => {
-      router.events.off("routeChangeComplete", handleStop);
-      router.events.off("routeChangeError", handleStop);
-    };
-  }, [router.events]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      setIsSearching(true);
-      router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
-    }
-  };
 
   const filtered = (tours || []).filter(
     (t) =>
@@ -154,6 +113,11 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
         .filter(Boolean)
   ).filter((d) => d.image);
 
+  const destinationCount = Math.max(
+    destinationCards.length,
+    new Set((tours || []).map((t) => String(t?.location || "").split(",")[0].trim().toLowerCase()).filter(Boolean)).size
+  );
+
   const regions = [
     { id: "all", label: "All Destinations" },
     { id: "himachal", label: "Himachal Pradesh" },
@@ -188,212 +152,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       <Navbar site={dynamicSite} />
 
       {/* ── HERO SECTION ─────────────────────────────────────────── */}
-      <section
-        aria-label="Hero section with featured destinations"
-        style={{
-          position: "relative",
-          minHeight: "min(94vh, 820px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-          background: "#064e3b",
-          borderRadius: "0 0 32px 32px",
-        }}
-      >
-        {/* Background images */}
-        {(banners || []).map((b, i) => (
-          <div
-            key={b?.id || i}
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: i === currentSlide ? 1 : 0,
-              transition: "opacity 1.3s ease",
-              zIndex: i === currentSlide ? 1 : 0,
-            }}
-          >
-            {(i === 0 || i <= maxSlideSeen) && (
-              <Image
-                src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
-                alt={[b.title, b.hi].filter(Boolean).join(" ") || b.tag || "Humsafar Community group trip in the Himalayas"}
-                fill
-                priority={i === 0}
-                fetchPriority={i === 0 ? "high" : "auto"}
-                quality={70}
-                sizes="100vw"
-                style={{ objectFit: "cover" }}
-              />
-            )}
-          </div>
-        ))}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)",
-            zIndex: 2,
-          }}
-        />
-
-        <div
-          style={{
-            position: "relative",
-            zIndex: 3,
-            textAlign: "center",
-            width: "100%",
-            maxWidth: 860,
-            padding: "100px 24px 120px",
-          }}
-        >
-          {/* AEO/GEO: Hero content is what AI reads first */}
-          <div style={{ minHeight: 320, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-
-
-            {/* AEO: H1 must contain primary keyword — AI systems weight H1 very heavily */}
-            <h1
-              className="speakable hero-title"
-              style={{
-                fontFamily: "var(--sans)",
-                fontSize: "clamp(36px, 7vw, 84px)",
-                fontWeight: 800,
-                color: "#fff",
-                lineHeight: 1.1,
-                marginBottom: 20,
-                letterSpacing: "-0.02em",
-                textShadow: "0 4px 20px rgba(0,0,0,0.4)",
-                }}
-            >
-              {banners[currentSlide]?.title || "Discover Your Next"}{" "}
-              <span>{banners[currentSlide]?.hi || "Adventure."}</span>
-            </h1>
-            {banners[currentSlide]?.sub && (
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.92)",
-                  fontSize: "clamp(15px, 1.8vw, 19px)",
-                  lineHeight: 1.6,
-                  maxWidth: 580,
-                  margin: "0 auto 36px",
-                  textShadow: "0 2px 8px rgba(0,0,0,0.3)",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 500,
-                  animation: "fadeIn 1.2s ease-out",
-                }}
-              >
-                {banners[currentSlide]?.sub}
-              </p>
-            )}
-          </div>
-
-          {/* Search form */}
-          <form
-            onSubmit={handleSearch}
-            role="search"
-            aria-label="Search destinations"
-            className="hero-search-form"
-            style={{
-              display: "flex",
-              background: "rgba(255,255,255,0.97)",
-              backdropFilter: "blur(20px)",
-              borderRadius: 999,
-              padding: "6px 6px 6px 22px",
-              maxWidth: 580, // Prevent too wide on desktop
-              width: "100%",
-              margin: "0 auto 32px",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.28)",
-              alignItems: "center",
-              gap: 8,
-            }}
-          >
-            <label htmlFor="hero-search" style={{ display: "none" }}>
-              Search travel destinations
-            </label>
-            <input
-              id="hero-search"
-              type="search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search Manali, Kedarnath, Jaisalmer..."
-              aria-label="Search destinations"
-              style={{
-                flex: 1,
-                border: "none",
-                outline: "none",
-                fontSize: 15,
-                color: "#0e1117",
-                background: "transparent",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                padding: "10px 0",
-              }}
-            />
-            <button
-              type="submit"
-              aria-label="Search"
-              disabled={isSearching}
-              style={{
-                background: "#064e3b",
-                color: "#fff",
-                border: "none",
-                borderRadius: 999,
-                padding: "12px 28px",
-                fontWeight: 700,
-                fontSize: 14,
-                cursor: isSearching ? "not-allowed" : "pointer",
-                flexShrink: 0,
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                opacity: isSearching ? 0.85 : 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              {isSearching ? (
-                <>
-                  <span className="spinner" />
-                  Searching...
-                </>
-              ) : (
-                "Search"
-              )}
-            </button>
-          </form>
-
-
-
-          {/* Slider dots */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: 8,
-              marginTop: 32,
-            }}
-          >
-            {banners.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentSlide(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                style={{
-                  width: i === currentSlide ? 32 : 8,
-                  height: 8,
-                  borderRadius: 999,
-                  background:
-                    i === currentSlide
-                      ? "#6ee7b7"
-                      : "rgba(255,255,255,0.35)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "all 0.35s ease",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroBanner banners={banners} site={dynamicSite} destinationCount={destinationCount} />
 
       {/* ── FILTER BAR ───────────────────────────────────────────── */}
       <div style={{ width: "100%", padding: "0 24px", boxSizing: "border-box" }}>
@@ -507,7 +266,6 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       </div>
 
       {/* ── NUMBERS STRIP (from CMS) ──────────────────────────────── */}
-      <StatsStrip site={dynamicSite} />
 
       {/* ── DESTINATION CARDS ────────────────────────────────────── */}
       {isDefault && (

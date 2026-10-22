@@ -7,6 +7,7 @@ export default {
     { name: 'footer', title: 'Footer & Newsletter', options: { collapsible: true } },
     { name: 'stats', title: 'Traveler Statistics', options: { collapsible: true } },
     { name: 'social', title: 'Social Media Icons', options: { collapsible: true } },
+    { name: 'hero', title: 'Homepage Hero Text', options: { collapsible: true } },
     { name: 'popup', title: 'Enquiry Popup Form', options: { collapsible: true } },
   ],
   fields: [
@@ -65,6 +66,9 @@ export default {
       of: [{ type: 'faq' }],
       fieldset: 'footer'
     },
+    { name: 'heroWords', title: 'Changing destination words', type: 'array', of: [{ type: 'string' }], description: 'The highlighted word in "Book Your Trip to ___" cycles through these, e.g. Spiti, Ladakh, Manali, Jibhi, Rajasthan, Udaipur, Jaisalmer. Leave empty for that default list.', fieldset: 'hero' },
+    { name: 'heroTagline', title: 'Tagline', type: 'string', description: 'Separate words with |, e.g. Pack | Join | Explore | Repeat', fieldset: 'hero' },
+    { name: 'heroSubline', title: 'Line under the tagline', type: 'string', fieldset: 'hero' },
     { name: 'popupEnabled', title: 'Show the enquiry popup', type: 'boolean', initialValue: true, description: 'The "Enquire Now" button in the menu opens it.', fieldset: 'popup' },
     { name: 'popupImage', title: 'Popup photo (left side)', type: 'image', options: { hotspot: true }, description: 'Tall photo works best, about 800 x 1000. Change it any time for a new campaign.', fieldset: 'popup' },
     { name: 'popupImageAlt', title: 'Photo description', type: 'string', fieldset: 'popup' },

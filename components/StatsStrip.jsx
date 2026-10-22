@@ -2,13 +2,7 @@
 // Shows only the numbers entered in the CMS (Global Branding → Traveler Statistics). Nothing is made up.
 const INSTAGRAM = "https://www.instagram.com/humsafar.community/";
 
-// CMS fields sometimes hold a whole sentence. Keep only the short figure so the strip stays tidy.
-const figure = (v, rating = false) => {
-  const t = String(v || "").trim();
-  if (!t) return "";
-  const m = rating ? t.match(/\b[0-5](?:\.\d)?\b/) : t.match(/\d[\d,.]*\s?[kKmM]?\+?/);
-  return m ? m[0].replace(/\s/g, "") : t.length <= 12 ? t : "";
-};
+import { figure } from "../lib/figure";
 
 export default function StatsStrip({ site = {} }) {
   const items = [];

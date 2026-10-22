@@ -58,6 +58,7 @@ export default function EnquiryModal({ site = {} }) {
       document.body.style.overflow = "";
       clearTimeout(t);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   function close() {
