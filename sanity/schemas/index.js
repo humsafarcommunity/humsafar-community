@@ -8,6 +8,7 @@ import aboutPage from './aboutPage';
 import destination from './destination';
 import lead from './lead';
 import review from './review';
+import video from './video';
 import itineraryDay from './itineraryDay';
 
 export const schemaTypes = [
@@ -21,5 +22,6 @@ export const schemaTypes = [
   destination,
   lead,
   review,
+  video,
   itineraryDay,
 ];
