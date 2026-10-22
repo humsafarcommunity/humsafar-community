@@ -26,7 +26,8 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
   return (
     <div style={{ background: "#f8fafc", minHeight: "100vh", paddingTop: "85px" }}>
       <SEOHead
-        title="Custom Trip Planning | Design Your Dream Vacation"
+        title="Custom Trip Planning | Humsafar Community"
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Custom Trips", path: "/custom-trips" }]}
         description="Plan your perfect private trip with Humsafar Community. Tell us your requirements and we'll craft a curated itinerary just for you."
         site={dynamicSite}
         seo={seoData}

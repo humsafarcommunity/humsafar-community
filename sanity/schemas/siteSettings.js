@@ -75,6 +75,8 @@ export default {
         { name: 'youtube', type: 'url' },
         { name: 'twitter', type: 'url' },
         { name: 'linkedin', type: 'url' },
+        { name: 'tripadvisor', title: 'TripAdvisor', type: 'url' },
+        { name: 'linktree', title: 'Linktree', type: 'url' },
       ],
     },
   ],

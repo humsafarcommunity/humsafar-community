@@ -12,7 +12,8 @@ export default function BlogPage({ blogs, site: freshSite }) {
     <div style={{ background: "#f8fafc", minHeight: "100vh", paddingTop: "85px" }}>
       <SEOHead
         title="Travel Blog | Tips & Guides | Humsafar Community"
-        description="Read our latest travel guides, tips, and stories from across the globe."
+        description="Practical travel guides for Manali, Kasol, Spiti, Uttarakhand and more: itineraries, costs, permits, best time to visit and packing tips from the Humsafar team."
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Travel Blog", path: "/blog" }]}
         site={dynamicSite}
         url="/blog"
       />

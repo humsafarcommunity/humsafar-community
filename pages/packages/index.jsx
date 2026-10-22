@@ -40,7 +40,7 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
     },
     all: {
       title: "All Tour Packages | Humsafar Community",
-      desc: "Explore all our group tours and travel packages across India and International destinations.",
+      desc: "Compare all Humsafar Community group tours: Manali, Kasol, Spiti, Uttarakhand, Rajasthan and international trips. Weekly departures, fixed prices, trip captain included.",
       keys: "group tours india, travel packages 2026, humsafar community tours"
     }
   };
@@ -57,6 +57,7 @@ export default function PackagesPage({ tours, site: freshSite, seo: seoData }) {
         title={currentSEO.title}
         description={currentSEO.desc}
         keywords={currentSEO.keys}
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Tour Packages", path: "/packages" }]}
         site={dynamicSite}
         seo={seoData}
         url="/packages"
