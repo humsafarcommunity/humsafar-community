@@ -55,7 +55,7 @@ export default function BlogCard({ blog }) {
           </span>
           <span
             style={{
-              color: "#94a3b8",
+              color: "#64748b",
               fontSize: 11,
               padding: "3px 0",
               fontFamily: "Plus Jakarta Sans, sans-serif",

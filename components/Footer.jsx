@@ -73,7 +73,7 @@ export default function Footer({ dynamicSite }) {
     <footer
       style={{
         background: "#080808",
-        color: "#64748b",
+        color: "#94a3b8",
         padding: "50px 24px 30px",
         fontFamily: "'Plus Jakarta Sans', sans-serif",
         borderTop: "1px solid #161b22",
@@ -121,7 +121,7 @@ export default function Footer({ dynamicSite }) {
                 Community
               </div>
             </Link>
-            <p style={{ fontSize: 13, lineHeight: 1.7, color: "#64748b", marginBottom: 20 }}>
+            <p style={{ fontSize: 13, lineHeight: 1.7, color: "#94a3b8", marginBottom: 20 }}>
               {dynamicSite.description || "Curating authentic group travel experiences across the Himalayas and beyond."}
             </p>
           </div>
@@ -129,15 +129,15 @@ export default function Footer({ dynamicSite }) {
           {/* Navigation Groups */}
           {navGroups.map((group) => (
             <div key={group.title}>
-              <h3 style={{ color: "#fff", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 20 }}>
+              <p style={{ color: "#fff", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 20 }}>
                 {group.title}
-              </h3>
+              </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {group.links.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
-                    style={{ color: "#64748b", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
+                    style={{ color: "#94a3b8", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
                     className="footer-link"
                   >
                     {link.label}
@@ -149,23 +149,23 @@ export default function Footer({ dynamicSite }) {
 
           {/* Contact Section */}
           <div>
-            <h3 style={{ color: "#fff", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 20 }}>
+            <p style={{ color: "#fff", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 20 }}>
               Contact Us
-            </h3>
+            </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <div style={{ fontSize: 13, color: "#64748b", display: "flex", gap: 12, alignItems: "center" }}>
+              <div style={{ fontSize: 13, color: "#94a3b8", display: "flex", gap: 12, alignItems: "center" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
                 </svg>
                 <a href={`mailto:${dynamicSite.email || "humsafarcommunity4@gmail.com"}`} style={{ color: "inherit", textDecoration: "none" }}>{dynamicSite.email || "humsafarcommunity4@gmail.com"}</a>
               </div>
-              <div style={{ fontSize: 13, color: "#64748b", display: "flex", gap: 12, alignItems: "center" }}>
+              <div style={{ fontSize: 13, color: "#94a3b8", display: "flex", gap: 12, alignItems: "center" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 <a href={`https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}`} style={{ color: "inherit", textDecoration: "none" }}>{dynamicSite.phone || "+91 62684 96389"}</a>
               </div>
-              <div style={{ fontSize: 13, color: "#64748b", display: "flex", gap: 12, alignItems: "flex-start" }}>
+              <div style={{ fontSize: 13, color: "#94a3b8", display: "flex", gap: 12, alignItems: "flex-start" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6, marginTop: 2 }}>
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
                 </svg>
@@ -186,7 +186,7 @@ export default function Footer({ dynamicSite }) {
             flexWrap: "wrap",
             gap: 16,
             fontSize: 12,
-            color: "#475569",
+            color: "#94a3b8",
           }}
         >
           <span>© {new Date().getFullYear()} {dynamicSite.name} Pvt. Ltd.</span>

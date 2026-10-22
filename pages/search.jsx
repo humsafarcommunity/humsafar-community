@@ -161,7 +161,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
                   style={{
                     background: "none",
                     border: "none",
-                    color: "#94a3b8",
+                    color: "#64748b",
                     fontSize: 16,
                     cursor: "pointer",
                     padding: "6px 10px",
@@ -175,7 +175,7 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
               <button
                 type="submit"
                 style={{
-                  background: "#10b981",
+                  background: "#047857",
                   color: "#fff",
                   border: "none",
                   padding: "12px 24px",
@@ -193,13 +193,13 @@ export default function SearchPage({ tours, blogs, site: freshSite, seo: seoData
 
             {/* Quick Tag Suggestions */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
-              <span style={{ fontSize: 12, color: "#94a3b8", fontWeight: 600 }}>Popular:</span>
+              <span style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>Popular:</span>
               {quickTags.map(tag => (
                 <button
                   key={tag}
                   onClick={() => handleTagClick(tag)}
                   style={{
-                    background: q?.toLowerCase() === tag.toLowerCase() ? "#10b981" : "rgba(255, 255, 255, 0.1)",
+                    background: q?.toLowerCase() === tag.toLowerCase() ? "#047857" : "rgba(255, 255, 255, 0.1)",
                     color: "#fff",
                     border: "none",
                     padding: "4px 12px",

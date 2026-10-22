@@ -66,7 +66,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 20px" }}>
           {/* Hero */}
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <p style={{ fontSize: 14, fontWeight: 700, color: "#10b981", marginBottom: 16 }}>{pick("eyebrow")}</p>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#047857", marginBottom: 16 }}>{pick("eyebrow")}</p>
             <h1 style={{ fontSize: "clamp(36px, 6vw, 60px)", color: "#0f172a", marginBottom: 24, whiteSpace: "pre-line" }}>
               {headline}
             </h1>
@@ -113,7 +113,7 @@ export default function AboutPage({ site: freshSite, seo: seoData, about }) {
             {values.map((v, i) => (
               <div key={v._key || i} style={{ ...card, padding: 36 }}>
                 {v.icon && <div style={{ fontSize: 32, marginBottom: 18 }}>{v.icon}</div>}
-                <h3 style={{ fontSize: 22, color: "#0f172a", marginBottom: 12 }}>{v.title}</h3>
+                <h2 style={{ fontSize: 22, color: "#0f172a", marginBottom: 12 }}>{v.title}</h2>
                 <p style={{ color: "#64748b", lineHeight: 1.65 }}>{v.description}</p>
               </div>
             ))}

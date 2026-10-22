@@ -57,7 +57,7 @@ export default async function handler(req, res) {
   if (hook) {
     try {
       const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 4000);
+      const t = setTimeout(() => ctrl.abort(), 7000);
       const r = await fetch(hook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(lead), signal: ctrl.signal });
       clearTimeout(t);
       stored = stored || r.ok;

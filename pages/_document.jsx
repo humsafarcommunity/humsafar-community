@@ -24,10 +24,18 @@ export default function Document() {
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Londrina+Solid:wght@900&display=swap"
-          rel="stylesheet"
+        {/* Fonts load without blocking the first paint (swap shows text straight away) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Londrina+Solid:wght@900&display=swap';l.media='print';l.onload=function(){l.media='all'};document.head.appendChild(l);})();`,
+          }}
         />
+        <noscript>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Londrina+Solid:wght@900&display=swap"
+            rel="stylesheet"
+          />
+        </noscript>
         {/* Favicon */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 

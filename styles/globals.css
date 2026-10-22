@@ -405,3 +405,6 @@ img, video, svg { max-width: 100%; }
 
 /* Keep the sticky booking bar clear of the iPhone home bar */
 .mobile-book-bar { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+
+/* Links inside paragraphs need more than colour to stand out (accessibility) */
+main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; }
