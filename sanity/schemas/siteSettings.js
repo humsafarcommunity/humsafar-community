@@ -7,6 +7,7 @@ export default {
     { name: 'footer', title: 'Footer & Newsletter', options: { collapsible: true } },
     { name: 'stats', title: 'Traveler Statistics', options: { collapsible: true } },
     { name: 'social', title: 'Social Media Icons', options: { collapsible: true } },
+    { name: 'popup', title: 'Enquiry Popup Form', options: { collapsible: true } },
   ],
   fields: [
     { name: 'name', title: 'Site Name', type: 'string', fieldset: 'business' },
@@ -64,6 +65,15 @@ export default {
       of: [{ type: 'faq' }],
       fieldset: 'footer'
     },
+    { name: 'popupEnabled', title: 'Show the enquiry popup', type: 'boolean', initialValue: true, description: 'The "Enquire Now" button in the menu opens it.', fieldset: 'popup' },
+    { name: 'popupImage', title: 'Popup photo (left side)', type: 'image', options: { hotspot: true }, description: 'Tall photo works best, about 800 x 1000. Change it any time for a new campaign.', fieldset: 'popup' },
+    { name: 'popupImageAlt', title: 'Photo description', type: 'string', fieldset: 'popup' },
+    { name: 'popupTitle', title: 'Popup heading', type: 'string', initialValue: 'Plan Your Next Trip', fieldset: 'popup' },
+    { name: 'popupButtonText', title: 'Button text', type: 'string', initialValue: "Let's Travel", fieldset: 'popup' },
+    { name: 'popupTripTypes', title: 'Trip type choices', type: 'array', of: [{ type: 'string' }], description: 'Shown in "What kind of trip do you prefer?". Leave empty for the default list.', fieldset: 'popup' },
+    { name: 'popupDestinations', title: 'Destination choices', type: 'array', of: [{ type: 'string' }], description: 'Shown in "Where do you want to go?". Leave empty for the default list.', fieldset: 'popup' },
+    { name: 'popupAutoOpen', title: 'Open by itself on desktop', type: 'boolean', initialValue: false, description: 'Opens once per visit after the delay below, on computers only. It never opens by itself on phones (Google penalises that).', fieldset: 'popup' },
+    { name: 'popupDelay', title: 'Seconds before it opens', type: 'number', initialValue: 20, fieldset: 'popup' },
     {
       name: 'socials',
       title: 'Active Social Profiles',

@@ -112,6 +112,8 @@ export async function getFreshData() {
       ...sanityData.SITE,
     };
     
+    site.popupImage = sanityData.SITE?.popupImage ? urlFor(sanityData.SITE.popupImage) : "";
+
     site.trustLogos = (sanityData.SITE?.trustLogos || [])
       .filter((l) => l && l.logo)
       .map((l) => ({ name: l.name || "", url: l.url || "", logo: urlFor(l.logo) }));

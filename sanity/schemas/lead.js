@@ -6,6 +6,10 @@ export default {
   fields: [
     { name: 'name', title: 'Name', type: 'string' },
     { name: 'phone', title: 'Phone / WhatsApp', type: 'string' },
+    { name: 'email', title: 'Email', type: 'string' },
+    { name: 'tripType', title: 'Trip type', type: 'string' },
+    { name: 'destination', title: 'Destination', type: 'string' },
+    { name: 'consent', title: 'OK to send offers', type: 'boolean' },
     { name: 'fromCity', title: 'Travelling from', type: 'string' },
     { name: 'travelMonth', title: 'Month', type: 'string' },
     { name: 'people', title: 'People', type: 'string' },

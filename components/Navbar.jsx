@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import EnquiryModal from "./EnquiryModal";
 
 export default function Navbar({ site, isSolid = false }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -94,6 +95,26 @@ export default function Navbar({ site, isSolid = false }) {
                 {link.label}
               </Link>
             ))}
+            {site?.popupEnabled !== false && (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("open-enquiry"))}
+                style={{
+                  background: activeHeaderStyle ? "#fff" : "rgba(255,255,255,0.14)",
+                  color: activeHeaderStyle ? "#064e3b" : "#fff",
+                  border: activeHeaderStyle ? "2px solid #064e3b" : "2px solid rgba(255,255,255,0.8)",
+                  padding: "8px 18px",
+                  borderRadius: 12,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  marginLeft: 12,
+                  fontFamily: "inherit",
+                }}
+              >
+                Enquire Now
+              </button>
+            )}
             <a
               href={`https://wa.me/${(site?.whatsapp || '916268496389').toString().replace(/\D/g, '')}`}
               target="_blank"
@@ -192,7 +213,18 @@ export default function Navbar({ site, isSolid = false }) {
         >
           Book on WhatsApp
         </a>
+        {site?.popupEnabled !== false && (
+          <button
+            type="button"
+            onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new Event("open-enquiry")); }}
+            style={{ background: "transparent", color: "#fff", border: "2px solid #fff", padding: "14px 40px", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", fontFamily: "var(--sans)" }}
+          >
+            Enquire Now
+          </button>
+        )}
       </div>
+
+      <EnquiryModal site={site || {}} />
 
       <style jsx global>{`
         @media (max-width: 960px) {
