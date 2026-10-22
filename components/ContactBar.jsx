@@ -1,6 +1,6 @@
 // A white rounded card that sits across the top edge of the footer:
 // WhatsApp number on the left, social media icons on the right.
-const DEFAULT_INSTAGRAM = "https://www.instagram.com/humsafar.community/";
+import { mergeSocials } from "../data/socials";
 
 const tile = { width: 44, height: 44, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0, textDecoration: "none" };
 const letter = { fontFamily: "var(--sans)", fontWeight: 800, fontSize: 22, lineHeight: 1 };
@@ -22,16 +22,35 @@ function YouTube() {
   );
 }
 
+function TripAdvisor() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="7.5" cy="14" r="3.2" /><circle cx="16.5" cy="14" r="3.2" />
+      <circle cx="7.5" cy="14" r="0.9" fill="#fff" /><circle cx="16.5" cy="14" r="0.9" fill="#fff" />
+      <path d="M2 9.6h20M5 9.6C7 7.4 9.3 6.5 12 6.5s5 .9 7 3.1" />
+    </svg>
+  );
+}
+function Linktree() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v18M12 8l-5-4M12 8l5-4M12 13l-6-4M12 13l6-4" />
+    </svg>
+  );
+}
+
 export default function ContactBar({ site = {} }) {
   const wa = String(site.whatsapp || "916268496389").replace(/\D/g, "");
   const phone = site.phone || "+91 62684 96389";
-  const socials = site.socials || {};
+  const socials = mergeSocials(site.socials);
   const links = [
-    { name: "Instagram", href: socials.instagram || DEFAULT_INSTAGRAM, style: { background: "linear-gradient(45deg,#f9a03f,#e1306c 55%,#833ab4)" }, icon: <Instagram /> },
+    { name: "Instagram", href: socials.instagram, style: { background: "linear-gradient(45deg,#f9a03f,#e1306c 55%,#833ab4)" }, icon: <Instagram /> },
     { name: "YouTube", href: socials.youtube, style: { background: "#ef4a23" }, icon: <YouTube /> },
     { name: "Facebook", href: socials.facebook, style: { background: "#2d5a9e" }, icon: <span style={letter}>f</span> },
     { name: "X", href: socials.twitter, style: { background: "#111" }, icon: <span style={letter}>X</span> },
     { name: "LinkedIn", href: socials.linkedin, style: { background: "#2b75c8" }, icon: <span style={{ ...letter, fontSize: 20 }}>in</span> },
+    { name: "TripAdvisor", href: socials.tripadvisor, style: { background: "#00a680" }, icon: <TripAdvisor /> },
+    { name: "Linktree", href: socials.linktree, style: { background: "#43b94f" }, icon: <Linktree /> },
   ].filter((l) => l.href);
 
   return (

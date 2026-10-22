@@ -8,6 +8,7 @@
  * Use this in getStaticProps/getServerSideProps.
  */
 import { createClient } from 'next-sanity';
+import { mergeSocials } from "./socials";
 import { urlFor } from '../lib/sanity.image';
 
 const staticData = require('./data.json');
@@ -201,7 +202,7 @@ export function generateOrganizationSchema(site = SITE) {
       },
     ],
     priceRange: "₹₹",
-    sameAs: Object.values(site.socials || {}),
+    sameAs: Object.values(mergeSocials(site.socials)).filter(Boolean),
   };
 }
 
