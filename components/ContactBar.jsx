@@ -46,9 +46,9 @@ export default function ContactBar({ site = {} }) {
   const links = [
     { name: "Instagram", href: socials.instagram, style: { background: "linear-gradient(45deg,#f9a03f,#e1306c 55%,#833ab4)" }, icon: <Instagram /> },
     { name: "YouTube", href: socials.youtube, style: { background: "#ef4a23" }, icon: <YouTube /> },
-    { name: "Facebook", href: socials.facebook, style: { background: "#2d5a9e" }, icon: <span style={letter}>f</span> },
-    { name: "X", href: socials.twitter, style: { background: "#111" }, icon: <span style={letter}>X</span> },
-    { name: "LinkedIn", href: socials.linkedin, style: { background: "#2b75c8" }, icon: <span style={{ ...letter, fontSize: 20 }}>in</span> },
+    { name: "Facebook", href: socials.facebook, style: { background: "#2d5a9e" }, icon: <span aria-hidden="true" style={letter}>f</span> },
+    { name: "X", href: socials.twitter, style: { background: "#111" }, icon: <span aria-hidden="true" style={letter}>X</span> },
+    { name: "LinkedIn", href: socials.linkedin, style: { background: "#2b75c8" }, icon: <span aria-hidden="true" style={{ ...letter, fontSize: 20 }}>in</span> },
     { name: "TripAdvisor", href: socials.tripadvisor, style: { background: "#00a680" }, icon: <TripAdvisor /> },
     { name: "Linktree", href: socials.linktree, style: { background: "#43b94f" }, icon: <Linktree /> },
   ].filter((l) => l.href);
