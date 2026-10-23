@@ -9,6 +9,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import TourCard from "../../components/TourCard";
 import { toursForBlog, slimTour } from "../../lib/related";
+import { RichBlocks, inline } from "../../lib/richText";
 import {
   SITE,
   getFreshData,
@@ -147,7 +148,18 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
                 case "h3":
                   return <h3 key={i} style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" }}>{block.text}</h3>;
                 case "para":
-                  return <p key={i} style={{ marginBottom: 20 }} className="speakable">{block.text}</p>;
+                  return (
+                    <RichBlocks
+                      key={i}
+                      text={block.text}
+                      styles={{
+                        p: { marginBottom: 20 },
+                        h2: { fontFamily: "var(--sans)", fontSize: 28, fontWeight: 700, color: "#0e1117", margin: "40px 0 16px", lineHeight: 1.2 },
+                        h3: { fontFamily: "var(--sans)", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" },
+                        ul: { margin: "0 0 20px 22px" }, ol: { margin: "0 0 20px 22px" }, li: { marginBottom: 8, lineHeight: 1.7 },
+                      }}
+                    />
+                  );
                 case "quote":
                   return (
                     <blockquote key={i} style={{ borderLeft: "4px solid #10b981", background: "#f0fdf4", padding: "18px 24px", margin: "28px 0", borderRadius: "0 12px 12px 0", fontStyle: "italic", color: "#065f46", fontSize: 18 }}>
@@ -158,9 +170,9 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
                   return <hr key={i} style={{ border: "none", borderTop: "2px dashed #e2e8f0", margin: "36px 0" }} />;
                 case "list":
                   return (
-                    <ul key={i} style={{ margin: "0 0 20px 22px" }}>
+                    <ul key={i} style={{ margin: "0 0 20px 22px", listStyle: "disc" }}>
                       {(block.items || []).map((item, j) => (
-                        <li key={j} style={{ marginBottom: 8, lineHeight: 1.7 }}>{item}</li>
+                        <li key={j} style={{ marginBottom: 8, lineHeight: 1.7 }}>{inline(item, `l${i}${j}`)}</li>
                       ))}
                     </ul>
                   );
