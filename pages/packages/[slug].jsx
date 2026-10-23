@@ -12,6 +12,8 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import LeadForm from "../../components/LeadForm";
 import ReviewsSection from "../../components/ReviewsSection";
+import BlogCard from "../../components/BlogCard";
+import { blogsForTour, slimBlog } from "../../lib/related";
 import { waLink, telLink, track } from "../../lib/whatsapp";
 import {
   SITE,
@@ -22,7 +24,7 @@ import {
   generateFAQSchema,
 } from "../../data";
 
-export default function TourDetailPage({ tour, relatedTours, reviews = [], site: freshSite }) {
+export default function TourDetailPage({ tour, relatedTours, guides = [], reviews = [], site: freshSite }) {
   const dynamicSite = freshSite || SITE || { whatsapp: "916268496389", name: "Humsafar Community" };
   const router = useRouter();
   const [activeDate, setActiveDate] = useState(null);
@@ -454,6 +456,20 @@ export default function TourDetailPage({ tour, relatedTours, reviews = [], site:
         </div>
       </main>
 
+      {guides.length > 0 && (
+        <section aria-label="Travel guides for this trip" style={{ background: "#f8fafc", padding: "48px 24px 56px", borderTop: "1px solid #e2e8f0" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <h2 style={{ fontFamily: "var(--sans)", fontSize: "clamp(22px, 3.6vw, 30px)", fontWeight: 800, margin: "0 0 8px", color: "#0e1117" }}>
+              Read before you go
+            </h2>
+            <p style={{ margin: "0 0 24px", color: "#475569", fontSize: 16 }}>Travel guides for this destination from the Humsafar team.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
+              {guides.map((b) => <BlogCard key={b._id || b.slug} blog={b} />)}
+            </div>
+          </div>
+        </section>
+      )}
+
       <Footer dynamicSite={dynamicSite} />
 
       <style jsx global>{`
@@ -565,7 +581,7 @@ export async function getStaticProps({ params }) {
   ).slice(0, 3);
 
   return {
-    props: { tour, relatedTours, reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])), site: data.SITE },
+    props: { tour, relatedTours, guides: blogsForTour(tour, data.BLOGS || [], 3).map(slimBlog), reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])), site: data.SITE },
     revalidate: 60, // ISR: Update every 60s (SXO: Fresh content)
   };
 }

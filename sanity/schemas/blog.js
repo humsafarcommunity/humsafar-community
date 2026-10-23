@@ -14,6 +14,7 @@ export default {
     { name: 'excerpt', title: 'Excerpt', type: 'text' },
     { name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } },
     { name: 'content', title: 'Content Blocks', type: 'array', of: [{ type: 'block' }, { type: 'image' }] },
+    { name: 'relatedTours', title: 'Trips to show under this post', type: 'array', of: [{ type: 'reference', to: [{ type: 'tour' }] }], description: 'Optional. Leave empty and the site picks trips for the same destination by itself.' },
     { name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'faq' }] },
     { name: 'seoTitle', title: 'SEO Title', type: 'string', group: 'seo' },
     { name: 'seoDesc', title: 'SEO Description', type: 'text', group: 'seo' },

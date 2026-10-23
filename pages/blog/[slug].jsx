@@ -7,6 +7,8 @@ import FAQAccordion from "../../components/FAQAccordion";
 import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import TourCard from "../../components/TourCard";
+import { toursForBlog, slimTour } from "../../lib/related";
 import {
   SITE,
   getFreshData,
@@ -15,7 +17,7 @@ import {
   generateFAQSchema,
 } from "../../data";
 
-export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) {
+export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], site: freshSite }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
 
@@ -214,6 +216,27 @@ export default function BlogDetailPage({ blog, relatedBlogs, site: freshSite }) 
         </div>
       </article>
 
+      {/* Trips connected to this guide */}
+      {relatedTours.length > 0 && (
+        <section aria-label="Trips from this guide" style={{ background: "#fff", padding: "56px 24px", borderTop: "1px solid #e2e8f0" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <p style={{ margin: "0 0 6px", fontSize: 12, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#047857" }}>Book this trip</p>
+            <h2 style={{ fontFamily: "var(--sans)", fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 800, margin: "0 0 8px", color: "#0e1117" }}>
+              Go on the trip from this guide
+            </h2>
+            <p style={{ margin: "0 0 28px", color: "#475569", fontSize: 16, maxWidth: 620 }}>
+              Join a Humsafar group batch with a trip captain, fixed price and weekly dates.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
+              {relatedTours.map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
+            </div>
+            <p style={{ margin: "24px 0 0" }}>
+              <Link href="/packages" style={{ color: "#047857", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>See all tour packages</Link>
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* Related blogs */}
       {relatedBlogs?.length > 0 && (
         <section style={{ background: "#f8fafc", padding: "48px 24px", borderTop: "1px solid #e2e8f0" }}>
@@ -275,7 +298,7 @@ export async function getStaticProps({ params }) {
   ).slice(0, 3);
 
   return {
-    props: { blog, relatedBlogs, site: data.SITE },
+    props: { blog, relatedBlogs, relatedTours: toursForBlog(blog, data.TOURS || [], 3).map(slimTour), site: data.SITE },
     revalidate: 60,
   };
 }
