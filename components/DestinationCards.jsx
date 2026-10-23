@@ -66,12 +66,23 @@ export default function DestinationCards({ title, items = [] }) {
             >
               {d.name}
             </span>
+            <span aria-hidden="true" className="dest-shade" />
+            <Image
+              src="/humsafar-logo-white.png"
+              alt=""
+              width={700}
+              height={307}
+              sizes="160px"
+              className="dest-logo"
+            />
           </Link>
         ))}
       </div>
 
       <style jsx global>{`
         .dest-row::-webkit-scrollbar { display: none; }
+        .dest-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent); pointer-events: none; }
+        .dest-logo { position: absolute; left: 50%; bottom: 20px; width: 62%; height: auto; transform: translateX(-50%); pointer-events: none; filter: drop-shadow(0 0 7px rgba(255,255,255,0.55)) drop-shadow(0 2px 5px rgba(0,0,0,0.55)); }
         .dest-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .dest-card:hover, .dest-card:focus-visible { transform: translateY(-8px) scale(1.03); box-shadow: 0 18px 36px rgba(15,23,42,0.28); }
         @media (max-width: 700px) { .dest-arrows { display: none !important; } }
