@@ -42,6 +42,7 @@ export async function getFreshData() {
       },
       "BLOGS": *[_type == "blog" && defined(slug.current)] {
         ...,
+        "relatedTourSlugs": relatedTours[]->slug.current,
         "slug": slug.current,
         "coverImage": coverImage // Get full object for builder
       },
