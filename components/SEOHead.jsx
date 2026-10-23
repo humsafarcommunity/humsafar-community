@@ -26,10 +26,17 @@ export default function SEOHead({
   
   const metaTitle = title || seo.seoTitle || "India's #1 Travel Community";
   const fullTitle = title
-    ? (title.toLowerCase().includes(String(site.name).toLowerCase()) ? title : `${title} | ${site.name}`)
+    ? (title.toLowerCase().includes(String(site.name).toLowerCase()) || title.length > 56 ? title : `${title} | ${site.name}`)
     : `${site.name} — ${metaTitle}`;
   
-  const metaDescription = description || seo.seoDescription || "Experience authentic group travel across India with Humsafar Community.";
+  // One tidy sentence for search results: no line breaks, markdown marks or HTML, about 155 characters
+  const tidy = (v) => {
+    const t = String(v || "").replace(/<[^>]*>/g, " ").replace(/[#*_`>|]+/g, " ").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\s+/g, " ").trim();
+    if (t.length <= 160) return t;
+    const cut = t.slice(0, 157);
+    return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 100))}…`;
+  };
+  const metaDescription = tidy(description || seo.seoDescription) || "Experience authentic group travel across India with Humsafar Community.";
   const metaKeywords = keywords || seo.seoKeywords;
   
   const fullUrl = url ? `${site.url}${url}` : site.url;

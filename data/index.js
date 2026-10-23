@@ -92,12 +92,30 @@ export async function getFreshData() {
                 caption: block.caption || "" 
               };
             }
-            // Handle PortableText blocks
+            // Handle PortableText blocks (keep bold, italic, links and bullet lists)
             if (block._type === 'block') {
-              return {
-                type: block.style === 'h2' ? 'h2' : (block.style === 'h3' ? 'h3' : 'para'),
-                text: (block.children || []).map(c => c.text || "").join("")
-              };
+              const defs = block.markDefs || [];
+              const text = (block.children || []).map((c) => {
+                let t = c.text || "";
+                if (!t.trim()) return t;
+                (c.marks || []).forEach((m) => {
+                  if (m === 'strong') t = `**${t}**`;
+                  else if (m === 'em') t = `*${t}*`;
+                  else {
+                    const d = defs.find((x) => x._key === m);
+                    if (d && d._type === 'link' && d.href) t = `[${t}](${d.href})`;
+                  }
+                });
+                return t;
+              }).join("");
+              if (block.listItem) {
+                return { type: 'para', text: `${block.listItem === 'number' ? '1.' : '-'} ${text}` };
+              }
+              if (block.style === 'h2' || block.style === 'h3' || block.style === 'h4') {
+                const plain = (block.children || []).map((c) => c.text || "").join("");
+                return { type: block.style === 'h2' ? 'h2' : 'h3', text: plain };
+              }
+              return { type: 'para', text };
             }
             return block;
           }).filter(Boolean)
