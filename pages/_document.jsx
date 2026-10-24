@@ -37,7 +37,9 @@ export default function Document() {
           />
         </noscript>
         {/* Favicon */}
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* AIO: Speakable meta for Google Assistant */}
         <meta

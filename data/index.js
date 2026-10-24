@@ -196,8 +196,8 @@ export function generateOrganizationSchema(site = SITE) {
     logo: {
       "@type": "ImageObject",
       url: `${site.url}/logo.png`,
-      width: 200,
-      height: 60,
+      width: 600,
+      height: 600,
     },
     description:
       "Group tours, custom Himalayan trips and corporate retreats led by experienced trip captains, with departures from Delhi and Gwalior.",

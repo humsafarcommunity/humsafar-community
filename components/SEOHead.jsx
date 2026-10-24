@@ -40,11 +40,11 @@ export default function SEOHead({
   const metaKeywords = keywords || seo.seoKeywords;
   
   const fullUrl = url ? `${site.url}${url}` : site.url;
-  const ogImage = image || (seo.ogImage ? urlFor(seo.ogImage) : (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : "https://images.unsplash.com/photo-1501785888041-af3ef285b470") : "https://images.unsplash.com/photo-1501785888041-af3ef285b470"));
+  const ogImage = image || (seo.ogImage ? urlFor(seo.ogImage) : (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : `${site.url || "https://www.humsafarcommunity.com"}/og-default.png`) : `${site.url || "https://www.humsafarcommunity.com"}/og-default.png`));
   // Every page points to its own address. (The old logic let the CMS "Canonical URL Base"
   // replace the canonical of every page, which tells Google all pages are the homepage.)
   const canonicalUrl = canonical ? `${site.url}${canonical}` : fullUrl;
-  const favicon = seo.favicon ? urlFor(seo.favicon) : "/favicon.ico";
+  const favicon = "/favicon.ico"; // always the Humsafar logo mark
 
   return (
     <Head>
@@ -122,9 +122,11 @@ export default function SEOHead({
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
       {/* Favicon */}
-      <link rel="icon" type="image/x-icon" href={favicon} />
-      <link rel="apple-touch-icon" sizes="180x180" href={favicon} />
-      <link rel="icon" type="image/png" sizes="32x32" href={favicon} />
+      <link rel="icon" href={favicon} sizes="any" />
+      <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
       {/* ── JSON-LD STRUCTURED DATA (GEO + AIO core) ─────────────── */}
       {schemas.map((schema, i) => (
