@@ -50,7 +50,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   const word = words[i % words.length];
   const slide = banners.length ? i % banners.length : -1;
   const tagline = (site.heroTagline || "Pack | Join | Explore | Repeat").split("|").map((s) => s.trim()).filter(Boolean);
-  const subline = site.heroSubline || "Group trips with a trip captain, from Delhi & Gwalior";
+  const subline = site.heroSubline || "Group trips with a trip captain. Fly to Delhi and join from Mumbai, Pune, Bangalore, Hyderabad or Ahmedabad";
 
   const years = /^\d{4}$/.test(String(site.founded || "").trim()) ? new Date().getFullYear() - Number(site.founded) : 0;
   const stats = [

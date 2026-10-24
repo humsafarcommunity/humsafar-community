@@ -33,7 +33,7 @@ module.exports = {
     }
 
     // Manali landing page — the main keyword page
-    if (path === "/manali-tour-packages") {
+    if (/^\/(manali|spiti|kasol|jibhi)-tour-packages$/.test(path)) {
       return { loc: path, changefreq: "weekly", priority: 0.95 };
     }
 

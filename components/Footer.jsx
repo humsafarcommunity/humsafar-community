@@ -19,6 +19,9 @@ export default function Footer({ dynamicSite }) {
       links: [
         { label: "All Tour Packages", href: "/packages" },
         { label: "Manali Tour Packages", href: "/manali-tour-packages" },
+        { label: "Spiti Valley Packages", href: "/spiti-tour-packages" },
+        { label: "Kasol Tour Packages", href: "/kasol-tour-packages" },
+        { label: "Jibhi Tour Packages", href: "/jibhi-tour-packages" },
         { label: "Himachal Group Tours", href: "/packages?region=himachal" },
         { label: "Uttarakhand Treks", href: "/packages?region=uttarakhand" },
         { label: "International Getaways", href: "/packages?region=international" },
