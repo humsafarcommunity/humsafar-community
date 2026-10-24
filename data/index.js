@@ -47,7 +47,7 @@ export async function getFreshData() {
         "coverImage": coverImage // Get full object for builder
       },
       "DESTINATIONS": *[_type == "destination" && defined(image)] | order(order asc) { _id, name, group, region, link, textColor, "image": image, "alt": image.alt },
-      "REVIEWS": *[_type == "review" && defined(text)] | order(featured desc, _createdAt desc)[0...12] { _id, author, city, trip, rating, text, date, source, "photo": photo },
+      "REVIEWS": *[_type == "review" && defined(text)] | order(featured desc, _createdAt desc)[0...40] { _id, author, city, trip, rating, text, date, source, "photo": photo, "tourSlug": tour->slug.current },
       "VIDEOS": *[_type == "video" && defined(youtubeUrl)] | order(order asc, _createdAt desc)[0...12] { _id, title, youtubeUrl, "thumbnail": thumbnail },
       "BANNERS": *[_type == "banner"] {
         ...,
@@ -61,6 +61,7 @@ export async function getFreshData() {
       ...t,
       img: t.img ? urlFor(t.img) : (typeof t.img === 'string' ? t.img : ""),
       gallery: (t.gallery || []).map(g => urlFor(g)),
+      attractions: (t.attractions || []).filter(a => a && a.name).map(a => ({ name: a.name, description: a.description || "", image: a.image ? urlFor(a.image) : "" })),
       price: t.price || 0,
       rating: t.rating || 5.0,
       reviews: t.reviews || 0

@@ -7,6 +7,7 @@ export default {
     { name: 'author', title: 'Traveller name', type: 'string', validation: (Rule) => Rule.required() },
     { name: 'city', title: 'City', type: 'string' },
     { name: 'trip', title: 'Trip', type: 'string', description: 'e.g. Manali Kasol 6D/5N' },
+    { name: 'tour', title: 'Tour they booked (optional)', type: 'reference', to: [{ type: 'tour' }], description: 'Shows this review first on that tour page and links the trip name.' },
     { name: 'rating', title: 'Rating (1 to 5)', type: 'number', validation: (Rule) => Rule.min(1).max(5), initialValue: 5 },
     { name: 'text', title: 'Review', type: 'text', rows: 4, validation: (Rule) => Rule.required() },
     { name: 'date', title: 'When', type: 'string', description: 'e.g. October 2026' },

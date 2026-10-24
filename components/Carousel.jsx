@@ -1,0 +1,68 @@
+import { useRef, useState, useEffect, useCallback } from "react";
+
+// Horizontal scroll-snap track with round prev/next buttons. Used by Attractions and Reviews.
+export default function Carousel({ title, subtitle, children, action, label }) {
+  const ref = useRef(null);
+  const [can, setCan] = useState({ prev: false, next: true });
+
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    setCan({ prev: el.scrollLeft > 4, next: el.scrollLeft + el.clientWidth < el.scrollWidth - 4 });
+  }, []);
+
+  useEffect(() => {
+    update();
+    const el = ref.current;
+    if (!el) return;
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => { el.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+  }, [update]);
+
+  const go = (dir) => {
+    const el = ref.current;
+    if (!el) return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: dir * Math.max(el.clientWidth * 0.85, 260), behavior: reduce ? "auto" : "smooth" });
+  };
+
+  const arrow = (dir, enabled, text) => (
+    <button
+      type="button"
+      onClick={() => go(dir)}
+      disabled={!enabled}
+      aria-label={text}
+      style={{ width: 44, height: 44, borderRadius: 999, border: 0, background: enabled ? "#111827" : "#cbd5e1", color: "#fff", cursor: enabled ? "pointer" : "default", display: "grid", placeItems: "center", flexShrink: 0 }}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d={dir < 0 ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
+      </svg>
+    </button>
+  );
+
+  return (
+    <section aria-label={label || title} style={{ minWidth: 0, maxWidth: "100%" }}>
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 20 }}>
+        <div style={{ minWidth: 0 }}>
+          <h2 style={{ fontSize: "clamp(26px, 4.5vw, 40px)", color: "#0e1117", margin: 0, lineHeight: 1.1 }}>{title}</h2>
+          {subtitle && <p style={{ margin: "8px 0 0", color: "#64748b", fontSize: 16 }}>{subtitle}</p>}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {arrow(-1, can.prev, "Previous")}
+          {arrow(1, can.next, "Next")}
+          {action}
+        </div>
+      </div>
+      <div
+        ref={ref}
+        tabIndex={0}
+        style={{ display: "flex", gap: 20, overflowX: "auto", scrollSnapType: "x mandatory", paddingBottom: 6, scrollbarWidth: "none", outlineOffset: 4 }}
+        className="hc-track"
+      >
+        {children}
+      </div>
+      <style jsx global>{`.hc-track::-webkit-scrollbar{display:none}.hc-track>*{scroll-snap-align:start;flex-shrink:0}`}</style>
+    </section>
+  );
+}

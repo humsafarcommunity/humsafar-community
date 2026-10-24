@@ -8,6 +8,7 @@ import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import TourCard from "../../components/TourCard";
+import ReviewsSection from "../../components/ReviewsSection";
 import { toursForBlog, slimTour } from "../../lib/related";
 import { RichBlocks, inline } from "../../lib/richText";
 import {
@@ -18,7 +19,7 @@ import {
   generateFAQSchema,
 } from "../../data";
 
-export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], site: freshSite }) {
+export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], reviews = [], site: freshSite }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
 
@@ -249,6 +250,12 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
         </section>
       )}
 
+      {reviews.length > 0 && (
+        <section style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 0" }}>
+          <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} />
+        </section>
+      )}
+
       {/* Related blogs */}
       {relatedBlogs?.length > 0 && (
         <section style={{ background: "#f8fafc", padding: "48px 24px", borderTop: "1px solid #e2e8f0" }}>
@@ -310,7 +317,7 @@ export async function getStaticProps({ params }) {
   ).slice(0, 3);
 
   return {
-    props: { blog, relatedBlogs, relatedTours: toursForBlog(blog, data.TOURS || [], 3).map(slimTour), site: data.SITE },
+    props: { blog, relatedBlogs, relatedTours: toursForBlog(blog, data.TOURS || [], 3).map(slimTour), reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])), site: data.SITE },
     revalidate: 60,
   };
 }

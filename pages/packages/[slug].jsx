@@ -12,6 +12,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import LeadForm from "../../components/LeadForm";
 import ReviewsSection from "../../components/ReviewsSection";
+import AttractionsCarousel from "../../components/AttractionsCarousel";
 import BlogCard from "../../components/BlogCard";
 import { blogsForTour, slimBlog } from "../../lib/related";
 import { waLink, telLink, track } from "../../lib/whatsapp";
@@ -285,6 +286,8 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
             </section>
             )}
 
+            <div style={{ marginBottom: 32 }}><AttractionsCarousel attractions={tour.attractions} /></div>
+
             {/* Itinerary */}
             {tour.itinerary?.length > 0 && (
               <section aria-label="Trip itinerary" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0", marginBottom: 22 }}>
@@ -346,7 +349,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
 
             <LeadForm site={dynamicSite} source={`/packages/${tour.slug}`} trip={tour.title} title="Not ready to book? Get a callback" />
 
-            {reviews.length > 0 && <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} />}
+            {reviews.length > 0 && <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} tourSlug={tour.slug} />}
 
             {/* FAQs — Google reads these from the FAQ markup added in `schemas` above */}
             {tour.faqs?.length > 0 && (
