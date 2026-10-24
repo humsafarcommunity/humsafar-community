@@ -49,32 +49,15 @@ export default function Navbar({ site, isSolid = false }) {
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
           {/* Logo Section */}
-          <Link href="/" style={{ textDecoration: "none", zIndex: 1100 }}>
-            <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-              <span
-                style={{
-                  fontFamily: "var(--sans)",
-                  fontSize: 26,
-                  fontWeight: 700,
-                  color: activeHeaderStyle ? "#0e1117" : "#fff",
-                  transition: "color 0.3s",
-                }}
-              >
-                Humsafar
-              </span>
-              <span
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                  textTransform: "uppercase",
-                  color: activeHeaderStyle ? "#047857" : "#34d399",
-                  marginTop: 2,
-                }}
-              >
-                Community
-              </span>
-            </div>
+          <Link href="/" aria-label="Humsafar Community home" style={{ textDecoration: "none", zIndex: 1100, display: "block" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeHeaderStyle ? "/logo-full.png" : "/humsafar-logo-white.png"}
+              alt="Humsafar Community"
+              width={150}
+              height={Math.round(150 * 0.44)}
+              style={{ display: "block", height: 56, width: "auto", transition: "opacity 0.3s" }}
+            />
           </Link>
 
           {/* Desktop Links */}

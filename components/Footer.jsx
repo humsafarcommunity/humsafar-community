@@ -96,33 +96,9 @@ export default function Footer({ dynamicSite }) {
         >
           {/* Logo & About Section */}
           <div className="footer-logo-section" style={{ maxWidth: 280 }}>
-            <Link
-              href="/"
-              style={{ textDecoration: "none", lineHeight: 1.1, display: "flex", flexDirection: "column", marginBottom: 16 }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--sans)",
-                  fontSize: 26,
-                  fontWeight: 700,
-                  color: "#fff",
-                  marginBottom: 8,
-                }}
-              >
-                Humsafar
-              </div>
-              <div
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                  textTransform: "uppercase",
-                  color: "#10b981",
-                  marginTop: 2,
-                }}
-              >
-                Community
-              </div>
+            <Link href="/" aria-label="Humsafar Community home" style={{ display: "inline-block", marginBottom: 16 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/humsafar-logo-white.png" alt="Humsafar Community" width={180} height={79} style={{ display: "block", height: 72, width: "auto" }} />
             </Link>
             <p style={{ fontSize: 13, lineHeight: 1.7, color: "#94a3b8", marginBottom: 20 }}>
               {dynamicSite.description || "Curating authentic group travel experiences across the Himalayas and beyond."}
