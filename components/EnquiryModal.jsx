@@ -29,21 +29,37 @@ export default function EnquiryModal({ site = {} }) {
     };
     window.addEventListener("open-enquiry", show);
 
-    // Optional: open once per visit on computers only. Never on phones (Google penalises pop-ups there).
+    // Opens by itself once per visit (switch off in Site Settings). On phones it waits until the visitor
+    // has scrolled a little, so it never blocks the page on arrival, and it opens as a small bottom sheet.
     let timer;
-    if (site.popupAutoOpen && window.matchMedia("(min-width: 900px)").matches) {
-      let seen = false;
-      try { seen = sessionStorage.getItem("enquiry-seen") === "1"; } catch (e) { /* ignore */ }
-      if (!seen) {
-        timer = setTimeout(() => {
-          try { sessionStorage.setItem("enquiry-seen", "1"); } catch (e) { /* ignore */ }
-          show();
-        }, Math.max(5, Number(site.popupDelay) || 20) * 1000);
+    let onScroll;
+    const auto = site.popupAutoOpen !== false;
+    let seen = false;
+    try { seen = sessionStorage.getItem("enquiry-seen") === "1"; } catch (e) { /* ignore */ }
+    if (auto && !seen) {
+      const fire = () => {
+        try { sessionStorage.setItem("enquiry-seen", "1"); } catch (e) { /* ignore */ }
+        show();
+      };
+      const delay = Math.max(5, Number(site.popupDelay) || 15) * 1000;
+      if (window.matchMedia("(min-width: 900px)").matches) {
+        timer = setTimeout(fire, delay);
+      } else {
+        let waited = false;
+        let scrolled = false;
+        const tryFire = () => { if (waited && scrolled) { window.removeEventListener("scroll", onScroll); fire(); } };
+        timer = setTimeout(() => { waited = true; tryFire(); }, delay);
+        onScroll = () => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          if (max > 0 && window.scrollY / max > 0.3) { scrolled = true; tryFire(); }
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
       }
     }
     return () => {
       window.removeEventListener("open-enquiry", show);
       clearTimeout(timer);
+      if (onScroll) window.removeEventListener("scroll", onScroll);
     };
   }, [enabled, site.popupAutoOpen, site.popupDelay]);
 
@@ -52,7 +68,8 @@ export default function EnquiryModal({ site = {} }) {
     const onKey = (e) => { if (e.key === "Escape") close(); };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-    const t = setTimeout(() => firstField.current && firstField.current.focus(), 50);
+    // Do not focus on phones: it would pop the keyboard up and hide the form
+    const t = setTimeout(() => { if (window.matchMedia("(min-width: 761px)").matches && firstField.current) firstField.current.focus(); }, 50);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
@@ -131,13 +148,13 @@ export default function EnquiryModal({ site = {} }) {
               </a>
             </div>
           ) : (
-            <form onSubmit={onSubmit} noValidate style={{ display: "grid", gap: 16 }}>
+            <form onSubmit={onSubmit} noValidate className="enq-form">
               <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
               <div>
                 <label htmlFor="enq-name" style={label}>Full name *</label>
                 <input ref={firstField} id="enq-name" name="name" type="text" autoComplete="name" required maxLength={80} placeholder="Your name" style={field} />
               </div>
-              <div>
+              <div className="enq-opt">
                 <label htmlFor="enq-email" style={label}>Email</label>
                 <input id="enq-email" name="email" type="email" autoComplete="email" maxLength={120} placeholder="you@example.com" style={field} />
               </div>
@@ -155,14 +172,14 @@ export default function EnquiryModal({ site = {} }) {
                   {types.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <div>
+              <div className="enq-opt">
                 <label htmlFor="enq-place" style={label}>Where do you want to go?</label>
                 <select id="enq-place" name="destination" defaultValue="" style={field}>
                   <option value="">Select a location</option>
                   {places.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 14, color: "#475569", lineHeight: 1.5, cursor: "pointer" }}>
+              <label className="enq-consent" style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 14, color: "#475569", lineHeight: 1.5, cursor: "pointer" }}>
                 <input type="checkbox" name="consent" defaultChecked style={{ width: 20, height: 20, marginTop: 2, accentColor: "#047857", flexShrink: 0 }} />
                 Keep me updated with offers and trips on WhatsApp and email.
               </label>
@@ -186,16 +203,27 @@ export default function EnquiryModal({ site = {} }) {
         .enq-body { flex: 1 1 54%; padding: 32px 36px 36px; overflow-y: auto; }
         .enq-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 22px; }
         .enq-head h2 { margin: 0; font-size: clamp(24px, 3vw, 32px); color: #0f172a; }
+        .enq-form { display: grid; gap: 16px; }
         .enq-close { width: 44px; height: 44px; border: none; background: none; font-size: 34px; line-height: 1; cursor: pointer; color: #0f172a; border-radius: 12px; }
         .enq-close:focus-visible, .enq-modal input:focus-visible, .enq-modal select:focus-visible, .enq-modal button:focus-visible { outline: 3px solid #10b981; outline-offset: 2px; }
         @media (max-width: 760px) {
           .enq-backdrop { align-items: flex-end; padding: 0; }
-          .enq-modal { flex-direction: column; max-height: 94vh; border-radius: 24px 24px 0 0; }
-          .enq-photo { flex: 0 0 120px; min-height: 120px; }
-          .enq-photo-fallback { padding: 18px 22px; }
-          .enq-photo-fallback p { font-size: 22px; margin: 0; }
+          .enq-backdrop { background: rgba(15,23,42,0.45); }
+          .enq-modal { flex-direction: column; max-height: 82vh; border-radius: 22px 22px 0 0; }
+          .enq-photo { flex: 0 0 64px; min-height: 64px; }
+          .enq-photo-fallback { padding: 12px 18px; justify-content: center; }
+          .enq-photo-fallback p { font-size: 18px; margin: 0; }
           .enq-photo-fallback span { display: none; }
-          .enq-body { padding: 20px 20px 28px; }
+          .enq-body { padding: 12px 16px 18px; }
+          .enq-head { padding-bottom: 6px; margin-bottom: 12px; }
+          .enq-head h2 { font-size: 20px; }
+          .enq-close { width: 40px; height: 40px; font-size: 30px; }
+          .enq-form { gap: 10px !important; }
+          .enq-form label { margin-bottom: 4px; font-size: 12px; }
+          .enq-modal input, .enq-modal select { min-height: 46px !important; }
+          .enq-opt { display: none; }
+          .enq-consent { font-size: 12px !important; }
+          .enq-form button[type=submit] { width: 100%; justify-self: stretch !important; min-height: 48px !important; }
         }
       `}</style>
     </div>

@@ -78,8 +78,8 @@ export default {
     { name: 'popupButtonText', title: 'Button text', type: 'string', initialValue: "Let's Travel", fieldset: 'popup' },
     { name: 'popupTripTypes', title: 'Trip type choices', type: 'array', of: [{ type: 'string' }], description: 'Shown in "What kind of trip do you prefer?". Leave empty for the default list.', fieldset: 'popup' },
     { name: 'popupDestinations', title: 'Destination choices', type: 'array', of: [{ type: 'string' }], description: 'Shown in "Where do you want to go?". Leave empty for the default list.', fieldset: 'popup' },
-    { name: 'popupAutoOpen', title: 'Open by itself on desktop', type: 'boolean', initialValue: false, description: 'Opens once per visit after the delay below, on computers only. It never opens by itself on phones (Google penalises that).', fieldset: 'popup' },
-    { name: 'popupDelay', title: 'Seconds before it opens', type: 'number', initialValue: 20, fieldset: 'popup' },
+    { name: 'popupAutoOpen', title: 'Open by itself', type: 'boolean', initialValue: true, description: 'Opens once per visit after the delay below. On phones it waits until the visitor has scrolled a little, then shows a small bottom sheet (so Google does not treat it as an intrusive pop-up).', fieldset: 'popup' },
+    { name: 'popupDelay', title: 'Seconds before it opens', type: 'number', initialValue: 15, fieldset: 'popup' },
     {
       name: 'socials',
       title: 'Active Social Profiles',
