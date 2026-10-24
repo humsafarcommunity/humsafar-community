@@ -1,6 +1,7 @@
 // pages/index.jsx — Homepage with complete 5-layer optimization
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { figure } from "../lib/figure";
 import SEOHead from "../components/SEOHead";
 import HeroBanner from "../components/HeroBanner";
 import DestinationCards from "../components/DestinationCards";
@@ -55,7 +56,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
   const homepageFAQs = dynamicSite.faqs?.length > 0 ? dynamicSite.faqs : [
     {
       q: "Which is the best travel company for Manali tour packages?",
-      a: "Humsafar Community is one of India's most trusted travel companies for Manali tours. Packages start at ₹6,999/person for 6 days 5 nights including transport, hotel, meals, and sightseeing.",
+      a: "Humsafar Community runs weekly group Manali tours with a trip captain, with departures from Delhi. Each package page shows its own price, inclusions and dates, so you can compare before you book.",
     },
     {
       q: "What tour packages does Humsafar Community offer?",
@@ -67,7 +68,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     },
     {
       q: "What is the cheapest tour package from Delhi?",
-      a: "Humsafar's most affordable package is Rishikesh Rafting & Camping at ₹3,999/person (2 days). Kasol weekend trip: ₹4,999. Manali group tour: ₹6,999/person for 6 days. All prices include transport, accommodation, and most meals.",
+      a: "Our shorter trips such as Rishikesh and Kasol weekends cost the least, and the Manali group tour is one of our lowest-priced longer trips. Each package page lists its price and what is included.",
     },
   ];
 
@@ -140,9 +141,9 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     <>
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
-        title="Group Tours from Delhi & Gwalior | Humsafar Community"
-        description="Join Humsafar Community for budget-friendly group tours, backpacking trips, and authentic travel experiences across India. Plan your 2026 adventure today!"
-        keywords="Humsafar Community, India travel community, Group tours to Himachal, Uttarakhand tour packages 2026, Adventure tours North India"
+        title="Group Tours to Manali, Spiti & Kasol from Mumbai, Pune, Bangalore | Humsafar"
+        description="Budget group tours to Manali, Spiti, Kasol and Jibhi with a trip captain. Fly to Delhi and join weekly batches from Mumbai, Pune, Bangalore, Hyderabad and Ahmedabad."
+        keywords="Humsafar Community, group tours from Mumbai, Manali tour package from Pune, Spiti Valley group tour, Kasol group trip, Himachal backpacking trip, group tours from Bangalore"
         url="/"
         schemas={schemas}
         breadcrumbs={[{ name: "Home", path: "/" }]}
@@ -621,7 +622,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 fontFamily: "Plus Jakarta Sans, sans-serif",
               }}
             >
-              Join {dynamicSite.newsletterCount || "20,000+"} Travelers
+              Join {figure(dynamicSite.totalTravelers) || "our"} travellers
             </p>
             <h2
               style={{
