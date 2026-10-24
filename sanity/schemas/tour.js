@@ -41,6 +41,22 @@ export default {
     { name: 'highlights', title: 'Highlights', type: 'array', of: [{ type: 'string' }] },
     { name: 'inclusions', title: 'Inclusions', type: 'array', of: [{ type: 'string' }] },
     { name: 'exclusions', title: 'Exclusions', type: 'array', of: [{ type: 'string' }] },
+    {
+      name: 'attractions',
+      title: 'Attractions (must-see stops)',
+      type: 'array',
+      description: 'Shown as a photo carousel on the tour page. Add 3 to 8 real stops from this trip.',
+      of: [{
+        type: 'object',
+        name: 'attraction',
+        fields: [
+          { name: 'name', title: 'Name', type: 'string', validation: (Rule) => Rule.required() },
+          { name: 'image', title: 'Photo', type: 'image', options: { hotspot: true } },
+          { name: 'description', title: 'One or two lines', type: 'text', rows: 3 },
+        ],
+        preview: { select: { title: 'name', media: 'image' } },
+      }],
+    },
     { name: 'itinerary', title: 'Itinerary', type: 'array', of: [{ type: 'itineraryDay' }] },
     { name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'faq' }] },
     { name: 'advanceAmount', title: 'Advance to book', type: 'string', description: 'e.g. ₹2,000 per person. Shown on the tour page.', group: 'terms' },

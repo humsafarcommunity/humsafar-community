@@ -10,6 +10,7 @@ import Navbar from "../components/Navbar";
 import BlogCard from "../components/BlogCard";
 import FAQAccordion from "../components/FAQAccordion";
 import VideoCarousel from "../components/VideoCarousel";
+import ReviewsSection from "../components/ReviewsSection";
 import Footer from "../components/Footer";
 import {
   SITE,
@@ -24,7 +25,7 @@ import {
 // HOMEPAGE COMPONENT
 // ──────────────────────────────────────────────────────────────────
 
-export default function HomePage({ tours = [], blogs = [], banners = [], destinations = [], videos = [], site: freshSite, seo: seoData }) {
+export default function HomePage({ tours = [], blogs = [], banners = [], destinations = [], videos = [], reviews = [], site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
@@ -465,6 +466,11 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
           </div>
         </section>
 
+        {reviews.length > 0 && (
+          <section style={{ maxWidth: 1156, margin: "0 auto", padding: "64px 24px 0" }}>
+            <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} />
+          </section>
+        )}
         <VideoCarousel videos={videos} eyebrow={dynamicSite.videosEyebrow} title={dynamicSite.videosTitle} />
 
         {/* ── AEO SECTION: Direct answers for voice search ──────── */}
@@ -836,6 +842,7 @@ export async function getStaticProps() {
       banners,
       destinations: (data.DESTINATIONS || []).map((d) => ({ _id: d._id || d.name, name: d.name || "", group: d.group || "domestic", region: d.region || "", link: d.link || "", textColor: d.textColor || "light", image: d.image || "", alt: d.alt || "" })),
       videos: JSON.parse(JSON.stringify(data.VIDEOS || [])),
+      reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])),
       site: data.SITE,
       seo: data.SEODATA,
     },
