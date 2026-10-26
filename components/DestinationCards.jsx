@@ -27,8 +27,8 @@ export default function DestinationCards({ title, items: plain = [], tabs = [] }
   };
 
   return (
-    <section ref={auto.wrapRef} {...auto.handlers} aria-label={title} aria-roledescription="carousel" style={{ padding: "56px 0 8px", background: "#fff" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+    <section ref={auto.wrapRef} {...auto.handlers} aria-label={title} aria-roledescription="carousel" className="dest-sec" style={{ padding: "56px 0 8px", background: "#fff" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 12 }}>
           <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 800, color: "#0e1117" }}>{title}</h2>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -72,16 +72,16 @@ export default function DestinationCards({ title, items: plain = [], tabs = [] }
             className="dest-card"
             aria-label={`${d.name} tours`}
             style={{
-              position: "relative", flex: "0 0 auto", width: "clamp(200px, 62vw, 250px)", aspectRatio: "2 / 3",
-              borderRadius: 28, overflow: "hidden", scrollSnapAlign: "start", background: "#cbd5e1",
+              position: "relative", flex: "0 0 auto", width: "var(--dw)", aspectRatio: "2 / 3",
+              borderRadius: "var(--dr)", overflow: "hidden", scrollSnapAlign: "start", background: "#cbd5e1",
               boxShadow: "0 10px 24px rgba(15,23,42,0.18)", textDecoration: "none",
             }}
           >
             <Image src={d.image} alt={d.alt || `${d.name} travel destination`} fill sizes="250px" style={{ objectFit: "cover" }} />
             <span
               style={{
-                position: "absolute", top: 0, left: 0, right: 0, padding: "34px 12px 40px", textAlign: "center",
-                fontFamily: "'Londrina Solid', var(--sans)", fontWeight: 900, fontSize: "clamp(30px, 8vw, 38px)",
+                position: "absolute", top: 0, left: 0, right: 0, padding: "var(--dpt) 8px 28px", textAlign: "center",
+                fontFamily: "'Londrina Solid', var(--sans)", fontWeight: 900, fontSize: "var(--dfs)",
                 lineHeight: 1, textTransform: "uppercase", letterSpacing: "0.02em",
                 color: d.textColor === "dark" ? "#1e4a72" : "#fff",
                 background: d.textColor === "dark"
@@ -105,12 +105,20 @@ export default function DestinationCards({ title, items: plain = [], tabs = [] }
       </div>
 
       <style jsx global>{`
+        .dest-sec { --dw: 250px; --dr: 28px; --dfs: 38px; --dpt: 34px; }
         .dest-row::-webkit-scrollbar { display: none; }
         .dest-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent); pointer-events: none; }
         .dest-logo { position: absolute; left: 50%; bottom: 20px; width: 62%; height: auto; transform: translateX(-50%); pointer-events: none; filter: drop-shadow(0 0 7px rgba(255,255,255,0.55)) drop-shadow(0 2px 5px rgba(0,0,0,0.55)); }
         .dest-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .dest-card:hover, .dest-card:focus-visible { transform: translateY(-8px) scale(1.03); box-shadow: 0 18px 36px rgba(15,23,42,0.28); }
-        @media (max-width: 700px) { .dest-arrows { display: none !important; } }
+        @media (max-width: 700px) {
+          .dest-sec { --dw: 148px; --dr: 18px; --dfs: 22px; --dpt: 16px; padding-top: 28px !important; }
+          .dest-sec h2 { font-size: 20px !important; }
+          .dest-row { gap: 12px !important; padding-top: 6px !important; padding-bottom: 20px !important; padding-left: 16px !important; padding-right: 16px !important; }
+          .dest-arrows { display: none !important; }
+          .dest-logo { width: 70%; bottom: 10px; }
+          .dest-shade { height: 30%; }
+        }
         @media (prefers-reduced-motion: reduce) { .dest-card { transition: none; } .dest-card:hover { transform: none; } }
       `}</style>
     </section>

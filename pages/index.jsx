@@ -273,14 +273,8 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       {/* ── DESTINATION CARDS ────────────────────────────────────── */}
       {isDefault && (
         <>
-          <DestinationCards
-            title="Where to next?"
-            tabs={[
-              { id: "all", label: "All", items: destinationCards },
-              { id: "domestic", label: "Domestic", items: destinationCards.filter((d) => d.group !== "international") },
-              { id: "international", label: "International", items: destinationCards.filter((d) => d.group === "international") },
-            ]}
-          />
+          <DestinationCards title="Domestic Destinations" items={destinationCards.filter((d) => d.group !== "international")} />
+          <DestinationCards title="International Destinations" items={destinationCards.filter((d) => d.group === "international")} />
         </>
       )}
 
@@ -296,7 +290,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 <h2
                   style={{
                     fontFamily: "var(--sans)",
-                    fontSize: 34,
+                    fontSize: "clamp(22px, 5.5vw, 34px)",
                     fontWeight: 700,
                     color: "#0e1117",
                     marginBottom: 8,
@@ -371,7 +365,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   <h2
                     style={{
                       fontFamily: "var(--sans)",
-                      fontSize: "clamp(28px, 5vw, 38px)",
+                      fontSize: "clamp(22px, 5vw, 38px)",
                       fontWeight: 700,
                       color: "#0e1117",
                     }}
@@ -639,7 +633,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
             <h2
               style={{
                 fontFamily: "var(--sans)",
-                fontSize: "clamp(28px,4vw,48px)",
+                fontSize: "clamp(22px,4vw,48px)",
                 color: "#fff",
                 marginBottom: 16,
                 lineHeight: 1.15,

@@ -35,7 +35,7 @@ export default function Carousel({ title, subtitle, children, action, label, aut
       onClick={() => go(dir)}
       disabled={!enabled}
       aria-label={text}
-      style={{ width: 44, height: 44, borderRadius: 999, border: 0, background: enabled ? "#111827" : "#cbd5e1", color: "#fff", cursor: enabled ? "pointer" : "default", display: "grid", placeItems: "center", flexShrink: 0 }}
+      className="hc-btn" style={{ width: 44, height: 44, borderRadius: 999, border: 0, background: enabled ? "#111827" : "#cbd5e1", color: "#fff", cursor: enabled ? "pointer" : "default", display: "grid", placeItems: "center", flexShrink: 0 }}
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d={dir < 0 ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
@@ -47,8 +47,8 @@ export default function Carousel({ title, subtitle, children, action, label, aut
     <section ref={auto.wrapRef} {...auto.handlers} aria-label={label || title} aria-roledescription="carousel" style={{ minWidth: 0, maxWidth: "100%" }}>
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 20 }}>
         <div style={{ minWidth: 0 }}>
-          <h2 style={{ fontSize: "clamp(26px, 4.5vw, 40px)", color: "#0e1117", margin: 0, lineHeight: 1.1 }}>{title}</h2>
-          {subtitle && <p style={{ margin: "8px 0 0", color: "#64748b", fontSize: 16 }}>{subtitle}</p>}
+          <h2 className="hc-h" style={{ fontSize: "clamp(22px, 4.5vw, 40px)", color: "#0e1117", margin: 0, lineHeight: 1.1 }}>{title}</h2>
+          {subtitle && <p className="hc-sub" style={{ margin: "8px 0 0", color: "#64748b", fontSize: 16 }}>{subtitle}</p>}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {auto.canAuto && <PauseButton paused={auto.userPaused} onClick={auto.toggle} label={label || title} />}
@@ -65,7 +65,7 @@ export default function Carousel({ title, subtitle, children, action, label, aut
       >
         {children}
       </div>
-      <style jsx global>{`.hc-track::-webkit-scrollbar{display:none}.hc-track>*{scroll-snap-align:start;flex-shrink:0}`}</style>
+      <style jsx global>{`.hc-track::-webkit-scrollbar{display:none}.hc-track>*{scroll-snap-align:start;flex-shrink:0}@media(max-width:700px){.hc-pause{width:36px!important;height:36px!important}.hc-track{gap:12px!important}.hc-sub{font-size:13px!important;margin-top:4px!important}.hc-btn{width:36px!important;height:36px!important}.hc-btn svg{width:14px;height:14px}}`}</style>
     </section>
   );
 }
