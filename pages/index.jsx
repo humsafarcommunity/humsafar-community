@@ -273,8 +273,14 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       {/* ── DESTINATION CARDS ────────────────────────────────────── */}
       {isDefault && (
         <>
-          <DestinationCards title="Domestic Destinations" items={destinationCards.filter((d) => d.group !== "international")} />
-          <DestinationCards title="International Destinations" items={destinationCards.filter((d) => d.group === "international")} />
+          <DestinationCards
+            title="Where to next?"
+            tabs={[
+              { id: "all", label: "All", items: destinationCards },
+              { id: "domestic", label: "Domestic", items: destinationCards.filter((d) => d.group !== "international") },
+              { id: "international", label: "International", items: destinationCards.filter((d) => d.group === "international") },
+            ]}
+          />
         </>
       )}
 

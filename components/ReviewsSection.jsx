@@ -59,6 +59,7 @@ export default function ReviewsSection({ reviews = [], title = "Reviews", review
   return (
     <Carousel
       title={title}
+      autoplay={6000}
       subtitle="Real words from travellers on our group trips."
       action={reviewsUrl ? <a href={reviewsUrl} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 6, fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap" }}>View All</a> : null}
     >
