@@ -1,11 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import useAutoplay, { advanceTrack, PauseButton } from "../lib/useAutoplay";
 import Link from "next/link";
 import Image from "next/image";
 
 // A row of tall photo cards with the destination name across the top.
 // Scrolls sideways (swipe on phones, arrows on desktop). Each card opens that region's tours.
-export default function DestinationCards({ title, items = [] }) {
+// Pass `tabs` ([{ id, label, items }]) to get Domestic / International tabs on one rotating row.
+export default function DestinationCards({ title, items: plain = [], tabs = [] }) {
   const rowRef = useRef(null);
+  const usable = tabs.filter((t) => t.items && t.items.length);
+  const [tab, setTab] = useState(usable[0]?.id);
+  const items = usable.length ? (usable.find((t) => t.id === tab) || usable[0]).items : plain;
+  const auto = useAutoplay({ enabled: items.length > 1, interval: 3200, tick: () => advanceTrack(rowRef.current) });
+  useEffect(() => { if (rowRef.current) rowRef.current.scrollTo({ left: 0 }); }, [tab]);
   if (!items.length) return null;
 
   const scrollBy = (dir) => {
@@ -20,15 +27,33 @@ export default function DestinationCards({ title, items = [] }) {
   };
 
   return (
-    <section aria-label={title} style={{ padding: "56px 0 8px", background: "#fff" }}>
+    <section ref={auto.wrapRef} {...auto.handlers} aria-label={title} aria-roledescription="carousel" style={{ padding: "56px 0 8px", background: "#fff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 12 }}>
           <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 800, color: "#0e1117" }}>{title}</h2>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {auto.canAuto && <PauseButton paused={auto.userPaused} onClick={auto.toggle} label="destinations" />}
           <div className="dest-arrows" style={{ display: "flex", gap: 8 }}>
             <button type="button" aria-label="Scroll left" onClick={() => scrollBy(-1)} style={arrow}>‹</button>
             <button type="button" aria-label="Scroll right" onClick={() => scrollBy(1)} style={arrow}>›</button>
           </div>
+          </div>
         </div>
+        {usable.length > 1 && (
+          <div role="tablist" aria-label="Destination type" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {usable.map((t) => (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={(tab || usable[0].id) === t.id}
+                onClick={() => setTab(t.id)}
+                style={{ minHeight: 44, padding: "0 20px", borderRadius: 999, border: "1.5px solid #064e3b", cursor: "pointer", fontWeight: 700, fontSize: 15, fontFamily: "var(--sans)", background: (tab || usable[0].id) === t.id ? "#064e3b" : "#fff", color: (tab || usable[0].id) === t.id ? "#fff" : "#064e3b" }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div

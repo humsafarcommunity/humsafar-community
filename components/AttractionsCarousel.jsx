@@ -6,7 +6,7 @@ export default function AttractionsCarousel({ attractions = [], title = "Attract
   const items = (attractions || []).filter((a) => a && a.name);
   if (!items.length) return null;
   return (
-    <Carousel title={title} subtitle={subtitle}>
+    <Carousel title={title} subtitle={subtitle} autoplay={4500}>
       {items.map((a, i) => (
         <figure key={a.name + i} style={{ position: "relative", margin: 0, width: "min(78vw, 290px)", aspectRatio: "4 / 5.6", borderRadius: 28, overflow: "hidden", background: "#0f172a", boxShadow: "0 10px 30px rgba(15,23,42,0.12)" }}>
           {a.image && <Image src={a.image} alt={a.name} fill sizes="(max-width: 640px) 78vw, 290px" style={{ objectFit: "cover" }} />}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useAutoplay, { PauseButton } from "../lib/useAutoplay";
 
 // "Videos" section: a 3D-style carousel of YouTube videos. The video in the middle plays when tapped
 // (nothing is loaded from YouTube until then, so the page stays fast). Videos are added in Studio → Videos.
@@ -8,6 +9,7 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
   const [playing, setPlaying] = useState(false);
   const [touchX, setTouchX] = useState(null);
 
+  const auto = useAutoplay({ enabled: n > 1 && !playing, interval: 5000, tick: () => setActive((a) => (a + 1) % Math.max(n, 1)) });
   useEffect(() => { setPlaying(false); }, [active]);
   if (n === 0) return null;
 
@@ -22,7 +24,7 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
   const current = videos[active];
 
   return (
-    <section aria-label="Videos" className="vc" style={{ background: "#fff", padding: "72px 0 64px" }}>
+    <section ref={auto.wrapRef} {...auto.handlers} aria-label="Videos" className="vc" style={{ background: "#fff", padding: "72px 0 64px" }}>
       <div style={{ textAlign: "center", padding: "0 20px", marginBottom: 36 }}>
         <p style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: "#047857", fontFamily: "var(--sans)" }}>
           {eyebrow || "Videos"}
@@ -102,10 +104,19 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
       </div>
 
       {n > 1 && (
+        <div className="vc-dots" role="group" aria-label="Choose a video">
+          {videos.map((v, idx) => (
+            <button key={v._id || v.youtubeId} type="button" onClick={() => setActive(idx)} aria-label={`Video ${idx + 1} of ${n}: ${v.title || "Humsafar travel video"}`} aria-current={idx === active} className="vc-dot" data-on={idx === active ? "true" : "false"} />
+          ))}
+        </div>
+      )}
+
+      {n > 1 && (
         <div className="vc-nav">
           <button type="button" onClick={() => go(-1)} aria-label="Previous video">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
           </button>
+          {auto.canAuto && <PauseButton paused={auto.userPaused} onClick={auto.toggle} label="videos" style={{ width: 56, height: 56, background: "#fff" }} />}
           <button type="button" onClick={() => go(1)} aria-label="Next video">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </button>
@@ -124,7 +135,12 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
         .vc-thumb:focus-visible, .vc-nav button:focus-visible, .vc-stage:focus-visible { outline: 3px solid #10b981; outline-offset: 3px; }
         .vc-play { position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%; background: rgba(6,78,59,0.88); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,0.35); transition: transform 0.2s; }
         .vc-thumb:hover .vc-play { transform: scale(1.08); }
-        .vc-nav { display: flex; justify-content: center; gap: 18px; margin-top: 22px; }
+        .vc-dots { display: flex; justify-content: center; gap: 4px; margin-top: 18px; flex-wrap: wrap; padding: 0 20px; }
+        .vc-dot { width: 24px; height: 24px; border: 0; background: none; cursor: pointer; position: relative; padding: 0; }
+        .vc-dot::after { content: ""; position: absolute; inset: 8px; border-radius: 99px; background: #cbd5e1; transition: all 0.25s; }
+        .vc-dot[data-on="true"]::after { background: #064e3b; inset: 8px -2px; }
+        .vc-dot:focus-visible { outline: 3px solid #10b981; outline-offset: 2px; }
+        .vc-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 22px; }
         .vc-nav button { width: 56px; height: 56px; border-radius: 50%; border: none; background: #064e3b; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(6,78,59,0.3); transition: transform 0.2s, background 0.2s; }
         .vc-nav button:hover { background: #047857; transform: translateY(-2px); }
         @media (max-width: 700px) {

@@ -1,8 +1,10 @@
 import { useRef, useState, useEffect, useCallback } from "react";
+import useAutoplay, { advanceTrack, PauseButton } from "../lib/useAutoplay";
 
 // Horizontal scroll-snap track with round prev/next buttons. Used by Attractions and Reviews.
-export default function Carousel({ title, subtitle, children, action, label }) {
+export default function Carousel({ title, subtitle, children, action, label, autoplay = 0 }) {
   const ref = useRef(null);
+  const auto = useAutoplay({ enabled: autoplay > 0, interval: autoplay || 4000, tick: () => advanceTrack(ref.current) });
   const [can, setCan] = useState({ prev: false, next: true });
 
   const update = useCallback(() => {
@@ -42,13 +44,14 @@ export default function Carousel({ title, subtitle, children, action, label }) {
   );
 
   return (
-    <section aria-label={label || title} style={{ minWidth: 0, maxWidth: "100%" }}>
+    <section ref={auto.wrapRef} {...auto.handlers} aria-label={label || title} aria-roledescription="carousel" style={{ minWidth: 0, maxWidth: "100%" }}>
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 20 }}>
         <div style={{ minWidth: 0 }}>
           <h2 style={{ fontSize: "clamp(26px, 4.5vw, 40px)", color: "#0e1117", margin: 0, lineHeight: 1.1 }}>{title}</h2>
           {subtitle && <p style={{ margin: "8px 0 0", color: "#64748b", fontSize: 16 }}>{subtitle}</p>}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {auto.canAuto && <PauseButton paused={auto.userPaused} onClick={auto.toggle} label={label || title} />}
           {arrow(-1, can.prev, "Previous")}
           {arrow(1, can.next, "Next")}
           {action}
