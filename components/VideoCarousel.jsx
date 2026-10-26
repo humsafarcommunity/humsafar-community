@@ -24,8 +24,8 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
   const current = videos[active];
 
   return (
-    <section ref={auto.wrapRef} {...auto.handlers} aria-label="Videos" className="vc" style={{ background: "#fff", padding: "72px 0 64px" }}>
-      <div style={{ textAlign: "center", padding: "0 20px", marginBottom: 36 }}>
+    <section ref={auto.wrapRef} {...auto.handlers} aria-label="Videos" className="vc" style={{ background: "#fff", padding: "var(--vp) 0 var(--vq)" }}>
+      <div style={{ textAlign: "center", padding: "0 16px", marginBottom: 22 }}>
         <p style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: "#047857", fontFamily: "var(--sans)" }}>
           {eyebrow || "Videos"}
         </p>
@@ -124,7 +124,7 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
       )}
 
       <style jsx global>{`
-        .vc { overflow: hidden; }
+        .vc { overflow: hidden; --vp: 72px; --vq: 64px; }
         .vc-stage { --w: min(760px, 78vw); position: relative; height: calc(var(--w) * 0.5625 + 28px); max-width: 1300px; margin: 0 auto; perspective: 1500px; outline-offset: 6px; }
         .vc-card { position: absolute; top: 0; left: 50%; width: var(--w); transition: transform 0.6s cubic-bezier(.2,.8,.2,1), opacity 0.5s ease; transform: translateX(-50%) translateX(calc(var(--d) * 54%)) translateZ(calc(var(--ad) * -150px)) rotateY(calc(var(--d) * 26deg)) scale(calc(1 - var(--ad) * 0.1)); opacity: calc(1 - var(--ad) * 0.12); will-change: transform; }
         .vc-card[data-hidden="true"] { opacity: 0; pointer-events: none; }
@@ -144,7 +144,13 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
         .vc-nav button { width: 56px; height: 56px; border-radius: 50%; border: none; background: #064e3b; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(6,78,59,0.3); transition: transform 0.2s, background 0.2s; }
         .vc-nav button:hover { background: #047857; transform: translateY(-2px); }
         @media (max-width: 700px) {
-          .vc-stage { --w: 80vw; }
+          .vc { --vp: 36px; --vq: 32px; }
+          .vc h2 { font-size: 22px !important; }
+          .vc-stage { --w: 66vw; }
+          .vc-nav { margin-top: 14px; gap: 12px; }
+          .vc-nav button { width: 42px; height: 42px; }
+          .vc-nav button svg { width: 18px; height: 18px; }
+          .vc-nav .hc-pause { width: 42px !important; height: 42px !important; }
           .vc-card { transform: translateX(-50%) translateX(calc(var(--d) * 50%)) translateZ(calc(var(--ad) * -120px)) rotateY(calc(var(--d) * 22deg)) scale(calc(1 - var(--ad) * 0.12)); }
           .vc-card[data-far="true"] { opacity: 0; pointer-events: none; }
           .vc-frame { padding: 8px; border-radius: 22px; }

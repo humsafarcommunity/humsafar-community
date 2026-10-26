@@ -167,7 +167,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         .hb-inner { position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0 auto; padding: 120px 28px 64px; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; box-sizing: border-box; }
         .hb-copy { margin: auto 0; }
         .hb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-        .hb-h1 { color: #fff; margin: 0 0 22px; font-family: var(--sans); font-weight: 800; font-size: clamp(40px, 8.2vw, 92px); line-height: 1.12; letter-spacing: -0.02em; text-shadow: 0 4px 24px rgba(0,0,0,0.45); }
+        .hb-h1 { color: #fff; margin: 0 0 22px; font-family: var(--sans); font-weight: 800; font-size: clamp(30px, 8.2vw, 92px); line-height: 1.12; letter-spacing: -0.02em; text-shadow: 0 4px 24px rgba(0,0,0,0.45); }
         .hb-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.22em; }
         .hb-pill { display: inline-block; width: 2.3em; height: 0.88em; border-radius: 999px; overflow: hidden; border: 3px solid rgba(255,255,255,0.85); box-shadow: 0 8px 24px rgba(0,0,0,0.4); animation: hbFade 0.6s ease both; }
         .hb-word { position: relative; display: inline-block; color: ${LIME}; animation: hbIn 0.65s cubic-bezier(.2,.8,.2,1) both; }
@@ -198,7 +198,8 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         @keyframes hbZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
         @media (max-width: 1100px) { .hb-arrow { display: none; } }
         @media (max-width: 760px) {
-          .hb { min-height: 92svh; }
+          .hb { min-height: 78svh; }
+          .hb-h1 { margin-bottom: 14px; }
           .hb-inner { padding: 96px 20px 36px; gap: 32px; }
           .hb-stats { grid-template-columns: 1fr 1fr; gap: 18px 0; }
           .hb-stats li { padding: 0 8px 0 0; }

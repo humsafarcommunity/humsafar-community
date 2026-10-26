@@ -13,7 +13,7 @@ function Card({ r }) {
   const long = (r.text || "").length > LIMIT;
   const text = open || !long ? r.text : r.text.slice(0, LIMIT).replace(/\s+\S*$/, "") + "…";
   return (
-    <article style={{ width: "min(86vw, 420px)", background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 28, padding: 24, display: "flex", flexDirection: "column", gap: 12, boxShadow: "0 6px 24px rgba(15,23,42,0.05)" }}>
+    <article className="rv-card" style={{ width: "min(86vw, 420px)", background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 28, padding: 24, display: "flex", flexDirection: "column", gap: 12, boxShadow: "0 6px 24px rgba(15,23,42,0.05)" }}>
       <header style={{ display: "flex", gap: 14, alignItems: "center" }}>
         <span style={{ position: "relative", width: 52, height: 52, borderRadius: 999, overflow: "hidden", flexShrink: 0, background: "#064e3b", color: "#fff", display: "grid", placeItems: "center", fontWeight: 800 }}>
           {r.photo ? <Image src={r.photo} alt="" fill sizes="52px" style={{ objectFit: "cover" }} /> : initials(r.author)}
@@ -53,6 +53,8 @@ function Card({ r }) {
   );
 }
 
+const RV_CSS = "@media(max-width:700px){.rv-card{width:min(78vw,290px)!important;padding:14px!important;border-radius:18px!important;gap:8px!important}.rv-card strong{font-size:15px!important}.rv-card blockquote{font-size:13.5px!important;line-height:1.55!important}.rv-card header span:first-child{width:38px!important;height:38px!important}}";
+
 export default function ReviewsSection({ reviews = [], title = "Reviews", reviewsUrl, tourSlug }) {
   if (!reviews.length) return null;
   const sorted = tourSlug ? [...reviews].sort((a, b) => (b.tourSlug === tourSlug) - (a.tourSlug === tourSlug)) : reviews;
@@ -64,6 +66,7 @@ export default function ReviewsSection({ reviews = [], title = "Reviews", review
       action={reviewsUrl ? <a href={reviewsUrl} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 6, fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap" }}>View All</a> : null}
     >
       {sorted.map((r) => <Card key={r._id || r.author + r.text.slice(0, 12)} r={r} />)}
+      <style jsx global>{RV_CSS}</style>
     </Carousel>
   );
 }

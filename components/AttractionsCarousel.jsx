@@ -8,13 +8,13 @@ export default function AttractionsCarousel({ attractions = [], title = "Attract
   return (
     <Carousel title={title} subtitle={subtitle} autoplay={4500}>
       {items.map((a, i) => (
-        <figure key={a.name + i} style={{ position: "relative", margin: 0, width: "min(78vw, 290px)", aspectRatio: "4 / 5.6", borderRadius: 28, overflow: "hidden", background: "#0f172a", boxShadow: "0 10px 30px rgba(15,23,42,0.12)" }}>
+        <figure key={a.name + i} style={{ position: "relative", margin: 0, width: "min(56vw, 290px)", aspectRatio: "4 / 5.6", borderRadius: 22, overflow: "hidden", background: "#0f172a", boxShadow: "0 10px 30px rgba(15,23,42,0.12)" }}>
           {a.image && <Image src={a.image} alt={a.name} fill sizes="(max-width: 640px) 78vw, 290px" style={{ objectFit: "cover" }} />}
           <span aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 38%, rgba(0,0,0,0) 62%)" }} />
-          <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: 20, color: "#fff" }}>
-            <strong style={{ display: "block", fontSize: 22, lineHeight: 1.15, marginBottom: 6 }}>{a.name}</strong>
+          <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "clamp(12px, 3vw, 20px)", color: "#fff" }}>
+            <strong style={{ display: "block", fontSize: "clamp(16px, 4.6vw, 22px)", lineHeight: 1.15, marginBottom: 6 }}>{a.name}</strong>
             {a.description && (
-              <span style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden", fontSize: 14, lineHeight: 1.45, color: "rgba(255,255,255,0.92)" }}>{a.description}</span>
+              <span style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", fontSize: "clamp(12px, 3.3vw, 14px)", lineHeight: 1.4, color: "rgba(255,255,255,0.92)" }}>{a.description}</span>
             )}
           </figcaption>
         </figure>
