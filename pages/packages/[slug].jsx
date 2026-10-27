@@ -13,6 +13,7 @@ import Footer from "../../components/Footer";
 import LeadForm from "../../components/LeadForm";
 import ReviewsSection from "../../components/ReviewsSection";
 import AttractionsCarousel from "../../components/AttractionsCarousel";
+import ItineraryActions from "../../components/ItineraryActions";
 import BlogCard from "../../components/BlogCard";
 import { blogsForTour, slimBlog } from "../../lib/related";
 import { waLink, telLink, track } from "../../lib/whatsapp";
@@ -289,6 +290,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
             <div style={{ marginBottom: 32 }}><AttractionsCarousel attractions={tour.attractions} /></div>
 
             {/* Itinerary */}
+            <ItineraryActions tour={tour} site={dynamicSite} pageUrl={`${(dynamicSite.url || "https://www.humsafarcommunity.com").replace(/\/$/, "")}/packages/${tour.slug}`} />
             {tour.itinerary?.length > 0 && (
               <section aria-label="Trip itinerary" style={{ background: "#fff", borderRadius: 28, padding: "clamp(18px, 4vw, 32px)", border: "1px solid #e2e8f0", marginBottom: 22 }}>
                 <Accordion
