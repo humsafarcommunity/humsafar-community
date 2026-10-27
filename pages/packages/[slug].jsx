@@ -27,6 +27,8 @@ import {
 } from "../../data";
 
 export default function TourDetailPage({ tour, relatedTours, guides = [], reviews = [], site: freshSite }) {
+  // Drop stray call-to-action lines that were pasted into the highlights list in the CMS.
+  const cleanHighlights = (tour.highlights || []).filter((h) => h && !/\[(book now|call us|whatsapp us)\]|ready to book/i.test(h));
   const dynamicSite = freshSite || SITE || { whatsapp: "916268496389", name: "Humsafar Community" };
   const router = useRouter();
   const [activeDate, setActiveDate] = useState(null);
@@ -205,7 +207,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
       {/* Hero Section with Integrated Image Grid */}
       <section style={{ background: "#fff", paddingTop: 85 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 32px" }}>
-            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr", gap: 8, height: 520, borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
+            <div className="tour-gallery-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 2.2fr) minmax(0, 1fr)", gap: 8, height: 520, borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
               {/* Main Featured Image with Overlay Content */}
               <div style={{ position: "relative", height: "100%", overflow: "hidden" }} className="featured-img-container">
                 <Image src={tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"} alt={tour.title} fill style={{ objectFit: "cover" }} priority />
@@ -267,17 +269,17 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
             margin: "0 auto", 
             padding: "32px 24px", 
             display: "grid", 
-            gridTemplateColumns: "2.5fr 1fr", 
+            gridTemplateColumns: "minmax(0, 2.5fr) minmax(0, 1fr)", 
             gap: 28 
           }}
         >
-          <div>
+          <div style={{ minWidth: 0 }}>
             {/* Highlights */}
-            {tour.highlights?.length > 0 && (
+            {cleanHighlights.length > 0 && (
               <section aria-label="Trip highlights" style={{ background: "#fff", borderRadius: 12, padding: "24px", marginBottom: 20, border: "1px solid #eef2f6" }}>
               <h2 style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 800, marginBottom: 16, color: "#0f172a" }}>Trip Highlights</h2>
               <ul className="highlights-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))", gap: 10, listStyle: "none" }}>
-                {tour.highlights.map((h, i) => (
+                {cleanHighlights.map((h, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{ width: 20, height: 20, borderRadius: 6, background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 10, color: "#047857" }}>✓</div>
                     <span style={{ fontSize: 14, color: "#475569", fontWeight: 500 }}>{h}</span>
@@ -316,7 +318,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
             )}
 
             {/* Inclusions / Exclusions */}
-            <div className="inclusions-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
+            <div className="inclusions-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 16, marginBottom: 20 }}>
               {[
                 { title: "What's Included", items: tour.inclusions, icon: "✓", bg: "#f0fdf4", col: "#16a34a" },
                 { title: "What's Excluded", items: tour.exclusions, icon: "✗", bg: "#fef2f2", col: "#dc2626" },
@@ -362,7 +364,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
           </div>
 
           {/* Booking Sidebar */}
-          <aside style={{ position: "sticky", top: 90, height: "fit-content" }}>
+          <aside style={{ position: "sticky", top: 90, height: "fit-content", minWidth: 0 }}>
             <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e2e8f0", overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
               <div style={{ background: "#064e3b", padding: "22px", textAlign: "center", color: "#fff" }}>
                 <div style={{ fontSize: 10, opacity: 0.7, textTransform: "uppercase", letterSpacing: 2, marginBottom: 4, fontFamily: "Plus Jakarta Sans, sans-serif" }}>
