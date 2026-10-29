@@ -28,7 +28,7 @@ import {
 
 export default function TourDetailPage({ tour, relatedTours, guides = [], reviews = [], site: freshSite }) {
   // Drop stray call-to-action lines that were pasted into the highlights list in the CMS.
-  const cleanHighlights = (tour.highlights || []).filter((h) => h && !/\[(book now|call us|whatsapp us)\]|ready to book/i.test(h));
+  const cleanHighlights = (tour?.highlights || []).filter((h) => h && !/\[(book now|call us|whatsapp us)\]|ready to book/i.test(h));
   const dynamicSite = freshSite || SITE || { whatsapp: "916268496389", name: "Humsafar Community" };
   const router = useRouter();
   const [activeDate, setActiveDate] = useState(null);
