@@ -13,6 +13,7 @@ import Footer from "../../components/Footer";
 import LeadForm from "../../components/LeadForm";
 import ReviewsSection from "../../components/ReviewsSection";
 import AttractionsCarousel from "../../components/AttractionsCarousel";
+import TripSnapshot from "../../components/TripSnapshot";
 import ItineraryActions from "../../components/ItineraryActions";
 import BlogCard from "../../components/BlogCard";
 import { blogsForTour, slimBlog } from "../../lib/related";
@@ -288,6 +289,8 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
               </ul>
             </section>
             )}
+
+            <TripSnapshot tour={tour} />
 
             <div style={{ marginBottom: 32 }}><AttractionsCarousel attractions={tour.attractions} /></div>
 

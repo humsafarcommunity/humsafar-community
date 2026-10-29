@@ -59,6 +59,10 @@ export default {
     },
     { name: 'itinerary', title: 'Itinerary', type: 'array', of: [{ type: 'itineraryDay' }] },
     { name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'faq' }] },
+    { name: 'difficulty', title: 'Difficulty level', type: 'string', options: { list: [{ title: 'Easy', value: 'easy' }, { title: 'Moderate', value: 'moderate' }, { title: 'Difficult', value: 'difficult' }], layout: 'radio' }, description: 'Shown on the tour page as a 3-step meter. Leave empty to hide it.', group: 'snapshot' },
+    { name: 'altitude', title: 'Highest altitude', type: 'string', description: 'e.g. 4,590 m (Kibber)', group: 'snapshot' },
+    { name: 'bestSeason', title: 'Best time to go', type: 'string', description: 'e.g. May to October', group: 'snapshot' },
+    { name: 'weatherPlace', title: 'Weather place', type: 'string', description: 'Town used for the live weather, e.g. Kaza. Leave empty to guess from the tour name and location.', group: 'snapshot' },
     { name: 'advanceAmount', title: 'Advance to book', type: 'string', description: 'e.g. ₹2,000 per person. Shown on the tour page.', group: 'terms' },
     { name: 'taxNote', title: 'Tax note', type: 'string', description: 'e.g. GST included, or GST extra', group: 'terms' },
     { name: 'cancellationPolicy', title: 'Cancellation and refunds', type: 'text', rows: 4, description: 'Plain words, e.g. 100% refund 15 days before, 50% 7 days before.', group: 'terms' },
@@ -69,6 +73,7 @@ export default {
     { name: 'directAnswer', title: 'AEO Direct Answer Summary', type: 'text', group: 'seo' }
   ],
   groups: [
+    { name: 'snapshot', title: 'Trip snapshot (difficulty, weather)' },
     { name: 'terms', title: 'Booking terms' },
     { name: 'seo', title: 'SEO / AEO Optimization' }
   ]
