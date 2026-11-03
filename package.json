@@ -1,7 +1,7 @@
 {
   "name": "humsafar-community",
   "version": "5.0.0",
-  "description": "Humsafar Community - India's #1 Travel Platform with Full SEO/AEO/GEO/SXO/AIO",
+  "description": "Humsafar Community - Group Tours, Himalayan Treks and Custom Trips in India",
   "private": true,
   "scripts": {
     "dev": "next dev",

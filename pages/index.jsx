@@ -82,7 +82,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: "Best Tour Packages India 2025",
+      name: "Tour Packages by Humsafar Community",
       description:
         "Curated travel packages by Humsafar Community for India and international destinations",
       numberOfItems: tours.length,
