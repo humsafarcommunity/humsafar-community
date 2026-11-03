@@ -25,6 +25,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   const [maxSeen, setMaxSeen] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [term, setTerm] = useState("");
   const [searching, setSearching] = useState(false);
 
@@ -33,10 +34,18 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   }, []);
 
   useEffect(() => {
-    if (paused || reduced) return undefined;
+    const media = window.matchMedia("(max-width: 760px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener?.("change", update);
+    return () => media.removeEventListener?.("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (paused || reduced || isMobile) return undefined;
     const t = setInterval(() => setI((p) => p + 1), SHOW_MS);
     return () => clearInterval(t);
-  }, [paused, reduced]);
+  }, [paused, reduced, isMobile]);
 
   useEffect(() => { setMaxSeen((m) => Math.max(m, banners.length ? i % banners.length : 0)); }, [i, banners.length]);
 
