@@ -350,7 +350,7 @@ export function generateWebsiteSchema(site = SITE) {
     url: site.url,
     name: site.name,
     description:
-      "India's #1 travel community for group tours, Himalayan treks, and custom trips",
+      "Group tours, Himalayan treks and custom trips across India with Humsafar Community",
     inLanguage: "en-IN",
     potentialAction: {
       "@type": "SearchAction",
