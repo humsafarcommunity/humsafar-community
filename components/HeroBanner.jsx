@@ -209,6 +209,10 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         @media (max-width: 760px) {
           /* Keep the first-screen hero image static on mobile to reduce animation work. */
           .hb-slide[data-active="true"] { animation: none; }
+          /* Paint the mobile headline and decorative elements immediately. */
+          .hb-word, .hb-pill, .hb-wave path { animation: none; }
+          .hb-wave path { stroke-dashoffset: 0; }
+          .hb-slide { transition: none; }
           .hb { min-height: 78svh; }
           .hb-h1 { margin-bottom: 14px; }
           .hb-inner { padding: 96px 20px 36px; gap: 32px; }
