@@ -1,5 +1,5 @@
 // components/SEOHead.jsx
-// Full SEO + AEO + GEO + SXO + AIO optimization in every page
+// Shared metadata, canonical URL, social preview and structured data output.
 import Head from "next/head";
 import { SITE } from "../data";
 import { urlFor } from "../lib/sanity.image";
@@ -11,7 +11,7 @@ export default function SEOHead({
   image,
   url,
   type = "website",
-  schemas = [], // Array of JSON-LD schema objects
+  schemas = [],
   noindex = false,
   canonical,
   publishedAt,
@@ -23,32 +23,47 @@ export default function SEOHead({
 }) {
   const site = freshSite || SITE;
   const seo = freshSeo || {};
-  
-  const metaTitle = title || seo.seoTitle || "India's #1 Travel Community";
+  const siteUrl = String(site.url || "https://www.humsafarcommunity.com").replace(/\/+$/, "");
+
+  // Resolve relative paths against the canonical site origin. Social crawlers
+  // require absolute image URLs, and canonical links must identify one URL.
+  const absoluteUrl = (value, fallback = "/") => {
+    const candidate = typeof value === "string" && value.trim() ? value.trim() : fallback;
+    try {
+      return new URL(candidate, `${siteUrl}/`).toString();
+    } catch {
+      return new URL(fallback, `${siteUrl}/`).toString();
+    }
+  };
+
+  const metaTitle = title || seo.seoTitle || "Group Tours, Himalayan Treks & Custom Trips in India";
   const fullTitle = title
     ? (title.toLowerCase().includes(String(site.name).toLowerCase()) || title.length > 56 ? title : `${title} | ${site.name}`)
     : `${site.name} — ${metaTitle}`;
-  
-  // One tidy sentence for search results: no line breaks, markdown marks or HTML, about 155 characters
+
+  // Keep the search description concise and free of markup.
   const tidy = (v) => {
-    const t = String(v || "").replace(/<[^>]*>/g, " ").replace(/[#*_`>|]+/g, " ").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\s+/g, " ").trim();
+    const t = String(v || "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/[#*_\`>|]+/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/\s+/g, " ")
+      .trim();
     if (t.length <= 160) return t;
     const cut = t.slice(0, 157);
     return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 100))}…`;
   };
-  const metaDescription = tidy(description || seo.seoDescription) || "Experience authentic group travel across India with Humsafar Community.";
+
+  const metaDescription = tidy(description || seo.seoDescription) || "Explore group tours, Himalayan treks and custom trips across India with Humsafar Community.";
   const metaKeywords = keywords || seo.seoKeywords;
-  
-  const fullUrl = url ? `${site.url}${url}` : site.url;
-  const ogImage = image || (seo.ogImage ? urlFor(seo.ogImage) : (site.defaultOGImage ? (typeof site.defaultOGImage === 'string' ? site.defaultOGImage : `${site.url || "https://www.humsafarcommunity.com"}/og-default.png`) : `${site.url || "https://www.humsafarcommunity.com"}/og-default.png`));
-  // Every page points to its own address. (The old logic let the CMS "Canonical URL Base"
-  // replace the canonical of every page, which tells Google all pages are the homepage.)
-  const canonicalUrl = canonical ? `${site.url}${canonical}` : fullUrl;
-  const favicon = "/favicon.ico"; // always the Humsafar logo mark
+  const fullUrl = absoluteUrl(url || "/");
+  const canonicalUrl = absoluteUrl(canonical || fullUrl);
+  const cmsOgImage = seo.ogImage ? urlFor(seo.ogImage) : null;
+  const ogImage = absoluteUrl(image || cmsOgImage || site.defaultOGImage, "/og-default.png");
+  const favicon = "/favicon.ico";
 
   return (
     <Head>
-      {/* ── PRIMARY META ─────────────────────────────────────────── */}
       <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
       {metaKeywords && <meta name="keywords" content={metaKeywords} />}
@@ -56,20 +71,15 @@ export default function SEOHead({
       <link rel="canonical" href={canonicalUrl} />
       {seo.googleVerification && <meta name="google-site-verification" content={seo.googleVerification} />}
 
-      {/* ── ROBOTS (SEO + GEO: Allow AI crawlers) ─────────────────── */}
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
         <>
-          <meta
-            name="robots"
-            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-          />
+          <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
           <meta name="googlebot" content="index, follow, max-snippet:-1" />
         </>
       )}
 
-      {/* ── OPEN GRAPH (SXO: Rich previews for higher CTR) ────────── */}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={type} />
@@ -79,41 +89,35 @@ export default function SEOHead({
       <meta property="og:site_name" content={site.name} />
       <meta property="og:locale" content="en_IN" />
 
-      {/* ── TWITTER CARDS ─────────────────────────────────────────── */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={site.socials?.twitter ? `@${site.socials.twitter.split('/').pop()}` : "@humsafar_travel"} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImage} />
 
-      {/* ── ARTICLE META (for blog posts) ──────────────────────────── */}
       {type === "article" && publishedAt && (
         <>
           <meta property="article:published_time" content={publishedAt} />
           <meta property="article:modified_time" content={updatedAt || publishedAt} />
           <meta property="article:author" content={author || site.name} />
-          <meta property="article:publisher" content={site.socials?.facebook} />
+          {site.socials?.facebook && <meta property="article:publisher" content={site.socials.facebook} />}
         </>
       )}
 
-      {/* ── GEOGRAPHIC META (Local SEO) ────────────────────────────── */}
       <meta name="geo.region" content="IN-MP" />
       <meta name="geo.placename" content="Gwalior, Madhya Pradesh, India" />
-      <meta name="geo.position" content={`${site.lat};${site.lng}`} />
-      <meta name="ICBM" content={`${site.lat}, ${site.lng}`} />
+      {site.lat && site.lng && (
+        <>
+          <meta name="geo.position" content={`${site.lat};${site.lng}`} />
+          <meta name="ICBM" content={`${site.lat}, ${site.lng}`} />
+        </>
+      )}
 
-      {/* ── LANGUAGE & CONTENT TYPE ────────────────────────────────── */}
       <meta httpEquiv="content-language" content="en-in" />
       <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
-      <meta name="rating" content="general" />
-      <meta name="category" content="Travel, Tourism, India" />
-
-      {/* ── PERFORMANCE (SXO: Core Web Vitals) ─────────────────────── */}
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       <meta httpEquiv="x-dns-prefetch-control" content="on" />
 
-      {/* Preconnect for fonts and images */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="preconnect" href="https://images.unsplash.com" />
@@ -121,23 +125,16 @@ export default function SEOHead({
       <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-      {/* Favicon */}
       <link rel="icon" href={favicon} sizes="any" />
       <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
       <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-      {/* ── JSON-LD STRUCTURED DATA (GEO + AIO core) ─────────────── */}
       {schemas.map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
 
-      {/* ── BREADCRUMB META ────────────────────────────────────────── */}
       {breadcrumbs && breadcrumbs.length > 0 && (
         <script
           type="application/ld+json"
@@ -149,7 +146,7 @@ export default function SEOHead({
                 "@type": "ListItem",
                 position: i + 1,
                 name: item.name,
-                item: `${site.url}${item.path}`,
+                item: absoluteUrl(item.path),
               })),
             }),
           }}
