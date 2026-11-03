@@ -81,7 +81,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
                 fill
                 priority={idx === 0}
                 fetchPriority={idx === 0 ? "high" : "auto"}
-                quality={70}
+                quality={60}
                 sizes="100vw"
                 style={{ objectFit: "cover" }}
               />
@@ -198,6 +198,8 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         @keyframes hbZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
         @media (max-width: 1100px) { .hb-arrow { display: none; } }
         @media (max-width: 760px) {
+          /* Keep the first-screen hero image static on mobile to reduce animation work. */
+          .hb-slide[data-active="true"] { animation: none; }
           .hb { min-height: 78svh; }
           .hb-h1 { margin-bottom: 14px; }
           .hb-inner { padding: 96px 20px 36px; gap: 32px; }
