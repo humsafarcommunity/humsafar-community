@@ -59,6 +59,26 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
       <Navbar site={dynamicSite} isSolid={true} />
 
+      <main className="blog-guide">
+        <header className={"blog-guide__hero" + (blog.coverImage ? "" : " blog-guide__hero--empty")}>
+          {blog.coverImage && <Image src={blog.coverImage} alt={blog.title} fill priority sizes="100vw" className="blog-guide__hero-image" />}
+          <div className="blog-guide__hero-shade" />
+          <div className="blog-guide__hero-content">
+            <nav className="blog-guide__breadcrumbs" aria-label="Breadcrumb">
+              <Link href="/">Home</Link><span aria-hidden="true"> / </span><Link href="/blog">Travel Guides</Link><span aria-hidden="true"> / </span><span>{blog.category || "Travel Guide"}</span>
+            </nav>
+            <span className="blog-guide__category">{blog.category || "Travel Guide"}</span>
+            <h1>{blog.title}</h1>
+            <div className="blog-guide__meta">
+              {blog.readTime && <span>{blog.readTime} min read</span>}
+              {blog.author && <span>{blog.author}</span>}
+              {blog.publishedAt && <time dateTime={blog.publishedAt}>{new Date(blog.publishedAt).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}</time>}
+            </div>
+            <p className="blog-guide__tagline">Plan better. Travel happier.</p>
+          </div>
+        </header>
+
+
       {/* Breadcrumb nav */}
       <nav aria-label="Breadcrumb" style={{ background: "#f8fafc", padding: "85px 24px 12px", borderBottom: "1px solid #e2e8f0", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: 13, color: "#64748b" }}>
         <ol style={{ display: "flex", gap: 8, listStyle: "none", maxWidth: 800, margin: "0 auto", flexWrap: "wrap" }}>
@@ -74,7 +94,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
         </ol>
       </nav>
 
-      <article
+      <article className="blog-guide__article"
         style={{ background: "#fff", minHeight: "100vh", paddingTop: 0, fontFamily: "Plus Jakarta Sans, sans-serif" }}
         itemScope
         itemType="https://schema.org/BlogPosting"
@@ -92,7 +112,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
         <div style={{ maxWidth: 800, margin: "0 auto", padding: "40px 24px 80px" }}>
           {/* Tags */}
-          <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+          <div className="blog-guide__old-tags" style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
             <span style={{ background: "#ecfdf5", color: "#065f46", fontSize: 12, padding: "4px 12px", borderRadius: 999, fontWeight: 600 }} itemProp="articleSection">
               {blog.category}
             </span>
@@ -105,7 +125,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
           {/* H1 — AEO: Must contain primary keyword */}
           <h1
-            className="speakable"
+            className="blog-guide__old-title speakable"
             style={{ fontFamily: "var(--sans)", fontSize: "clamp(26px,4vw,44px)", fontWeight: 700, color: "#0e1117", lineHeight: 1.17, marginBottom: 18 }}
             itemProp="headline"
           >
@@ -113,7 +133,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
           </h1>
 
           {/* Author / date meta */}
-          <div style={{ display: "flex", gap: 20, marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid #f1f5f9", color: "#64748b", fontSize: 13 }}>
+          <div className="blog-guide__old-meta" style={{ display: "flex", gap: 20, marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid #f1f5f9", color: "#64748b", fontSize: 13 }}>
             <span>✍️ <span itemProp="author" itemScope itemType="https://schema.org/Organization"><span itemProp="name">{blog.author}</span></span></span>
             <span>•</span>
             <span>📅 <time itemProp="datePublished" dateTime={blog.publishedAt}>{blog.publishedAt}</time></span>
@@ -124,7 +144,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
           {/* Cover image */}
           {blog.coverImage && (
-            <div style={{ position: 'relative', height: 440, width: '100%', marginBottom: 36 }}>
+            <div className="blog-guide__old-cover" style={{ position: 'relative', height: 440, width: '100%', marginBottom: 36 }}>
               <Image
                 src={blog.coverImage}
                 alt={blog.title}
@@ -138,7 +158,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
           )}
 
           {/* Blog body */}
-          <div
+          <div className="blog-guide__article-body"
             itemProp="articleBody"
             style={{ fontSize: 17, lineHeight: 1.85, color: "#1e293b" }}
           >
@@ -240,9 +260,26 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
             <p style={{ margin: "0 0 28px", color: "#475569", fontSize: 16, maxWidth: 620 }}>
               Join a Humsafar group batch with a trip captain, fixed price and weekly dates.
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
-              {relatedTours.map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
-            </div>
+            {relatedTours[0] && (
+              <div className="blog-guide__featured-trip">
+                {relatedTours[0].img && <div className="blog-guide__featured-image"><Image src={relatedTours[0].img} alt={relatedTours[0].title} fill sizes="(max-width: 760px) 100vw, 42vw" /></div>}
+                <div className="blog-guide__featured-copy">
+                  <span className="blog-guide__eyebrow">Featured trip</span>
+                  <h3>{relatedTours[0].title}</h3>
+                  <p>{relatedTours[0].seoDesc || ("Explore " + (relatedTours[0].location || relatedTours[0].title) + " with a Humsafar group trip.")}</p>
+                  <div className="blog-guide__trip-facts">
+                    {relatedTours[0].duration && <span>{relatedTours[0].duration}</span>}
+                    {relatedTours[0].price > 0 && <span>From ₹{Number(relatedTours[0].price).toLocaleString("en-IN")} / person</span>}
+                  </div>
+                  <Link href={"/packages/" + relatedTours[0].slug} className="blog-guide__button">Explore package <span aria-hidden="true">→</span></Link>
+                </div>
+              </div>
+            )}
+            {relatedTours.length > 1 && (
+              <div className="blog-guide__tour-grid">
+                {relatedTours.slice(1).map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
+              </div>
+            )}
             <p style={{ margin: "24px 0 0" }}>
               <Link href="/packages" style={{ color: "#047857", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>See all tour packages</Link>
             </p>
@@ -292,6 +329,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
         </section>
       )}
 
+      </main>
       <Footer dynamicSite={dynamicSite} />
     </>
   );
