@@ -1,16 +1,16 @@
-// pages/blog/[slug].jsx — Blog detail with full SEO/AEO/GEO/AIO
-import { useState } from "react";
+// pages/blog/[slug].jsx — Travel guide (blog post) page with full SEO/AEO/GEO/AIO
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import FAQAccordion from "../../components/FAQAccordion";
 import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import TourCard from "../../components/TourCard";
-import ReviewsSection from "../../components/ReviewsSection";
+import { GIcon, Swoosh, Testimonials, Faq, iconFor } from "../../components/GuideBits";
 import { toursForBlog, slimTour } from "../../lib/related";
 import { RichBlocks, inline } from "../../lib/richText";
+import { guidePlace, guideHeadings, guideTiles, isThingsToDo, packagesHref, tourPerks, slugify } from "../../lib/guide";
+import { figure } from "../../lib/figure";
 import {
   SITE,
   getFreshData,
@@ -19,7 +19,7 @@ import {
   generateFAQSchema,
 } from "../../data";
 
-export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], reviews = [], site: freshSite }) {
+export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], perks = [], tiles = [], reviews = [], site: freshSite }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const router = useRouter();
 
@@ -39,6 +39,26 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
     { name: "Travel Blog", path: "/blog" },
     { name: blog.title, path: `/blog/${blog.slug}` },
   ];
+
+  const place = guidePlace(blog);
+  const headings = guideHeadings(blog.content, 4);
+  const intro = blog.directAnswer || blog.excerpt;
+  const wa = (text) => `https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+  const waLink = wa(place ? `Hi Humsafar! I read your ${place} guide and want to plan a trip.` : `Hi Humsafar! I read your blog about ${blog.title} and want to book a trip.`);
+  const trip = relatedTours[0];
+  const moreTrips = relatedTours.slice(1);
+  const pkgHref = packagesHref(place);
+  const travellers = figure(dynamicSite.totalTravelers);
+  const rating = figure(dynamicSite.ratingValue, true);
+  const stats = [
+    travellers && { icon: "people", text: `${travellers} Happy Travellers` },
+    { icon: "shield", text: "Safe & Reliable Trips" },
+    rating && { icon: "star", text: `${rating}/5 Customer Rating` },
+    { icon: "plane", text: "Pan India Operations" },
+  ].filter(Boolean);
+  const hasReviews = reviews.some((r) => r && r.text);
+  const hasFaqs = blog.faqs?.length > 0;
+  const published = blog.publishedAt ? new Date(blog.publishedAt).toLocaleDateString("en-IN", { month: "short", year: "numeric", timeZone: "UTC" }) : "";
 
   return (
     <>
@@ -60,275 +80,221 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
       <Navbar site={dynamicSite} isSolid={true} />
 
       <main className="blog-guide">
-        <header className={"blog-guide__hero" + (blog.coverImage ? "" : " blog-guide__hero--empty")}>
-          {blog.coverImage && <Image src={blog.coverImage} alt={blog.title} fill priority sizes="100vw" className="blog-guide__hero-image" />}
-          <div className="blog-guide__hero-shade" />
-          <div className="blog-guide__hero-content">
-            <nav className="blog-guide__breadcrumbs" aria-label="Breadcrumb">
-              <Link href="/">Home</Link><span aria-hidden="true"> / </span><Link href="/blog">Travel Guides</Link><span aria-hidden="true"> / </span><span>{blog.category || "Travel Guide"}</span>
-            </nav>
-            <span className="blog-guide__category">{blog.category || "Travel Guide"}</span>
-            <h1>{blog.title}</h1>
-            <div className="blog-guide__meta">
-              {blog.readTime && <span>{blog.readTime} min read</span>}
-              {blog.author && <span>{blog.author}</span>}
-              {blog.publishedAt && <time dateTime={blog.publishedAt}>{new Date(blog.publishedAt).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}</time>}
+        {/* ---------- Hero ---------- */}
+        <header className={"bg-hero" + (blog.coverImage ? "" : " bg-hero--empty")}>
+          {blog.coverImage && <Image src={blog.coverImage} alt={blog.title} fill priority sizes="100vw" className="bg-hero__img" />}
+          <div className="bg-hero__shade" />
+          <div className="bg-hero__in">
+            <span className="bg-pill"><GIcon name="pin" size={15} stroke={2} />{blog.category || "Travel Guide"}</span>
+            <h1 className="speakable">{blog.title}</h1>
+            <div className="bg-meta">
+              {blog.readTime && <span><GIcon name="clock" size={16} />{blog.readTime} min read</span>}
+              {blog.author && <span><GIcon name="user" size={16} />{blog.author}</span>}
+              {published && <span><GIcon name="calendar" size={16} /><time dateTime={blog.publishedAt}>{published}</time></span>}
             </div>
-            <p className="blog-guide__tagline">Plan better. Travel happier.</p>
+            <p className="bg-tag">Plan Better. Travel Happier.<Swoosh width={170} /></p>
           </div>
         </header>
 
-
-      {/* Breadcrumb nav */}
-      <nav aria-label="Breadcrumb" style={{ background: "#f8fafc", padding: "85px 24px 12px", borderBottom: "1px solid #e2e8f0", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: 13, color: "#64748b" }}>
-        <ol style={{ display: "flex", gap: 8, listStyle: "none", maxWidth: 800, margin: "0 auto", flexWrap: "wrap" }}>
-          {breadcrumbs.map((crumb, i) => (
-            <li key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              {i < breadcrumbs.length - 1 ? (
-                <><Link href={crumb.path} style={{ color: "#064e3b", textDecoration: "none" }}>{crumb.name}</Link><span>/</span></>
-              ) : (
-                <span style={{ color: "#64748b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>{crumb.name}</span>
+        {/* ---------- Intro, photo tiles, things to do + "why Humsafar" card ---------- */}
+        <div className="bg-wrap">
+          <div className="bg-top">
+            <div>
+              {intro && (
+                <section className="bg-intro">
+                  <h2 className="bg-h2">{place ? `Discover the Magic of ${place}` : "Discover the Magic"}</h2>
+                  <p className="speakable">{intro}</p>
+                </section>
               )}
-            </li>
-          ))}
-        </ol>
-      </nav>
 
-      <article className="blog-guide__article"
-        style={{ background: "#fff", minHeight: "100vh", paddingTop: 0, fontFamily: "Plus Jakarta Sans, sans-serif" }}
-        itemScope
-        itemType="https://schema.org/BlogPosting"
-      >
-        {/* AEO: Direct answer para — first thing AI/Google reads */}
-        {blog.directAnswer && (
-          <div style={{ background: "#f0fdf4", padding: "16px 24px", borderBottom: "1px solid #bbf7d0" }}>
-            <div style={{ maxWidth: 800, margin: "0 auto" }}>
-              <p className="speakable" style={{ fontSize: 14, color: "#065f46", lineHeight: 1.7 }}>
-                <strong>Quick Answer:</strong> {blog.directAnswer}
-              </p>
-            </div>
-          </div>
-        )}
+              {tiles.length >= 2 && (
+                <ul className="bg-tiles" aria-label="Places in this guide">
+                  {tiles.map((t, i) => (
+                    <li key={i} className="bg-tile">
+                      <Image src={t.src} alt={t.label || blog.title} fill sizes="(max-width: 700px) 50vw, 200px" />
+                      {t.label && <span><GIcon name="pin" size={14} stroke={2} />{t.label}</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "40px 24px 80px" }}>
-          {/* Tags */}
-          <div className="blog-guide__old-tags" style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-            <span style={{ background: "#ecfdf5", color: "#065f46", fontSize: 12, padding: "4px 12px", borderRadius: 999, fontWeight: 600 }} itemProp="articleSection">
-              {blog.category}
-            </span>
-            {(Array.isArray(blog.tags) ? blog.tags : []).map((tag) => (
-              <span key={tag} style={{ background: "#f1f5f9", color: "#475569", fontSize: 12, padding: "4px 10px", borderRadius: 999 }} itemProp="keywords">
-                #{tag}
-              </span>
-            ))}
-          </div>
-
-          {/* H1 — AEO: Must contain primary keyword */}
-          <h1
-            className="blog-guide__old-title speakable"
-            style={{ fontFamily: "var(--sans)", fontSize: "clamp(26px,4vw,44px)", fontWeight: 700, color: "#0e1117", lineHeight: 1.17, marginBottom: 18 }}
-            itemProp="headline"
-          >
-            {blog.title}
-          </h1>
-
-          {/* Author / date meta */}
-          <div className="blog-guide__old-meta" style={{ display: "flex", gap: 20, marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid #f1f5f9", color: "#64748b", fontSize: 13 }}>
-            <span>✍️ <span itemProp="author" itemScope itemType="https://schema.org/Organization"><span itemProp="name">{blog.author}</span></span></span>
-            <span>•</span>
-            <span>📅 <time itemProp="datePublished" dateTime={blog.publishedAt}>{blog.publishedAt}</time></span>
-            <span>•</span>
-            <span>⏱ {blog.readTime} min read</span>
-            <meta itemProp="dateModified" content={blog.updatedAt || blog.publishedAt} />
-          </div>
-
-          {/* Cover image */}
-          {blog.coverImage && (
-            <div className="blog-guide__old-cover" style={{ position: 'relative', height: 440, width: '100%', marginBottom: 36 }}>
-              <Image
-                src={blog.coverImage}
-                alt={blog.title}
-                fill
-                priority
-                sizes="(max-width: 800px) 100vw, 800px"
-                style={{ borderRadius: 20, objectFit: "cover" }}
-                itemProp="image"
-              />
-            </div>
-          )}
-
-          {/* Blog body */}
-          <div className="blog-guide__article-body"
-            itemProp="articleBody"
-            style={{ fontSize: 17, lineHeight: 1.85, color: "#1e293b" }}
-          >
-            {(blog.content || []).map((block, i) => {
-              switch (block.type) {
-                case "h2":
-                  return <h2 key={i} style={{ fontFamily: "var(--sans)", fontSize: 28, fontWeight: 700, color: "#0e1117", margin: "40px 0 16px", lineHeight: 1.2 }}>{block.text}</h2>;
-                case "h3":
-                  return <h3 key={i} style={{ fontFamily: "var(--sans)", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" }}>{block.text}</h3>;
-                case "para":
-                  return (
-                    <RichBlocks
-                      key={i}
-                      text={block.text}
-                      styles={{
-                        p: { marginBottom: 20 },
-                        h2: { fontFamily: "var(--sans)", fontSize: 28, fontWeight: 700, color: "#0e1117", margin: "40px 0 16px", lineHeight: 1.2 },
-                        h3: { fontFamily: "var(--sans)", fontSize: 22, fontWeight: 700, color: "#1e293b", margin: "28px 0 12px" },
-                        ul: { margin: "0 0 20px 22px" }, ol: { margin: "0 0 20px 22px" }, li: { marginBottom: 8, lineHeight: 1.7 },
-                      }}
-                    />
-                  );
-                case "quote":
-                  return (
-                    <blockquote key={i} style={{ borderLeft: "4px solid #10b981", background: "#f0fdf4", padding: "18px 24px", margin: "28px 0", borderRadius: "0 12px 12px 0", fontStyle: "italic", color: "#065f46", fontSize: 18 }}>
-                      {block.text}
-                    </blockquote>
-                  );
-                case "hr":
-                  return <hr key={i} style={{ border: "none", borderTop: "2px dashed #e2e8f0", margin: "36px 0" }} />;
-                case "list":
-                  return (
-                    <ul key={i} style={{ margin: "0 0 20px 22px", listStyle: "disc" }}>
-                      {(block.items || []).map((item, j) => (
-                        <li key={j} style={{ marginBottom: 8, lineHeight: 1.7 }}>{inline(item, `l${i}${j}`)}</li>
+              {headings.length >= 2 && (
+                <section className="bg-todo" aria-label="What's in this guide">
+                  <h2 className="bg-h2">{isThingsToDo(blog) && place ? `Top Things to Do in ${place}` : "Inside This Guide"}</h2>
+                  <div className="bg-todo__grid">
+                    <ul>
+                      {headings.map((h) => (
+                        <li key={h.id}>
+                          <a href={`#${h.id}`}><GIcon name={iconFor(h.text)} size={22} stroke={1.5} />{h.text}</a>
+                        </li>
                       ))}
                     </ul>
-                  );
-                case "img":
-                  return block.url ? (
-                    <figure key={i} style={{ margin: "28px 0 8px" }}>
-                    <div style={{ position: 'relative', width: '100%', height: 400 }}>
-                      <Image
-                        src={block.url}
-                        alt={block.caption || blog.title}
-                        fill
-                        sizes="(max-width: 800px) 100vw, 800px"
-                        style={{ borderRadius: 16, objectFit: "cover" }}
-                      />
+                    <span className="bg-vline" aria-hidden="true" />
+                    <div className="bg-todo__side">
+                      <p>Everything you need to plan it, from timings and costs to handy tips, is in the full guide below.</p>
+                      <a href="#guide" className="bg-btn bg-btn--ghost">Read More Travel Tips <GIcon name="arrow" size={15} stroke={2.2} /></a>
                     </div>
-                      {block.caption && (
-                        <figcaption style={{ textAlign: "center", fontSize: 13, color: "#64748b", fontStyle: "italic", marginTop: 8, marginBottom: 16 }}>
-                          {block.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ) : null;
-                default:
-                  return null;
-              }
-            })}
+                  </div>
+                  <svg className="bg-plane" width="96" height="150" viewBox="0 0 96 150" fill="none" aria-hidden="true" focusable="false">
+                    <path d="M14 148C-6 108 40 84 56 46" stroke="#1d2b44" strokeWidth="1.6" strokeDasharray="4 6" strokeLinecap="round" />
+                    <path d="M92 8L56 24l14 6 6 14L92 8zM70 30L92 8" stroke="#1d2b44" strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round" />
+                  </svg>
+                </section>
+              )}
+            </div>
+
+            <aside className="bg-why" aria-label="Why travel with Humsafar">
+              <svg className="bg-why__peak" width="84" height="44" viewBox="0 0 84 44" fill="none" aria-hidden="true" focusable="false">
+                <path d="M2 42L26 12l10 12 8-10 16 20 8-9 12 17H2z" stroke="#1d2b44" strokeWidth="1.8" strokeLinejoin="round" />
+                <path d="M26 12l-6 8 6-2 5 5M44 14l-5 7 5-2 4 4" stroke="#1d2b44" strokeWidth="1.4" strokeLinejoin="round" strokeLinecap="round" />
+              </svg>
+              <h2 className="bg-why__title">Why Travel with Humsafar?</h2>
+              <ul>
+                {["Community Trips & Great Vibes", "Trusted & Safe Travel", "Explore More, Together"].map((t) => (
+                  <li key={t}><span className="bg-check"><GIcon name="check" size={13} stroke={3} /></span>{t}</li>
+                ))}
+              </ul>
+              <p className="bg-why__script">{place ? `Ready for ${place}?` : "Ready to go?"}</p>
+              <p>Let&apos;s turn your travel dreams into memories!</p>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn"><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp <GIcon name="arrow" size={15} stroke={2.2} /></a>
+            </aside>
           </div>
 
-          {/* FAQ Section — Google reads these from the FAQ markup in `schemas` above */}
-          {blog.faqs?.length > 0 && (
-            <section aria-label="Frequently asked questions" style={{ marginTop: 48, paddingTop: 36, borderTop: "2px solid #f1f5f9" }}>
-              <FAQAccordion title="Frequently asked questions" faqs={blog.faqs} defaultOpen={null} />
+          {/* ---------- The full guide ---------- */}
+          <article id="guide" className="bg-article" itemScope itemType="https://schema.org/BlogPosting">
+            <meta itemProp="headline" content={blog.title} />
+            <meta itemProp="datePublished" content={blog.publishedAt || ""} />
+            <meta itemProp="dateModified" content={blog.updatedAt || blog.publishedAt || ""} />
+            <span itemProp="author" itemScope itemType="https://schema.org/Organization" hidden><meta itemProp="name" content={blog.author || "Humsafar Community"} /></span>
+            {(Array.isArray(blog.tags) ? blog.tags : []).length > 0 && (
+              <div className="bg-tags">
+                {blog.tags.map((tag) => <span key={tag} itemProp="keywords">#{tag}</span>)}
+              </div>
+            )}
+            <div className="bg-body" itemProp="articleBody">
+              {(blog.content || []).map((block, i) => {
+                switch (block.type) {
+                  case "h2":
+                    return <h2 key={i} id={slugify(block.text) || undefined}>{block.text}</h2>;
+                  case "h3":
+                    return <h3 key={i}>{block.text}</h3>;
+                  case "para":
+                    return <RichBlocks key={i} text={block.text} />;
+                  case "quote":
+                    return <blockquote key={i}>{block.text}</blockquote>;
+                  case "hr":
+                    return <hr key={i} />;
+                  case "list":
+                    return (
+                      <ul key={i}>
+                        {(block.items || []).map((item, j) => <li key={j}>{inline(item, `l${i}${j}`)}</li>)}
+                      </ul>
+                    );
+                  case "img":
+                    return block.url ? (
+                      <figure key={i}>
+                        <div className="bg-fig"><Image src={block.url} alt={block.caption || blog.title} fill sizes="(max-width: 820px) 100vw, 820px" /></div>
+                        {block.caption && <figcaption>{block.caption}</figcaption>}
+                      </figure>
+                    ) : null;
+                  default:
+                    return null;
+                }
+              })}
+            </div>
+          </article>
+
+          {/* ---------- Featured trip ---------- */}
+          {trip && (
+            <section aria-label="Trip from this guide" className="bg-trip">
+              <div className="bg-trip__img">
+                {trip.img && <Image src={trip.img} alt={trip.title} fill sizes="(max-width: 900px) 100vw, 380px" />}
+              </div>
+              <div className="bg-trip__copy">
+                <p className="bg-trip__script" aria-hidden="true">Travel Together.<br />Explore More.</p>
+                <span className="bg-pill bg-pill--sm"><GIcon name="star" size={12} />Featured Trip</span>
+                <h3>{trip.title}</h3>
+                <p>{trip.seoDesc || `Explore ${trip.location || trip.title} with a Humsafar group trip.`}</p>
+                {perks.length > 0 && (
+                  <ul className="bg-perks">
+                    {perks.map((p) => <li key={p.label}><GIcon name={p.icon} size={22} stroke={1.6} />{p.label}</li>)}
+                  </ul>
+                )}
+                <div className="bg-trip__foot">
+                  <span className="bg-trip__facts">
+                    {trip.duration}
+                    {trip.duration && trip.price > 0 ? " · " : ""}
+                    {trip.price > 0 && <>From <strong>₹{Number(trip.price).toLocaleString("en-IN")}</strong> / person</>}
+                  </span>
+                  <Link href={`/packages/${trip.slug}`} className="bg-btn">{place ? `Explore ${place} Package` : "Explore Package"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
+                </div>
+              </div>
             </section>
           )}
 
-          {/* CTA */}
-          <div style={{ marginTop: 48, background: "#064e3b", borderRadius: 20, padding: "32px", textAlign: "center", color: "#fff" }}>
-            <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, marginBottom: 10 }}>
-              Ready for Your Adventure?
-            </h2>
-            <p style={{ opacity: 0.8, marginBottom: 22, fontSize: 15 }}>
-              Talk to our experts and book the perfect trip today.
-            </p>
-            <a
-              href={`https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=${encodeURIComponent(`Hi Humsafar! I read your blog about ${blog.title} and want to book a trip.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#22c55e", color: "#fff", padding: "14px 28px", borderRadius: 14, fontWeight: 700, fontSize: 15, textDecoration: "none", fontFamily: "Plus Jakarta Sans, sans-serif" }}
-            >
-              💬 Chat on WhatsApp
-            </a>
-          </div>
-        </div>
-      </article>
-
-      {/* Trips connected to this guide */}
-      {relatedTours.length > 0 && (
-        <section aria-label="Trips from this guide" style={{ background: "#fff", padding: "56px 24px", borderTop: "1px solid #e2e8f0" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <p style={{ margin: "0 0 6px", fontSize: 12, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#047857" }}>Book this trip</p>
-            <h2 style={{ fontFamily: "var(--sans)", fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 800, margin: "0 0 8px", color: "#0e1117" }}>
-              Go on the trip from this guide
-            </h2>
-            <p style={{ margin: "0 0 28px", color: "#475569", fontSize: 16, maxWidth: 620 }}>
-              Join a Humsafar group batch with a trip captain, fixed price and weekly dates.
-            </p>
-            {relatedTours[0] && (
-              <div className="blog-guide__featured-trip">
-                {relatedTours[0].img && <div className="blog-guide__featured-image"><Image src={relatedTours[0].img} alt={relatedTours[0].title} fill sizes="(max-width: 760px) 100vw, 42vw" /></div>}
-                <div className="blog-guide__featured-copy">
-                  <span className="blog-guide__eyebrow">Featured trip</span>
-                  <h3>{relatedTours[0].title}</h3>
-                  <p>{relatedTours[0].seoDesc || ("Explore " + (relatedTours[0].location || relatedTours[0].title) + " with a Humsafar group trip.")}</p>
-                  <div className="blog-guide__trip-facts">
-                    {relatedTours[0].duration && <span>{relatedTours[0].duration}</span>}
-                    {relatedTours[0].price > 0 && <span>From ₹{Number(relatedTours[0].price).toLocaleString("en-IN")} / person</span>}
-                  </div>
-                  <Link href={"/packages/" + relatedTours[0].slug} className="blog-guide__button">Explore package <span aria-hidden="true">→</span></Link>
-                </div>
+          {moreTrips.length > 0 && (
+            <section aria-label="More trips" className="bg-more">
+              <h2 className="bg-sec-h">More trips you may like</h2>
+              <div className="bg-more__grid">
+                {moreTrips.map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
               </div>
-            )}
-            {relatedTours.length > 1 && (
-              <div className="blog-guide__tour-grid">
-                {relatedTours.slice(1).map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
-              </div>
-            )}
-            <p style={{ margin: "24px 0 0" }}>
-              <Link href="/packages" style={{ color: "#047857", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>See all tour packages</Link>
-            </p>
-          </div>
-        </section>
-      )}
+            </section>
+          )}
 
-      {reviews.length > 0 && (
-        <section style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 0" }}>
-          <ReviewsSection reviews={reviews} reviewsUrl={dynamicSite.googleReviewsUrl} />
-        </section>
-      )}
+          {/* ---------- Stats strip ---------- */}
+          <ul className="bg-stats" aria-label="Humsafar Community in numbers">
+            {stats.map((s) => <li key={s.text}><GIcon name={s.icon} size={22} stroke={1.6} />{s.text}</li>)}
+          </ul>
 
-      {/* Related blogs */}
-      {relatedBlogs?.length > 0 && (
-        <section style={{ background: "#f8fafc", padding: "48px 24px", borderTop: "1px solid #e2e8f0" }}>
-          <div style={{ maxWidth: 800, margin: "0 auto" }}>
-            <h2 style={{ fontFamily: "var(--sans)", fontSize: 26, fontWeight: 700, marginBottom: 24, color: "#0e1117" }}>
-              Related Articles
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(min(100%, 240px), 1fr))", gap: 20 }}>
-              {relatedBlogs.map((rb) => (
-                <Link key={rb.id} href={`/blog/${rb.slug}`} style={{ textDecoration: "none" }}>
-                  <article style={{ background: "#fff", borderRadius: 14, overflow: "hidden", border: "1px solid #e2e8f0", transition: "transform 0.2s ease, box-shadow 0.2s ease" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.1)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
-                    {rb.coverImage && (
-                      <div style={{ position: 'relative', width: '100%', height: 140 }}>
-                        <Image
-                          src={rb.coverImage}
-                          alt={rb.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 240px"
-                          style={{ objectFit: "cover" }}
-                        />
-                      </div>
-                    )}
-                    <div style={{ padding: 16 }}>
-                      <span style={{ fontSize: 11, color: "#065f46", fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif" }}>{rb.category}</span>
-                      <h3 style={{ fontFamily: "var(--sans)", fontSize: 15, fontWeight: 700, color: "#0e1117", marginTop: 6, lineHeight: 1.3 }}>{rb.title}</h3>
-                    </div>
-                  </article>
-                </Link>
-              ))}
+          {/* ---------- Reviews + FAQ ---------- */}
+          {(hasReviews || hasFaqs) && (
+            <div className={"bg-two" + (hasReviews && hasFaqs ? "" : " bg-two--one")}>
+              {hasReviews && (
+                <section aria-label="Traveller reviews">
+                  <h2 className="bg-sec-h">What Travellers Say</h2>
+                  <Testimonials reviews={reviews} />
+                </section>
+              )}
+              {hasFaqs && (
+                <section aria-label="Frequently asked questions">
+                  <h2 className="bg-sec-h">Frequently Asked Questions</h2>
+                  <Faq faqs={blog.faqs} />
+                </section>
+              )}
             </div>
+          )}
+        </div>
+
+        {/* ---------- Closing call to action ---------- */}
+        <section className="bg-cta" aria-label="Book your trip">
+          {blog.coverImage && <Image src={blog.coverImage} alt="" fill sizes="100vw" className="bg-cta__img" />}
+          <div className="bg-cta__in">
+            <h2>{place ? `Ready to Explore ${place}?` : "Ready for Your Adventure?"}</h2>
+            <p>Book your trip today and be a part of the Humsafar Community!</p>
+            <Link href={pkgHref} className="bg-btn">{place ? `View ${place} Packages` : "View Packages"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
+            <p className="bg-cta__script" aria-hidden="true">Travel with Humsafar<br />Where journeys turn<br />into memories.</p>
           </div>
         </section>
-      )}
 
+        {/* ---------- Related articles ---------- */}
+        {relatedBlogs?.length > 0 && (
+          <section className="bg-related" aria-label="Related articles">
+            <div className="bg-wrap">
+              <h2 className="bg-sec-h">Related Articles</h2>
+              <div className="bg-related__grid">
+                {relatedBlogs.map((rb) => (
+                  <Link key={rb.id} href={`/blog/${rb.slug}`} className="bg-related__card">
+                    {rb.coverImage && <div className="bg-related__img"><Image src={rb.coverImage} alt={rb.title} fill sizes="(max-width: 768px) 100vw, 260px" /></div>}
+                    <div className="bg-related__txt">
+                      <span>{rb.category}</span>
+                      <h3>{rb.title}</h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
       <Footer dynamicSite={dynamicSite} />
     </>
@@ -354,8 +320,19 @@ export async function getStaticProps({ params }) {
     (b) => b.id !== blog.id && b.category === blog.category
   ).slice(0, 3);
 
+  const place = guidePlace(blog);
+  const relatedFull = toursForBlog(blog, data.TOURS || [], 3);
+
   return {
-    props: { blog, relatedBlogs, relatedTours: toursForBlog(blog, data.TOURS || [], 3).map(slimTour), reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])), site: data.SITE },
+    props: {
+      blog,
+      relatedBlogs,
+      relatedTours: relatedFull.map(slimTour),
+      perks: relatedFull[0] ? tourPerks(relatedFull[0]) : [],
+      tiles: guideTiles(blog, data.TOURS || [], place),
+      reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])),
+      site: data.SITE,
+    },
     revalidate: 60,
   };
 }
