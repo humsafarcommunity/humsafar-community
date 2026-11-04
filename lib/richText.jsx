@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+const headingId = (t) => String(t || "").replace(/\*\*|__|\*/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/^\s*\d+[.)]\s*/, "").toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
 // Blog text is sometimes saved with markdown marks (## headings, **bold**, [links](url), - bullets, | tables |).
 // These helpers turn those marks into proper HTML instead of showing the raw symbols.
 
@@ -40,7 +42,7 @@ export function RichBlocks({ text, styles = {}, speakable = true }) {
     if (h) {
       const level = h[1].length;
       const Tag = level <= 2 ? "h2" : "h3";
-      out.push(<Tag key={k++} style={level <= 2 ? styles.h2 : styles.h3}>{inline(h[2], `h${k}`)}</Tag>);
+      out.push(<Tag key={k++} id={headingId(h[2]) || undefined} style={level <= 2 ? styles.h2 : styles.h3}>{inline(h[2], `h${k}`)}</Tag>);
       i += 1; continue;
     }
     if (/^\s*[-*•]\s+/.test(line)) {
