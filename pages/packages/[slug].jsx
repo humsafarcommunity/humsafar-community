@@ -18,6 +18,7 @@ import ItineraryActions from "../../components/ItineraryActions";
 import BlogCard from "../../components/BlogCard";
 import { blogsForTour, slimBlog } from "../../lib/related";
 import { waLink, telLink, track } from "../../lib/whatsapp";
+import { getTourSeoMeta } from "../../lib/tourSeo";
 import {
   SITE,
   getFreshData,
@@ -53,6 +54,10 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
 
   if (!tour) return null;
 
+  // Ensure every published package has unique, useful metadata even when CMS SEO fields are blank.
+  const seoMeta = getTourSeoMeta(tour);
+  const seoTour = { ...tour, seoTitle: seoMeta.title, seoDesc: seoMeta.description };
+
   const sharingOptions = [
     { type: "Quad", surcharge: 0 },
     { type: "Triple", surcharge: 1500 },
@@ -76,7 +81,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
 
   const schemas = [
     generateOrganizationSchema(dynamicSite),
-    generateTourSchema(tour, dynamicSite),
+    generateTourSchema(seoTour, dynamicSite),
     ...(tour.faqs?.length > 0 ? [generateFAQSchema(tour.faqs, dynamicSite)] : []),
   ];
 
@@ -89,8 +94,8 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
   return (
     <>
       <SEOHead
-        title={tour.seoTitle || tour.title}
-        description={tour.seoDesc}
+        title={seoMeta.title}
+        description={seoMeta.description}
         keywords={tour.keywords}
         image={tour.img}
         url={`/packages/${tour.slug}`}
