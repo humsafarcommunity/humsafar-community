@@ -9,7 +9,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "audit:tour-seo": "node scripts/audit-tour-seo.mjs"
+    "audit:tour-seo": "node scripts/audit-tour-seo.mjs",
+    "audit:himachal-seo": "node scripts/audit-himachal-tour-seo.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
