@@ -243,18 +243,20 @@ export function generateTourSchema(tour, site = SITE) {
     description: tour.seoDesc,
     image: tour.img,
     url: `${site.url}/packages/${tour.slug}`,
-    offers: {
-      "@type": "Offer",
-      price: tour.price,
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
-      validFrom: new Date().toISOString().split("T")[0],
-      seller: {
-        "@type": "TravelAgency",
-        name: site.name,
-        url: site.url,
-      },
-    },
+    ...(Number.isFinite(Number(tour.price)) && Number(tour.price) > 0
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: Number(tour.price),
+            priceCurrency: "INR",
+            seller: {
+              "@type": "TravelAgency",
+              name: site.name,
+              url: site.url,
+            },
+          },
+        }
+      : {}),
     provider: {
       "@type": "TravelAgency",
       "@id": `${site.url}/#organization`,
