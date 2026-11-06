@@ -8,7 +8,8 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:tour-seo": "node scripts/audit-tour-seo.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
