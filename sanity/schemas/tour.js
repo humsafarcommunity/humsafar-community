@@ -67,8 +67,8 @@ export default {
     { name: 'taxNote', title: 'Tax note', type: 'string', description: 'e.g. GST included, or GST extra', group: 'terms' },
     { name: 'cancellationPolicy', title: 'Cancellation and refunds', type: 'text', rows: 4, description: 'Plain words, e.g. 100% refund 15 days before, 50% 7 days before.', group: 'terms' },
     { name: 'weatherNote', title: 'Snow and road closure note', type: 'text', rows: 3, description: 'What happens if snow or landslides close the road.', group: 'terms' },
-    { name: 'seoTitle', title: 'SEO Title', type: 'string', group: 'seo' },
-    { name: 'seoDesc', title: 'SEO Description', type: 'text', group: 'seo' },
+    { name: 'seoTitle', title: 'SEO Title', type: 'string', description: 'Optional custom title. If blank, the website generates a title from the tour name. Aim for 50–60 characters.', validation: (Rule) => Rule.max(60).warning('SEO titles longer than 60 characters may be truncated in search results.'), group: 'seo' },
+    { name: 'seoDesc', title: 'SEO Description', type: 'text', rows: 3, description: 'Optional custom search description. If blank, the website generates one from the tour details. Aim for 120–160 characters.', validation: (Rule) => Rule.max(160).warning('SEO descriptions longer than 160 characters may be truncated in search results.'), group: 'seo' },
     { name: 'keywords', title: 'SEO Keywords', type: 'string', group: 'seo' },
     { name: 'directAnswer', title: 'AEO Direct Answer Summary', type: 'text', group: 'seo' }
   ],
