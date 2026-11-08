@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { waLink, track } from "../lib/whatsapp";
+import useSelectedStops from "../lib/selectedStops";
 
 // Buttons above the itinerary: download the branded PDF, copy the page link, share on WhatsApp.
 export default function ItineraryActions({ tour, site, pageUrl }) {
   const [msg, setMsg] = useState("");
-  const pdfHref = `/api/itinerary/${tour.slug}`;
+  // Stops picked in the Attractions carousel go into the PDF too.
+  const stops = useSelectedStops(tour.slug, (tour.attractions || []).filter((a) => a && a.name).length);
+  const pdfHref = `/api/itinerary/${tour.slug}${stops.list.length ? `?stops=${stops.list.join(",")}` : ""}`;
   const flash = (t) => { setMsg(t); setTimeout(() => setMsg(""), 2500); };
 
   const copy = async () => {
@@ -33,8 +36,8 @@ export default function ItineraryActions({ tour, site, pageUrl }) {
 
   return (
     <div className="it-actions" style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", marginBottom: 16 }}>
-      <a href={pdfHref} download onClick={() => track("download_itinerary", { event_label: tour.slug })} style={{ ...btn, background: "#064e3b", color: "#fff" }}>
-        {icon("M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3")} Download itinerary (PDF)
+      <a href={pdfHref} download onClick={() => track("download_itinerary", { event_label: tour.slug, stops: stops.list.length })} style={{ ...btn, background: "#064e3b", color: "#fff" }}>
+        {icon("M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3")} Download itinerary (PDF){stops.list.length > 0 ? ` + ${stops.list.length} ${stops.list.length === 1 ? "stop" : "stops"}` : ""}
       </a>
       <button type="button" onClick={copy} style={{ ...btn, background: "#fff", color: "#064e3b" }}>
         {icon("M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1")} Copy link

@@ -3,6 +3,7 @@ import { buildItineraryPdf } from "../../../lib/itineraryPdf";
 
 // GET /api/itinerary/<tour-slug>          -> downloads the branded itinerary PDF
 // GET /api/itinerary/<tour-slug>?view=1   -> opens it in the browser instead
+// GET /api/itinerary/<tour-slug>?stops=0,2 -> also adds those must-see stops (positions in the tour's Attractions list)
 export default async function handler(req, res) {
   const slug = String(req.query.slug || "").replace(/\.pdf$/i, "");
   if (!/^[a-z0-9-_%]+$/i.test(slug)) return res.status(400).json({ error: "Bad trip name" });
@@ -11,7 +12,12 @@ export default async function handler(req, res) {
     const tour = (data.TOURS || []).find((t) => t.slug === slug);
     if (!tour) return res.status(404).json({ error: "Trip not found" });
     const site = data.SITE?.whatsapp ? data.SITE : SITE;
-    const pdf = await buildItineraryPdf(tour, site);
+    const stops = String(req.query.stops || "")
+      .split(",")
+      .map((n) => (/^\d{1,2}$/.test(n.trim()) ? Number(n) : -1))
+      .filter((n) => n >= 0)
+      .slice(0, 12);
+    const pdf = await buildItineraryPdf(tour, site, { stops });
     const inline = req.query.view === "1";
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `${inline ? "inline" : "attachment"}; filename="Humsafar-${slug}-itinerary.pdf"`);
