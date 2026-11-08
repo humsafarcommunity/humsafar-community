@@ -3,7 +3,7 @@ import { buildItineraryPdf } from "../../../lib/itineraryPdf";
 
 // GET /api/itinerary/<tour-slug>          -> downloads the branded itinerary PDF
 // GET /api/itinerary/<tour-slug>?view=1   -> opens it in the browser instead
-// GET /api/itinerary/<tour-slug>?stops=0,2 -> also adds those must-see stops (positions in the tour's Attractions list)
+// The PDF lists every attraction from the tour in Studio. ?stops=0,2 limits it to those positions (the visitor's picks).
 export default async function handler(req, res) {
   const slug = String(req.query.slug || "").replace(/\.pdf$/i, "");
   if (!/^[a-z0-9-_%]+$/i.test(slug)) return res.status(400).json({ error: "Bad trip name" });
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       .map((n) => (/^\d{1,2}$/.test(n.trim()) ? Number(n) : -1))
       .filter((n) => n >= 0)
       .slice(0, 12);
-    const pdf = await buildItineraryPdf(tour, site, { stops });
+    const pdf = await buildItineraryPdf(tour, site, { stops: stops.length ? stops : null });
     const inline = req.query.view === "1";
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `${inline ? "inline" : "attachment"}; filename="Humsafar-${slug}-itinerary.pdf"`);

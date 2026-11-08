@@ -22,7 +22,7 @@ const Ic = ({ d, size = 18, sw = 2.6 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>
 );
 
-export default function AttractionsCarousel({ attractions = [], tourSlug, title = "Attractions", subtitle = "Tap a stop to explore it, then add it to your itinerary PDF." }) {
+export default function AttractionsCarousel({ attractions = [], tourSlug, title = "Attractions", subtitle = "Tap a stop to explore it. Every stop is in the itinerary PDF; add some to choose just those." }) {
   const router = useRouter();
   const slug = tourSlug || (router && router.query && router.query.slug) || "";
   const items = (attractions || []).filter((a) => a && a.name);
@@ -99,7 +99,7 @@ export default function AttractionsCarousel({ attractions = [], tourSlug, title 
       {canPick && sel.list.length > 0 && (
         <div className="as-bar" role="status" aria-live="polite">
           <span className="as-count">{sel.list.length}</span>
-          <span className="as-bar-txt">{sel.list.length === 1 ? "stop" : "stops"} added to your itinerary PDF</span>
+          <span className="as-bar-txt">{sel.list.length === 1 ? "stop" : "stops"} in your itinerary PDF (only these)</span>
           <button type="button" className="as-clear" onClick={sel.clear}>Clear</button>
           <a className="as-dl" href={pdfHref} download onClick={onDownload}><Ic d={P.down} size={17} />Download PDF</a>
         </div>
@@ -132,7 +132,7 @@ export default function AttractionsCarousel({ attractions = [], tourSlug, title 
                   {sel.list.length > 0 && <a className="as-link" href={pdfHref} download onClick={onDownload}>Download PDF ({sel.list.length})</a>}
                 </div>
               )}
-              <p className="as-hint">Stops you add appear with photos in your downloadable itinerary.</p>
+              <p className="as-hint">Pick stops for a shorter PDF. With none picked, the PDF lists them all.</p>
             </div>
           </div>
         </div>,
