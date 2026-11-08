@@ -13,7 +13,7 @@ import { CITIES, CITY_SLUGS } from "../data/cities";
 import { waLink, track } from "../lib/whatsapp";
 
 // The Manali keyword page. With a `city`, it becomes "Manali tour packages from <city>".
-export default function ManaliLanding({ tours = [], guides = [], reviews = [], site: freshSite, seo: seoData, minPrice, city }) {
+export default function ManaliLanding({ tours = [], themes = [], guides = [], reviews = [], site: freshSite, seo: seoData, minPrice, city }) {
   const site = freshSite?.whatsapp ? freshSite : SITE;
   const c = city ? CITIES[city] : null;
   const path = c ? `/manali-tour-packages/${city}` : "/manali-tour-packages";
@@ -99,6 +99,22 @@ export default function ManaliLanding({ tours = [], guides = [], reviews = [], s
             <p style={p}>New Manali dates are being added. See <Link href="/packages">all packages</Link> or message us on WhatsApp for the next batch.</p>
           )}
         </section>
+
+        {themes.length > 0 && (
+          <section aria-label="Popular Manali trips" style={{ ...section, paddingTop: 48 }}>
+            <h2 style={h2}>Popular Manali trips</h2>
+            <p style={{ ...p, marginBottom: 20 }}>Not sure which Manali plan fits you? Start with what you are travelling for.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 200px), 1fr))", gap: 14 }}>
+              {themes.map((th) => (
+                <Link key={th.key} href={th.href} onClick={() => track("manali_theme_click", { event_label: th.key })} style={{ display: "block", padding: "18px 18px 16px", borderRadius: 18, background: "#fff", border: "1px solid #e2e8f0", textDecoration: "none", boxShadow: "0 4px 14px rgba(15,23,42,0.05)" }}>
+                  <strong style={{ display: "block", fontSize: 18, color: "#064e3b", marginBottom: 4 }}>{th.label}</strong>
+                  <span style={{ display: "block", fontSize: 14, lineHeight: 1.5, color: "#475569", marginBottom: 10 }}>{th.blurb}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#047857" }}>{th.kind === "Trip" ? "See the trip" : "Read the guide"} →</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {c && (
           <section style={{ ...section, paddingTop: 56 }}>

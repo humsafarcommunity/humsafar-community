@@ -34,6 +34,10 @@ import {
 } from "../../data";
 
 export default function TourDetailPage({ tour, relatedTours, guides = [], reviews = [], site: freshSite }) {
+  // Trips to a place with its own keyword page link back up to that page
+  const hubText = `${tour?.title || ""} ${tour?.slug || ""} ${tour?.location || ""}`.toLowerCase();
+  const hubSlug = ["manali", "spiti", "kasol", "jibhi"].find((k) => hubText.includes(k));
+  const hubPlace = hubSlug ? { slug: hubSlug, name: hubSlug[0].toUpperCase() + hubSlug.slice(1) } : null;
   // Drop stray call-to-action lines that were pasted into the highlights list in the CMS.
   const cleanHighlights = (tour?.highlights || []).filter((h) => h && !/\[(book now|call us|whatsapp us)\]|ready to book/i.test(h));
   const dynamicSite = freshSite || SITE || { whatsapp: "916268496389", name: "Humsafar Community" };
@@ -373,6 +377,15 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
                 {guides.map((b) => <BlogCard key={b._id || b.slug} blog={b} />)}
               </div>
+            </div>
+          </section>
+        )}
+
+        {hubPlace && (
+          <section aria-label={`More ${hubPlace.name} trips`} style={{ background: "#f8fafc", padding: guides.length ? "0 24px 48px" : "40px 24px 48px" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto", padding: "18px 22px", borderRadius: 18, background: "#fff", border: "1px solid #e2e8f0", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+              <span style={{ fontSize: 16, color: "#475569" }}>Comparing options? See every {hubPlace.name} group trip, dates and prices in one place.</span>
+              <Link href={`/${hubPlace.slug}-tour-packages`} style={{ fontWeight: 700, fontSize: 15, color: "#047857", textDecoration: "none" }}>All {hubPlace.name} tour packages →</Link>
             </div>
           </section>
         )}
