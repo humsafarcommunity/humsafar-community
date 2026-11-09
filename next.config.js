@@ -75,6 +75,19 @@ const nextConfig = {
   // ── SEO: URL redirects ──
   async redirects() {
     return [
+      // Old blog post that no longer exists: send visitors and Google to the closest live guide
+      {
+        source: "/blog/15-hidden-offbeat-places-in-himachal-pradesh-you-haven-t-visited-yet-2026-guide",
+        destination: "/blog/himachal-pradesh-hidden-places-to-visit",
+        permanent: true,
+      },
+      // One address for the site: non-www goes to www with a permanent (308) redirect
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "humsafarcommunity.com" }],
+        destination: "https://www.humsafarcommunity.com/:path*",
+        permanent: true,
+      },
       {
         source: "/tours/:slug",
         destination: "/packages/:slug",
