@@ -27,12 +27,12 @@ export default function Document() {
         {/* Fonts load without blocking the first paint (swap shows text straight away) */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Londrina+Solid:wght@900&display=swap';l.media='print';l.onload=function(){l.media='all'};document.head.appendChild(l);})();`,
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Londrina+Solid:wght@900&family=Anton&display=swap';l.media='print';l.onload=function(){l.media='all'};document.head.appendChild(l);})();`,
           }}
         />
         <noscript>
           <link
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Londrina+Solid:wght@900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Londrina+Solid:wght@900&family=Anton&display=swap"
             rel="stylesheet"
           />
         </noscript>

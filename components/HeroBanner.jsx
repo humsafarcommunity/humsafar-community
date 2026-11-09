@@ -1,13 +1,43 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { figure } from "../lib/figure";
+import { track } from "../lib/whatsapp";
 
 // Homepage hero: big headline with a destination word that changes by itself, a pill search bar and a
 // row of numbers. The words, tagline and photos are editable in Studio (Site Settings → Hero, and Banners).
 const DEFAULT_WORDS = ["Spiti", "Ladakh", "Manali", "Jibhi", "Rajasthan", "Udaipur", "Jaisalmer"];
 const LIME = "#bef264";
 const SHOW_MS = 3200;
+
+// Destination poster slides: one per hero word that has real trips behind it. Each slide shows that
+// destination's own photo and opens its page, so the words, the picture and the link always match.
+const LANDING = ["manali", "spiti", "kasol", "jibhi"];
+const REGION_KEYS = ["himachal", "uttarakhand", "rajasthan", "international"];
+const NAMES = { spiti: "Spiti Valley" };
+const norm = (v) => String(v || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+function buildSlides(words, tours = [], banners = []) {
+  const seen = new Set();
+  return words.map((w) => {
+    const key = norm(w);
+    if (!key || seen.has(key)) return null;
+    seen.add(key);
+    const re = new RegExp(`(^| )${key}( |$)`);
+    const mine = tours.filter((t) => re.test(norm(`${t.title} ${t.slug} ${t.location}`)) || (REGION_KEYS.includes(key) && t.region === key));
+    if (!mine.length) return null;
+    const banner = banners.find((b) => b?.url && re.test(norm(`${b.title} ${b.hi} ${b.sub}`)));
+    const image = banner?.url || mine.find((t) => t.img)?.img;
+    if (!image) return null;
+    const prices = mine.map((t) => Number(t.price)).filter((n) => n > 0);
+    const href = LANDING.includes(key) ? `/${key}-tour-packages`
+      : REGION_KEYS.includes(key) ? `/packages?region=${key}`
+      : mine.length === 1 ? `/packages/${mine[0].slug}`
+      : `/search?q=${encodeURIComponent(w)}`;
+    return { key, name: NAMES[key] || w, image, href, count: mine.length, from: prices.length ? Math.min(...prices) : 0 };
+  }).filter(Boolean);
+}
 
 function Icon({ name }) {
   const common = { width: 38, height: 38, viewBox: "0 0 24 24", fill: "none", stroke: "#fff", strokeWidth: 1.7, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true };
@@ -18,9 +48,12 @@ function Icon({ name }) {
   return (<svg {...common}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="0.6" fill="#fff" /></svg>);
 }
 
-export default function HeroBanner({ banners = [], site = {}, destinationCount = 0 }) {
+export default function HeroBanner({ banners = [], tours = [], site = {}, destinationCount = 0 }) {
   const router = useRouter();
   const words = useMemo(() => (site.heroWords?.length ? site.heroWords : DEFAULT_WORDS), [site.heroWords]);
+  const slides = useMemo(() => buildSlides(words, tours, banners), [words, tours, banners]);
+  const posterMode = slides.length > 0;
+  const bg = posterMode ? slides.map((x) => ({ id: x.key, url: x.image })) : banners;
   const [i, setI] = useState(0);
   const [maxSeen, setMaxSeen] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -42,12 +75,12 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   }, []);
 
   useEffect(() => {
-    if (paused || reduced || isMobile) return undefined;
-    const t = setInterval(() => setI((p) => p + 1), SHOW_MS);
+    if (paused || reduced || (isMobile && !posterMode)) return undefined;
+    const t = setInterval(() => setI((p) => p + 1), posterMode ? 5200 : SHOW_MS);
     return () => clearInterval(t);
-  }, [paused, reduced, isMobile]);
+  }, [paused, reduced, isMobile, posterMode]);
 
-  useEffect(() => { setMaxSeen((m) => Math.max(m, banners.length ? i % banners.length : 0)); }, [i, banners.length]);
+  useEffect(() => { setMaxSeen((m) => Math.max(m, bg.length ? i % bg.length : 0)); }, [i, bg.length]);
 
   useEffect(() => {
     const stop = () => setSearching(false);
@@ -57,7 +90,8 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   }, [router.events]);
 
   const word = words[i % words.length];
-  const slide = banners.length ? i % banners.length : -1;
+  const slide = bg.length ? i % bg.length : -1;
+  const active = posterMode ? slides[slide] : null;
   const tagline = (site.heroTagline || "Pack | Join | Explore | Repeat").split("|").map((s) => s.trim()).filter(Boolean);
   const subline = site.heroSubline || "Group trips with a trip captain. Fly to Delhi and join from Mumbai, Pune, Bangalore, Hyderabad or Ahmedabad";
 
@@ -81,7 +115,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
   return (
     <section aria-label="Find your next group trip" className="hb">
       <div className="hb-bg" aria-hidden="true">
-        {banners.map((b, idx) => (
+        {bg.map((b, idx) => (
           <div key={b?.id || idx} className="hb-slide" style={{ opacity: idx === slide ? 1 : 0 }} data-active={idx === slide}>
             {(idx === 0 || idx <= maxSeen) && (
               <Image
@@ -104,24 +138,48 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         <div className="hb-copy">
           <h1 className="hb-h1">
             <span className="hb-sr">Book your group trip to {words.join(", ")} and more with Humsafar Community</span>
-            <span aria-hidden="true" className="hb-line">
-              Book Your
-              {slide >= 0 && banners[slide]?.url && maxSeen >= 0 && (
-                <span className="hb-pill" key={`pill-${slide}`}>
-                  <Image src={banners[slide].url} alt="" width={220} height={84} quality={55} sizes="220px" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+            {active ? (
+              <span className="hb-poster" key={`poster-${active.key}`}>
+                <span className="hb-kicker">Explore the <span className="hb-magic">magic</span> of</span>
+                <Link href={active.href} className="hb-title" onClick={() => track("hero_destination_click", { event_label: active.key })}>{active.name}</Link>
+                <span className="hb-curated">{active.count} group trip{active.count > 1 ? "s" : ""} to choose from</span>
+              </span>
+            ) : (
+              <>
+                <span aria-hidden="true" className="hb-line">
+                  Book Your
+                  {slide >= 0 && banners[slide]?.url && maxSeen >= 0 && (
+                    <span className="hb-pill" key={`pill-${slide}`}>
+                      <Image src={banners[slide].url} alt="" width={220} height={84} quality={55} sizes="220px" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                    </span>
+                  )}
+                </span>
+                <span aria-hidden="true" className="hb-line">
+                  Trip to{" "}
+                  <span className="hb-word" key={word}>
+                    {word}
+                    <svg className="hb-wave" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M2 8 Q 14 1 26 8 T 50 8 T 74 8 T 98 8 T 122 8 T 146 8 T 170 8 T 198 8" fill="none" stroke={LIME} strokeWidth="3.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </span>
+              </>
+            )}
+          </h1>
+
+          {active && (
+            <div className="hb-ctas">
+              <Link href={active.href} className="hb-cta" onClick={() => track("hero_destination_click", { event_label: active.key })}>View {active.name} packages →</Link>
+              {active.from > 0 && <span className="hb-from">From ₹{active.from.toLocaleString("en-IN")} / person</span>}
+              {slides.length > 1 && (
+                <span className="hb-dots" role="group" aria-label="Choose destination">
+                  {slides.map((x, n) => (
+                    <button key={x.key} type="button" className="hb-dot" aria-label={`Show ${x.name}`} aria-current={n === slide} onClick={() => setI(n)} />
+                  ))}
                 </span>
               )}
-            </span>
-            <span aria-hidden="true" className="hb-line">
-              Trip to{" "}
-              <span className="hb-word" key={word}>
-                {word}
-                <svg className="hb-wave" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M2 8 Q 14 1 26 8 T 50 8 T 74 8 T 98 8 T 122 8 T 146 8 T 170 8 T 198 8" fill="none" stroke={LIME} strokeWidth="3.5" strokeLinecap="round" />
-                </svg>
-              </span>
-            </span>
-          </h1>
+            </div>
+          )}
 
           <p className="hb-tag">
             {tagline.map((t, n) => (
@@ -182,6 +240,21 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
         .hb-word { position: relative; display: inline-block; color: ${LIME}; animation: hbIn 0.65s cubic-bezier(.2,.8,.2,1) both; }
         .hb-wave { position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.2em; overflow: visible; }
         .hb-wave path { stroke-dasharray: 260; stroke-dashoffset: 260; animation: hbDraw 0.9s 0.25s ease forwards; }
+        .hb-poster { display: flex; flex-direction: column; align-items: flex-start; gap: 0; animation: hbIn 0.65s cubic-bezier(.2,.8,.2,1) both; }
+        .hb-kicker { font-family: var(--sans); font-weight: 800; font-size: clamp(20px, 3.4vw, 40px); letter-spacing: -0.01em; line-height: 1.1; }
+        .hb-magic { font-family: "Caveat", cursive; font-weight: 700; font-size: 1.25em; color: #fff; }
+        .hb-title { font-family: "Anton", "Impact", "Arial Narrow", sans-serif; font-weight: 400; text-transform: uppercase; color: ${LIME}; text-decoration: none; font-size: clamp(54px, 13vw, 168px); line-height: 0.98; letter-spacing: 0.01em; text-shadow: 5px 5px 0 rgba(0,0,0,0.85); margin: 2px 0 6px; }
+        .hb-title:hover { filter: brightness(1.08); }
+        .hb-curated { font-family: var(--sans); font-weight: 700; font-size: clamp(16px, 2.2vw, 26px); }
+        .hb-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 0 0 22px; }
+        .hb-cta { display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; background: ${LIME}; color: #14301f; font-weight: 800; font-size: 16px; text-decoration: none; box-shadow: 0 10px 28px rgba(0,0,0,0.35); }
+        .hb-cta:hover { background: #fff; }
+        .hb-from { font-weight: 700; font-size: 16px; padding: 10px 16px; border-radius: 999px; background: rgba(0,0,0,0.38); border: 1px solid rgba(255,255,255,0.35); }
+        .hb-dots { display: inline-flex; gap: 8px; align-items: center; }
+        .hb-dot { width: 12px; height: 12px; padding: 0; border-radius: 999px; border: 0; background: rgba(255,255,255,0.55); cursor: pointer; position: relative; }
+        .hb-dot::after { content: ""; position: absolute; inset: -10px; }
+        .hb-dot[aria-current="true"] { width: 34px; background: ${LIME}; }
+        .hb-title:focus-visible, .hb-cta:focus-visible, .hb-dot:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
         .hb-tag { font-size: clamp(18px, 2.4vw, 26px); font-weight: 600; margin: 0 0 8px; }
         .hb-bar { color: rgba(255,255,255,0.75); }
         .hb-sub { font-size: clamp(15px, 1.7vw, 19px); margin: 0 0 28px; color: rgba(255,255,255,0.92); max-width: 560px; }
@@ -210,7 +283,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
           /* Keep the first-screen hero image static on mobile to reduce animation work. */
           .hb-slide[data-active="true"] { animation: none; }
           /* Paint the mobile headline and decorative elements immediately. */
-          .hb-word, .hb-pill, .hb-wave path { animation: none; }
+          .hb-word, .hb-pill, .hb-wave path, .hb-poster { animation: none; }
           .hb-wave path { stroke-dashoffset: 0; }
           .hb-slide { transition: none; }
           .hb { min-height: 78svh; }
@@ -226,7 +299,7 @@ export default function HeroBanner({ banners = [], site = {}, destinationCount =
           .hb-pause { top: 78px; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .hb-slide[data-active="true"], .hb-word, .hb-pill, .hb-wave path { animation: none; }
+          .hb-slide[data-active="true"], .hb-word, .hb-pill, .hb-wave path, .hb-poster { animation: none; }
           .hb-wave path { stroke-dashoffset: 0; }
           .hb-slide { transition: none; }
         }
