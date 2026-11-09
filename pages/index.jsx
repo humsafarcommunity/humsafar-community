@@ -155,7 +155,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       <Navbar site={dynamicSite} />
 
       {/* ── HERO SECTION ─────────────────────────────────────────── */}
-      <HeroBanner banners={banners} site={dynamicSite} destinationCount={destinationCount} />
+      <HeroBanner banners={banners} tours={tours} site={dynamicSite} destinationCount={destinationCount} />
 
       {/* ── FILTER BAR ───────────────────────────────────────────── */}
       <div style={{ width: "100%", padding: "0 24px", boxSizing: "border-box" }}>
