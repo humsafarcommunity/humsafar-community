@@ -273,7 +273,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       {/* ── NUMBERS STRIP (from CMS) ──────────────────────────────── */}
 
       {/* ── TOURS SECTION ────────────────────────────────────────── */}
-      <main>
+      <main className="hp-main">
         <section
           aria-label="Tour packages"
           style={{ padding: "60px 24px", background: "#fff" }}
@@ -605,7 +605,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   All Blog Posts →
                 </Link>
               </div>
-              <div
+              <div className="tour-rail blog-rail"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fill,minmax(min(100%, 300px), 1fr))",
@@ -613,8 +613,15 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 }}
               >
                 {blogs.slice(0, 3).map((blog, idx) => (
-                  <BlogCard key={blog._id || blog.slug || idx} blog={blog} />
+                  <BlogCard key={blog._id || blog.slug || idx} blog={blog} site={dynamicSite} />
                 ))}
+              </div>
+              <div className="blog-cta" style={{ marginTop: 22, background: "#fff7ed", border: "1px solid #fed7aa", borderRadius: 18, padding: "16px 18px", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+                <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "#7a3a12", fontFamily: "Plus Jakarta Sans, sans-serif", flex: "1 1 220px" }}>Ready to go instead of reading? Pick a trip or ask us on WhatsApp.</p>
+                <div style={{ display: "flex", gap: 8, flex: "1 1 240px" }}>
+                  <Link href="/packages" onClick={() => track("view_book_click", { event_label: "blog_section_cta" })} style={{ flex: 1, minHeight: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#E8681E", color: "#fff", fontWeight: 800, fontSize: 14, textDecoration: "none", fontFamily: "var(--sans)" }}>View all trips</Link>
+                  <a href={waLink(dynamicSite, "Hi Humsafar! Please suggest a trip for me.", "Homepage: blog section")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: "blog_section_cta" })} style={{ flex: 1, minHeight: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#1fb855", color: "#fff", fontWeight: 800, fontSize: 14, textDecoration: "none", fontFamily: "var(--sans)" }}>WhatsApp us</a>
+                </div>
               </div>
             </div>
           </section>

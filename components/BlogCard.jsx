@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { waLink, track } from "../lib/whatsapp";
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, site }) {
   if (!blog) return null;
   return (
     <article
+      className="bc"
       style={{
         background: "#fff",
         borderRadius: 20,
@@ -26,7 +28,7 @@ export default function BlogCard({ blog }) {
       itemType="https://schema.org/BlogPosting"
     >
       {blog.coverImage && (
-        <div style={{ position: 'relative', height: 196, width: '100%' }}>
+        <div className="bc-img" style={{ position: 'relative', height: 196, width: '100%' }}>
           <Image
             src={blog.coverImage}
             alt={blog.title}
@@ -37,7 +39,7 @@ export default function BlogCard({ blog }) {
           />
         </div>
       )}
-      <div style={{ padding: "20px" }}>
+      <div className="bc-body" style={{ padding: "20px" }}>
         <div style={{ display: "flex", gap: 8, marginBottom: 11 }}>
           <span
             style={{
@@ -65,6 +67,7 @@ export default function BlogCard({ blog }) {
           </span>
         </div>
         <h3
+          className="bc-title"
           style={{
             fontFamily: "var(--sans)",
             fontSize: 18,
@@ -84,6 +87,7 @@ export default function BlogCard({ blog }) {
           {blog.title}
         </h3>
         <p
+          className="bc-excerpt"
           style={{
             fontSize: 13,
             color: "#64748b",
@@ -98,22 +102,31 @@ export default function BlogCard({ blog }) {
         >
           {blog.excerpt}
         </p>
-        <Link
-          href={blog.slug ? `/blog/${blog.slug}` : "#"}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            marginTop: 14,
-            fontSize: 13,
-            fontWeight: 700,
-            color: "#064e3b",
-            textDecoration: "none",
-            fontFamily: "Plus Jakarta Sans, sans-serif",
-          }}
-        >
-          {blog.slug ? "Read Full Guide →" : "Content Unavailable"}
-        </Link>
+        <div className="bc-actions" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
+          <Link
+            href={blog.slug ? `/blog/${blog.slug}` : "#"}
+            style={{ fontSize: 13, fontWeight: 700, color: "#064e3b", textDecoration: "none", fontFamily: "Plus Jakarta Sans, sans-serif", marginRight: "auto" }}
+          >
+            {blog.slug ? "Read guide →" : "Content Unavailable"}
+          </Link>
+          <Link
+            href="/packages"
+            onClick={() => track("view_book_click", { event_label: `blog_${blog.slug || "card"}` })}
+            style={{ background: "#E8681E", color: "#fff", fontSize: 12.5, fontWeight: 800, padding: "9px 14px", borderRadius: 999, textDecoration: "none", fontFamily: "Plus Jakarta Sans, sans-serif", whiteSpace: "nowrap" }}
+          >
+            View trips
+          </Link>
+          <a
+            href={waLink(site, `Hi Humsafar! I read your guide "${blog.title}". Can you suggest a trip and share dates?`, `Blog: ${blog.slug || "card"}`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { event_label: `blog_${blog.slug || "card"}` })}
+            aria-label="Ask about a trip on WhatsApp"
+            style={{ width: 38, height: 38, borderRadius: 999, background: "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+          >
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.5-8.3zm-8.5 18.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7z" /></svg>
+          </a>
+        </div>
         <meta itemProp="datePublished" content={blog.publishedAt} />
       </div>
     </article>
