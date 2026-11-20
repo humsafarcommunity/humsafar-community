@@ -5,6 +5,8 @@ import SEOHead from "../components/SEOHead";
 import { getFreshData, SITE } from "../data";
 import { waLink, track } from "../lib/whatsapp";
 
+import WhatsAppLogo from "../components/WhatsAppLogo";
+
 export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
   const dynamicSite = freshSite?.whatsapp ? freshSite : (SITE || { name: "Humsafar Community", whatsapp: "916268496389" });
   const [status, setStatus] = useState("idle"); // idle | success
@@ -50,7 +52,7 @@ export default function CustomTripsPage({ site: freshSite, seo: seoData }) {
              <div style={{ fontSize: 48, marginBottom: 20 }}>✅</div>
              <h2 style={{ fontFamily: "var(--sans)", fontSize: 28, marginBottom: 12 }}>Request Received!</h2>
              <p style={{ color: "#64748b", marginBottom: 24 }}>Tap the button to send these details to our team on WhatsApp.</p>
-             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#047857", color: "#fff", padding: "14px 28px", borderRadius: 999, fontWeight: 800, textDecoration: "none", marginBottom: 16 }}>Continue on WhatsApp</a><br />
+             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#047857", color: "#fff", padding: "14px 28px", borderRadius: 999, fontWeight: 800, textDecoration: "none", marginBottom: 16 }}><WhatsAppLogo size={24} /> Continue on WhatsApp</a><br />
              <button 
                onClick={() => setStatus("idle")}
                style={{ background: "#064e3b", color: "#fff", border: "none", padding: "12px 24px", borderRadius: 12, fontWeight: 700, cursor: "pointer" }}
