@@ -592,9 +592,9 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; 
     gap: 14px !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 24px;
-    margin: 0 -24px;
-    padding: 4px 24px 18px;
+    scroll-padding-left: 18px;
+    margin: 0 -18px;
+    padding: 4px 18px 16px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -613,4 +613,21 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; 
 
   /* Filters: smaller card, same two rows and same behaviour */
   .filter-strip-card { padding: 16px 16px !important; margin-top: -20px !important; border-radius: 18px !important; }
+}
+
+/* ── MOBILE: smaller, tighter homepage sections (text + spacing) ─────────── */
+@media (max-width: 760px) {
+  main > section { padding-top: 32px !important; padding-bottom: 32px !important; padding-left: 18px !important; padding-right: 18px !important; }
+  main section h2 { font-size: 21px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
+  main section h2 + p, main section p { font-size: 13px !important; line-height: 1.5 !important; }
+  main section a, main section summary { font-size: 13px; }
+
+  /* blog cards: compact, swipeable */
+  .blog-rail > * { flex-basis: 76%; }
+  .bc { border-radius: 16px !important; }
+  .bc-img { height: 120px !important; }
+  .bc-body { padding: 14px !important; }
+  .bc-title { font-size: 15px !important; margin-bottom: 6px !important; }
+  .bc-excerpt { font-size: 12.5px !important; -webkit-line-clamp: 2 !important; line-height: 1.5 !important; }
+  .blog-cta { padding: 14px !important; }
 }
