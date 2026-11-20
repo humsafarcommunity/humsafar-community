@@ -2,6 +2,8 @@
 // WhatsApp number on the left, social media icons on the right.
 import { mergeSocials } from "../data/socials";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 const tile = { width: 44, height: 44, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0, textDecoration: "none" };
 const letter = { fontFamily: "var(--sans)", fontWeight: 800, fontSize: 22, lineHeight: 1 };
 
@@ -65,11 +67,7 @@ export default function ContactBar({ site = {} }) {
           rel="noopener noreferrer"
           style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none", color: "#0f172a" }}
         >
-          <span style={{ width: 52, height: 52, borderRadius: 999, background: "#25d366", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-          </span>
+          <WhatsAppLogo size={52} />
           <span>
             <span style={{ display: "block", fontSize: 15, color: "#475569" }}>Don&apos;t wait any longer, contact us!</span>
             <span style={{ display: "block", fontSize: "clamp(26px, 5vw, 36px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.15 }}>{phone}</span>

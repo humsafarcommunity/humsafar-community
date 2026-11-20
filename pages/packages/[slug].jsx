@@ -24,6 +24,8 @@ import { TOUR_PAGE_CSS } from "../../components/tour-page/css";
 import { blogsForTour, slimBlog } from "../../lib/related";
 import { waLink, telLink, track } from "../../lib/whatsapp";
 import { getTourSeoMeta } from "../../lib/tourSeo";
+import WhatsAppLogo from "../../components/WhatsAppLogo";
+
 import {
   SITE,
   getFreshData,
@@ -350,7 +352,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
                     style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "var(--tp-accent)", color: "#fff", padding: "14px", borderRadius: 10, fontWeight: 800, fontSize: 13, textDecoration: "none", boxSizing: "border-box", textTransform: "uppercase", letterSpacing: 0.5 }}
                     onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Tour Sidebar", value: totalPrice })}
                   >
-                    Book on WhatsApp
+                    <WhatsAppLogo size={24} /> Book on WhatsApp
                   </a>
                   <p style={{ textAlign: "center", fontSize: 11, color: "#64748b", marginTop: 10 }}>No payment needed to enquire.</p>
                   <a href={telLink(dynamicSite)} onClick={() => track("call_click", { event_label: "Tour Sidebar" })} style={{ display: "block", textAlign: "center", marginTop: 6, fontSize: 13, fontWeight: 700, color: "var(--tp-accent)", textDecoration: "none" }}>
@@ -406,7 +408,7 @@ export default function TourDetailPage({ tour, relatedTours, guides = [], review
             rel="noopener noreferrer"
             onClick={() => window.gtag?.("event", "whatsapp_click", { event_label: "Mobile Book Bar", value: totalPrice })}
           >
-            Book Now<Icon name="right" size={18} />
+            <WhatsAppLogo size={24} /> Book Now
           </a>
         </div>
       </div>

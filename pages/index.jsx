@@ -14,6 +14,7 @@ import ReviewsSection from "../components/ReviewsSection";
 import Footer from "../components/Footer";
 import MobileCtaBar from "../components/MobileCtaBar";
 import { waLink, track } from "../lib/whatsapp";
+import WhatsAppLogo from "../components/WhatsAppLogo";
 import {
   SITE,
   REVIEWS,
@@ -476,7 +477,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   onClick={() => track("whatsapp_click", { event_label: "not_sure_block" })}
                   style={{ flex: "1 1 200px", minHeight: 52, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#1fb855", color: "#fff", fontWeight: 800, fontSize: 15, textDecoration: "none", fontFamily: "var(--sans)" }}
                 >
-                  Get a suggestion on WhatsApp
+                  <WhatsAppLogo size={24} /> Get a suggestion on WhatsApp
                 </a>
                 <button
                   type="button"
@@ -620,7 +621,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                 <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "#7a3a12", fontFamily: "Plus Jakarta Sans, sans-serif", flex: "1 1 220px" }}>Ready to go instead of reading? Pick a trip or ask us on WhatsApp.</p>
                 <div style={{ display: "flex", gap: 8, flex: "1 1 240px" }}>
                   <Link href="/packages" onClick={() => track("view_book_click", { event_label: "blog_section_cta" })} style={{ flex: 1, minHeight: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#E8681E", color: "#fff", fontWeight: 800, fontSize: 14, textDecoration: "none", fontFamily: "var(--sans)" }}>View all trips</Link>
-                  <a href={waLink(dynamicSite, "Hi Humsafar! Please suggest a trip for me.", "Homepage: blog section")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: "blog_section_cta" })} style={{ flex: 1, minHeight: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#1fb855", color: "#fff", fontWeight: 800, fontSize: 14, textDecoration: "none", fontFamily: "var(--sans)" }}>WhatsApp us</a>
+                  <a href={waLink(dynamicSite, "Hi Humsafar! Please suggest a trip for me.", "Homepage: blog section")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: "blog_section_cta" })} style={{ flex: 1, minHeight: 46, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#1fb855", color: "#fff", fontWeight: 800, fontSize: 14, textDecoration: "none", fontFamily: "var(--sans)" }}><WhatsAppLogo size={22} /> WhatsApp us</a>
                 </div>
               </div>
             </div>
@@ -764,11 +765,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
           }
         }}
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382C17.115 14.204 15.361 13.342 15.034 13.223C14.707 13.104 14.469 13.045 14.231 13.402C13.993 13.759 13.31 14.561 13.102 14.8C12.894 15.038 12.686 15.068 12.329 14.889C11.972 14.711 10.822 14.333 9.458 13.117C8.396 12.17 7.679 10.999 7.471 10.642C7.263 10.285 7.449 10.091 7.628 9.913C7.789 9.753 7.987 9.493 8.165 9.285C8.343 9.077 8.402 8.928 8.521 8.69C8.64 8.452 8.581 8.244 8.492 8.066C8.402 7.888 7.689 6.134 7.392 5.421C7.102 4.727 6.81 4.821 6.596 4.811C6.394 4.801 6.156 4.801 5.918 4.801C5.68 4.801 5.294 4.89 4.967 5.247C4.64 5.604 3.719 6.466 3.719 8.22C3.719 9.974 4.997 11.668 5.175 11.906C5.353 12.144 7.688 15.733 11.263 17.278C12.113 17.645 12.776 17.865 13.292 18.028C14.145 18.3 14.921 18.261 15.534 18.17C16.218 18.068 17.643 17.307 17.94 16.474C18.237 15.641 18.237 14.927 18.148 14.779C18.058 14.63 17.829 14.56 17.472 14.382Z" fill="currentColor"/>
-          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12C2 13.82 2.489 15.526 3.344 17L2 22L7.174 20.686C8.618 21.523 10.256 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM4 12C4 7.582 7.582 4 12 4C16.418 4 20 7.582 20 12C20 16.418 16.418 20 12 20C10.457 20 9.015 19.562 7.785 18.802L4.85 19.55L5.617 16.711C4.595 15.385 4 13.76 4 12Z" fill="currentColor"/>
-        </svg>
-      </a>
+        <WhatsAppLogo size={46} />      </a>
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }

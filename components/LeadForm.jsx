@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { waLink, track } from "../lib/whatsapp";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 // Short callback form. The enquiry is saved first (see pages/api/lead.js), then the visitor gets a
 // WhatsApp button with their details filled in, so a lead is kept even if they never open WhatsApp.
 const MONTHS = ["Not sure yet", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -48,7 +50,7 @@ export default function LeadForm({ site, source, trip, title = "Get a callback",
           onClick={() => track("whatsapp_click", { event_label: "After lead form" })}
           style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minHeight: 52, padding: "0 28px", borderRadius: 999, background: "#047857", color: "#fff", fontWeight: 800, textDecoration: "none" }}
         >
-          Continue on WhatsApp
+          <WhatsAppLogo size={25} /> Continue on WhatsApp
         </a>
       </div>
     );

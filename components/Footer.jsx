@@ -1,6 +1,8 @@
 import ContactBar from "./ContactBar";
 import Link from 'next/link';
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 export default function Footer({ dynamicSite }) {
   if (!dynamicSite) return null;
 
