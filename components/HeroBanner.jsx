@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { figure } from "../lib/figure";
 import { track, waLink } from "../lib/whatsapp";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 // Homepage hero: big headline with a destination word that changes by itself, a pill search bar and a
 // row of numbers. The words, tagline and photos are editable in Studio (Site Settings → Hero, and Banners).
 const DEFAULT_WORDS = ["Spiti", "Ladakh", "Manali", "Jibhi", "Rajasthan", "Udaipur", "Jaisalmer"];
@@ -196,7 +198,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
             rel="noopener noreferrer"
             onClick={() => track("whatsapp_click", { event_label: "hero" })}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.5-8.3zm-8.5 18.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7z" /></svg>
+            <WhatsAppLogo size={26} />
             Chat on WhatsApp
           </a>
 
