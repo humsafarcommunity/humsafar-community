@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { waLink, track } from "../lib/whatsapp";
 
 const ORANGE = "#E8681E";
 const CREAM = "#FFEBDA";
@@ -65,7 +66,7 @@ function buildBlurb(tour) {
   return (raw || "").replace(/\s+/g, " ").trim();
 }
 
-export default function TourCard({ tour }) {
+export default function TourCard({ tour, site }) {
   if (!tour) return null;
 
   const departure = tour.departureDay
@@ -81,6 +82,10 @@ export default function TourCard({ tour }) {
 
   const feats = buildFeatures(tour);
   const blurb = buildBlurb(tour);
+  // Old price: format with Indian commas (it used to print as a bare number like ₹14500)
+  const oldNum = Number(String(tour.oldPrice || "").replace(/[^\d.]/g, ""));
+  const oldPriceText = oldNum > 0 ? oldNum.toLocaleString("en-IN") : tour.oldPrice;
+  const waMsg = `Hi Humsafar! I'm interested in: ${tour.title} (₹${Number(tour.price).toLocaleString("en-IN")}). Please share dates and details.`;
   const href = `/packages/${tour.slug}`;
   const chipStyle = {
     display: "inline-flex",
@@ -95,6 +100,7 @@ export default function TourCard({ tour }) {
 
   return (
     <article
+      className="tc"
       style={{
         position: "relative",
         borderRadius: 26,
@@ -118,8 +124,8 @@ export default function TourCard({ tour }) {
       itemType="https://schema.org/TouristTrip"
     >
       {/* ---------- photo hero with chips + title ---------- */}
-      <Link href={href} aria-label={`${tour.title} — view details`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
-        <div style={{ position: "relative", paddingTop: "84%", overflow: "hidden" }}>
+      <Link href={href} onClick={() => track("view_book_click", { event_label: `photo_${tour.slug}` })} aria-label={`${tour.title} — view details`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+        <div className="tc-photo" style={{ position: "relative", paddingTop: "84%", overflow: "hidden" }}>
           <Image
             src={tour.img || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
             alt={`${tour.title} — ${tour.location}`}
@@ -241,6 +247,7 @@ export default function TourCard({ tour }) {
       >
         {feats.length > 0 && (
           <ul
+            className="tc-feats"
             style={{
               listStyle: "none",
               margin: "0 0 14px",
@@ -264,6 +271,7 @@ export default function TourCard({ tour }) {
 
         {blurb && (
           <p
+            className="tc-blurb"
             style={{
               margin: "0 0 16px",
               fontSize: 13,
@@ -281,7 +289,7 @@ export default function TourCard({ tour }) {
         )}
 
         <div
-          className="tour-card-footer"
+          className="tour-card-footer tc-footer"
           style={{
             marginTop: "auto",
             paddingTop: 14,
@@ -298,7 +306,7 @@ export default function TourCard({ tour }) {
             <meta itemProp="price" content={tour.price} />
             {tour.oldPrice && (
               <div style={{ fontSize: 11.5, color: "rgba(255,235,218,0.8)", textDecoration: "line-through", fontFamily: FONT, lineHeight: 1.1 }}>
-                ₹{tour.oldPrice}
+                ₹{oldPriceText}
               </div>
             )}
             <div style={{ fontSize: 24, fontWeight: 800, color: "#fff", fontFamily: FONT, letterSpacing: "-0.02em", lineHeight: 1.15 }}>
@@ -306,8 +314,11 @@ export default function TourCard({ tour }) {
               <span style={{ fontSize: 11, fontWeight: 500, color: "rgba(255,235,218,0.85)", letterSpacing: 0 }}>/ person</span>
             </div>
           </div>
+          <div className="tc-actions" style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Link
             href={href}
+            className="tc-book"
+            onClick={() => track("view_book_click", { event_label: `button_${tour.slug}` })}
             style={{
               background: "#fff",
               color: "#7A3A12",
@@ -327,6 +338,18 @@ export default function TourCard({ tour }) {
           >
             View &amp; Book →
           </Link>
+            <a
+              href={waLink(site, waMsg, `Card: ${tour.slug}`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tc-wa"
+              onClick={() => track("whatsapp_click", { event_label: `card_${tour.slug}` })}
+              aria-label={`Ask about ${tour.title} on WhatsApp`}
+              style={{ width: 44, height: 44, borderRadius: 999, background: "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 4px 14px rgba(0,0,0,0.18)" }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.5-8.3zm-8.5 18.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7z" /></svg>
+            </a>
+          </div>
         </div>
       </div>
     </article>
