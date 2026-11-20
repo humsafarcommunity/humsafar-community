@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function WhatsAppLogo({ size = 24, style = {} }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="WhatsApp" style={{ display: "block", flexShrink: 0, ...style }}>
