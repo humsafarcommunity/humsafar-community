@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { waLink, track } from "../lib/whatsapp";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 // Popup enquiry form. The photo, heading, button text and dropdown choices come from the CMS
 // (Site Settings → Enquiry Popup Form). Every submission goes to /api/lead, which feeds your Google Sheet.
 // Open it from anywhere with: window.dispatchEvent(new Event("open-enquiry"))
@@ -144,7 +146,7 @@ export default function EnquiryModal({ site = {} }) {
                 target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { event_label: "Enquiry popup" })}
                 style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minHeight: 50, padding: "0 30px", borderRadius: 999, background: "#047857", color: "#fff", fontWeight: 800, fontSize: 16, textDecoration: "none" }}
               >
-                Continue on WhatsApp
+                <WhatsAppLogo size={25} /> Continue on WhatsApp
               </a>
             </div>
           ) : (
