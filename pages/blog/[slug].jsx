@@ -207,7 +207,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
               </ul>
               <p className="bg-why__script">{place ? `Ready for ${place}?` : "Ready to go?"}</p>
               <p>Let&apos;s turn your travel dreams into memories!</p>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn" onClick={() => track("whatsapp_click", { event_label: `blog_why_${blog.slug}` })}><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp <GIcon name="arrow" size={15} stroke={2.2} /></a>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn" onClick={() => track("whatsapp_click", { event_label: `blog_why_${blog.slug}` })}><WhatsAppLogo size={24} />Chat on WhatsApp <GIcon name="arrow" size={15} stroke={2.2} /></a>
             </aside>
           </div>
 
@@ -302,7 +302,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
             <p>Book your trip today and be a part of the Humsafar Community!</p>
             <div className="bg-cta__btns">
               <Link href={pkgHref} className="bg-btn" onClick={() => track("view_book_click", { event_label: `blog_closing_${blog.slug}` })}>{place ? `View ${place} Packages` : "View Packages"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn bg-btn--wa" onClick={() => track("whatsapp_click", { event_label: `blog_closing_${blog.slug}` })}><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp</a>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn bg-btn--wa" onClick={() => track("whatsapp_click", { event_label: `blog_closing_${blog.slug}` })}><WhatsAppLogo size={24} />Chat on WhatsApp</a>
             </div>
             <p className="bg-cta__script" aria-hidden="true">Travel with Humsafar<br />Where journeys turn<br />into memories.</p>
           </div>
