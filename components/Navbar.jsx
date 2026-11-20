@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import EnquiryModal from "./EnquiryModal";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 export default function Navbar({ site, isSolid = false }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -114,7 +116,7 @@ export default function Navbar({ site, isSolid = false }) {
                 boxShadow: "0 4px 14px rgba(16, 185, 129, 0.25)"
               }}
             >
-              WhatsApp
+              <WhatsAppLogo size={23} /> WhatsApp
             </a>
           </div>
 
@@ -194,7 +196,7 @@ export default function Navbar({ site, isSolid = false }) {
             marginTop: 20
           }}
         >
-          Book on WhatsApp
+          <WhatsAppLogo size={28} /> Book on WhatsApp
         </a>
         {site?.popupEnabled !== false && (
           <button
