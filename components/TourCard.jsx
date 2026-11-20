@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { waLink, track } from "../lib/whatsapp";
 
+import WhatsAppLogo from "./WhatsAppLogo";
+
 const ORANGE = "#E8681E";
 const CREAM = "#FFEBDA";
 const FONT = "'Plus Jakarta Sans', sans-serif";
@@ -347,7 +349,7 @@ export default function TourCard({ tour, site }) {
               aria-label={`Ask about ${tour.title} on WhatsApp`}
               style={{ width: 44, height: 44, borderRadius: 999, background: "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 4px 14px rgba(0,0,0,0.18)" }}
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.5-8.3zm-8.5 18.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7z" /></svg>
+              <WhatsAppLogo size={30} />
             </a>
           </div>
         </div>
