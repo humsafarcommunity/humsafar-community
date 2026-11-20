@@ -15,6 +15,8 @@ import { toursForBlog, slimTour } from "../../lib/related";
 import { RichBlocks, inline } from "../../lib/richText";
 import { guidePlace, guideHeadings, guideTiles, isThingsToDo, packagesHref, tourPerks, slugify } from "../../lib/guide";
 import { figure } from "../../lib/figure";
+import WhatsAppLogo from "../../components/WhatsAppLogo";
+
 import {
   SITE,
   getFreshData,
