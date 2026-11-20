@@ -617,10 +617,10 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; 
 
 /* ── MOBILE: smaller, tighter homepage sections (text + spacing) ─────────── */
 @media (max-width: 760px) {
-  main > section { padding-top: 32px !important; padding-bottom: 32px !important; padding-left: 18px !important; padding-right: 18px !important; }
-  main section h2 { font-size: 21px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
-  main section h2 + p, main section p { font-size: 13px !important; line-height: 1.5 !important; }
-  main section a, main section summary { font-size: 13px; }
+  .hp-main > section { padding-top: 32px !important; padding-bottom: 32px !important; padding-left: 18px !important; padding-right: 18px !important; }
+  .hp-main section h2 { font-size: 21px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
+  .hp-main section h2 + p, .hp-main section p { font-size: 13px !important; line-height: 1.5 !important; }
+  .hp-main section a, .hp-main section summary { font-size: 13px; }
 
   /* blog cards: compact, swipeable */
   .blog-rail > * { flex-basis: 76%; }
@@ -630,4 +630,82 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; 
   .bc-title { font-size: 15px !important; margin-bottom: 6px !important; }
   .bc-excerpt { font-size: 12.5px !important; -webkit-line-clamp: 2 !important; line-height: 1.5 !important; }
   .blog-cta { padding: 14px !important; }
+}
+
+
+/* ── BLOG ARTICLE PAGE: get readers into the article fast, then to a trip or WhatsApp ───────── */
+.bg-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100001; pointer-events: none; }
+.bg-progress span { display: block; height: 100%; background: linear-gradient(90deg, #ee6c1f, #f59e0b); transition: width .1s linear; }
+
+.bg-tcta { display: flex; align-items: center; gap: 14px; margin: 22px 0; padding: 12px; border: 1px solid #fed7aa; border-radius: 18px; background: #fff7ed; box-shadow: 0 8px 22px rgba(238,108,31,.12); }
+.bg-tcta__img { position: relative; flex: 0 0 84px; height: 84px; border-radius: 14px; overflow: hidden; background: #e5e7eb; }
+.bg-tcta__img img { object-fit: cover; }
+.bg-tcta__txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.bg-tcta__kicker { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #c2540d; }
+.bg-tcta__txt strong { font-size: 15px; line-height: 1.25; color: #14213a; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.bg-tcta__meta { font-size: 12.5px; font-weight: 600; color: #475569; }
+.bg-tcta__btns { display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto; }
+.bg-tcta a.bg-tcta__view, .bg-tcta a.bg-tcta__wa { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-size: 13px; font-weight: 800; text-decoration: none !important; white-space: nowrap; color: #fff !important; }
+.bg-tcta a.bg-tcta__view { background: #ee6c1f; }
+.bg-tcta a.bg-tcta__wa { background: #1fb855; }
+.bg-tcta--strip { display: none; }
+
+.bg-ask { margin: 30px 0; padding: 20px 18px; border-radius: 18px; background: #064e3b; color: #fff; text-align: center; }
+.bg-ask .bg-ask__t { display: block; font-size: 18px; font-weight: 800; line-height: 1.25; color: #fff; }
+.bg-ask .bg-ask__s { display: block; margin: 6px 0 14px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.9); }
+.bg-ask__btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.bg-ask a.bg-ask__wa, .bg-ask button.bg-ask__cb { flex: 1 1 170px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 46px; padding: 0 16px; border-radius: 999px; border: 0; font-size: 14px; font-weight: 800; text-decoration: none !important; cursor: pointer; color: #fff !important; }
+.bg-ask a.bg-ask__wa { background: #1fb855; }
+.bg-ask button.bg-ask__cb { background: #E8681E; }
+
+.bg-jump { display: none; }
+.bg-cta__btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.bg-btn--wa { background: #1fb855; box-shadow: 0 9px 20px rgba(31,184,85,.3); }
+.bg-btn--wa:hover { background: #17a34a; }
+
+@media (max-width: 900px) { .bg-tcta--strip { display: flex; } }
+
+@media (max-width: 700px) {
+  /* Article first: slim hero, no photo grid / long list / side card before the text */
+  .bg-hero { min-height: 230px; }
+  .bg-hero__in { padding: 92px 20px 54px; } /* clears the fixed logo bar */
+  .bg-hero h1 { font-size: 23px; margin-top: 12px; line-height: 1.18; }
+  .bg-hero .bg-tag { display: none; }
+  .bg-pill { font-size: 11.5px; padding: 5px 11px; }
+  .bg-meta { font-size: 12px; gap: 6px 14px; }
+  .bg-tiles, .bg-todo, .bg-why { display: none; }
+  .bg-top { padding-top: 8px; gap: 0; }
+  .bg-intro .bg-h2 { font-size: 19px; }
+  .bg-intro p { font-size: 15px; line-height: 1.6; }
+  .bg-jump { display: flex; gap: 8px; overflow-x: auto; margin: 14px -20px 4px; padding: 2px 20px 6px; scrollbar-width: none; }
+  .bg-jump::-webkit-scrollbar { display: none; }
+  .bg-jump a { flex: 0 0 auto; padding: 8px 14px; border-radius: 999px; background: #f1f5f9; color: #1d2b44; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+  /* Smaller, easier-to-read article text */
+  .bg-body { font-size: 15.5px; line-height: 1.75; }
+  .bg-body h2 { font-size: 21px; margin: 30px 0 12px; }
+  .bg-body h3 { font-size: 18px; margin: 22px 0 10px; }
+  .bg-body blockquote { font-size: 15px; padding: 14px 16px; }
+
+  .bg-tcta { flex-wrap: wrap; padding: 12px; }
+  .bg-tcta__txt { flex: 1 1 calc(100% - 100px); }
+  .bg-tcta__btns { flex-direction: row; width: 100%; }
+  .bg-tcta a.bg-tcta__view, .bg-tcta a.bg-tcta__wa { flex: 1; }
+  .bg-tcta--strip { margin: 12px 0 4px; }
+
+  .bg-trip h3 { font-size: 20px; }
+  .bg-sec-h { font-size: 20px; }
+  .bg-cta__in { padding: 34px 20px; }
+  .bg-cta h2 { font-size: 22px; }
+  .bg-cta__btns .bg-btn { flex: 1 1 100%; }
+}
+
+/* blog page: stop the swipe chips from widening the text column; tighten gaps */
+@media (max-width: 900px) {
+  .bg-top { grid-template-columns: minmax(0, 1fr); }
+  .bg-top > div { min-width: 0; }
+}
+@media (max-width: 700px) {
+  .bg-tcta--strip { margin-bottom: 18px; }
+  .bg-article { margin-top: 10px !important; padding-top: 0 !important; }
 }

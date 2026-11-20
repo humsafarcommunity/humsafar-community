@@ -1,4 +1,5 @@
 // pages/blog/[slug].jsx — Travel guide (blog post) page with full SEO/AEO/GEO/AIO
+import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -6,6 +7,9 @@ import SEOHead from "../../components/SEOHead";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import TourCard from "../../components/TourCard";
+import MobileCtaBar from "../../components/MobileCtaBar";
+import { ReadProgress, TripCta, AskCta } from "../../components/BlogCtas";
+import { track } from "../../lib/whatsapp";
 import { GIcon, Swoosh, Testimonials, Faq, iconFor } from "../../components/GuideBits";
 import { toursForBlog, slimTour } from "../../lib/related";
 import { RichBlocks, inline } from "../../lib/richText";
@@ -42,6 +46,13 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
   const place = guidePlace(blog);
   const headings = guideHeadings(blog.content, 4);
+  const jump = guideHeadings(blog.content, 8);
+  const content = blog.content || [];
+  const h2s = content.map((b, i) => (b && b.type === "h2" ? i : -1)).filter((i) => i >= 0);
+  // Trip card lands before the 3rd section (or ~40% in); a WhatsApp nudge before the 5th (or ~75% in).
+  const tripAt = h2s.length >= 3 ? h2s[2] : content.length >= 6 ? Math.floor(content.length * 0.4) : -1;
+  let askAt = h2s.length >= 5 ? h2s[4] : content.length >= 10 ? Math.floor(content.length * 0.75) : -1;
+  if (askAt === tripAt) askAt = -1;
   const intro = blog.directAnswer || blog.excerpt;
   const wa = (text) => `https://wa.me/${(dynamicSite.whatsapp || "916268496389").toString().replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
   const waLink = wa(place ? `Hi Humsafar! I read your ${place} guide and want to plan a trip.` : `Hi Humsafar! I read your blog about ${blog.title} and want to book a trip.`);
@@ -59,6 +70,36 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
   const hasReviews = reviews.some((r) => r && r.text);
   const hasFaqs = blog.faqs?.length > 0;
   const published = blog.publishedAt ? new Date(blog.publishedAt).toLocaleDateString("en-IN", { month: "short", year: "numeric", timeZone: "UTC" }) : "";
+
+  const renderBlock = (block, i) => {
+    switch (block.type) {
+      case "h2":
+        return <h2 key={i} id={slugify(block.text) || undefined}>{block.text}</h2>;
+      case "h3":
+        return <h3 key={i}>{block.text}</h3>;
+      case "para":
+        return <RichBlocks key={i} text={block.text} />;
+      case "quote":
+        return <blockquote key={i}>{block.text}</blockquote>;
+      case "hr":
+        return <hr key={i} />;
+      case "list":
+        return (
+          <ul key={i}>
+            {(block.items || []).map((item, j) => <li key={j}>{inline(item, `l${i}${j}`)}</li>)}
+          </ul>
+        );
+      case "img":
+        return block.url ? (
+          <figure key={i}>
+            <div className="bg-fig"><Image src={block.url} alt={block.caption || blog.title} fill sizes="(max-width: 820px) 100vw, 820px" /></div>
+            {block.caption && <figcaption>{block.caption}</figcaption>}
+          </figure>
+        ) : null;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -78,6 +119,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
       />
 
       <Navbar site={dynamicSite} isSolid={true} />
+      <ReadProgress targetId="guide" slug={blog.slug} />
 
       <main className="blog-guide">
         {/* ---------- Hero ---------- */}
@@ -98,6 +140,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
         {/* ---------- Intro, photo tiles, things to do + "why Humsafar" card ---------- */}
         <div className="bg-wrap">
+          <TripCta variant="strip" trip={trip} place={place} site={dynamicSite} slug={blog.slug} fallbackHref={pkgHref} />
           <div className="bg-top">
             <div>
               {intro && (
@@ -105,6 +148,12 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
                   <h2 className="bg-h2">{place ? `Discover the Magic of ${place}` : "Discover the Magic"}</h2>
                   <p className="speakable">{intro}</p>
                 </section>
+              )}
+
+              {jump.length >= 2 && (
+                <nav className="bg-jump" aria-label="Jump to a section">
+                  {jump.map((h) => <a key={h.id} href={`#${h.id}`}>{h.text}</a>)}
+                </nav>
               )}
 
               {tiles.length >= 2 && (
@@ -156,7 +205,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
               </ul>
               <p className="bg-why__script">{place ? `Ready for ${place}?` : "Ready to go?"}</p>
               <p>Let&apos;s turn your travel dreams into memories!</p>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn"><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp <GIcon name="arrow" size={15} stroke={2.2} /></a>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn" onClick={() => track("whatsapp_click", { event_label: `blog_why_${blog.slug}` })}><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp <GIcon name="arrow" size={15} stroke={2.2} /></a>
             </aside>
           </div>
 
@@ -172,35 +221,13 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
               </div>
             )}
             <div className="bg-body" itemProp="articleBody">
-              {(blog.content || []).map((block, i) => {
-                switch (block.type) {
-                  case "h2":
-                    return <h2 key={i} id={slugify(block.text) || undefined}>{block.text}</h2>;
-                  case "h3":
-                    return <h3 key={i}>{block.text}</h3>;
-                  case "para":
-                    return <RichBlocks key={i} text={block.text} />;
-                  case "quote":
-                    return <blockquote key={i}>{block.text}</blockquote>;
-                  case "hr":
-                    return <hr key={i} />;
-                  case "list":
-                    return (
-                      <ul key={i}>
-                        {(block.items || []).map((item, j) => <li key={j}>{inline(item, `l${i}${j}`)}</li>)}
-                      </ul>
-                    );
-                  case "img":
-                    return block.url ? (
-                      <figure key={i}>
-                        <div className="bg-fig"><Image src={block.url} alt={block.caption || blog.title} fill sizes="(max-width: 820px) 100vw, 820px" /></div>
-                        {block.caption && <figcaption>{block.caption}</figcaption>}
-                      </figure>
-                    ) : null;
-                  default:
-                    return null;
-                }
-              })}
+              {content.map((block, i) => (
+                <Fragment key={i}>
+                  {i === tripAt && <TripCta variant="card" trip={trip} place={place} site={dynamicSite} slug={blog.slug} fallbackHref={pkgHref} />}
+                  {i === askAt && <AskCta place={place} site={dynamicSite} slug={blog.slug} />}
+                  {renderBlock(block, i)}
+                </Fragment>
+              ))}
             </div>
           </article>
 
@@ -226,7 +253,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
                     {trip.duration && trip.price > 0 ? " · " : ""}
                     {trip.price > 0 && <>From <strong>₹{Number(trip.price).toLocaleString("en-IN")}</strong> / person</>}
                   </span>
-                  <Link href={`/packages/${trip.slug}`} className="bg-btn">{place ? `Explore ${place} Package` : "Explore Package"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
+                  <Link href={`/packages/${trip.slug}`} className="bg-btn" onClick={() => track("view_book_click", { event_label: `blog_featured_${blog.slug}` })}>{place ? `Explore ${place} Package` : "Explore Package"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
                 </div>
               </div>
             </section>
@@ -236,7 +263,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
             <section aria-label="More trips" className="bg-more">
               <h2 className="bg-sec-h">More trips you may like</h2>
               <div className="bg-more__grid">
-                {moreTrips.map((t) => <TourCard key={t._id || t.slug} tour={t} />)}
+                {moreTrips.map((t) => <TourCard key={t._id || t.slug} tour={t} site={dynamicSite} />)}
               </div>
             </section>
           )}
@@ -271,7 +298,10 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
           <div className="bg-cta__in">
             <h2>{place ? `Ready to Explore ${place}?` : "Ready for Your Adventure?"}</h2>
             <p>Book your trip today and be a part of the Humsafar Community!</p>
-            <Link href={pkgHref} className="bg-btn">{place ? `View ${place} Packages` : "View Packages"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
+            <div className="bg-cta__btns">
+              <Link href={pkgHref} className="bg-btn" onClick={() => track("view_book_click", { event_label: `blog_closing_${blog.slug}` })}>{place ? `View ${place} Packages` : "View Packages"} <GIcon name="arrow" size={15} stroke={2.2} /></Link>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="bg-btn bg-btn--wa" onClick={() => track("whatsapp_click", { event_label: `blog_closing_${blog.slug}` })}><GIcon name="chat" size={17} stroke={2} />Chat on WhatsApp</a>
+            </div>
             <p className="bg-cta__script" aria-hidden="true">Travel with Humsafar<br />Where journeys turn<br />into memories.</p>
           </div>
         </section>
@@ -296,6 +326,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
           </section>
         )}
       </main>
+      <MobileCtaBar site={dynamicSite} message={place ? `Hi Humsafar! I read your ${place} guide and want to plan a trip.` : `Hi Humsafar! I read your blog "${blog.title}" and want to book a trip.`} source={`Blog: ${blog.slug}`} />
       <Footer dynamicSite={dynamicSite} />
     </>
   );

@@ -273,7 +273,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       {/* ── NUMBERS STRIP (from CMS) ──────────────────────────────── */}
 
       {/* ── TOURS SECTION ────────────────────────────────────────── */}
-      <main>
+      <main className="hp-main">
         <section
           aria-label="Tour packages"
           style={{ padding: "60px 24px", background: "#fff" }}
