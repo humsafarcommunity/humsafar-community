@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { figure } from "../lib/figure";
-import { track } from "../lib/whatsapp";
+import { track, waLink } from "../lib/whatsapp";
 
 // Homepage hero: big headline with a destination word that changes by itself, a pill search bar and a
 // row of numbers. The words, tagline and photos are editable in Studio (Site Settings → Hero, and Banners).
@@ -75,10 +75,18 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
   }, []);
 
   useEffect(() => {
-    if (paused || reduced || (isMobile && !posterMode)) return undefined;
+    if (paused || reduced || isMobile) return undefined;
     const t = setInterval(() => setI((p) => p + 1), posterMode ? 5200 : SHOW_MS);
     return () => clearInterval(t);
   }, [paused, reduced, isMobile, posterMode]);
+
+  // Phones: start on the destination with the most trips (usually Manali) and stay there.
+  useEffect(() => {
+    if (!isMobile || !posterMode) return;
+    let best = 0;
+    slides.forEach((x, n) => { if (x.count > slides[best].count) best = n; });
+    setI(best);
+  }, [isMobile, posterMode, slides]);
 
   useEffect(() => { setMaxSeen((m) => Math.max(m, bg.length ? i % bg.length : 0)); }, [i, bg.length]);
 
@@ -181,6 +189,17 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
             </div>
           )}
 
+          <a
+            className="hb-wa"
+            href={waLink(site, active ? `Hi Humsafar! I'm looking at ${active.name} trips. Please help me choose.` : "Hi Humsafar! Please help me choose a trip.", "Homepage hero")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { event_label: "hero" })}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.5-8.3zm-8.5 18.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 6.9 2.9a9.6 9.6 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7z" /></svg>
+            Chat on WhatsApp
+          </a>
+
           <p className="hb-tag">
             {tagline.map((t, n) => (
               <span key={t + n}>
@@ -219,7 +238,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
         )}
       </div>
 
-      {!reduced && (
+      {!reduced && !isMobile && (
         <button type="button" className="hb-pause" onClick={() => setPaused((p) => !p)} aria-label={paused ? "Play hero animation" : "Pause hero animation"}>
           {paused ? "▶" : "❚❚"}
         </button>
@@ -272,6 +291,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
         .hb-stats li:first-child { padding-left: 0; }
         .hb-stats strong { display: block; font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; line-height: 1.1; }
         .hb-stats em { display: block; font-style: normal; font-size: 15px; color: rgba(255,255,255,0.88); margin-top: 2px; }
+        .hb-wa { display: none; }
         .hb-pause { position: absolute; z-index: 3; right: 18px; top: 92px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.5); background: rgba(0,0,0,0.35); color: #fff; font-size: 11px; cursor: pointer; }
         .hb-pause:focus-visible, .hb-search button:focus-visible { outline: 3px solid ${LIME}; outline-offset: 2px; }
         @keyframes hbIn { from { opacity: 0; transform: translateY(0.4em); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
@@ -280,23 +300,35 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
         @keyframes hbZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
         @media (max-width: 1100px) { .hb-arrow { display: none; } }
         @media (max-width: 760px) {
-          /* Keep the first-screen hero image static on mobile to reduce animation work. */
+          /* Static hero on phones: no auto-rotating words, nothing jumping while the visitor reads. */
           .hb-slide[data-active="true"] { animation: none; }
-          /* Paint the mobile headline and decorative elements immediately. */
           .hb-word, .hb-pill, .hb-wave path, .hb-poster { animation: none; }
           .hb-wave path { stroke-dashoffset: 0; }
           .hb-slide { transition: none; }
-          .hb { min-height: 78svh; }
-          .hb-h1 { margin-bottom: 14px; }
-          .hb-inner { padding: 96px 20px 36px; gap: 32px; }
-          .hb-stats { grid-template-columns: 1fr 1fr; gap: 18px 0; }
-          .hb-stats li { padding: 0 8px 0 0; }
-          .hb-stats li + li { border-left: none; }
-          .hb-stats li:nth-child(even) { border-left: 1px solid rgba(255,255,255,0.22); padding-left: 16px; }
-          .hb-stats li svg { width: 30px; height: 30px; }
-          .hb-search { padding-left: 20px; }
-          .hb-search button { padding: 0 22px; }
-          .hb-pause { top: 78px; }
+          .hb { min-height: 0; border-radius: 0 0 24px 24px; }
+          .hb-h1 { margin-bottom: 12px; }
+          /* Clear the fixed logo/menu bar so the headline never sits under it. */
+          .hb-inner { padding: 112px 20px 26px; gap: 22px; }
+          .hb-copy { margin: 0; }
+          .hb-title { font-size: clamp(48px, 15vw, 84px); }
+          .hb-ctas { gap: 10px; margin-bottom: 12px; }
+          .hb-cta { width: 100%; justify-content: center; min-height: 54px; }
+          .hb-from { font-size: 14px; padding: 8px 14px; }
+          .hb-wa { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; margin: 0 0 16px; border-radius: 999px; background: #1fb855; color: #fff; font-weight: 800; font-size: 16px; text-decoration: none; box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+          .hb-tag { font-size: 16px; margin-bottom: 6px; }
+          .hb-sub { font-size: 14px; margin-bottom: 18px; }
+          .hb-searchwrap { max-width: none; }
+          .hb-search { padding-left: 18px; }
+          .hb-search button { padding: 0 20px; }
+          /* Trust numbers: one compact row of three, no big icons */
+          .hb-stats { grid-template-columns: repeat(3, 1fr); gap: 0; padding-top: 14px; }
+          .hb-stats li { padding: 0 6px; gap: 0; }
+          .hb-stats li:first-child { padding-left: 0; }
+          .hb-stats li + li { border-left: 1px solid rgba(255,255,255,0.22); }
+          .hb-stats li:nth-child(n+4) { display: none; }
+          .hb-stats li svg { display: none; }
+          .hb-stats strong { font-size: 20px; }
+          .hb-stats em { font-size: 12px; }
         }
         @media (prefers-reduced-motion: reduce) {
           .hb-slide[data-active="true"], .hb-word, .hb-pill, .hb-wave path, .hb-poster { animation: none; }

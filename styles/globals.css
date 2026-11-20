@@ -580,3 +580,37 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 3px; 
   .bg-quote { flex-direction:column; align-items:flex-start; }
   .bg-cta__in { padding-top:44px; padding-bottom:44px; }
 }
+
+
+/* ── MOBILE CONVERSION: compact swipe cards, tighter filters ───────────────
+   Phones see ~1.3 trip cards per screen instead of one card per screen, so visitors
+   reach prices and the WhatsApp / Book buttons without long scrolling. */
+@media (max-width: 760px) {
+  .tour-rail {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    margin: 0 -24px;
+    padding: 4px 24px 18px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tour-rail::-webkit-scrollbar { display: none; }
+  .tour-rail > * { flex: 0 0 80%; max-width: 330px; scroll-snap-align: start; }
+
+  .tc { border-radius: 22px !important; }
+  .tc-photo { padding-top: 80% !important; }
+  .tc h3 { font-size: 18px !important; -webkit-line-clamp: 2 !important; }
+  .tc-blurb { display: none !important; }
+  .tc-feats { margin-bottom: 12px !important; gap: 10px 8px !important; }
+  .tc-feats li:nth-child(n+3) { display: none !important; }
+  .tc-footer { flex-direction: column; align-items: stretch !important; }
+  .tc-actions { width: 100%; }
+  .tc-book { flex: 1; text-align: center; padding: 13px 16px !important; font-size: 14px !important; }
+
+  /* Filters: smaller card, same two rows and same behaviour */
+  .filter-strip-card { padding: 16px 16px !important; margin-top: -20px !important; border-radius: 18px !important; }
+}

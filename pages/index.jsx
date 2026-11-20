@@ -12,6 +12,8 @@ import FAQAccordion from "../components/FAQAccordion";
 import VideoCarousel from "../components/VideoCarousel";
 import ReviewsSection from "../components/ReviewsSection";
 import Footer from "../components/Footer";
+import MobileCtaBar from "../components/MobileCtaBar";
+import { waLink, track } from "../lib/whatsapp";
 import {
   SITE,
   REVIEWS,
@@ -270,14 +272,6 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
 
       {/* ── NUMBERS STRIP (from CMS) ──────────────────────────────── */}
 
-      {/* ── DESTINATION CARDS ────────────────────────────────────── */}
-      {isDefault && (
-        <>
-          <DestinationCards title="Domestic Destinations" items={destinationCards.filter((d) => d.group !== "international")} />
-          <DestinationCards title="International Destinations" items={destinationCards.filter((d) => d.group === "international")} />
-        </>
-      )}
-
       {/* ── TOURS SECTION ────────────────────────────────────────── */}
       <main>
         <section
@@ -322,7 +316,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   }}
                 >
                   {filtered.map((tour) => (
-                    <TourCard key={tour._id} tour={tour} />
+                    <TourCard key={tour._id} tour={tour} site={dynamicSite} />
                   ))}
                 </div>
                 {filtered.length === 0 && (
@@ -385,7 +379,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                     View All Packages →
                   </Link>
                 </div>
-                <div
+                <div className="tour-rail"
                   style={{
                     display: "grid",
                     gridTemplateColumns:
@@ -394,7 +388,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                   }}
                 >
                   {bestsellers.map((tour, idx) => (
-                    <TourCard key={tour._id || tour.slug || idx} tour={tour} />
+                    <TourCard key={tour._id || tour.slug || idx} tour={tour} site={dynamicSite} />
                   ))}
                 </div>
 
@@ -447,7 +441,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                         View All International →
                       </Link>
                     </div>
-                    <div
+                    <div className="tour-rail"
                       style={{
                         display: "grid",
                         gridTemplateColumns:
@@ -456,7 +450,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
                       }}
                     >
                       {internationalTours.map((tour, idx) => (
-                        <TourCard key={tour._id || tour.slug || idx} tour={tour} />
+                        <TourCard key={tour._id || tour.slug || idx} tour={tour} site={dynamicSite} />
                       ))}
                     </div>
                   </div>
@@ -465,6 +459,44 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
             )}
           </div>
         </section>
+
+        {/* ── NOT SURE? (catches visitors who would otherwise leave) ── */}
+        {isDefault && (
+          <section aria-label="Get help choosing a trip" style={{ padding: "0 24px 56px", background: "#fff" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto", background: "#064e3b", color: "#fff", borderRadius: 24, padding: "28px 24px", display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ flex: "1 1 260px" }}>
+                <h2 style={{ fontFamily: "var(--sans)", fontSize: "clamp(20px, 5vw, 28px)", fontWeight: 800, margin: "0 0 6px", color: "#fff" }}>Not sure which trip is right for you?</h2>
+                <p style={{ margin: 0, fontSize: 14, color: "rgba(255,255,255,0.88)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Tell us your budget and dates. We will suggest the best fit on WhatsApp.</p>
+              </div>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", flex: "1 1 260px", justifyContent: "flex-end" }}>
+                <a
+                  href={waLink(dynamicSite, "Hi Humsafar! My budget is ___ and my dates are ___. Which trip do you suggest?", "Homepage: not sure block")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("whatsapp_click", { event_label: "not_sure_block" })}
+                  style={{ flex: "1 1 200px", minHeight: 52, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#1fb855", color: "#fff", fontWeight: 800, fontSize: 15, textDecoration: "none", fontFamily: "var(--sans)" }}
+                >
+                  Get a suggestion on WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={() => { track("enquiry_open", { event_label: "not_sure_block" }); window.dispatchEvent(new Event("open-enquiry")); }}
+                  style={{ flex: "1 1 140px", minHeight: 52, borderRadius: 999, background: "#E8681E", color: "#fff", border: "none", fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "var(--sans)" }}
+                >
+                  Request a call back
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── DESTINATION CARDS ────────────────────────────────────── */}
+      {isDefault && (
+        <>
+          <DestinationCards title="Domestic Destinations" items={destinationCards.filter((d) => d.group !== "international")} />
+          <DestinationCards title="International Destinations" items={destinationCards.filter((d) => d.group === "international")} />
+        </>
+      )}
 
         {reviews.length > 0 && (
           <section style={{ maxWidth: 1156, margin: "0 auto", padding: "64px 24px 0" }}>
@@ -690,6 +722,8 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
       {/* ── FOOTER ───────────────────────────────────────────────── */}
       <Footer dynamicSite={dynamicSite} />
 
+      <MobileCtaBar site={dynamicSite} message="Hi Humsafar! I'd like details about your trips." source="Homepage" />
+
       {/* ── WHATSAPP FLOAT ───────────────────────────────────────── */}
       <a
         href={`https://wa.me/${(dynamicSite.whatsapp || '916268496389').toString().replace(/\D/g, '')}?text=${encodeURIComponent("Hi Humsafar! I want to enquire about tour packages.")}`}
@@ -786,9 +820,7 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
             align-items: center !important;
           }
           .whatsapp-float {
-             left: 20px !important;
-             right: auto !important;
-             bottom: 20px !important;
+             display: none !important;
           }
         }
       `}</style>
