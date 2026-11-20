@@ -3,14 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { waLink, track } from "../lib/whatsapp";
 
-const WA_ICON = (
-  <svg width="23" height="23" viewBox="0 0 64 64" aria-hidden="true" style={{ flexShrink: 0, display: "block" }}>
-    <defs><linearGradient id="waGreenBlog" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#59F477" /><stop offset="100%" stopColor="#16B934" /></linearGradient></defs>
-    <rect x="1" y="1" width="62" height="62" rx="15" fill="url(#waGreenMobile)" />
-    <path d="M32 9.5c-12.1 0-21.9 9.6-21.9 21.5 0 4.2 1.2 8.1 3.4 11.4L10.8 54l12-3.1c2.8 1.4 5.9 2.1 9.2 2.1 12.1 0 21.9-9.6 21.9-21.5S44.1 9.5 32 9.5z" fill="none" stroke="#fff" strokeWidth="4.2" strokeLinejoin="round" />
-    <path d="M24.2 21.5c-.7-1.5-1.4-1.5-2-1.5h-1.7c-.6 0-1.5.2-2.3 1.1-.8.9-3 2.9-3 7.1s3.1 8.2 3.5 8.8c.4.6 6 9.5 14.7 12.9 7.3 2.9 8.8 2.3 10.4 2.1 1.6-.2 5.1-2.1 5.8-4.1.7-2 .7-3.7.5-4.1-.2-.4-.8-.6-1.7-1.1-.9-.4-5.1-2.5-5.9-2.8-.8-.3-1.4-.4-2 .5-.6.9-2.3 2.8-2.8 3.4-.5.6-1 .7-1.9.2-.9-.4-3.7-1.3-7-4.2-2.6-2.3-4.3-5.1-4.8-6-.5-.9 0-1.4.4-1.8.4-.4.9-1.1 1.3-1.6.4-.5.6-.9.9-1.5.3-.6.1-1.1-.1-1.6-.2-.4-1.9-4.6-2.7-6.2z" fill="#fff" transform="translate(3 0) scale(.88)" />
-  </svg>
-);
+import WhatsAppLogo from "./WhatsAppLogo";
+
 
 // Thin orange reading bar at the top of the screen. Also reports how far people read (GA4 events),
 // so you can see which articles keep readers and which lose them.
@@ -63,7 +57,7 @@ export function TripCta({ trip, place, site, slug, variant = "card", fallbackHre
       </div>
       <div className="bg-tcta__btns">
         <Link href={href} className="bg-tcta__view" onClick={() => track("view_book_click", { event_label: `blog_${label}` })}>{trip ? "View trip" : "View trips"}</Link>
-        <a href={waLink(site, msg, `Blog: ${slug}`)} target="_blank" rel="noopener noreferrer" className="bg-tcta__wa" onClick={() => track("whatsapp_click", { event_label: `blog_${label}` })}>{WA_ICON} WhatsApp</a>
+        <a href={waLink(site, msg, `Blog: ${slug}`)} target="_blank" rel="noopener noreferrer" className="bg-tcta__wa" onClick={() => track("whatsapp_click", { event_label: `blog_${label}` })}><WhatsAppLogo size={25} /> WhatsApp</a>
       </div>
     </aside>
   );
@@ -76,7 +70,7 @@ export function AskCta({ place, site, slug }) {
       <strong className="bg-ask__t">{place ? `Questions about ${place}?` : "Have a question about this trip?"}</strong>
       <span className="bg-ask__s">Ask our team on WhatsApp. We will help you pick dates, budget and the right trip.</span>
       <div className="bg-ask__btns">
-        <a href={waLink(site, `Hi Humsafar! I have a question about ${place || "a trip"} after reading your guide.`, `Blog: ${slug}`)} target="_blank" rel="noopener noreferrer" className="bg-ask__wa" onClick={() => track("whatsapp_click", { event_label: `blog_ask_${slug}` })}>{WA_ICON} Ask on WhatsApp</a>
+        <a href={waLink(site, `Hi Humsafar! I have a question about ${place || "a trip"} after reading your guide.`, `Blog: ${slug}`)} target="_blank" rel="noopener noreferrer" className="bg-ask__wa" onClick={() => track("whatsapp_click", { event_label: `blog_ask_${slug}` })}><WhatsAppLogo size={25} /> Ask on WhatsApp</a>
         <button type="button" className="bg-ask__cb" onClick={() => { track("enquiry_open", { event_label: `blog_ask_${slug}` }); window.dispatchEvent(new Event("open-enquiry")); }}>Request a call back</button>
       </div>
     </div>
