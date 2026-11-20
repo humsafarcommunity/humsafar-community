@@ -1,7 +1,7 @@
 # 🏔️ Humsafar Community — Next.js v5.0
 ## Complete Platform with SEO + AEO + GEO + SXO + AIO
 
-**Admin:** `humsafar_admin` / `Trek@India2025!`  
+**Admin:** Credentials must never be stored in this repository. Use a secure password manager and environment-managed secrets.
 **WhatsApp:** +91 62684 96389  
 **Site:** https://humsafarcommunity.com
 

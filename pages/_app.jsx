@@ -6,7 +6,7 @@ import "../styles/globals.css";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID; // Add to .env.local
 
 function pageview(url) {
-  if (typeof window !== "undefined" && window.gtag) {
+  if (typeof window !== "undefined" && GA_ID && window.gtag) {
     window.gtag("config", GA_ID, { page_path: url });
   }
 }
