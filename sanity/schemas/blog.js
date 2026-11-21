@@ -23,5 +23,14 @@ export default {
   ],
   groups: [
     { name: 'seo', title: 'SEO / AEO Optimization' }
-  ]
+  ],
+  orderings: [{ title: 'Newest first', name: 'newest', by: [{ field: 'publishedAt', direction: 'desc' }] }],
+  preview: {
+    select: { title: 'title', category: 'category', readTime: 'readTime', media: 'coverImage' },
+    prepare: ({ title, category, readTime, media }) => ({
+      title: `✍️ ${title || 'Untitled post'}`,
+      subtitle: [category, readTime ? `${readTime} min read` : ''].filter(Boolean).join('  ·  '),
+      media,
+    }),
+  },
 }

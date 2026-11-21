@@ -12,5 +12,9 @@ export default {
     { name: 'hi', title: 'Highlighted Word', type: 'string', description: 'The colored word in the headline', fieldset: 'content' },
     { name: 'sub', title: 'Subtitle Description', type: 'text', fieldset: 'content' },
     { name: 'image', title: 'Background Image', type: 'image', options: { hotspot: true }, fieldset: 'visual' }
-  ]
+  ],
+  preview: {
+    select: { title: 'title', hi: 'hi', sub: 'sub', media: 'image' },
+    prepare: ({ title, hi, sub, media }) => ({ title: `🖼️ ${[title, hi].filter(Boolean).join(' ') || 'Hero banner'}`, subtitle: sub, media }),
+  },
 }

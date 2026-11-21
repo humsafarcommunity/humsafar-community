@@ -10,5 +10,5 @@ export default {
     { name: 'order', title: 'Order', type: 'number', description: 'Smaller numbers come first.' },
   ],
   orderings: [{ title: 'Order', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
-  preview: { select: { title: 'title', subtitle: 'youtubeUrl', media: 'thumbnail' } },
+  preview: { select: { title: 'title', subtitle: 'youtubeUrl', media: 'thumbnail' }, prepare: ({ title, subtitle, media }) => ({ title: `🎬 ${title || 'Video'}`, subtitle, media }) },
 };

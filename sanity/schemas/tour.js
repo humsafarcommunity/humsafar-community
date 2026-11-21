@@ -76,5 +76,18 @@ export default {
     { name: 'snapshot', title: 'Trip snapshot (difficulty, weather)' },
     { name: 'terms', title: 'Booking terms' },
     { name: 'seo', title: 'SEO / AEO Optimization' }
-  ]
+  ],
+  orderings: [
+    { title: 'Title A to Z', name: 'titleAsc', by: [{ field: 'title', direction: 'asc' }] },
+    { title: 'Price, low to high', name: 'priceAsc', by: [{ field: 'price', direction: 'asc' }] },
+    { title: 'Price, high to low', name: 'priceDesc', by: [{ field: 'price', direction: 'desc' }] },
+  ],
+  preview: {
+    select: { title: 'title', duration: 'duration', price: 'price', loc: 'location', best: 'bestseller', media: 'img' },
+    prepare: ({ title, duration, price, loc, best, media }) => ({
+      title: `${best ? '🔥 ' : ''}${title || 'Untitled tour'}`,
+      subtitle: [loc, duration, price ? `₹${Number(price).toLocaleString('en-IN')}` : ''].filter(Boolean).join('  ·  '),
+      media,
+    }),
+  },
 }

@@ -21,5 +21,12 @@ export default {
     { name: 'photo', title: 'Traveller photo (optional)', type: 'image', options: { hotspot: true } },
     { name: 'featured', title: 'Show first', type: 'boolean' },
   ],
-  preview: { select: { title: 'author', subtitle: 'trip', media: 'photo' } },
+  preview: {
+    select: { title: 'author', trip: 'trip', rating: 'rating', featured: 'featured', media: 'photo' },
+    prepare: ({ title, trip, rating, featured, media }) => ({
+      title: `${rating ? `⭐ ${rating}  ` : ''}${title || 'Review'}${featured ? '  📌' : ''}`,
+      subtitle: trip,
+      media,
+    }),
+  },
 };

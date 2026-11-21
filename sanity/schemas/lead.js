@@ -25,5 +25,11 @@ export default {
     { name: 'createdAt', title: 'Received', type: 'datetime' },
   ],
   orderings: [{ title: 'Newest first', name: 'newest', by: [{ field: 'createdAt', direction: 'desc' }] }],
-  preview: { select: { title: 'name', subtitle: 'phone' }, prepare: ({ title, subtitle }) => ({ title: title || 'Lead', subtitle }) },
+  preview: {
+    select: { title: 'name', phone: 'phone', status: 'status', trip: 'trip', dest: 'destination' },
+    prepare: ({ title, phone, status, trip, dest }) => {
+      const emoji = { new: '🆕', contacted: '📞', booked: '✅', lost: '❌' }[status] || '🆕';
+      return { title: `${emoji} ${title || 'Lead'}`, subtitle: [phone, trip || dest].filter(Boolean).join('  ·  ') };
+    },
+  },
 };

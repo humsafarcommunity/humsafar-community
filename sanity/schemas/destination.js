@@ -40,5 +40,5 @@ export default {
     { name: 'order', title: 'Order', type: 'number', description: 'Smaller numbers come first.' },
   ],
   orderings: [{ title: 'Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
-  preview: { select: { title: 'name', subtitle: 'group', media: 'image' } },
+  preview: { select: { title: 'name', group: 'group', media: 'image' }, prepare: ({ title, group, media }) => ({ title: `📍 ${title || 'Destination'}`, subtitle: group === 'international' ? 'International Destinations' : 'Domestic Destinations', media }) },
 };
