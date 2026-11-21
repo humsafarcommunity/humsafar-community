@@ -56,8 +56,16 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
   const slides = useMemo(() => buildSlides(words, tours, banners), [words, tours, banners]);
   const posterMode = slides.length > 0;
   const bg = posterMode ? slides.map((x) => ({ id: x.key, url: x.image })) : banners;
-  const [i, setI] = useState(0);
-  const [maxSeen, setMaxSeen] = useState(0);
+  // Start on the destination with the most trips (usually Manali) on every device, decided at render time,
+  // so the server HTML, the preloaded hero image and the first paint all agree. (It used to start on slide 0
+  // and jump to this slide after load on phones, which made the real hero image download late: slow LCP.)
+  const startIndex = useMemo(() => {
+    let best = 0;
+    slides.forEach((x, n) => { if (x.count > slides[best].count) best = n; });
+    return best;
+  }, [slides]);
+  const [i, setI] = useState(startIndex);
+  const [seen, setSeen] = useState(() => new Set([startIndex]));
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -82,15 +90,12 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
     return () => clearInterval(t);
   }, [paused, reduced, isMobile, posterMode]);
 
-  // Phones: start on the destination with the most trips (usually Manali) and stay there.
+  // Remember which slides have been shown so each photo is only downloaded once it is needed.
   useEffect(() => {
-    if (!isMobile || !posterMode) return;
-    let best = 0;
-    slides.forEach((x, n) => { if (x.count > slides[best].count) best = n; });
-    setI(best);
-  }, [isMobile, posterMode, slides]);
-
-  useEffect(() => { setMaxSeen((m) => Math.max(m, bg.length ? i % bg.length : 0)); }, [i, bg.length]);
+    if (!bg.length) return;
+    const cur = i % bg.length;
+    setSeen((prev) => (prev.has(cur) ? prev : new Set(prev).add(cur)));
+  }, [i, bg.length]);
 
   useEffect(() => {
     const stop = () => setSearching(false);
@@ -127,13 +132,14 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
       <div className="hb-bg" aria-hidden="true">
         {bg.map((b, idx) => (
           <div key={b?.id || idx} className="hb-slide" style={{ opacity: idx === slide ? 1 : 0 }} data-active={idx === slide}>
-            {(idx === 0 || idx <= maxSeen) && (
+            {(idx === startIndex || seen.has(idx)) && (
               <Image
                 src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
                 alt=""
                 fill
-                priority={idx === 0}
-                fetchPriority={idx === 0 ? "high" : "auto"}
+                priority={idx === startIndex}
+                fetchPriority={idx === startIndex ? "high" : "auto"}
+                loading={idx === startIndex ? "eager" : "lazy"}
                 quality={60}
                 sizes="100vw"
                 style={{ objectFit: "cover" }}
@@ -158,7 +164,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
               <>
                 <span aria-hidden="true" className="hb-line">
                   Book Your
-                  {slide >= 0 && banners[slide]?.url && maxSeen >= 0 && (
+                  {slide >= 0 && banners[slide]?.url && (
                     <span className="hb-pill" key={`pill-${slide}`}>
                       <Image src={banners[slide].url} alt="" width={220} height={84} quality={55} sizes="220px" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </span>
