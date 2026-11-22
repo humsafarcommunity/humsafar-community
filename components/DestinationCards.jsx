@@ -94,7 +94,7 @@ export default function DestinationCards({ title, items: plain = [], tabs = [] }
             <span aria-hidden="true" className="dest-shade" />
             <Image
               src="/humsafar-logo-white.png"
-              alt=""
+              alt="Humsafar Community"
               width={700}
               height={307}
               sizes="160px"

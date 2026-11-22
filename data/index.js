@@ -202,7 +202,6 @@ export function generateOrganizationSchema(site = SITE) {
     description:
       "Group tours, custom Himalayan trips and corporate retreats led by experienced trip captains, with departures from Delhi and Gwalior.",
     telephone: site.phone,
-    email: site.email,
     foundingDate: site.founded,
     address: {
       "@type": "PostalAddress",

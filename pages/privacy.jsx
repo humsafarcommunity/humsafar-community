@@ -1,6 +1,7 @@
 import SEOHead from "../components/SEOHead";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ObfuscatedEmail from "../components/ObfuscatedEmail";
 import { SITE, getFreshData } from "../data";
 
 export default function PrivacyPage({ site: freshSite, seo: seoData }) {
@@ -79,7 +80,7 @@ export default function PrivacyPage({ site: freshSite, seo: seoData }) {
                 If you have any questions or concerns regarding this Privacy Policy, you can reach out to us at:
               </p>
               <p style={{ background: "#f1f5f9", padding: 20, borderRadius: 12, display: "inline-block", width: "100%", boxSizing: "border-box" }}>
-                <strong>Email:</strong> {dynamicSite.email || "humsafarcommunity4@gmail.com"}<br />
+                <strong>Email:</strong> <ObfuscatedEmail email={dynamicSite.email || "humsafarcommunity4@gmail.com"} /><br />
                 <strong>WhatsApp / Phone:</strong> {dynamicSite.phone || "+91 62684 96389"}<br />
                 <strong>Address:</strong> {dynamicSite.address || "Gwalior, Madhya Pradesh, India"}
               </p>

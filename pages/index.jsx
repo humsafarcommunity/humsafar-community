@@ -145,8 +145,8 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     <>
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
-        title="Group Tours to Manali, Spiti & Kasol from Mumbai, Pune, Bangalore | Humsafar"
-        description="Budget group tours to Manali, Spiti, Kasol and Jibhi with a trip captain. Fly to Delhi and join weekly batches from Mumbai, Pune, Bangalore, Hyderabad and Ahmedabad."
+        title="Group Tours to Manali, Spiti & Kasol | Humsafar Community"
+        description="Book group tours to Manali, Spiti, Kasol and Jibhi with a trip captain. Fly to Delhi and join weekly batches from Mumbai, Pune, Bangalore, Hyderabad and Ahmedabad."
         keywords="Humsafar Community, group tours from Mumbai, Manali tour package from Pune, Spiti Valley group tour, Kasol group trip, Himachal backpacking trip, group tours from Bangalore"
         url="/"
         schemas={schemas}

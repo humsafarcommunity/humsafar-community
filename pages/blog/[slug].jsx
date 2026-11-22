@@ -296,7 +296,7 @@ export default function BlogDetailPage({ blog, relatedBlogs, relatedTours = [], 
 
         {/* ---------- Closing call to action ---------- */}
         <section className="bg-cta" aria-label="Book your trip">
-          {blog.coverImage && <Image src={blog.coverImage} alt="" fill sizes="100vw" className="bg-cta__img" />}
+          {blog.coverImage && <Image src={blog.coverImage} alt={blog.title || "Humsafar Community travel guide"} fill sizes="100vw" className="bg-cta__img" />}
           <div className="bg-cta__in">
             <h2>{place ? `Ready to Explore ${place}?` : "Ready for Your Adventure?"}</h2>
             <p>Book your trip today and be a part of the Humsafar Community!</p>

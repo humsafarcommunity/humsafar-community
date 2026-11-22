@@ -49,7 +49,7 @@ export function TripCta({ trip, place, site, slug, variant = "card", fallbackHre
   const label = `${variant}_${slug}`;
   return (
     <aside className={`bg-tcta bg-tcta--${variant}`} aria-label="Trip from this guide">
-      {trip?.img && variant === "card" && <div className="bg-tcta__img"><Image src={trip.img} alt="" fill sizes="84px" /></div>}
+      {trip?.img && variant === "card" && <div className="bg-tcta__img"><Image src={trip.img} alt={trip.title || "Humsafar trip"} fill sizes="84px" /></div>}
       <div className="bg-tcta__txt">
         <span className="bg-tcta__kicker">{trip ? "Planning this trip?" : `Planning ${place || "a trip"}?`}</span>
         <strong>{trip ? trip.title : `Browse ${place || "all"} group trips`}</strong>

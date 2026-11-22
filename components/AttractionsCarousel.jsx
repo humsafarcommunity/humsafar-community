@@ -78,7 +78,7 @@ export default function AttractionsCarousel({ attractions = [], tourSlug, title 
           const on = sel.has(i);
           return (
             <div key={a.name + i} className={`as-card${on ? " on" : ""}`}>
-              {a.image && <Image src={a.image} alt="" fill sizes="(max-width: 640px) 78vw, 290px" style={{ objectFit: "cover" }} className="as-img" />}
+              {a.image && <Image src={a.image} alt={a.name || "Attraction"} fill sizes="(max-width: 640px) 78vw, 290px" style={{ objectFit: "cover" }} className="as-img" />}
               <span aria-hidden="true" className="as-shade" />
               <button type="button" className="as-open" onClick={() => setOpen(i)} aria-haspopup="dialog" aria-label={`Open ${niceName(a.name)}`} />
               {canPick && (

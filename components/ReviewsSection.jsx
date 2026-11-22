@@ -16,7 +16,7 @@ function Card({ r }) {
     <article className="rv-card" style={{ width: "min(86vw, 420px)", background: "#fff", border: "1.5px solid #e2e8f0", borderRadius: 28, padding: 24, display: "flex", flexDirection: "column", gap: 12, boxShadow: "0 6px 24px rgba(15,23,42,0.05)" }}>
       <header style={{ display: "flex", gap: 14, alignItems: "center" }}>
         <span style={{ position: "relative", width: 52, height: 52, borderRadius: 999, overflow: "hidden", flexShrink: 0, background: "#064e3b", color: "#fff", display: "grid", placeItems: "center", fontWeight: 800 }}>
-          {r.photo ? <Image src={r.photo} alt="" fill sizes="52px" style={{ objectFit: "cover" }} /> : initials(r.author)}
+          {r.photo ? <Image src={r.photo} alt={`${r.author || "Traveller"}, Humsafar Community traveller`} fill sizes="52px" style={{ objectFit: "cover" }} /> : initials(r.author)}
         </span>
         <div style={{ minWidth: 0 }}>
           <strong style={{ fontSize: 18, color: "#0f172a" }}>{r.author}</strong>
