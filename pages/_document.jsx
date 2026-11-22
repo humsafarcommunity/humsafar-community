@@ -8,10 +8,12 @@ export default function Document() {
   return (
     <Html lang="en-IN" dir="ltr">
       <Head>
-        {/* Google Tag Manager: first thing in <head>. It also defines gtag() so our click tracking keeps working. */}
+        {/* Google Tag Manager. gtag() is defined straight away so click tracking keeps working, but the heavy GTM
+            script itself loads on the first touch/scroll/click, or 4 seconds after the page has loaded, whichever
+            comes first. This keeps it out of the way of the first paint (better LCP and Total Blocking Time). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}(function(w,d,i){var done=false;function go(){if(done)return;done=true;['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.removeEventListener(e,go)});w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.addEventListener(e,go,{passive:true,once:true})});if(d.readyState==='complete'){setTimeout(go,4000)}else{w.addEventListener('load',function(){setTimeout(go,4000)})}})(window,document,'${GTM_ID}');`,
           }}
         />
         {/* SXO: Character encoding */}
