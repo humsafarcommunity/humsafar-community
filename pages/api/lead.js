@@ -57,6 +57,37 @@ export default async function handler(req, res) {
     }
   }
 
+  const erpWebhook = process.env.ERP_LEAD_WEBHOOK_URL;
+  const erpSecret = process.env.ERP_LEAD_WEBHOOK_SECRET;
+  if (erpWebhook && erpSecret) {
+    try {
+      const ctrl = new AbortController();
+      const timeout = setTimeout(() => ctrl.abort(), 7000);
+      const response = await fetch(erpWebhook, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-humsafar-lead-secret": erpSecret,
+        },
+        body: JSON.stringify({
+          name: lead.name,
+          phone: lead.phone,
+          email: lead.email,
+          destination: lead.destination || lead.trip,
+          message: [lead.tripType, lead.fromCity, lead.travelMonth, lead.people ? "Travellers: " + lead.people : ""].filter(Boolean).join(" · "),
+          campaign: lead.page,
+          source: "website",
+          externalLeadId: require("crypto").randomUUID(),
+        }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(timeout);
+      stored = stored || response.ok;
+    } catch (e) {
+      // Keep the existing enquiry flow available even if ERP is temporarily unreachable.
+    }
+  }
+
   const hook = process.env.LEAD_WEBHOOK_URL;
   if (hook) {
     try {
