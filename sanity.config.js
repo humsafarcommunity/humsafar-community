@@ -1,12 +1,18 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './sanity/schemas/index.js';
+import { RemoveAction } from './sanity/actions/RemoveAction.js';
+import { humsafarTheme } from './sanity/theme.js';
+
+// Lists where every item can be removed with the red Remove button
+const REMOVABLE = ['tour', 'blog', 'banner', 'destination', 'review', 'video', 'lead'];
 
 export default defineConfig({
   basePath: '/admin',
   projectId: 'fghdctku',
   dataset: 'production',
   title: 'Humsafar CMS',
+  theme: humsafarTheme,
   plugins: [
     structureTool({
       structure: (S) =>
@@ -63,10 +69,14 @@ export default defineConfig({
       prev.filter((template) => !['siteSettings', 'seoSettings', 'aboutPage'].includes(template.id)),
   },
   document: {
-    // For singleton types, hide the "Duplicate" and "Delete" actions
+    // For singleton types, hide the "Duplicate" and "Delete" actions; other lists get a red Remove button
     actions: (prev, { schemaType }) => {
       if (['siteSettings', 'seoSettings', 'aboutPage'].includes(schemaType)) {
         return prev.filter(({ action }) => !['delete', 'duplicate', 'unpublish'].includes(action));
+      }
+      if (REMOVABLE.includes(schemaType)) {
+        // Swap Sanity's plain Delete for our red Remove button (with a confirm step)
+        return [...prev.filter(({ action }) => action !== 'delete'), RemoveAction];
       }
       return prev;
     },
