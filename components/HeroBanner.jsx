@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { figure } from "../lib/figure";
 import { track, waLink } from "../lib/whatsapp";
+import { suggestTours, splitMatch } from "../lib/smartSearch";
 
 import WhatsAppLogo from "./WhatsAppLogo";
 
@@ -71,6 +72,11 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
   const [isMobile, setIsMobile] = useState(false);
   const [term, setTerm] = useState("");
   const [searching, setSearching] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [hi, setHi] = useState(-1);
+  const blurTimer = useRef(null);
+  const suggestions = useMemo(() => suggestTours(tours, term, 6), [tours, term]);
+  const listId = "hero-search-list";
 
   useEffect(() => {
     try { setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { /* ignore */ }
@@ -120,11 +126,26 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
     figure(site.instagramFollowers) && { icon: "ig", value: figure(site.instagramFollowers), label: "Instagram Community" },
   ].filter(Boolean).slice(0, 4);
 
+  function goToTour(t) {
+    track("hero_search_suggestion_click", { event_label: t.slug });
+    setOpen(false);
+    setSearching(true);
+    router.push(`/packages/${t.slug}`);
+  }
+
   function onSearch(e) {
     e.preventDefault();
+    if (open && hi >= 0 && suggestions[hi]) return goToTour(suggestions[hi].tour);
     if (!term.trim()) return;
+    setOpen(false);
     setSearching(true);
     router.push(`/search?q=${encodeURIComponent(term.trim())}`);
+  }
+
+  function onKeyDown(e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true); setHi((h) => (suggestions.length ? (h + 1) % suggestions.length : -1)); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setHi((h) => (suggestions.length ? (h <= 0 ? suggestions.length - 1 : h - 1) : -1)); }
+    else if (e.key === "Escape") { setOpen(false); setHi(-1); }
   }
 
   return (
@@ -221,8 +242,49 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
           <div className="hb-searchwrap">
             <form onSubmit={onSearch} role="search" aria-label="Search destinations" className="hb-search">
               <label htmlFor="hero-search" className="hb-sr">Search travel destinations</label>
-              <input id="hero-search" type="search" value={term} onChange={(e) => setTerm(e.target.value)} placeholder="Type location…" autoComplete="off" />
+              <input
+                id="hero-search"
+                type="search"
+                value={term}
+                onChange={(e) => { setTerm(e.target.value); setOpen(true); setHi(-1); }}
+                onFocus={() => { clearTimeout(blurTimer.current); setOpen(true); }}
+                onBlur={() => { blurTimer.current = setTimeout(() => setOpen(false), 120); }}
+                onKeyDown={onKeyDown}
+                placeholder="Type location…"
+                autoComplete="off"
+                role="combobox"
+                aria-expanded={open && suggestions.length > 0}
+                aria-controls={listId}
+                aria-autocomplete="list"
+                aria-activedescendant={hi >= 0 ? `hero-opt-${hi}` : undefined}
+              />
               <button type="submit" disabled={searching}>{searching ? "Searching…" : "Search"}</button>
+              {open && suggestions.length > 0 && (
+                <ul id={listId} role="listbox" className="hb-sug" aria-label={term.trim() ? "Matching trips" : "Popular trips"}>
+                  {!term.trim() && <li className="hb-sug-head" role="presentation">Popular trips</li>}
+                  {suggestions.map(({ tour: t }, n) => {
+                    const [a, m, b] = splitMatch(t.title, term.trim());
+                    return (
+                      <li key={t._id || t.slug} id={`hero-opt-${n}`} role="option" aria-selected={n === hi}
+                        className="hb-sug-item" data-hi={n === hi}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onMouseEnter={() => setHi(n)}
+                        onClick={() => goToTour(t)}>
+                        {t.img ? <Image src={t.img} alt="" width={44} height={44} sizes="44px" quality={40} className="hb-sug-img" /> : <span className="hb-sug-img" />}
+                        <span className="hb-sug-txt">
+                          <span className="hb-sug-title">{a}<strong>{m}</strong>{b}</span>
+                          <span className="hb-sug-meta">{[t.duration, t.price > 0 && `From ₹${Number(t.price).toLocaleString("en-IN")}`].filter(Boolean).join(" · ")}</span>
+                        </span>
+                      </li>
+                    );
+                  })}
+                  {term.trim() && (
+                    <li className="hb-sug-all" role="option" aria-selected="false" onMouseDown={(e) => e.preventDefault()} onClick={onSearch}>
+                      See all results for “{term.trim()}” →
+                    </li>
+                  )}
+                </ul>
+              )}
             </form>
             <svg className="hb-arrow" width="150" height="110" viewBox="0 0 150 110" fill="none" aria-hidden="true">
               <path d="M138 10 C 96 2 70 30 92 46 C 108 58 118 30 98 24 C 70 16 40 52 22 92" stroke={LIME} strokeWidth="3" strokeLinecap="round" />
@@ -253,8 +315,9 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
       )}
 
       <style jsx global>{`
-        .hb { position: relative; min-height: min(94vh, 840px); display: flex; overflow: hidden; background: #022c22; border-radius: 0 0 32px 32px; color: #fff; }
+        .hb { position: relative; min-height: min(94vh, 840px); display: flex; background: #022c22; border-radius: 0 0 32px 32px; color: #fff; }
         .hb-bg, .hb-slide { position: absolute; inset: 0; }
+        .hb-bg { overflow: hidden; border-radius: inherit; }
         .hb-slide { transition: opacity 1.2s ease; }
         .hb-slide[data-active="true"] { animation: hbZoom 9s ease-out forwards; }
         .hb-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.38) 55%, rgba(0,0,0,0.15) 100%), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%); }
@@ -291,6 +354,18 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
         .hb-search input::placeholder { color: #64748b; }
         .hb-search button { flex-shrink: 0; border: none; cursor: pointer; background: #047857; color: #fff; font-weight: 800; font-size: 16px; font-family: var(--sans); border-radius: 999px; padding: 0 30px; min-height: 52px; }
         .hb-search button:hover { background: #064e3b; }
+        .hb-search { position: relative; }
+        .hb-sug { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 50; margin: 0; padding: 6px; list-style: none; background: #fff; color: #0f172a; border-radius: 22px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); max-height: min(60vh, 420px); overflow-y: auto; text-align: left; }
+        .hb-sug-head { padding: 8px 12px 4px; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #64748b; }
+        .hb-sug-item { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 16px; cursor: pointer; }
+        .hb-sug-item[data-hi="true"] { background: #ecfdf5; }
+        .hb-sug-img { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: #d1fae5; }
+        .hb-sug-txt { display: flex; flex-direction: column; min-width: 0; }
+        .hb-sug-title { font-size: 15px; font-weight: 500; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .hb-sug-title strong { font-weight: 800; color: #047857; }
+        .hb-sug-meta { font-size: 13px; color: #64748b; margin-top: 1px; }
+        .hb-sug-all { padding: 12px 14px; font-size: 14px; font-weight: 800; color: #047857; cursor: pointer; border-top: 1px solid #e2e8f0; margin-top: 4px; border-radius: 0 0 16px 16px; }
+        .hb-sug-all:hover { background: #ecfdf5; }
         .hb-search:focus-within { box-shadow: 0 0 0 4px rgba(190,242,100,0.6), 0 20px 50px rgba(0,0,0,0.35); }
         .hb-arrow { position: absolute; left: calc(100% + 12px); top: -18px; transform: rotate(-8deg); opacity: 0.95; }
         .hb-stats { list-style: none; margin: 0; padding: 22px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.18); }
