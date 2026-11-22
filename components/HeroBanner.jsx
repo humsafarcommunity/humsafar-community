@@ -56,7 +56,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
   const words = useMemo(() => (site.heroWords?.length ? site.heroWords : DEFAULT_WORDS), [site.heroWords]);
   const slides = useMemo(() => buildSlides(words, tours, banners), [words, tours, banners]);
   const posterMode = slides.length > 0;
-  const bg = posterMode ? slides.map((x) => ({ id: x.key, url: x.image })) : banners;
+  const bg = posterMode ? slides.map((x) => ({ id: x.key, url: x.image, alt: `${x.name} group tour packages by Humsafar Community` })) : banners;
   // Start on the destination with the most trips (usually Manali) on every device, decided at render time,
   // so the server HTML, the preloaded hero image and the first paint all agree. (It used to start on slide 0
   // and jump to this slide after load on phones, which made the real hero image download late: slow LCP.)
@@ -156,7 +156,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
             {(idx === startIndex || seen.has(idx)) && (
               <Image
                 src={b.url || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200"}
-                alt=""
+                alt={b.alt || b.title || "Humsafar Community group trip"}
                 fill
                 priority={idx === startIndex}
                 fetchPriority={idx === startIndex ? "high" : "auto"}
@@ -187,7 +187,7 @@ export default function HeroBanner({ banners = [], tours = [], site = {}, destin
                   Book Your
                   {slide >= 0 && banners[slide]?.url && (
                     <span className="hb-pill" key={`pill-${slide}`}>
-                      <Image src={banners[slide].url} alt="" width={220} height={84} quality={55} sizes="220px" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+                      <Image src={banners[slide].url} alt={banners[slide].title || "Humsafar Community trip"} width={220} height={84} quality={55} sizes="220px" style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                     </span>
                   )}
                 </span>

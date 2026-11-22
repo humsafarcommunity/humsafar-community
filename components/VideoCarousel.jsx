@@ -82,7 +82,7 @@ export default function VideoCarousel({ videos = [], eyebrow, title }) {
                     tabIndex={ad > 1 ? -1 : 0}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={thumbOf(v)} alt="" loading="lazy" decoding="async" />
+                    <img src={thumbOf(v)} alt={v.title || "Humsafar travel video"} loading="lazy" decoding="async" />
                     {isCenter && (
                       <span className="vc-play" aria-hidden="true">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z" /></svg>

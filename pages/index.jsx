@@ -145,8 +145,8 @@ export default function HomePage({ tours = [], blogs = [], banners = [], destina
     <>
       {/* ── SEO HEAD ─────────────────────────────────────────────── */}
       <SEOHead
-        title="Group Tours to Manali, Spiti & Kasol from Mumbai, Pune, Bangalore | Humsafar"
-        description="Budget group tours to Manali, Spiti, Kasol and Jibhi with a trip captain. Fly to Delhi and join weekly batches from Mumbai, Pune, Bangalore, Hyderabad and Ahmedabad."
+        title="Group Tours to Manali, Spiti & Kasol | Humsafar Community"
+        description="Book group tours to Manali, Spiti, Kasol and Jibhi with a trip captain. Fly to Delhi and join weekly batches from Mumbai, Pune, Bangalore, Hyderabad and Ahmedabad."
         keywords="Humsafar Community, group tours from Mumbai, Manali tour package from Pune, Spiti Valley group tour, Kasol group trip, Himachal backpacking trip, group tours from Bangalore"
         url="/"
         schemas={schemas}
@@ -879,7 +879,7 @@ export async function getStaticProps() {
       destinations: (data.DESTINATIONS || []).map((d) => ({ _id: d._id || d.name, name: d.name || "", group: d.group || "domestic", region: d.region || "", link: d.link || "", textColor: d.textColor || "light", image: d.image || "", alt: d.alt || "" })),
       videos: JSON.parse(JSON.stringify(data.VIDEOS || [])),
       reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])),
-      site: data.SITE,
+      site: (({ email, ...rest }) => ({ ...rest, emailEnc: Buffer.from(String(email || "humsafarcommunity4@gmail.com")).toString("base64") }))(data.SITE || {}),
       seo: data.SEODATA,
     },
     // ISR: Revalidate every 60 seconds (SXO: Always fresh content)

@@ -3,6 +3,9 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 // Google Tag Manager container. Set NEXT_PUBLIC_GTM_ID to use a different one.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-TN4HZ78N";
+// Meta (Facebook) Pixel: set NEXT_PUBLIC_FB_PIXEL_ID in Vercel to switch it on. Loaded at the same delayed moment as GTM.
+const FB_PIXEL_ID = (process.env.NEXT_PUBLIC_FB_PIXEL_ID || "").replace(/\D/g, "");
+const FB_SNIPPET = FB_PIXEL_ID ? `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');` : "";
 
 export default function Document() {
   return (
@@ -13,7 +16,7 @@ export default function Document() {
             comes first. This keeps it out of the way of the first paint (better LCP and Total Blocking Time). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}(function(w,d,i){var done=false;function go(){if(done)return;done=true;['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.removeEventListener(e,go)});w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.addEventListener(e,go,{passive:true,once:true})});if(d.readyState==='complete'){setTimeout(go,4000)}else{w.addEventListener('load',function(){setTimeout(go,4000)})}})(window,document,'${GTM_ID}');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}(function(w,d,i){var done=false;function go(){if(done)return;done=true;['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.removeEventListener(e,go)});w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);${FB_SNIPPET}}['scroll','touchstart','pointerdown','keydown','mousemove'].forEach(function(e){w.addEventListener(e,go,{passive:true,once:true})});if(d.readyState==='complete'){setTimeout(go,4000)}else{w.addEventListener('load',function(){setTimeout(go,4000)})}})(window,document,'${GTM_ID}');`,
           }}
         />
         {/* SXO: Character encoding */}

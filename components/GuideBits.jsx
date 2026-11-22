@@ -70,7 +70,7 @@ export function Testimonials({ reviews = [] }) {
     <div>
       <article className="bg-quote">
         <span className="bg-quote__ph">
-          {r.photo ? <Image src={r.photo} alt="" fill sizes="76px" style={{ objectFit: "cover" }} /> : initials(r.author)}
+          {r.photo ? <Image src={r.photo} alt={`${r.author || "Traveller"}, Humsafar Community traveller`} fill sizes="76px" style={{ objectFit: "cover" }} /> : initials(r.author)}
         </span>
         <div>
           <blockquote>&ldquo;{text}&rdquo;</blockquote>
