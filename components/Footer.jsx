@@ -139,7 +139,7 @@ export default function Footer({ dynamicSite }) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
                 </svg>
-                <ObfuscatedEmail email={dynamicSite.email || "humsafarcommunity4@gmail.com"} style={{ color: "inherit", textDecoration: "none" }} />
+                <ObfuscatedEmail encoded={dynamicSite.emailEnc} email={dynamicSite.email || "humsafarcommunity4@gmail.com"} style={{ color: "inherit", textDecoration: "none" }} />
               </div>
               <div style={{ fontSize: 13, color: "#94a3b8", display: "flex", gap: 12, alignItems: "center" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>

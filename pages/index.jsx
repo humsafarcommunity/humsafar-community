@@ -879,7 +879,7 @@ export async function getStaticProps() {
       destinations: (data.DESTINATIONS || []).map((d) => ({ _id: d._id || d.name, name: d.name || "", group: d.group || "domestic", region: d.region || "", link: d.link || "", textColor: d.textColor || "light", image: d.image || "", alt: d.alt || "" })),
       videos: JSON.parse(JSON.stringify(data.VIDEOS || [])),
       reviews: JSON.parse(JSON.stringify(data.REVIEWS || [])),
-      site: data.SITE,
+      site: (({ email, ...rest }) => ({ ...rest, emailEnc: Buffer.from(String(email || "humsafarcommunity4@gmail.com")).toString("base64") }))(data.SITE || {}),
       seo: data.SEODATA,
     },
     // ISR: Revalidate every 60 seconds (SXO: Always fresh content)
